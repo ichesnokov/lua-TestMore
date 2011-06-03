@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>LCOV - Lua 5.2.0 alpha - src/loslib.c</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.0 alpha</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">122</td>
+            <td class="headerCovTableEntry">128</td>
             <td class="headerCovTableEntry">131</td>
-            <td class="headerCovTableEntryHi">93.1 %</td>
+            <td class="headerCovTableEntryHi">97.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2010-11-27</td>
+            <td class="headerValue">2011-06-03</td>
             <td></td>
           </tr>
           <tr>
@@ -125,30 +125,30 @@
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span>            : 
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">         25 : static int os_pushresult (lua_State *L, int i, const char *filename) {</span>
-<span class="lineNum">      63 </span><span class="lineCov">         25 :   int en = errno;  /* calls to Lua API may change this value */</span>
-<span class="lineNum">      64 </span><span class="lineCov">         25 :   if (i) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">         20 :     lua_pushboolean(L, 1);</span>
-<span class="lineNum">      66 </span><span class="lineCov">         20 :     return 1;</span>
+<span class="lineNum">      62 </span><span class="lineCov">         28 : static int os_pushresult (lua_State *L, int i, const char *filename) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">         28 :   int en = errno;  /* calls to Lua API may change this value */</span>
+<span class="lineNum">      64 </span><span class="lineCov">         28 :   if (i) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">         23 :     lua_pushboolean(L, 1);</span>
+<span class="lineNum">      66 </span><span class="lineCov">         23 :     return 1;</span>
 <span class="lineNum">      67 </span>            :   }
 <span class="lineNum">      68 </span>            :   else {
 <span class="lineNum">      69 </span><span class="lineCov">          5 :     lua_pushnil(L);</span>
 <span class="lineNum">      70 </span><span class="lineCov">          5 :     lua_pushfstring(L, &quot;%s: %s&quot;, filename, strerror(en));</span>
 <span class="lineNum">      71 </span><span class="lineCov">          5 :     lua_pushinteger(L, en);</span>
-<span class="lineNum">      72 </span><span class="lineCov">         25 :     return 3;</span>
+<span class="lineNum">      72 </span><span class="lineCov">         28 :     return 3;</span>
 <span class="lineNum">      73 </span>            :   }
 <span class="lineNum">      74 </span>            : }
 <span class="lineNum">      75 </span>            : 
 <span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span><span class="lineCov">          5 : static int os_execute (lua_State *L) {</span>
-<span class="lineNum">      78 </span><span class="lineCov">          5 :   lua_pushinteger(L, system(luaL_optstring(L, 1, NULL)));</span>
-<span class="lineNum">      79 </span><span class="lineCov">          5 :   return 1;</span>
+<span class="lineNum">      77 </span><span class="lineCov">          6 : static int os_execute (lua_State *L) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">          6 :   lua_pushinteger(L, system(luaL_optstring(L, 1, NULL)));</span>
+<span class="lineNum">      79 </span><span class="lineCov">          6 :   return 1;</span>
 <span class="lineNum">      80 </span>            : }
 <span class="lineNum">      81 </span>            : 
 <span class="lineNum">      82 </span>            : 
-<span class="lineNum">      83 </span><span class="lineCov">         23 : static int os_remove (lua_State *L) {</span>
-<span class="lineNum">      84 </span><span class="lineCov">         23 :   const char *filename = luaL_checkstring(L, 1);</span>
-<span class="lineNum">      85 </span><span class="lineCov">         23 :   return os_pushresult(L, remove(filename) == 0, filename);</span>
+<span class="lineNum">      83 </span><span class="lineCov">         26 : static int os_remove (lua_State *L) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">         26 :   const char *filename = luaL_checkstring(L, 1);</span>
+<span class="lineNum">      85 </span><span class="lineCov">         26 :   return os_pushresult(L, remove(filename) == 0, filename);</span>
 <span class="lineNum">      86 </span>            : }
 <span class="lineNum">      87 </span>            : 
 <span class="lineNum">      88 </span>            : 
@@ -235,8 +235,8 @@
 <span class="lineNum">     169 </span><span class="lineCov">          9 :         buff[2] = '\0';  /* end buffer */</span>
 <span class="lineNum">     170 </span><span class="lineCov">          9 :         return conv + 1;</span>
 <span class="lineNum">     171 </span>            :       }
-<span class="lineNum">     172 </span><span class="lineCov">          1 :       else if (*(conv + 1) != '\0' &amp;&amp;</span>
-<span class="lineNum">     173 </span><span class="lineCov">          2 :                strchr(options[i + 1], *(conv + 1)) != NULL) {</span>
+<span class="lineNum">     172 </span><span class="lineCov">          2 :       else if (*(conv + 1) != '\0' &amp;&amp;</span>
+<span class="lineNum">     173 </span><span class="lineCov">          1 :                strchr(options[i + 1], *(conv + 1)) != NULL) {</span>
 <span class="lineNum">     174 </span><span class="lineCov">          1 :         buff[2] = *(conv + 1);  /* valid two-char conversion specifier */</span>
 <span class="lineNum">     175 </span><span class="lineCov">          1 :         buff[3] = '\0';  /* end buffer */</span>
 <span class="lineNum">     176 </span><span class="lineCov">          1 :         return conv + 2;</span>
@@ -341,15 +341,15 @@
 <span class="lineNum">     275 </span>            : }
 <span class="lineNum">     276 </span>            : 
 <span class="lineNum">     277 </span>            : 
-<span class="lineNum">     278 </span><span class="lineNoCov">          0 : static int os_exit (lua_State *L) {</span>
+<span class="lineNum">     278 </span><span class="lineCov">          4 : static int os_exit (lua_State *L) {</span>
 <span class="lineNum">     279 </span>            :   int status;
-<span class="lineNum">     280 </span><span class="lineNoCov">          0 :   if (lua_isboolean(L, 1))</span>
-<span class="lineNum">     281 </span><span class="lineNoCov">          0 :     status = (lua_toboolean(L, 1) ? EXIT_SUCCESS : EXIT_FAILURE);</span>
+<span class="lineNum">     280 </span><span class="lineCov">          4 :   if (lua_isboolean(L, 1))</span>
+<span class="lineNum">     281 </span><span class="lineCov">          2 :     status = (lua_toboolean(L, 1) ? EXIT_SUCCESS : EXIT_FAILURE);</span>
 <span class="lineNum">     282 </span>            :   else
-<span class="lineNum">     283 </span><span class="lineNoCov">          0 :     status = luaL_optint(L, 1, EXIT_SUCCESS);</span>
-<span class="lineNum">     284 </span><span class="lineNoCov">          0 :   if (lua_toboolean(L, 2))</span>
+<span class="lineNum">     283 </span><span class="lineCov">          2 :     status = luaL_optint(L, 1, EXIT_SUCCESS);</span>
+<span class="lineNum">     284 </span><span class="lineCov">          4 :   if (lua_toboolean(L, 2))</span>
 <span class="lineNum">     285 </span><span class="lineNoCov">          0 :     lua_close(L);</span>
-<span class="lineNum">     286 </span><span class="lineNoCov">          0 :   exit(status);</span>
+<span class="lineNum">     286 </span><span class="lineCov">          4 :   exit(status);</span>
 <span class="lineNum">     287 </span>            : }
 <span class="lineNum">     288 </span>            : 
 <span class="lineNum">     289 </span>            : 
@@ -372,9 +372,9 @@
 <span class="lineNum">     306 </span>            : 
 <span class="lineNum">     307 </span>            : 
 <span class="lineNum">     308 </span>            : 
-<span class="lineNum">     309 </span><span class="lineCov">         41 : LUAMOD_API int luaopen_os (lua_State *L) {</span>
-<span class="lineNum">     310 </span><span class="lineCov">         41 :   luaL_newlib(L, syslib);</span>
-<span class="lineNum">     311 </span><span class="lineCov">         41 :   return 1;</span>
+<span class="lineNum">     309 </span><span class="lineCov">         64 : LUAMOD_API int luaopen_os (lua_State *L) {</span>
+<span class="lineNum">     310 </span><span class="lineCov">         64 :   luaL_newlib(L, syslib);</span>
+<span class="lineNum">     311 </span><span class="lineCov">         64 :   return 1;</span>
 <span class="lineNum">     312 </span>            : }
 <span class="lineNum">     313 </span>            : 
 </pre>
@@ -385,7 +385,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.8</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
   </table>
   <br>
 

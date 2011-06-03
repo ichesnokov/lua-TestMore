@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>LCOV - Lua 5.2.0 alpha - src/ldebug.c</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.0 alpha</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">204</td>
-            <td class="headerCovTableEntry">256</td>
-            <td class="headerCovTableEntryMed">79.7 %</td>
+            <td class="headerCovTableEntry">207</td>
+            <td class="headerCovTableEntry">259</td>
+            <td class="headerCovTableEntryMed">79.9 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2010-11-27</td>
+            <td class="headerValue">2011-06-03</td>
             <td></td>
           </tr>
           <tr>
@@ -101,12 +101,12 @@
 <span class="lineNum">      35 </span>            : 
 <span class="lineNum">      36 </span>            : static int currentpc (CallInfo *ci) {
 <span class="lineNum">      37 </span>            :   lua_assert(isLua(ci));
-<span class="lineNum">      38 </span><span class="lineCov">        361 :   return pcRel(ci-&gt;u.l.savedpc, ci_func(ci)-&gt;l.p);</span>
+<span class="lineNum">      38 </span><span class="lineCov">        363 :   return pcRel(ci-&gt;u.l.savedpc, ci_func(ci)-&gt;l.p);</span>
 <span class="lineNum">      39 </span>            : }
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span>            : 
-<span class="lineNum">      42 </span>            : static int currentline (CallInfo *ci) {
-<span class="lineNum">      43 </span><span class="lineCov">        244 :   return getfuncline(ci_func(ci)-&gt;l.p, currentpc(ci));</span>
+<span class="lineNum">      42 </span><span class="lineCov">        246 : static int currentline (CallInfo *ci) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">        246 :   return getfuncline(ci_func(ci)-&gt;l.p, currentpc(ci));</span>
 <span class="lineNum">      44 </span>            : }
 <span class="lineNum">      45 </span>            : 
 <span class="lineNum">      46 </span>            : 
@@ -143,20 +143,20 @@
 <span class="lineNum">      77 </span>            : }
 <span class="lineNum">      78 </span>            : 
 <span class="lineNum">      79 </span>            : 
-<span class="lineNum">      80 </span><span class="lineCov">        114 : LUA_API int lua_getstack (lua_State *L, int level, lua_Debug *ar) {</span>
+<span class="lineNum">      80 </span><span class="lineCov">        134 : LUA_API int lua_getstack (lua_State *L, int level, lua_Debug *ar) {</span>
 <span class="lineNum">      81 </span>            :   int status;
 <span class="lineNum">      82 </span>            :   CallInfo *ci;
-<span class="lineNum">      83 </span><span class="lineCov">        114 :   if (level &lt; 0) return 0;  /* invalid (negative) level */</span>
+<span class="lineNum">      83 </span><span class="lineCov">        134 :   if (level &lt; 0) return 0;  /* invalid (negative) level */</span>
 <span class="lineNum">      84 </span>            :   lua_lock(L);
-<span class="lineNum">      85 </span><span class="lineCov">        232 :   for (ci = L-&gt;ci; level &gt; 0 &amp;&amp; ci != &amp;L-&gt;base_ci; ci = ci-&gt;previous)</span>
-<span class="lineNum">      86 </span><span class="lineCov">        118 :     level--;</span>
-<span class="lineNum">      87 </span><span class="lineCov">        114 :   if (level == 0 &amp;&amp; ci != &amp;L-&gt;base_ci) {  /* level found? */</span>
-<span class="lineNum">      88 </span><span class="lineCov">        103 :     status = 1;</span>
-<span class="lineNum">      89 </span><span class="lineCov">        103 :     ar-&gt;i_ci = ci;</span>
+<span class="lineNum">      85 </span><span class="lineCov">        294 :   for (ci = L-&gt;ci; level &gt; 0 &amp;&amp; ci != &amp;L-&gt;base_ci; ci = ci-&gt;previous)</span>
+<span class="lineNum">      86 </span><span class="lineCov">        160 :     level--;</span>
+<span class="lineNum">      87 </span><span class="lineCov">        134 :   if (level == 0 &amp;&amp; ci != &amp;L-&gt;base_ci) {  /* level found? */</span>
+<span class="lineNum">      88 </span><span class="lineCov">        117 :     status = 1;</span>
+<span class="lineNum">      89 </span><span class="lineCov">        117 :     ar-&gt;i_ci = ci;</span>
 <span class="lineNum">      90 </span>            :   }
-<span class="lineNum">      91 </span><span class="lineCov">         11 :   else status = 0;  /* no such level */</span>
+<span class="lineNum">      91 </span><span class="lineCov">         17 :   else status = 0;  /* no such level */</span>
 <span class="lineNum">      92 </span>            :   lua_unlock(L);
-<span class="lineNum">      93 </span><span class="lineCov">        114 :   return status;</span>
+<span class="lineNum">      93 </span><span class="lineCov">        134 :   return status;</span>
 <span class="lineNum">      94 </span>            : }
 <span class="lineNum">      95 </span>            : 
 <span class="lineNum">      96 </span>            : 
@@ -219,24 +219,24 @@
 <span class="lineNum">     153 </span>            : 
 <span class="lineNum">     154 </span>            : 
 <span class="lineNum">     155 </span>            : static void funcinfo (lua_Debug *ar, Closure *cl) {
-<span class="lineNum">     156 </span><span class="lineCov">         70 :   if (cl == NULL || cl-&gt;c.isC) {</span>
-<span class="lineNum">     157 </span><span class="lineCov">          7 :     ar-&gt;source = &quot;=[C]&quot;;</span>
-<span class="lineNum">     158 </span><span class="lineCov">          7 :     ar-&gt;linedefined = -1;</span>
-<span class="lineNum">     159 </span><span class="lineCov">          7 :     ar-&gt;lastlinedefined = -1;</span>
-<span class="lineNum">     160 </span><span class="lineCov">          7 :     ar-&gt;what = &quot;C&quot;;</span>
+<span class="lineNum">     156 </span><span class="lineCov">         78 :   if (cl == NULL || cl-&gt;c.isC) {</span>
+<span class="lineNum">     157 </span><span class="lineCov">         13 :     ar-&gt;source = &quot;=[C]&quot;;</span>
+<span class="lineNum">     158 </span><span class="lineCov">         13 :     ar-&gt;linedefined = -1;</span>
+<span class="lineNum">     159 </span><span class="lineCov">         13 :     ar-&gt;lastlinedefined = -1;</span>
+<span class="lineNum">     160 </span><span class="lineCov">         13 :     ar-&gt;what = &quot;C&quot;;</span>
 <span class="lineNum">     161 </span>            :   }
 <span class="lineNum">     162 </span>            :   else {
-<span class="lineNum">     163 </span><span class="lineCov">         63 :     Proto *p = cl-&gt;l.p;</span>
-<span class="lineNum">     164 </span><span class="lineCov">         63 :     ar-&gt;source = p-&gt;source ? getstr(p-&gt;source) : &quot;=?&quot;;</span>
-<span class="lineNum">     165 </span><span class="lineCov">         63 :     ar-&gt;linedefined = p-&gt;linedefined;</span>
-<span class="lineNum">     166 </span><span class="lineCov">         63 :     ar-&gt;lastlinedefined = p-&gt;lastlinedefined;</span>
-<span class="lineNum">     167 </span><span class="lineCov">         63 :     ar-&gt;what = (ar-&gt;linedefined == 0) ? &quot;main&quot; : &quot;Lua&quot;;</span>
+<span class="lineNum">     163 </span><span class="lineCov">         65 :     Proto *p = cl-&gt;l.p;</span>
+<span class="lineNum">     164 </span><span class="lineCov">         65 :     ar-&gt;source = p-&gt;source ? getstr(p-&gt;source) : &quot;=?&quot;;</span>
+<span class="lineNum">     165 </span><span class="lineCov">         65 :     ar-&gt;linedefined = p-&gt;linedefined;</span>
+<span class="lineNum">     166 </span><span class="lineCov">         65 :     ar-&gt;lastlinedefined = p-&gt;lastlinedefined;</span>
+<span class="lineNum">     167 </span><span class="lineCov">         65 :     ar-&gt;what = (ar-&gt;linedefined == 0) ? &quot;main&quot; : &quot;Lua&quot;;</span>
 <span class="lineNum">     168 </span>            :   }
-<span class="lineNum">     169 </span><span class="lineCov">         70 :   luaO_chunkid(ar-&gt;short_src, ar-&gt;source, LUA_IDSIZE);</span>
+<span class="lineNum">     169 </span><span class="lineCov">         78 :   luaO_chunkid(ar-&gt;short_src, ar-&gt;source, LUA_IDSIZE);</span>
 <span class="lineNum">     170 </span>            : }
 <span class="lineNum">     171 </span>            : 
 <span class="lineNum">     172 </span>            : 
-<span class="lineNum">     173 </span>            : static void collectvalidlines (lua_State *L, Closure *f) {
+<span class="lineNum">     173 </span><span class="lineCov">          1 : static void collectvalidlines (lua_State *L, Closure *f) {</span>
 <span class="lineNum">     174 </span><span class="lineCov">          1 :   if (f == NULL || f-&gt;c.isC) {</span>
 <span class="lineNum">     175 </span><span class="lineNoCov">          0 :     setnilvalue(L-&gt;top);</span>
 <span class="lineNum">     176 </span><span class="lineNoCov">          0 :     incr_top(L);</span>
@@ -250,43 +250,43 @@
 <span class="lineNum">     184 </span><span class="lineCov">         25 :     for (i=0; i&lt;f-&gt;l.p-&gt;sizelineinfo; i++)</span>
 <span class="lineNum">     185 </span><span class="lineCov">         24 :       setbvalue(luaH_setint(L, t, lineinfo[i]), 1);</span>
 <span class="lineNum">     186 </span>            :   }
-<span class="lineNum">     187 </span>            : }
+<span class="lineNum">     187 </span><span class="lineCov">          1 : }</span>
 <span class="lineNum">     188 </span>            : 
 <span class="lineNum">     189 </span>            : 
-<span class="lineNum">     190 </span><span class="lineCov">        103 : static int auxgetinfo (lua_State *L, const char *what, lua_Debug *ar,</span>
+<span class="lineNum">     190 </span><span class="lineCov">        115 : static int auxgetinfo (lua_State *L, const char *what, lua_Debug *ar,</span>
 <span class="lineNum">     191 </span>            :                     Closure *f, CallInfo *ci) {
-<span class="lineNum">     192 </span><span class="lineCov">        103 :   int status = 1;</span>
-<span class="lineNum">     193 </span><span class="lineCov">        292 :   for (; *what; what++) {</span>
-<span class="lineNum">     194 </span><span class="lineCov">        189 :     switch (*what) {</span>
+<span class="lineNum">     192 </span><span class="lineCov">        115 :   int status = 1;</span>
+<span class="lineNum">     193 </span><span class="lineCov">        340 :   for (; *what; what++) {</span>
+<span class="lineNum">     194 </span><span class="lineCov">        225 :     switch (*what) {</span>
 <span class="lineNum">     195 </span>            :       case 'S': {
 <span class="lineNum">     196 </span>            :         funcinfo(ar, f);
-<span class="lineNum">     197 </span><span class="lineCov">         70 :         break;</span>
+<span class="lineNum">     197 </span><span class="lineCov">         78 :         break;</span>
 <span class="lineNum">     198 </span>            :       }
 <span class="lineNum">     199 </span>            :       case 'l': {
-<span class="lineNum">     200 </span><span class="lineCov">        132 :         ar-&gt;currentline = (ci &amp;&amp; isLua(ci)) ? currentline(ci) : -1;</span>
-<span class="lineNum">     201 </span><span class="lineCov">         70 :         break;</span>
+<span class="lineNum">     200 </span><span class="lineCov">         78 :         ar-&gt;currentline = (ci &amp;&amp; isLua(ci)) ? currentline(ci) : -1;</span>
+<span class="lineNum">     201 </span><span class="lineCov">         78 :         break;</span>
 <span class="lineNum">     202 </span>            :       }
 <span class="lineNum">     203 </span>            :       case 'u': {
-<span class="lineNum">     204 </span><span class="lineCov">          6 :         ar-&gt;nups = (f == NULL) ? 0 : f-&gt;c.nupvalues;</span>
-<span class="lineNum">     205 </span><span class="lineCov">          6 :         if (f == NULL || f-&gt;c.isC) {</span>
+<span class="lineNum">     204 </span><span class="lineCov">          8 :         ar-&gt;nups = (f == NULL) ? 0 : f-&gt;c.nupvalues;</span>
+<span class="lineNum">     205 </span><span class="lineCov">          8 :         if (f == NULL || f-&gt;c.isC) {</span>
 <span class="lineNum">     206 </span><span class="lineNoCov">          0 :           ar-&gt;isvararg = 1;</span>
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :           ar-&gt;nparams = 0;</span>
 <span class="lineNum">     208 </span>            :         }
 <span class="lineNum">     209 </span>            :         else {
-<span class="lineNum">     210 </span><span class="lineCov">          6 :           ar-&gt;isvararg = f-&gt;l.p-&gt;is_vararg;</span>
-<span class="lineNum">     211 </span><span class="lineCov">          6 :           ar-&gt;nparams = f-&gt;l.p-&gt;numparams;</span>
+<span class="lineNum">     210 </span><span class="lineCov">          8 :           ar-&gt;isvararg = f-&gt;l.p-&gt;is_vararg;</span>
+<span class="lineNum">     211 </span><span class="lineCov">          8 :           ar-&gt;nparams = f-&gt;l.p-&gt;numparams;</span>
 <span class="lineNum">     212 </span>            :         }
 <span class="lineNum">     213 </span>            :         break;
 <span class="lineNum">     214 </span>            :       }
 <span class="lineNum">     215 </span>            :       case 't': {
-<span class="lineNum">     216 </span><span class="lineCov">          6 :         ar-&gt;istailcall = (ci) ? ci-&gt;callstatus &amp; CIST_TAIL : 0;</span>
-<span class="lineNum">     217 </span><span class="lineCov">          6 :         break;</span>
+<span class="lineNum">     216 </span><span class="lineCov">         12 :         ar-&gt;istailcall = (ci) ? ci-&gt;callstatus &amp; CIST_TAIL : 0;</span>
+<span class="lineNum">     217 </span><span class="lineCov">         12 :         break;</span>
 <span class="lineNum">     218 </span>            :       }
 <span class="lineNum">     219 </span>            :       case 'n': {
-<span class="lineNum">     220 </span><span class="lineCov">         29 :         ar-&gt;namewhat = (ci) ? getfuncname(L, ci, &amp;ar-&gt;name) : NULL;</span>
-<span class="lineNum">     221 </span><span class="lineCov">         29 :         if (ar-&gt;namewhat == NULL) {</span>
-<span class="lineNum">     222 </span><span class="lineCov">          6 :           ar-&gt;namewhat = &quot;&quot;;  /* not found */</span>
-<span class="lineNum">     223 </span><span class="lineCov">          6 :           ar-&gt;name = NULL;</span>
+<span class="lineNum">     220 </span><span class="lineCov">         35 :         ar-&gt;namewhat = (ci) ? getfuncname(L, ci, &amp;ar-&gt;name) : NULL;</span>
+<span class="lineNum">     221 </span><span class="lineCov">         35 :         if (ar-&gt;namewhat == NULL) {</span>
+<span class="lineNum">     222 </span><span class="lineCov">         12 :           ar-&gt;namewhat = &quot;&quot;;  /* not found */</span>
+<span class="lineNum">     223 </span><span class="lineCov">         12 :           ar-&gt;name = NULL;</span>
 <span class="lineNum">     224 </span>            :         }
 <span class="lineNum">     225 </span>            :         break;
 <span class="lineNum">     226 </span>            :       }
@@ -296,17 +296,17 @@
 <span class="lineNum">     230 </span><span class="lineCov">          1 :       default: status = 0;  /* invalid option */</span>
 <span class="lineNum">     231 </span>            :     }
 <span class="lineNum">     232 </span>            :   }
-<span class="lineNum">     233 </span><span class="lineCov">        103 :   return status;</span>
+<span class="lineNum">     233 </span><span class="lineCov">        115 :   return status;</span>
 <span class="lineNum">     234 </span>            : }
 <span class="lineNum">     235 </span>            : 
 <span class="lineNum">     236 </span>            : 
-<span class="lineNum">     237 </span><span class="lineCov">        103 : LUA_API int lua_getinfo (lua_State *L, const char *what, lua_Debug *ar) {</span>
+<span class="lineNum">     237 </span><span class="lineCov">        115 : LUA_API int lua_getinfo (lua_State *L, const char *what, lua_Debug *ar) {</span>
 <span class="lineNum">     238 </span>            :   int status;
 <span class="lineNum">     239 </span>            :   Closure *cl;
 <span class="lineNum">     240 </span>            :   CallInfo *ci;
 <span class="lineNum">     241 </span>            :   StkId func;
 <span class="lineNum">     242 </span>            :   lua_lock(L);
-<span class="lineNum">     243 </span><span class="lineCov">        103 :   if (*what == '&gt;') {</span>
+<span class="lineNum">     243 </span><span class="lineCov">        115 :   if (*what == '&gt;') {</span>
 <span class="lineNum">     244 </span><span class="lineCov">          7 :     ci = NULL;</span>
 <span class="lineNum">     245 </span><span class="lineCov">          7 :     func = L-&gt;top - 1;</span>
 <span class="lineNum">     246 </span>            :     luai_apicheck(L, ttisfunction(func));
@@ -314,20 +314,20 @@
 <span class="lineNum">     248 </span><span class="lineCov">          7 :     L-&gt;top--;  /* pop function */</span>
 <span class="lineNum">     249 </span>            :   }
 <span class="lineNum">     250 </span>            :   else {
-<span class="lineNum">     251 </span><span class="lineCov">         96 :     ci = ar-&gt;i_ci;</span>
-<span class="lineNum">     252 </span><span class="lineCov">         96 :     func = ci-&gt;func;</span>
+<span class="lineNum">     251 </span><span class="lineCov">        108 :     ci = ar-&gt;i_ci;</span>
+<span class="lineNum">     252 </span><span class="lineCov">        108 :     func = ci-&gt;func;</span>
 <span class="lineNum">     253 </span>            :     lua_assert(ttisfunction(ci-&gt;func));
 <span class="lineNum">     254 </span>            :   }
-<span class="lineNum">     255 </span><span class="lineCov">        103 :   cl = ttisclosure(func) ? clvalue(func) : NULL;</span>
-<span class="lineNum">     256 </span><span class="lineCov">        103 :   status = auxgetinfo(L, what, ar, cl, ci);</span>
-<span class="lineNum">     257 </span><span class="lineCov">        103 :   if (strchr(what, 'f')) {</span>
-<span class="lineNum">     258 </span><span class="lineCov">          6 :     setobjs2s(L, L-&gt;top, func);</span>
-<span class="lineNum">     259 </span><span class="lineCov">          6 :     incr_top(L);</span>
+<span class="lineNum">     255 </span><span class="lineCov">        115 :   cl = ttisclosure(func) ? clvalue(func) : NULL;</span>
+<span class="lineNum">     256 </span><span class="lineCov">        115 :   status = auxgetinfo(L, what, ar, cl, ci);</span>
+<span class="lineNum">     257 </span><span class="lineCov">        115 :   if (strchr(what, 'f')) {</span>
+<span class="lineNum">     258 </span><span class="lineCov">         12 :     setobjs2s(L, L-&gt;top, func);</span>
+<span class="lineNum">     259 </span><span class="lineCov">         12 :     incr_top(L);</span>
 <span class="lineNum">     260 </span>            :   }
-<span class="lineNum">     261 </span><span class="lineCov">        103 :   if (strchr(what, 'L'))</span>
-<span class="lineNum">     262 </span>            :     collectvalidlines(L, cl);
+<span class="lineNum">     261 </span><span class="lineCov">        115 :   if (strchr(what, 'L'))</span>
+<span class="lineNum">     262 </span><span class="lineCov">          1 :     collectvalidlines(L, cl);</span>
 <span class="lineNum">     263 </span>            :   lua_unlock(L);
-<span class="lineNum">     264 </span><span class="lineCov">        103 :   return status;</span>
+<span class="lineNum">     264 </span><span class="lineCov">        115 :   return status;</span>
 <span class="lineNum">     265 </span>            : }
 <span class="lineNum">     266 </span>            : 
 <span class="lineNum">     267 </span>            : 
@@ -353,7 +353,7 @@
 <span class="lineNum">     287 </span>            :                                const char **name) {
 <span class="lineNum">     288 </span><span class="lineCov">         94 :   Proto *p = ci_func(ci)-&gt;l.p;</span>
 <span class="lineNum">     289 </span><span class="lineCov">         94 :   const char *what = NULL;</span>
-<span class="lineNum">     290 </span><span class="lineCov">         94 :   int lastpc = currentpc(ci);</span>
+<span class="lineNum">     290 </span>            :   int lastpc = currentpc(ci);
 <span class="lineNum">     291 </span>            :   int pc;
 <span class="lineNum">     292 </span><span class="lineCov">         94 :   *name = luaF_getlocalname(p, reg + 1, lastpc);</span>
 <span class="lineNum">     293 </span><span class="lineCov">         94 :   if (*name)  /* is a local? */</span>
@@ -378,9 +378,9 @@
 <span class="lineNum">     312 </span><span class="lineCov">        103 :         if (reg == a) {</span>
 <span class="lineNum">     313 </span><span class="lineCov">        101 :           int k = GETARG_C(i);  /* key index */</span>
 <span class="lineNum">     314 </span><span class="lineCov">        101 :           int t = GETARG_B(i);</span>
-<span class="lineNum">     315 </span>            :           const char *vn = (op == OP_GETTABLE)  /* name of indexed variable */ 
+<span class="lineNum">     315 </span><span class="lineCov">        101 :           const char *vn = (op == OP_GETTABLE)  /* name of indexed variable */ </span>
 <span class="lineNum">     316 </span><span class="lineCov">         14 :                            ? luaF_getlocalname(p, t + 1, pc)</span>
-<span class="lineNum">     317 </span><span class="lineCov">        115 :                            : getstr(p-&gt;upvalues[t].name);</span>
+<span class="lineNum">     317 </span><span class="lineCov">        101 :                            : getstr(p-&gt;upvalues[t].name);</span>
 <span class="lineNum">     318 </span>            :           kname(p, k, a, what, name);
 <span class="lineNum">     319 </span><span class="lineCov">        101 :           what = (vn &amp;&amp; strcmp(vn, LUA_ENV) == 0) ? &quot;global&quot; : &quot;field&quot;;</span>
 <span class="lineNum">     320 </span>            :         }
@@ -446,11 +446,11 @@
 <span class="lineNum">     380 </span>            : }
 <span class="lineNum">     381 </span>            : 
 <span class="lineNum">     382 </span>            : 
-<span class="lineNum">     383 </span><span class="lineCov">         28 : static const char *getfuncname (lua_State *L, CallInfo *ci, const char **name) {</span>
+<span class="lineNum">     383 </span><span class="lineCov">         34 : static const char *getfuncname (lua_State *L, CallInfo *ci, const char **name) {</span>
 <span class="lineNum">     384 </span>            :   TMS tm;
 <span class="lineNum">     385 </span>            :   Instruction i;
-<span class="lineNum">     386 </span><span class="lineCov">         28 :   if ((ci-&gt;callstatus &amp; CIST_TAIL) || !isLua(ci-&gt;previous))</span>
-<span class="lineNum">     387 </span><span class="lineCov">          5 :     return NULL;  /* calling function is not Lua (or is unknown) */</span>
+<span class="lineNum">     386 </span><span class="lineCov">         34 :   if ((ci-&gt;callstatus &amp; CIST_TAIL) || !isLua(ci-&gt;previous))</span>
+<span class="lineNum">     387 </span><span class="lineCov">         11 :     return NULL;  /* calling function is not Lua (or is unknown) */</span>
 <span class="lineNum">     388 </span><span class="lineCov">         23 :   ci = ci-&gt;previous;  /* calling function */</span>
 <span class="lineNum">     389 </span><span class="lineCov">         46 :   i = ci_func(ci)-&gt;l.p-&gt;code[currentpc(ci)];</span>
 <span class="lineNum">     390 </span><span class="lineCov">         23 :   if (GET_OPCODE(i) == OP_EXTRAARG)  /* extra argument? */</span>
@@ -484,7 +484,7 @@
 <span class="lineNum">     418 </span><span class="lineNoCov">          0 :       return NULL;  /* else no useful name can be found */</span>
 <span class="lineNum">     419 </span>            :   }
 <span class="lineNum">     420 </span><span class="lineNoCov">          0 :   *name = getstr(G(L)-&gt;tmname[tm]);</span>
-<span class="lineNum">     421 </span><span class="lineCov">         28 :   return &quot;metamethod&quot;;</span>
+<span class="lineNum">     421 </span><span class="lineCov">         34 :   return &quot;metamethod&quot;;</span>
 <span class="lineNum">     422 </span>            : }
 <span class="lineNum">     423 </span>            : 
 <span class="lineNum">     424 </span>            : /* }====================================================== */
@@ -520,7 +520,7 @@
 <span class="lineNum">     454 </span><span class="lineCov">        108 :   const char *t = objtypename(o);</span>
 <span class="lineNum">     455 </span><span class="lineCov">        108 :   const char *kind = NULL;</span>
 <span class="lineNum">     456 </span><span class="lineCov">        108 :   if (isLua(ci)) {</span>
-<span class="lineNum">     457 </span><span class="lineCov">        107 :     kind = getupvalname(ci, o, &amp;name);  /* check whether 'o' is an upvalue */</span>
+<span class="lineNum">     457 </span>            :     kind = getupvalname(ci, o, &amp;name);  /* check whether 'o' is an upvalue */
 <span class="lineNum">     458 </span><span class="lineCov">        213 :     if (!kind &amp;&amp; isinstack(ci, o))  /* no? try a register */ </span>
 <span class="lineNum">     459 </span><span class="lineCov">         71 :       kind = getobjname(L, ci, cast_int(o - ci-&gt;u.l.base), &amp;name);</span>
 <span class="lineNum">     460 </span>            :   }
@@ -574,16 +574,16 @@
 <span class="lineNum">     508 </span>            : }
 <span class="lineNum">     509 </span>            : 
 <span class="lineNum">     510 </span>            : 
-<span class="lineNum">     511 </span><span class="lineCov">        250 : void luaG_errormsg (lua_State *L) {</span>
-<span class="lineNum">     512 </span><span class="lineCov">        250 :   if (L-&gt;errfunc != 0) {  /* is there an error handling function? */</span>
-<span class="lineNum">     513 </span><span class="lineCov">          2 :     StkId errfunc = restorestack(L, L-&gt;errfunc);</span>
-<span class="lineNum">     514 </span><span class="lineCov">          2 :     if (!ttisfunction(errfunc)) luaD_throw(L, LUA_ERRERR);</span>
-<span class="lineNum">     515 </span><span class="lineCov">          1 :     setobjs2s(L, L-&gt;top, L-&gt;top - 1);  /* move argument */</span>
-<span class="lineNum">     516 </span><span class="lineCov">          1 :     setobjs2s(L, L-&gt;top - 1, errfunc);  /* push function */</span>
-<span class="lineNum">     517 </span><span class="lineCov">          1 :     incr_top(L);</span>
-<span class="lineNum">     518 </span><span class="lineCov">          1 :     luaD_call(L, L-&gt;top - 2, 1, 0);  /* call it */</span>
+<span class="lineNum">     511 </span><span class="lineCov">        252 : void luaG_errormsg (lua_State *L) {</span>
+<span class="lineNum">     512 </span><span class="lineCov">        252 :   if (L-&gt;errfunc != 0) {  /* is there an error handling function? */</span>
+<span class="lineNum">     513 </span><span class="lineCov">          4 :     StkId errfunc = restorestack(L, L-&gt;errfunc);</span>
+<span class="lineNum">     514 </span><span class="lineCov">          4 :     if (!ttisfunction(errfunc)) luaD_throw(L, LUA_ERRERR);</span>
+<span class="lineNum">     515 </span><span class="lineCov">          3 :     setobjs2s(L, L-&gt;top, L-&gt;top - 1);  /* move argument */</span>
+<span class="lineNum">     516 </span><span class="lineCov">          3 :     setobjs2s(L, L-&gt;top - 1, errfunc);  /* push function */</span>
+<span class="lineNum">     517 </span><span class="lineCov">          3 :     incr_top(L);</span>
+<span class="lineNum">     518 </span><span class="lineCov">          3 :     luaD_call(L, L-&gt;top - 2, 1, 0);  /* call it */</span>
 <span class="lineNum">     519 </span>            :   }
-<span class="lineNum">     520 </span><span class="lineCov">        249 :   luaD_throw(L, LUA_ERRRUN);</span>
+<span class="lineNum">     520 </span><span class="lineCov">        251 :   luaD_throw(L, LUA_ERRRUN);</span>
 <span class="lineNum">     521 </span><span class="lineNoCov">          0 : }</span>
 <span class="lineNum">     522 </span>            : 
 <span class="lineNum">     523 </span>            : 
@@ -603,7 +603,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.8</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
   </table>
   <br>
 

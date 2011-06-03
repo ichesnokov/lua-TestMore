@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>LCOV - Lua 5.1.4 - src/lua.c</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.1.4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">141</td>
-            <td class="headerCovTableEntry">225</td>
-            <td class="headerCovTableEntryLo">62.7 %</td>
+            <td class="headerCovTableEntry">142</td>
+            <td class="headerCovTableEntry">227</td>
+            <td class="headerCovTableEntryLo">62.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2010-11-20</td>
+            <td class="headerValue">2011-06-03</td>
             <td></td>
           </tr>
           <tr>
@@ -105,8 +105,8 @@
 <span class="lineNum">      39 </span><span class="lineNoCov">          0 : }</span>
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span>            : 
-<span class="lineNum">      42 </span><span class="lineCov">          3 : static void print_usage (void) {</span>
-<span class="lineNum">      43 </span><span class="lineCov">          3 :   fprintf(stderr,</span>
+<span class="lineNum">      42 </span><span class="lineCov">          1 : static void print_usage (void) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">          1 :   fprintf(stderr,</span>
 <span class="lineNum">      44 </span>            :   &quot;usage: %s [options] [script [args]].\n&quot;
 <span class="lineNum">      45 </span>            :   &quot;Available options are:\n&quot;
 <span class="lineNum">      46 </span>            :   &quot;  -e stat  execute string &quot; LUA_QL(&quot;stat&quot;) &quot;\n&quot;
@@ -117,102 +117,102 @@
 <span class="lineNum">      51 </span>            :   &quot;  -        execute stdin and stop handling options\n&quot;
 <span class="lineNum">      52 </span>            :   ,
 <span class="lineNum">      53 </span>            :   progname);
-<span class="lineNum">      54 </span><span class="lineCov">          3 :   fflush(stderr);</span>
-<span class="lineNum">      55 </span><span class="lineCov">          3 : }</span>
+<span class="lineNum">      54 </span><span class="lineCov">          1 :   fflush(stderr);</span>
+<span class="lineNum">      55 </span><span class="lineCov">          1 : }</span>
 <span class="lineNum">      56 </span>            : 
 <span class="lineNum">      57 </span>            : 
-<span class="lineNum">      58 </span><span class="lineCov">         16 : static void l_message (const char *pname, const char *msg) {</span>
-<span class="lineNum">      59 </span><span class="lineCov">         16 :   if (pname) fprintf(stderr, &quot;%s: &quot;, pname);</span>
-<span class="lineNum">      60 </span><span class="lineCov">         16 :   fprintf(stderr, &quot;%s\n&quot;, msg);</span>
-<span class="lineNum">      61 </span><span class="lineCov">         16 :   fflush(stderr);</span>
-<span class="lineNum">      62 </span><span class="lineCov">         16 : }</span>
+<span class="lineNum">      58 </span><span class="lineCov">          4 : static void l_message (const char *pname, const char *msg) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">          4 :   if (pname) fprintf(stderr, &quot;%s: &quot;, pname);</span>
+<span class="lineNum">      60 </span><span class="lineCov">          4 :   fprintf(stderr, &quot;%s\n&quot;, msg);</span>
+<span class="lineNum">      61 </span><span class="lineCov">          4 :   fflush(stderr);</span>
+<span class="lineNum">      62 </span><span class="lineCov">          4 : }</span>
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">        531 : static int report (lua_State *L, int status) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">        531 :   if (status &amp;&amp; !lua_isnil(L, -1)) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">         10 :     const char *msg = lua_tostring(L, -1);</span>
-<span class="lineNum">      68 </span><span class="lineCov">         10 :     if (msg == NULL) msg = &quot;(error object is not a string)&quot;;</span>
-<span class="lineNum">      69 </span><span class="lineCov">         10 :     l_message(progname, msg);</span>
-<span class="lineNum">      70 </span><span class="lineCov">         10 :     lua_pop(L, 1);</span>
+<span class="lineNum">      65 </span><span class="lineCov">        173 : static int report (lua_State *L, int status) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">        173 :   if (status &amp;&amp; !lua_isnil(L, -1)) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">          2 :     const char *msg = lua_tostring(L, -1);</span>
+<span class="lineNum">      68 </span><span class="lineCov">          2 :     if (msg == NULL) msg = &quot;(error object is not a string)&quot;;</span>
+<span class="lineNum">      69 </span><span class="lineCov">          2 :     l_message(progname, msg);</span>
+<span class="lineNum">      70 </span><span class="lineCov">          2 :     lua_pop(L, 1);</span>
 <span class="lineNum">      71 </span>            :   }
-<span class="lineNum">      72 </span><span class="lineCov">        531 :   return status;</span>
+<span class="lineNum">      72 </span><span class="lineCov">        173 :   return status;</span>
 <span class="lineNum">      73 </span>            : }
 <span class="lineNum">      74 </span>            : 
 <span class="lineNum">      75 </span>            : 
-<span class="lineNum">      76 </span><span class="lineCov">          6 : static int traceback (lua_State *L) {</span>
-<span class="lineNum">      77 </span><span class="lineCov">          6 :   if (!lua_isstring(L, 1))  /* 'message' not a string? */</span>
+<span class="lineNum">      76 </span><span class="lineCov">          1 : static int traceback (lua_State *L) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">          1 :   if (!lua_isstring(L, 1))  /* 'message' not a string? */</span>
 <span class="lineNum">      78 </span><span class="lineNoCov">          0 :     return 1;  /* keep it intact */</span>
-<span class="lineNum">      79 </span><span class="lineCov">          6 :   lua_getfield(L, LUA_GLOBALSINDEX, &quot;debug&quot;);</span>
-<span class="lineNum">      80 </span><span class="lineCov">          6 :   if (!lua_istable(L, -1)) {</span>
+<span class="lineNum">      79 </span><span class="lineCov">          1 :   lua_getfield(L, LUA_GLOBALSINDEX, &quot;debug&quot;);</span>
+<span class="lineNum">      80 </span><span class="lineCov">          1 :   if (!lua_istable(L, -1)) {</span>
 <span class="lineNum">      81 </span><span class="lineNoCov">          0 :     lua_pop(L, 1);</span>
 <span class="lineNum">      82 </span><span class="lineNoCov">          0 :     return 1;</span>
 <span class="lineNum">      83 </span>            :   }
-<span class="lineNum">      84 </span><span class="lineCov">          6 :   lua_getfield(L, -1, &quot;traceback&quot;);</span>
-<span class="lineNum">      85 </span><span class="lineCov">          6 :   if (!lua_isfunction(L, -1)) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">          1 :   lua_getfield(L, -1, &quot;traceback&quot;);</span>
+<span class="lineNum">      85 </span><span class="lineCov">          1 :   if (!lua_isfunction(L, -1)) {</span>
 <span class="lineNum">      86 </span><span class="lineNoCov">          0 :     lua_pop(L, 2);</span>
 <span class="lineNum">      87 </span><span class="lineNoCov">          0 :     return 1;</span>
 <span class="lineNum">      88 </span>            :   }
-<span class="lineNum">      89 </span><span class="lineCov">          6 :   lua_pushvalue(L, 1);  /* pass error message */</span>
-<span class="lineNum">      90 </span><span class="lineCov">          6 :   lua_pushinteger(L, 2);  /* skip this function and traceback */</span>
-<span class="lineNum">      91 </span><span class="lineCov">          6 :   lua_call(L, 2, 1);  /* call debug.traceback */</span>
-<span class="lineNum">      92 </span><span class="lineCov">          6 :   return 1;</span>
+<span class="lineNum">      89 </span><span class="lineCov">          1 :   lua_pushvalue(L, 1);  /* pass error message */</span>
+<span class="lineNum">      90 </span><span class="lineCov">          1 :   lua_pushinteger(L, 2);  /* skip this function and traceback */</span>
+<span class="lineNum">      91 </span><span class="lineCov">          1 :   lua_call(L, 2, 1);  /* call debug.traceback */</span>
+<span class="lineNum">      92 </span><span class="lineCov">          1 :   return 1;</span>
 <span class="lineNum">      93 </span>            : }
 <span class="lineNum">      94 </span>            : 
 <span class="lineNum">      95 </span>            : 
-<span class="lineNum">      96 </span><span class="lineCov">        359 : static int docall (lua_State *L, int narg, int clear) {</span>
+<span class="lineNum">      96 </span><span class="lineCov">        118 : static int docall (lua_State *L, int narg, int clear) {</span>
 <span class="lineNum">      97 </span>            :   int status;
-<span class="lineNum">      98 </span><span class="lineCov">        359 :   int base = lua_gettop(L) - narg;  /* function index */</span>
-<span class="lineNum">      99 </span><span class="lineCov">        359 :   lua_pushcfunction(L, traceback);  /* push traceback function */</span>
-<span class="lineNum">     100 </span><span class="lineCov">        359 :   lua_insert(L, base);  /* put it under chunk and args */</span>
-<span class="lineNum">     101 </span><span class="lineCov">        359 :   signal(SIGINT, laction);</span>
-<span class="lineNum">     102 </span><span class="lineCov">        359 :   status = lua_pcall(L, narg, (clear ? 0 : LUA_MULTRET), base);</span>
-<span class="lineNum">     103 </span><span class="lineCov">        353 :   signal(SIGINT, SIG_DFL);</span>
-<span class="lineNum">     104 </span><span class="lineCov">        353 :   lua_remove(L, base);  /* remove traceback function */</span>
+<span class="lineNum">      98 </span><span class="lineCov">        118 :   int base = lua_gettop(L) - narg;  /* function index */</span>
+<span class="lineNum">      99 </span><span class="lineCov">        118 :   lua_pushcfunction(L, traceback);  /* push traceback function */</span>
+<span class="lineNum">     100 </span><span class="lineCov">        118 :   lua_insert(L, base);  /* put it under chunk and args */</span>
+<span class="lineNum">     101 </span><span class="lineCov">        118 :   signal(SIGINT, laction);</span>
+<span class="lineNum">     102 </span><span class="lineCov">        118 :   status = lua_pcall(L, narg, (clear ? 0 : LUA_MULTRET), base);</span>
+<span class="lineNum">     103 </span><span class="lineCov">        116 :   signal(SIGINT, SIG_DFL);</span>
+<span class="lineNum">     104 </span><span class="lineCov">        116 :   lua_remove(L, base);  /* remove traceback function */</span>
 <span class="lineNum">     105 </span>            :   /* force a complete garbage collection in case of errors */
-<span class="lineNum">     106 </span><span class="lineCov">        353 :   if (status != 0) lua_gc(L, LUA_GCCOLLECT, 0);</span>
-<span class="lineNum">     107 </span><span class="lineCov">        353 :   return status;</span>
+<span class="lineNum">     106 </span><span class="lineCov">        116 :   if (status != 0) lua_gc(L, LUA_GCCOLLECT, 0);</span>
+<span class="lineNum">     107 </span><span class="lineCov">        116 :   return status;</span>
 <span class="lineNum">     108 </span>            : }
 <span class="lineNum">     109 </span>            : 
 <span class="lineNum">     110 </span>            : 
-<span class="lineNum">     111 </span><span class="lineCov">          6 : static void print_version (void) {</span>
-<span class="lineNum">     112 </span><span class="lineCov">          6 :   l_message(NULL, LUA_RELEASE &quot;  &quot; LUA_COPYRIGHT);</span>
-<span class="lineNum">     113 </span><span class="lineCov">          6 : }</span>
+<span class="lineNum">     111 </span><span class="lineCov">          2 : static void print_version (void) {</span>
+<span class="lineNum">     112 </span><span class="lineCov">          2 :   l_message(NULL, LUA_RELEASE &quot;  &quot; LUA_COPYRIGHT);</span>
+<span class="lineNum">     113 </span><span class="lineCov">          2 : }</span>
 <span class="lineNum">     114 </span>            : 
 <span class="lineNum">     115 </span>            : 
-<span class="lineNum">     116 </span><span class="lineCov">        134 : static int getargs (lua_State *L, char **argv, int n) {</span>
+<span class="lineNum">     116 </span><span class="lineCov">         43 : static int getargs (lua_State *L, char **argv, int n) {</span>
 <span class="lineNum">     117 </span>            :   int narg;
 <span class="lineNum">     118 </span>            :   int i;
-<span class="lineNum">     119 </span><span class="lineCov">        134 :   int argc = 0;</span>
-<span class="lineNum">     120 </span><span class="lineCov">        414 :   while (argv[argc]) argc++;  /* count total number of arguments */</span>
-<span class="lineNum">     121 </span><span class="lineCov">        134 :   narg = argc - (n + 1);  /* number of arguments to the script */</span>
-<span class="lineNum">     122 </span><span class="lineCov">        134 :   luaL_checkstack(L, narg + 3, &quot;too many arguments to script&quot;);</span>
-<span class="lineNum">     123 </span><span class="lineCov">        134 :   for (i=n+1; i &lt; argc; i++)</span>
+<span class="lineNum">     119 </span><span class="lineCov">         43 :   int argc = 0;</span>
+<span class="lineNum">     120 </span><span class="lineCov">        133 :   while (argv[argc]) argc++;  /* count total number of arguments */</span>
+<span class="lineNum">     121 </span><span class="lineCov">         43 :   narg = argc - (n + 1);  /* number of arguments to the script */</span>
+<span class="lineNum">     122 </span><span class="lineCov">         43 :   luaL_checkstack(L, narg + 3, &quot;too many arguments to script&quot;);</span>
+<span class="lineNum">     123 </span><span class="lineCov">         43 :   for (i=n+1; i &lt; argc; i++)</span>
 <span class="lineNum">     124 </span><span class="lineNoCov">          0 :     lua_pushstring(L, argv[i]);</span>
-<span class="lineNum">     125 </span><span class="lineCov">        134 :   lua_createtable(L, narg, n + 1);</span>
-<span class="lineNum">     126 </span><span class="lineCov">        414 :   for (i=0; i &lt; argc; i++) {</span>
-<span class="lineNum">     127 </span><span class="lineCov">        280 :     lua_pushstring(L, argv[i]);</span>
-<span class="lineNum">     128 </span><span class="lineCov">        280 :     lua_rawseti(L, -2, i - n);</span>
+<span class="lineNum">     125 </span><span class="lineCov">         43 :   lua_createtable(L, narg, n + 1);</span>
+<span class="lineNum">     126 </span><span class="lineCov">        133 :   for (i=0; i &lt; argc; i++) {</span>
+<span class="lineNum">     127 </span><span class="lineCov">         90 :     lua_pushstring(L, argv[i]);</span>
+<span class="lineNum">     128 </span><span class="lineCov">         90 :     lua_rawseti(L, -2, i - n);</span>
 <span class="lineNum">     129 </span>            :   }
-<span class="lineNum">     130 </span><span class="lineCov">        134 :   return narg;</span>
+<span class="lineNum">     130 </span><span class="lineCov">         43 :   return narg;</span>
 <span class="lineNum">     131 </span>            : }
 <span class="lineNum">     132 </span>            : 
 <span class="lineNum">     133 </span>            : 
-<span class="lineNum">     134 </span><span class="lineCov">          3 : static int dofile (lua_State *L, const char *name) {</span>
-<span class="lineNum">     135 </span><span class="lineCov">          3 :   int status = luaL_loadfile(L, name) || docall(L, 0, 1);</span>
-<span class="lineNum">     136 </span><span class="lineCov">          3 :   return report(L, status);</span>
+<span class="lineNum">     134 </span><span class="lineCov">          1 : static int dofile (lua_State *L, const char *name) {</span>
+<span class="lineNum">     135 </span><span class="lineCov">          1 :   int status = luaL_loadfile(L, name) || docall(L, 0, 1);</span>
+<span class="lineNum">     136 </span><span class="lineCov">          1 :   return report(L, status);</span>
 <span class="lineNum">     137 </span>            : }
 <span class="lineNum">     138 </span>            : 
 <span class="lineNum">     139 </span>            : 
-<span class="lineNum">     140 </span><span class="lineCov">        217 : static int dostring (lua_State *L, const char *s, const char *name) {</span>
-<span class="lineNum">     141 </span><span class="lineCov">        217 :   int status = luaL_loadbuffer(L, s, strlen(s), name) || docall(L, 0, 1);</span>
-<span class="lineNum">     142 </span><span class="lineCov">        211 :   return report(L, status);</span>
+<span class="lineNum">     140 </span><span class="lineCov">         72 : static int dostring (lua_State *L, const char *s, const char *name) {</span>
+<span class="lineNum">     141 </span><span class="lineCov">         72 :   int status = luaL_loadbuffer(L, s, strlen(s), name) || docall(L, 0, 1);</span>
+<span class="lineNum">     142 </span><span class="lineCov">         70 :   return report(L, status);</span>
 <span class="lineNum">     143 </span>            : }
 <span class="lineNum">     144 </span>            : 
 <span class="lineNum">     145 </span>            : 
-<span class="lineNum">     146 </span><span class="lineCov">          9 : static int dolibrary (lua_State *L, const char *name) {</span>
-<span class="lineNum">     147 </span><span class="lineCov">          9 :   lua_getglobal(L, &quot;require&quot;);</span>
-<span class="lineNum">     148 </span><span class="lineCov">          9 :   lua_pushstring(L, name);</span>
-<span class="lineNum">     149 </span><span class="lineCov">          9 :   return report(L, docall(L, 1, 1));</span>
+<span class="lineNum">     146 </span><span class="lineCov">          3 : static int dolibrary (lua_State *L, const char *name) {</span>
+<span class="lineNum">     147 </span><span class="lineCov">          3 :   lua_getglobal(L, &quot;require&quot;);</span>
+<span class="lineNum">     148 </span><span class="lineCov">          3 :   lua_pushstring(L, name);</span>
+<span class="lineNum">     149 </span><span class="lineCov">          3 :   return report(L, docall(L, 1, 1));</span>
 <span class="lineNum">     150 </span>            : }
 <span class="lineNum">     151 </span>            : 
 <span class="lineNum">     152 </span>            : 
@@ -302,21 +302,21 @@
 <span class="lineNum">     236 </span><span class="lineNoCov">          0 : }</span>
 <span class="lineNum">     237 </span>            : 
 <span class="lineNum">     238 </span>            : 
-<span class="lineNum">     239 </span><span class="lineCov">        134 : static int handle_script (lua_State *L, char **argv, int n) {</span>
+<span class="lineNum">     239 </span><span class="lineCov">         43 : static int handle_script (lua_State *L, char **argv, int n) {</span>
 <span class="lineNum">     240 </span>            :   int status;
 <span class="lineNum">     241 </span>            :   const char *fname;
-<span class="lineNum">     242 </span><span class="lineCov">        134 :   int narg = getargs(L, argv, n);  /* collect arguments */</span>
-<span class="lineNum">     243 </span><span class="lineCov">        134 :   lua_setglobal(L, &quot;arg&quot;);</span>
-<span class="lineNum">     244 </span><span class="lineCov">        134 :   fname = argv[n];</span>
-<span class="lineNum">     245 </span><span class="lineCov">        134 :   if (strcmp(fname, &quot;-&quot;) == 0 &amp;&amp; strcmp(argv[n-1], &quot;--&quot;) != 0) </span>
+<span class="lineNum">     242 </span><span class="lineCov">         43 :   int narg = getargs(L, argv, n);  /* collect arguments */</span>
+<span class="lineNum">     243 </span><span class="lineCov">         43 :   lua_setglobal(L, &quot;arg&quot;);</span>
+<span class="lineNum">     244 </span><span class="lineCov">         43 :   fname = argv[n];</span>
+<span class="lineNum">     245 </span><span class="lineCov">         43 :   if (strcmp(fname, &quot;-&quot;) == 0 &amp;&amp; strcmp(argv[n-1], &quot;--&quot;) != 0) </span>
 <span class="lineNum">     246 </span><span class="lineNoCov">          0 :     fname = NULL;  /* stdin */</span>
-<span class="lineNum">     247 </span><span class="lineCov">        134 :   status = luaL_loadfile(L, fname);</span>
-<span class="lineNum">     248 </span><span class="lineCov">        134 :   lua_insert(L, -(narg+1));</span>
-<span class="lineNum">     249 </span><span class="lineCov">        134 :   if (status == 0)</span>
-<span class="lineNum">     250 </span><span class="lineCov">        133 :     status = docall(L, narg, 0);</span>
+<span class="lineNum">     247 </span><span class="lineCov">         43 :   status = luaL_loadfile(L, fname);</span>
+<span class="lineNum">     248 </span><span class="lineCov">         43 :   lua_insert(L, -(narg+1));</span>
+<span class="lineNum">     249 </span><span class="lineCov">         43 :   if (status == 0)</span>
+<span class="lineNum">     250 </span><span class="lineCov">         43 :     status = docall(L, narg, 0);</span>
 <span class="lineNum">     251 </span>            :   else
-<span class="lineNum">     252 </span><span class="lineCov">          1 :     lua_pop(L, narg);      </span>
-<span class="lineNum">     253 </span><span class="lineCov">        134 :   return report(L, status);</span>
+<span class="lineNum">     252 </span><span class="lineNoCov">          0 :     lua_pop(L, narg);      </span>
+<span class="lineNum">     253 </span><span class="lineCov">         43 :   return report(L, status);</span>
 <span class="lineNum">     254 </span>            : }
 <span class="lineNum">     255 </span>            : 
 <span class="lineNum">     256 </span>            : 
@@ -324,12 +324,12 @@
 <span class="lineNum">     258 </span>            : #define notail(x)       {if ((x)[2] != '\0') return -1;}
 <span class="lineNum">     259 </span>            : 
 <span class="lineNum">     260 </span>            : 
-<span class="lineNum">     261 </span><span class="lineCov">        180 : static int collectargs (char **argv, int *pi, int *pv, int *pe) {</span>
+<span class="lineNum">     261 </span><span class="lineCov">         58 : static int collectargs (char **argv, int *pi, int *pv, int *pe) {</span>
 <span class="lineNum">     262 </span>            :   int i;
-<span class="lineNum">     263 </span><span class="lineCov">        238 :   for (i = 1; argv[i] != NULL; i++) {</span>
-<span class="lineNum">     264 </span><span class="lineCov">        198 :     if (argv[i][0] != '-')  /* not an option? */</span>
-<span class="lineNum">     265 </span><span class="lineCov">        137 :         return i;</span>
-<span class="lineNum">     266 </span><span class="lineCov">         61 :     switch (argv[i][1]) {  /* option */</span>
+<span class="lineNum">     263 </span><span class="lineCov">         77 :   for (i = 1; argv[i] != NULL; i++) {</span>
+<span class="lineNum">     264 </span><span class="lineCov">         64 :     if (argv[i][0] != '-')  /* not an option? */</span>
+<span class="lineNum">     265 </span><span class="lineCov">         44 :         return i;</span>
+<span class="lineNum">     266 </span><span class="lineCov">         20 :     switch (argv[i][1]) {  /* option */</span>
 <span class="lineNum">     267 </span>            :       case '-':
 <span class="lineNum">     268 </span><span class="lineNoCov">          0 :         notail(argv[i]);</span>
 <span class="lineNum">     269 </span><span class="lineNoCov">          0 :         return (argv[i+1] != NULL ? i+1 : 0);</span>
@@ -339,60 +339,60 @@
 <span class="lineNum">     273 </span><span class="lineNoCov">          0 :         notail(argv[i]);</span>
 <span class="lineNum">     274 </span><span class="lineNoCov">          0 :         *pi = 1;  /* go through */</span>
 <span class="lineNum">     275 </span>            :       case 'v':
-<span class="lineNum">     276 </span><span class="lineCov">          6 :         notail(argv[i]);</span>
-<span class="lineNum">     277 </span><span class="lineCov">          6 :         *pv = 1;</span>
-<span class="lineNum">     278 </span><span class="lineCov">          6 :         break;</span>
+<span class="lineNum">     276 </span><span class="lineCov">          2 :         notail(argv[i]);</span>
+<span class="lineNum">     277 </span><span class="lineCov">          2 :         *pv = 1;</span>
+<span class="lineNum">     278 </span><span class="lineCov">          2 :         break;</span>
 <span class="lineNum">     279 </span>            :       case 'e':
-<span class="lineNum">     280 </span><span class="lineCov">         43 :         *pe = 1;  /* go through */</span>
+<span class="lineNum">     280 </span><span class="lineCov">         14 :         *pe = 1;  /* go through */</span>
 <span class="lineNum">     281 </span>            :       case 'l':
-<span class="lineNum">     282 </span><span class="lineCov">         52 :         if (argv[i][2] == '\0') {</span>
-<span class="lineNum">     283 </span><span class="lineCov">         43 :           i++;</span>
-<span class="lineNum">     284 </span><span class="lineCov">         43 :           if (argv[i] == NULL) return -1;</span>
+<span class="lineNum">     282 </span><span class="lineCov">         17 :         if (argv[i][2] == '\0') {</span>
+<span class="lineNum">     283 </span><span class="lineCov">         14 :           i++;</span>
+<span class="lineNum">     284 </span><span class="lineCov">         14 :           if (argv[i] == NULL) return -1;</span>
 <span class="lineNum">     285 </span>            :         }
-<span class="lineNum">     286 </span><span class="lineCov">         52 :         break;</span>
-<span class="lineNum">     287 </span><span class="lineCov">          3 :       default: return -1;  /* invalid option */</span>
+<span class="lineNum">     286 </span><span class="lineCov">         17 :         break;</span>
+<span class="lineNum">     287 </span><span class="lineCov">          1 :       default: return -1;  /* invalid option */</span>
 <span class="lineNum">     288 </span>            :     }
 <span class="lineNum">     289 </span>            :   }
-<span class="lineNum">     290 </span><span class="lineCov">        180 :   return 0;</span>
+<span class="lineNum">     290 </span><span class="lineCov">         58 :   return 0;</span>
 <span class="lineNum">     291 </span>            : }
 <span class="lineNum">     292 </span>            : 
 <span class="lineNum">     293 </span>            : 
-<span class="lineNum">     294 </span><span class="lineCov">        177 : static int runargs (lua_State *L, char **argv, int n) {</span>
+<span class="lineNum">     294 </span><span class="lineCov">         57 : static int runargs (lua_State *L, char **argv, int n) {</span>
 <span class="lineNum">     295 </span>            :   int i;
-<span class="lineNum">     296 </span><span class="lineCov">        221 :   for (i = 1; i &lt; n; i++) {</span>
-<span class="lineNum">     297 </span><span class="lineCov">         58 :     if (argv[i] == NULL) continue;</span>
+<span class="lineNum">     296 </span><span class="lineCov">         72 :   for (i = 1; i &lt; n; i++) {</span>
+<span class="lineNum">     297 </span><span class="lineCov">         19 :     if (argv[i] == NULL) continue;</span>
 <span class="lineNum">     298 </span>            :     lua_assert(argv[i][0] == '-');
-<span class="lineNum">     299 </span><span class="lineCov">         58 :     switch (argv[i][1]) {  /* option */</span>
+<span class="lineNum">     299 </span><span class="lineCov">         19 :     switch (argv[i][1]) {  /* option */</span>
 <span class="lineNum">     300 </span>            :       case 'e': {
-<span class="lineNum">     301 </span><span class="lineCov">         43 :         const char *chunk = argv[i] + 2;</span>
-<span class="lineNum">     302 </span><span class="lineCov">         43 :         if (*chunk == '\0') chunk = argv[++i];</span>
+<span class="lineNum">     301 </span><span class="lineCov">         14 :         const char *chunk = argv[i] + 2;</span>
+<span class="lineNum">     302 </span><span class="lineCov">         14 :         if (*chunk == '\0') chunk = argv[++i];</span>
 <span class="lineNum">     303 </span>            :         lua_assert(chunk != NULL);
-<span class="lineNum">     304 </span><span class="lineCov">         43 :         if (dostring(L, chunk, &quot;=(command line)&quot;) != 0)</span>
-<span class="lineNum">     305 </span><span class="lineCov">          5 :           return 1;</span>
-<span class="lineNum">     306 </span><span class="lineCov">         32 :         break;</span>
+<span class="lineNum">     304 </span><span class="lineCov">         14 :         if (dostring(L, chunk, &quot;=(command line)&quot;) != 0)</span>
+<span class="lineNum">     305 </span><span class="lineCov">          1 :           return 1;</span>
+<span class="lineNum">     306 </span><span class="lineCov">         11 :         break;</span>
 <span class="lineNum">     307 </span>            :       }
 <span class="lineNum">     308 </span>            :       case 'l': {
-<span class="lineNum">     309 </span><span class="lineCov">          9 :         const char *filename = argv[i] + 2;</span>
-<span class="lineNum">     310 </span><span class="lineCov">          9 :         if (*filename == '\0') filename = argv[++i];</span>
+<span class="lineNum">     309 </span><span class="lineCov">          3 :         const char *filename = argv[i] + 2;</span>
+<span class="lineNum">     310 </span><span class="lineCov">          3 :         if (*filename == '\0') filename = argv[++i];</span>
 <span class="lineNum">     311 </span>            :         lua_assert(filename != NULL);
-<span class="lineNum">     312 </span><span class="lineCov">          9 :         if (dolibrary(L, filename))</span>
-<span class="lineNum">     313 </span><span class="lineCov">          3 :           return 1;  /* stop if file fails */</span>
-<span class="lineNum">     314 </span>            :         break;
+<span class="lineNum">     312 </span><span class="lineCov">          3 :         if (dolibrary(L, filename))</span>
+<span class="lineNum">     313 </span><span class="lineCov">          1 :           return 1;  /* stop if file fails */</span>
+<span class="lineNum">     314 </span><span class="lineCov">          2 :         break;</span>
 <span class="lineNum">     315 </span>            :       }
-<span class="lineNum">     316 </span>            :       default: break;
+<span class="lineNum">     316 </span><span class="lineCov">          2 :       default: break;</span>
 <span class="lineNum">     317 </span>            :     }
 <span class="lineNum">     318 </span>            :   }
-<span class="lineNum">     319 </span><span class="lineCov">        171 :   return 0;</span>
+<span class="lineNum">     319 </span><span class="lineCov">         55 :   return 0;</span>
 <span class="lineNum">     320 </span>            : }
 <span class="lineNum">     321 </span>            : 
 <span class="lineNum">     322 </span>            : 
-<span class="lineNum">     323 </span><span class="lineCov">        180 : static int handle_luainit (lua_State *L) {</span>
-<span class="lineNum">     324 </span><span class="lineCov">        180 :   const char *init = getenv(LUA_INIT);</span>
-<span class="lineNum">     325 </span><span class="lineCov">        180 :   if (init == NULL) return 0;  /* status OK */</span>
-<span class="lineNum">     326 </span><span class="lineCov">        174 :   else if (init[0] == '@')</span>
+<span class="lineNum">     323 </span><span class="lineCov">         58 : static int handle_luainit (lua_State *L) {</span>
+<span class="lineNum">     324 </span><span class="lineCov">         58 :   const char *init = getenv(LUA_INIT);</span>
+<span class="lineNum">     325 </span><span class="lineCov">         58 :   if (init == NULL) return 0;  /* status OK */</span>
+<span class="lineNum">     326 </span><span class="lineCov">         58 :   else if (init[0] == '@')</span>
 <span class="lineNum">     327 </span><span class="lineNoCov">          0 :     return dofile(L, init+1);</span>
 <span class="lineNum">     328 </span>            :   else
-<span class="lineNum">     329 </span><span class="lineCov">        180 :     return dostring(L, init, &quot;=&quot; LUA_INIT);</span>
+<span class="lineNum">     329 </span><span class="lineCov">         58 :     return dostring(L, init, &quot;=&quot; LUA_INIT);</span>
 <span class="lineNum">     330 </span>            : }
 <span class="lineNum">     331 </span>            : 
 <span class="lineNum">     332 </span>            : 
@@ -403,57 +403,57 @@
 <span class="lineNum">     337 </span>            : };
 <span class="lineNum">     338 </span>            : 
 <span class="lineNum">     339 </span>            : 
-<span class="lineNum">     340 </span><span class="lineCov">        180 : static int pmain (lua_State *L) {</span>
-<span class="lineNum">     341 </span><span class="lineCov">        180 :   struct Smain *s = (struct Smain *)lua_touserdata(L, 1);</span>
-<span class="lineNum">     342 </span><span class="lineCov">        180 :   char **argv = s-&gt;argv;</span>
+<span class="lineNum">     340 </span><span class="lineCov">         58 : static int pmain (lua_State *L) {</span>
+<span class="lineNum">     341 </span><span class="lineCov">         58 :   struct Smain *s = (struct Smain *)lua_touserdata(L, 1);</span>
+<span class="lineNum">     342 </span><span class="lineCov">         58 :   char **argv = s-&gt;argv;</span>
 <span class="lineNum">     343 </span>            :   int script;
-<span class="lineNum">     344 </span><span class="lineCov">        180 :   int has_i = 0, has_v = 0, has_e = 0;</span>
-<span class="lineNum">     345 </span><span class="lineCov">        180 :   globalL = L;</span>
-<span class="lineNum">     346 </span><span class="lineCov">        180 :   if (argv[0] &amp;&amp; argv[0][0]) progname = argv[0];</span>
-<span class="lineNum">     347 </span><span class="lineCov">        180 :   lua_gc(L, LUA_GCSTOP, 0);  /* stop collector during initialization */</span>
-<span class="lineNum">     348 </span><span class="lineCov">        180 :   luaL_openlibs(L);  /* open libraries */</span>
-<span class="lineNum">     349 </span><span class="lineCov">        180 :   lua_gc(L, LUA_GCRESTART, 0);</span>
-<span class="lineNum">     350 </span><span class="lineCov">        180 :   s-&gt;status = handle_luainit(L);</span>
-<span class="lineNum">     351 </span><span class="lineCov">        180 :   if (s-&gt;status != 0) return 0;</span>
-<span class="lineNum">     352 </span><span class="lineCov">        180 :   script = collectargs(argv, &amp;has_i, &amp;has_v, &amp;has_e);</span>
-<span class="lineNum">     353 </span><span class="lineCov">        180 :   if (script &lt; 0) {  /* invalid args? */</span>
-<span class="lineNum">     354 </span><span class="lineCov">          3 :     print_usage();</span>
-<span class="lineNum">     355 </span><span class="lineCov">          3 :     s-&gt;status = 1;</span>
-<span class="lineNum">     356 </span><span class="lineCov">          3 :     return 0;</span>
+<span class="lineNum">     344 </span><span class="lineCov">         58 :   int has_i = 0, has_v = 0, has_e = 0;</span>
+<span class="lineNum">     345 </span><span class="lineCov">         58 :   globalL = L;</span>
+<span class="lineNum">     346 </span><span class="lineCov">         58 :   if (argv[0] &amp;&amp; argv[0][0]) progname = argv[0];</span>
+<span class="lineNum">     347 </span><span class="lineCov">         58 :   lua_gc(L, LUA_GCSTOP, 0);  /* stop collector during initialization */</span>
+<span class="lineNum">     348 </span><span class="lineCov">         58 :   luaL_openlibs(L);  /* open libraries */</span>
+<span class="lineNum">     349 </span><span class="lineCov">         58 :   lua_gc(L, LUA_GCRESTART, 0);</span>
+<span class="lineNum">     350 </span><span class="lineCov">         58 :   s-&gt;status = handle_luainit(L);</span>
+<span class="lineNum">     351 </span><span class="lineCov">         58 :   if (s-&gt;status != 0) return 0;</span>
+<span class="lineNum">     352 </span><span class="lineCov">         58 :   script = collectargs(argv, &amp;has_i, &amp;has_v, &amp;has_e);</span>
+<span class="lineNum">     353 </span><span class="lineCov">         58 :   if (script &lt; 0) {  /* invalid args? */</span>
+<span class="lineNum">     354 </span><span class="lineCov">          1 :     print_usage();</span>
+<span class="lineNum">     355 </span><span class="lineCov">          1 :     s-&gt;status = 1;</span>
+<span class="lineNum">     356 </span><span class="lineCov">          1 :     return 0;</span>
 <span class="lineNum">     357 </span>            :   }
-<span class="lineNum">     358 </span><span class="lineCov">        177 :   if (has_v) print_version();</span>
-<span class="lineNum">     359 </span><span class="lineCov">        177 :   s-&gt;status = runargs(L, argv, (script &gt; 0) ? script : s-&gt;argc);</span>
-<span class="lineNum">     360 </span><span class="lineCov">        171 :   if (s-&gt;status != 0) return 0;</span>
-<span class="lineNum">     361 </span><span class="lineCov">        163 :   if (script)</span>
-<span class="lineNum">     362 </span><span class="lineCov">        134 :     s-&gt;status = handle_script(L, argv, script);</span>
-<span class="lineNum">     363 </span><span class="lineCov">        163 :   if (s-&gt;status != 0) return 0;</span>
-<span class="lineNum">     364 </span><span class="lineCov">        161 :   if (has_i)</span>
+<span class="lineNum">     358 </span><span class="lineCov">         57 :   if (has_v) print_version();</span>
+<span class="lineNum">     359 </span><span class="lineCov">         57 :   s-&gt;status = runargs(L, argv, (script &gt; 0) ? script : s-&gt;argc);</span>
+<span class="lineNum">     360 </span><span class="lineCov">         55 :   if (s-&gt;status != 0) return 0;</span>
+<span class="lineNum">     361 </span><span class="lineCov">         53 :   if (script)</span>
+<span class="lineNum">     362 </span><span class="lineCov">         43 :     s-&gt;status = handle_script(L, argv, script);</span>
+<span class="lineNum">     363 </span><span class="lineCov">         53 :   if (s-&gt;status != 0) return 0;</span>
+<span class="lineNum">     364 </span><span class="lineCov">         53 :   if (has_i)</span>
 <span class="lineNum">     365 </span><span class="lineNoCov">          0 :     dotty(L);</span>
-<span class="lineNum">     366 </span><span class="lineCov">        161 :   else if (script == 0 &amp;&amp; !has_e &amp;&amp; !has_v) {</span>
-<span class="lineNum">     367 </span><span class="lineCov">          3 :     if (lua_stdin_is_tty()) {</span>
+<span class="lineNum">     366 </span><span class="lineCov">         53 :   else if (script == 0 &amp;&amp; !has_e &amp;&amp; !has_v) {</span>
+<span class="lineNum">     367 </span><span class="lineCov">          1 :     if (lua_stdin_is_tty()) {</span>
 <span class="lineNum">     368 </span><span class="lineNoCov">          0 :       print_version();</span>
 <span class="lineNum">     369 </span><span class="lineNoCov">          0 :       dotty(L);</span>
 <span class="lineNum">     370 </span>            :     }
-<span class="lineNum">     371 </span><span class="lineCov">          3 :     else dofile(L, NULL);  /* executes stdin as a file */</span>
+<span class="lineNum">     371 </span><span class="lineCov">          1 :     else dofile(L, NULL);  /* executes stdin as a file */</span>
 <span class="lineNum">     372 </span>            :   }
-<span class="lineNum">     373 </span><span class="lineCov">        174 :   return 0;</span>
+<span class="lineNum">     373 </span><span class="lineCov">         56 :   return 0;</span>
 <span class="lineNum">     374 </span>            : }
 <span class="lineNum">     375 </span>            : 
 <span class="lineNum">     376 </span>            : 
-<span class="lineNum">     377 </span><span class="lineCov">        180 : int main (int argc, char **argv) {</span>
+<span class="lineNum">     377 </span><span class="lineCov">         58 : int main (int argc, char **argv) {</span>
 <span class="lineNum">     378 </span>            :   int status;
 <span class="lineNum">     379 </span>            :   struct Smain s;
-<span class="lineNum">     380 </span><span class="lineCov">        180 :   lua_State *L = lua_open();  /* create state */</span>
-<span class="lineNum">     381 </span><span class="lineCov">        180 :   if (L == NULL) {</span>
+<span class="lineNum">     380 </span><span class="lineCov">         58 :   lua_State *L = lua_open();  /* create state */</span>
+<span class="lineNum">     381 </span><span class="lineCov">         58 :   if (L == NULL) {</span>
 <span class="lineNum">     382 </span><span class="lineNoCov">          0 :     l_message(argv[0], &quot;cannot create state: not enough memory&quot;);</span>
 <span class="lineNum">     383 </span><span class="lineNoCov">          0 :     return EXIT_FAILURE;</span>
 <span class="lineNum">     384 </span>            :   }
-<span class="lineNum">     385 </span><span class="lineCov">        180 :   s.argc = argc;</span>
-<span class="lineNum">     386 </span><span class="lineCov">        180 :   s.argv = argv;</span>
-<span class="lineNum">     387 </span><span class="lineCov">        180 :   status = lua_cpcall(L, &amp;pmain, &amp;s);</span>
-<span class="lineNum">     388 </span><span class="lineCov">        174 :   report(L, status);</span>
-<span class="lineNum">     389 </span><span class="lineCov">        174 :   lua_close(L);</span>
-<span class="lineNum">     390 </span><span class="lineCov">        174 :   return (status || s.status) ? EXIT_FAILURE : EXIT_SUCCESS;</span>
+<span class="lineNum">     385 </span><span class="lineCov">         58 :   s.argc = argc;</span>
+<span class="lineNum">     386 </span><span class="lineCov">         58 :   s.argv = argv;</span>
+<span class="lineNum">     387 </span><span class="lineCov">         58 :   status = lua_cpcall(L, &amp;pmain, &amp;s);</span>
+<span class="lineNum">     388 </span><span class="lineCov">         56 :   report(L, status);</span>
+<span class="lineNum">     389 </span><span class="lineCov">         56 :   lua_close(L);</span>
+<span class="lineNum">     390 </span><span class="lineCov">         56 :   return (status || s.status) ? EXIT_FAILURE : EXIT_SUCCESS;</span>
 <span class="lineNum">     391 </span>            : }
 <span class="lineNum">     392 </span>            : 
 </pre>
@@ -464,7 +464,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.8</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
   </table>
   <br>
 

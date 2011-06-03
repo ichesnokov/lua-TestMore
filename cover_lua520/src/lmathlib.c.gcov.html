@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>LCOV - Lua 5.2.0 alpha - src/lmathlib.c</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.0 alpha</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">126</td>
-            <td class="headerCovTableEntry">126</td>
+            <td class="headerCovTableEntry">128</td>
+            <td class="headerCovTableEntry">128</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2010-11-27</td>
+            <td class="headerValue">2011-06-03</td>
             <td></td>
           </tr>
           <tr>
@@ -254,17 +254,17 @@
 <span class="lineNum">     188 </span>            : }
 <span class="lineNum">     189 </span>            : 
 <span class="lineNum">     190 </span>            : 
-<span class="lineNum">     191 </span><span class="lineCov">          4 : static int math_max (lua_State *L) {</span>
-<span class="lineNum">     192 </span><span class="lineCov">          4 :   int n = lua_gettop(L);  /* number of arguments */</span>
-<span class="lineNum">     193 </span><span class="lineCov">          4 :   lua_Number dmax = luaL_checknumber(L, 1);</span>
+<span class="lineNum">     191 </span><span class="lineCov">          6 : static int math_max (lua_State *L) {</span>
+<span class="lineNum">     192 </span><span class="lineCov">          6 :   int n = lua_gettop(L);  /* number of arguments */</span>
+<span class="lineNum">     193 </span><span class="lineCov">          6 :   lua_Number dmax = luaL_checknumber(L, 1);</span>
 <span class="lineNum">     194 </span>            :   int i;
-<span class="lineNum">     195 </span><span class="lineCov">          7 :   for (i=2; i&lt;=n; i++) {</span>
-<span class="lineNum">     196 </span><span class="lineCov">          4 :     lua_Number d = luaL_checknumber(L, i);</span>
-<span class="lineNum">     197 </span><span class="lineCov">          4 :     if (d &gt; dmax)</span>
-<span class="lineNum">     198 </span><span class="lineCov">          3 :       dmax = d;</span>
+<span class="lineNum">     195 </span><span class="lineCov">         13 :   for (i=2; i&lt;=n; i++) {</span>
+<span class="lineNum">     196 </span><span class="lineCov">          8 :     lua_Number d = luaL_checknumber(L, i);</span>
+<span class="lineNum">     197 </span><span class="lineCov">          8 :     if (d &gt; dmax)</span>
+<span class="lineNum">     198 </span><span class="lineCov">          6 :       dmax = d;</span>
 <span class="lineNum">     199 </span>            :   }
-<span class="lineNum">     200 </span><span class="lineCov">          3 :   lua_pushnumber(L, dmax);</span>
-<span class="lineNum">     201 </span><span class="lineCov">          3 :   return 1;</span>
+<span class="lineNum">     200 </span><span class="lineCov">          5 :   lua_pushnumber(L, dmax);</span>
+<span class="lineNum">     201 </span><span class="lineCov">          5 :   return 1;</span>
 <span class="lineNum">     202 </span>            : }
 <span class="lineNum">     203 </span>            : 
 <span class="lineNum">     204 </span>            : 
@@ -277,16 +277,16 @@
 <span class="lineNum">     211 </span><span class="lineCov">          3 :       lua_pushnumber(L, r);  /* Number between 0 and 1 */</span>
 <span class="lineNum">     212 </span><span class="lineCov">          3 :       break;</span>
 <span class="lineNum">     213 </span>            :     }
-<span class="lineNum">     214 </span>            :     case 1: {  /* only upper limit */
+<span class="lineNum">     214 </span><span class="lineCov">          2 :     case 1: {  /* only upper limit */</span>
 <span class="lineNum">     215 </span><span class="lineCov">          2 :       lua_Number u = luaL_checknumber(L, 1);</span>
-<span class="lineNum">     216 </span><span class="lineCov">          2 :       luaL_argcheck(L, 1.0 &lt;= u, 1, &quot;interval is empty&quot;);</span>
+<span class="lineNum">     216 </span><span class="lineCov">          1 :       luaL_argcheck(L, 1.0 &lt;= u, 1, &quot;interval is empty&quot;);</span>
 <span class="lineNum">     217 </span><span class="lineCov">          1 :       lua_pushnumber(L, l_tg(floor)(r*u) + 1.0);  /* int in [1, u] */</span>
 <span class="lineNum">     218 </span><span class="lineCov">          1 :       break;</span>
 <span class="lineNum">     219 </span>            :     }
-<span class="lineNum">     220 </span>            :     case 2: {  /* lower and upper limits */
+<span class="lineNum">     220 </span><span class="lineCov">          2 :     case 2: {  /* lower and upper limits */</span>
 <span class="lineNum">     221 </span><span class="lineCov">          2 :       lua_Number l = luaL_checknumber(L, 1);</span>
 <span class="lineNum">     222 </span><span class="lineCov">          2 :       lua_Number u = luaL_checknumber(L, 2);</span>
-<span class="lineNum">     223 </span><span class="lineCov">          2 :       luaL_argcheck(L, l &lt;= u, 2, &quot;interval is empty&quot;);</span>
+<span class="lineNum">     223 </span><span class="lineCov">          1 :       luaL_argcheck(L, l &lt;= u, 2, &quot;interval is empty&quot;);</span>
 <span class="lineNum">     224 </span><span class="lineCov">          1 :       lua_pushnumber(L, l_tg(floor)(r*(u-l+1)) + l);  /* int in [l, u] */</span>
 <span class="lineNum">     225 </span><span class="lineCov">          1 :       break;</span>
 <span class="lineNum">     226 </span>            :     }
@@ -339,13 +339,13 @@
 <span class="lineNum">     273 </span>            : /*
 <span class="lineNum">     274 </span>            : ** Open math library
 <span class="lineNum">     275 </span>            : */
-<span class="lineNum">     276 </span><span class="lineCov">         41 : LUAMOD_API int luaopen_math (lua_State *L) {</span>
-<span class="lineNum">     277 </span><span class="lineCov">         41 :   luaL_newlib(L, mathlib);</span>
-<span class="lineNum">     278 </span><span class="lineCov">         41 :   lua_pushnumber(L, PI);</span>
-<span class="lineNum">     279 </span><span class="lineCov">         41 :   lua_setfield(L, -2, &quot;pi&quot;);</span>
-<span class="lineNum">     280 </span><span class="lineCov">         41 :   lua_pushnumber(L, HUGE_VAL);</span>
-<span class="lineNum">     281 </span><span class="lineCov">         41 :   lua_setfield(L, -2, &quot;huge&quot;);</span>
-<span class="lineNum">     282 </span><span class="lineCov">         41 :   return 1;</span>
+<span class="lineNum">     276 </span><span class="lineCov">         64 : LUAMOD_API int luaopen_math (lua_State *L) {</span>
+<span class="lineNum">     277 </span><span class="lineCov">         64 :   luaL_newlib(L, mathlib);</span>
+<span class="lineNum">     278 </span><span class="lineCov">         64 :   lua_pushnumber(L, PI);</span>
+<span class="lineNum">     279 </span><span class="lineCov">         64 :   lua_setfield(L, -2, &quot;pi&quot;);</span>
+<span class="lineNum">     280 </span><span class="lineCov">         64 :   lua_pushnumber(L, HUGE_VAL);</span>
+<span class="lineNum">     281 </span><span class="lineCov">         64 :   lua_setfield(L, -2, &quot;huge&quot;);</span>
+<span class="lineNum">     282 </span><span class="lineCov">         64 :   return 1;</span>
 <span class="lineNum">     283 </span>            : }
 <span class="lineNum">     284 </span>            : 
 </pre>
@@ -356,7 +356,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.8</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
   </table>
   <br>
 
