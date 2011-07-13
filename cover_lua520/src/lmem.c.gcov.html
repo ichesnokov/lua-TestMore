@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - Lua 5.2.0 alpha - src/lmem.c</title>
+  <title>LCOV - Lua 5.2.0 beta - src/lmem.c</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">Lua 5.2.0 alpha</td>
+            <td class="headerValue">Lua 5.2.0 beta</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">17</td>
-            <td class="headerCovTableEntry">28</td>
-            <td class="headerCovTableEntryLo">60.7 %</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntryLo">57.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2011-06-03</td>
+            <td class="headerValue">2011-07-13</td>
             <td></td>
           </tr>
           <tr>
@@ -65,7 +65,7 @@
 <pre class="sourceHeading">          Line data    Source code</pre>
 <pre class="source">
 <span class="lineNum">       1 </span>            : /*
-<span class="lineNum">       2 </span>            : ** $Id: lmem.c,v 1.79 2010/05/05 18:49:56 roberto Exp $
+<span class="lineNum">       2 </span>            : ** $Id: lmem.c,v 1.81 2010/12/20 19:40:07 roberto Exp $
 <span class="lineNum">       3 </span>            : ** Interface to Memory Manager
 <span class="lineNum">       4 </span>            : ** See Copyright Notice in lua.h
 <span class="lineNum">       5 </span>            : */
@@ -109,23 +109,23 @@
 <span class="lineNum">      43 </span>            : #define MINSIZEARRAY    4
 <span class="lineNum">      44 </span>            : 
 <span class="lineNum">      45 </span>            : 
-<span class="lineNum">      46 </span><span class="lineCov">      30438 : void *luaM_growaux_ (lua_State *L, void *block, int *size, size_t size_elems,</span>
+<span class="lineNum">      46 </span><span class="lineCov">      30627 : void *luaM_growaux_ (lua_State *L, void *block, int *size, size_t size_elems,</span>
 <span class="lineNum">      47 </span>            :                      int limit, const char *what) {
 <span class="lineNum">      48 </span>            :   void *newblock;
 <span class="lineNum">      49 </span>            :   int newsize;
-<span class="lineNum">      50 </span><span class="lineCov">      30438 :   if (*size &gt;= limit/2) {  /* cannot double it? */</span>
+<span class="lineNum">      50 </span><span class="lineCov">      30627 :   if (*size &gt;= limit/2) {  /* cannot double it? */</span>
 <span class="lineNum">      51 </span><span class="lineNoCov">          0 :     if (*size &gt;= limit)  /* cannot grow even a little? */</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 :       luaG_runerror(L, &quot;too many %s (limit is %d)&quot;, what, limit);</span>
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :     newsize = limit;  /* still have at least one free place */</span>
 <span class="lineNum">      54 </span>            :   }
 <span class="lineNum">      55 </span>            :   else {
-<span class="lineNum">      56 </span><span class="lineCov">      30438 :     newsize = (*size)*2;</span>
-<span class="lineNum">      57 </span><span class="lineCov">      30438 :     if (newsize &lt; MINSIZEARRAY)</span>
-<span class="lineNum">      58 </span><span class="lineCov">      14215 :       newsize = MINSIZEARRAY;  /* minimum size */</span>
+<span class="lineNum">      56 </span><span class="lineCov">      30627 :     newsize = (*size)*2;</span>
+<span class="lineNum">      57 </span><span class="lineCov">      30627 :     if (newsize &lt; MINSIZEARRAY)</span>
+<span class="lineNum">      58 </span><span class="lineCov">      14361 :       newsize = MINSIZEARRAY;  /* minimum size */</span>
 <span class="lineNum">      59 </span>            :   }
-<span class="lineNum">      60 </span><span class="lineCov">      30438 :   newblock = luaM_reallocv(L, block, *size, newsize, size_elems);</span>
-<span class="lineNum">      61 </span><span class="lineCov">      30438 :   *size = newsize;  /* update only when everything else is OK */</span>
-<span class="lineNum">      62 </span><span class="lineCov">      30438 :   return newblock;</span>
+<span class="lineNum">      60 </span><span class="lineCov">      30627 :   newblock = luaM_reallocv(L, block, *size, newsize, size_elems);</span>
+<span class="lineNum">      61 </span><span class="lineCov">      30627 :   *size = newsize;  /* update only when everything else is OK */</span>
+<span class="lineNum">      62 </span><span class="lineCov">      30627 :   return newblock;</span>
 <span class="lineNum">      63 </span>            : }
 <span class="lineNum">      64 </span>            : 
 <span class="lineNum">      65 </span>            : 
@@ -139,20 +139,20 @@
 <span class="lineNum">      73 </span>            : /*
 <span class="lineNum">      74 </span>            : ** generic allocation routine.
 <span class="lineNum">      75 </span>            : */
-<span class="lineNum">      76 </span><span class="lineCov">     281966 : void *luaM_realloc_ (lua_State *L, void *block, size_t osize, size_t nsize) {</span>
+<span class="lineNum">      76 </span><span class="lineCov">     282201 : void *luaM_realloc_ (lua_State *L, void *block, size_t osize, size_t nsize) {</span>
 <span class="lineNum">      77 </span>            :   void *newblock;
-<span class="lineNum">      78 </span><span class="lineCov">     281966 :   global_State *g = G(L);</span>
-<span class="lineNum">      79 </span><span class="lineCov">     281966 :   size_t realosize = (block) ? osize : 0;</span>
+<span class="lineNum">      78 </span><span class="lineCov">     282201 :   global_State *g = G(L);</span>
+<span class="lineNum">      79 </span><span class="lineCov">     282201 :   size_t realosize = (block) ? osize : 0;</span>
 <span class="lineNum">      80 </span>            :   lua_assert((realosize == 0) == (block == NULL));
 <span class="lineNum">      81 </span>            : #if defined(HARDMEMTESTS)
-<span class="lineNum">      82 </span>            :   if (nsize &gt; realosize &amp;&amp; !gcstopped(g))
+<span class="lineNum">      82 </span>            :   if (nsize &gt; realosize &amp;&amp; g-&gt;gcrunning)
 <span class="lineNum">      83 </span>            :     luaC_fullgc(L, 1);  /* force a GC whenever possible */
 <span class="lineNum">      84 </span>            : #endif
-<span class="lineNum">      85 </span><span class="lineCov">     281966 :   newblock = (*g-&gt;frealloc)(g-&gt;ud, block, osize, nsize);</span>
-<span class="lineNum">      86 </span><span class="lineCov">     281966 :   if (newblock == NULL &amp;&amp; nsize &gt; 0) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">     282201 :   newblock = (*g-&gt;frealloc)(g-&gt;ud, block, osize, nsize);</span>
+<span class="lineNum">      86 </span><span class="lineCov">     282201 :   if (newblock == NULL &amp;&amp; nsize &gt; 0) {</span>
 <span class="lineNum">      87 </span>            :     api_check(L, nsize &gt; realosize,
 <span class="lineNum">      88 </span>            :                  &quot;realloc cannot fail when shrinking a block&quot;);
-<span class="lineNum">      89 </span><span class="lineNoCov">          0 :     if (!gcstopped(g)) {</span>
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :     if (g-&gt;gcrunning) {</span>
 <span class="lineNum">      90 </span><span class="lineNoCov">          0 :       luaC_fullgc(L, 1);  /* try to free some memory... */</span>
 <span class="lineNum">      91 </span><span class="lineNoCov">          0 :       newblock = (*g-&gt;frealloc)(g-&gt;ud, block, osize, nsize);  /* try again */</span>
 <span class="lineNum">      92 </span>            :     }
@@ -160,30 +160,26 @@
 <span class="lineNum">      94 </span><span class="lineNoCov">          0 :       luaD_throw(L, LUA_ERRMEM);</span>
 <span class="lineNum">      95 </span>            :   }
 <span class="lineNum">      96 </span>            :   lua_assert((nsize == 0) == (newblock == NULL));
-<span class="lineNum">      97 </span><span class="lineCov">     281966 :   g-&gt;totalbytes = (g-&gt;totalbytes - realosize) + nsize;</span>
-<span class="lineNum">      98 </span><span class="lineCov">     281966 :   if (!gcstopped(g))</span>
-<span class="lineNum">      99 </span><span class="lineCov">     261114 :     g-&gt;GCdebt += nsize;  /* give some credit to garbage collector */</span>
-<span class="lineNum">     100 </span>            : #if defined(TRACEMEM)
-<span class="lineNum">     101 </span>            :   { /* auxiliary patch to monitor garbage collection.
-<span class="lineNum">     102 </span>            :     ** To plot, gnuplot with following command:
-<span class="lineNum">     103 </span>            :     ** plot TRACEMEM using 1:2 with lines, TRACEMEM using 1:3 with lines
-<span class="lineNum">     104 </span>            :     */
-<span class="lineNum">     105 </span>            :     static unsigned long total = 0;  /* our &quot;time&quot; */
-<span class="lineNum">     106 </span>            :     static FILE *f = NULL;  /* output file */
-<span class="lineNum">     107 </span>            :     total++;  /* &quot;time&quot; always grows */
-<span class="lineNum">     108 </span>            :     if ((total % 200) == 0) {
-<span class="lineNum">     109 </span>            :       if (f == NULL) f = fopen(TRACEMEM, &quot;w&quot;);
-<span class="lineNum">     110 </span>            :       fprintf(f, &quot;%lu %u %d %d\n&quot;, total,
-<span class="lineNum">     111 </span>            :               g-&gt;totalbytes,
-<span class="lineNum">     112 </span>            :               gcstopped(g) ? 0 : g-&gt;GCdebt,
-<span class="lineNum">     113 </span>            :               g-&gt;gcstate * 1000);
-<span class="lineNum">     114 </span>            :     }
-<span class="lineNum">     115 </span>            :   }
-<span class="lineNum">     116 </span>            : #endif
-<span class="lineNum">     117 </span>            : 
-<span class="lineNum">     118 </span><span class="lineCov">     281966 :   return newblock;</span>
-<span class="lineNum">     119 </span>            : }
-<span class="lineNum">     120 </span>            : 
+<span class="lineNum">      97 </span><span class="lineCov">     282201 :   g-&gt;GCdebt = (g-&gt;GCdebt + nsize) - realosize;</span>
+<span class="lineNum">      98 </span>            : #if defined(TRACEMEM)
+<span class="lineNum">      99 </span>            :   { /* auxiliary patch to monitor garbage collection.
+<span class="lineNum">     100 </span>            :     ** To plot, gnuplot with following command:
+<span class="lineNum">     101 </span>            :     ** plot TRACEMEM using 1:2 with lines, TRACEMEM using 1:3 with lines
+<span class="lineNum">     102 </span>            :     */
+<span class="lineNum">     103 </span>            :     static unsigned long total = 0;  /* our &quot;time&quot; */
+<span class="lineNum">     104 </span>            :     static FILE *f = NULL;  /* output file */
+<span class="lineNum">     105 </span>            :     total++;  /* &quot;time&quot; always grows */
+<span class="lineNum">     106 </span>            :     if ((total % 200) == 0) {
+<span class="lineNum">     107 </span>            :       if (f == NULL) f = fopen(TRACEMEM, &quot;w&quot;);
+<span class="lineNum">     108 </span>            :       fprintf(f, &quot;%lu %u %d %d\n&quot;, total,
+<span class="lineNum">     109 </span>            :               g-&gt;totalbytes, g-&gt;GCdebt, g-&gt;gcstate * 1000);
+<span class="lineNum">     110 </span>            :     }
+<span class="lineNum">     111 </span>            :   }
+<span class="lineNum">     112 </span>            : #endif
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span><span class="lineCov">     282201 :   return newblock;</span>
+<span class="lineNum">     115 </span>            : }
+<span class="lineNum">     116 </span>            : 
 </pre>
       </td>
     </tr>

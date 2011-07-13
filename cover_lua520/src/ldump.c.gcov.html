@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - Lua 5.2.0 alpha - src/ldump.c</title>
+  <title>LCOV - Lua 5.2.0 beta - src/ldump.c</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">Lua 5.2.0 alpha</td>
+            <td class="headerValue">Lua 5.2.0 beta</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">69</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2011-06-03</td>
+            <td class="headerValue">2011-07-13</td>
             <td></td>
           </tr>
           <tr>
@@ -65,7 +65,7 @@
 <pre class="sourceHeading">          Line data    Source code</pre>
 <pre class="source">
 <span class="lineNum">       1 </span>            : /*
-<span class="lineNum">       2 </span>            : ** $Id: ldump.c,v 1.17 2010/10/13 21:04:52 lhf Exp $
+<span class="lineNum">       2 </span>            : ** $Id: ldump.c,v 1.18 2011/05/06 13:35:17 lhf Exp $
 <span class="lineNum">       3 </span>            : ** save precompiled Lua chunks
 <span class="lineNum">       4 </span>            : ** See Copyright Notice in lua.h
 <span class="lineNum">       5 </span>            : */
@@ -94,19 +94,19 @@
 <span class="lineNum">      28 </span>            : 
 <span class="lineNum">      29 </span>            : static void DumpBlock(const void* b, size_t size, DumpState* D)
 <span class="lineNum">      30 </span>            : {
-<span class="lineNum">      31 </span><span class="lineCov">        316 :  if (D-&gt;status==0)</span>
+<span class="lineNum">      31 </span><span class="lineCov">        318 :  if (D-&gt;status==0)</span>
 <span class="lineNum">      32 </span>            :  {
 <span class="lineNum">      33 </span>            :   lua_unlock(D-&gt;L);
-<span class="lineNum">      34 </span><span class="lineCov">        316 :   D-&gt;status=(*D-&gt;writer)(D-&gt;L,b,size,D-&gt;data);</span>
+<span class="lineNum">      34 </span><span class="lineCov">        318 :   D-&gt;status=(*D-&gt;writer)(D-&gt;L,b,size,D-&gt;data);</span>
 <span class="lineNum">      35 </span>            :   lua_lock(D-&gt;L);
 <span class="lineNum">      36 </span>            :  }
 <span class="lineNum">      37 </span>            : }
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">         82 : static void DumpChar(int y, DumpState* D)</span>
+<span class="lineNum">      39 </span><span class="lineCov">         84 : static void DumpChar(int y, DumpState* D)</span>
 <span class="lineNum">      40 </span>            : {
-<span class="lineNum">      41 </span><span class="lineCov">         82 :  char x=(char)y;</span>
+<span class="lineNum">      41 </span><span class="lineCov">         84 :  char x=(char)y;</span>
 <span class="lineNum">      42 </span>            :  DumpVar(x,D);
-<span class="lineNum">      43 </span><span class="lineCov">         82 : }</span>
+<span class="lineNum">      43 </span><span class="lineCov">         84 : }</span>
 <span class="lineNum">      44 </span>            : 
 <span class="lineNum">      45 </span><span class="lineCov">         99 : static void DumpInt(int x, DumpState* D)</span>
 <span class="lineNum">      46 </span>            : {
@@ -135,7 +135,7 @@
 <span class="lineNum">      69 </span>            :  {
 <span class="lineNum">      70 </span><span class="lineCov">         52 :   size_t size=s-&gt;tsv.len+1;          /* include trailing '\0' */</span>
 <span class="lineNum">      71 </span>            :   DumpVar(size,D);
-<span class="lineNum">      72 </span><span class="lineCov">         52 :   DumpBlock(getstr(s),size,D);</span>
+<span class="lineNum">      72 </span><span class="lineCov">         52 :   DumpBlock(getstr(s),size*sizeof(char),D);</span>
 <span class="lineNum">      73 </span>            :  }
 <span class="lineNum">      74 </span><span class="lineCov">         56 : }</span>
 <span class="lineNum">      75 </span>            : 
@@ -175,10 +175,10 @@
 <span class="lineNum">     109 </span>            : {
 <span class="lineNum">     110 </span><span class="lineCov">          9 :  int i,n=f-&gt;sizeupvalues;</span>
 <span class="lineNum">     111 </span><span class="lineCov">          9 :  DumpInt(n,D);</span>
-<span class="lineNum">     112 </span><span class="lineCov">         19 :  for (i=0; i&lt;n; i++)</span>
+<span class="lineNum">     112 </span><span class="lineCov">         20 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     113 </span>            :  {
-<span class="lineNum">     114 </span><span class="lineCov">         10 :   DumpChar(f-&gt;upvalues[i].instack, D);</span>
-<span class="lineNum">     115 </span><span class="lineCov">         10 :   DumpChar(f-&gt;upvalues[i].idx, D);</span>
+<span class="lineNum">     114 </span><span class="lineCov">         11 :   DumpChar(f-&gt;upvalues[i].instack, D);</span>
+<span class="lineNum">     115 </span><span class="lineCov">         11 :   DumpChar(f-&gt;upvalues[i].idx, D);</span>
 <span class="lineNum">     116 </span>            :  }
 <span class="lineNum">     117 </span>            : }
 <span class="lineNum">     118 </span>            : 
@@ -216,7 +216,7 @@
 <span class="lineNum">     150 </span>            : 
 <span class="lineNum">     151 </span>            : static void DumpHeader(DumpState* D)
 <span class="lineNum">     152 </span>            : {
-<span class="lineNum">     153 </span>            :  char h[LUAC_HEADERSIZE];
+<span class="lineNum">     153 </span>            :  lu_byte h[LUAC_HEADERSIZE];
 <span class="lineNum">     154 </span><span class="lineCov">          5 :  luaU_header(h);</span>
 <span class="lineNum">     155 </span>            :  DumpBlock(h,LUAC_HEADERSIZE,D);
 <span class="lineNum">     156 </span>            : }
