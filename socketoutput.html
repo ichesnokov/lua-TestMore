@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module Test.Builder.SocketOutput</title>
+    <link rel="stylesheet" href="http://www.keplerproject.org/doc.css" type="text/css"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="Author" content="Fran&ccedil;ois Perrad"/>
+  <meta http-equiv="Language" content="en"/>
+  <meta http-equiv="Description" content="Module Test.Builder.SocketOutput"/>
+  <meta http-equiv="Keywords" content="lua, tap, test, more, builder, socket, output"/>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+  <div id="product_logo">
+    <a href="http://www.lua.org">
+      <img alt="Lua" src="http://www.andreas-rozek.de/Lua/Lua-Logo_128x128.png"/>
+    </a>
+  </div>
+  <div id="product_name"><big><strong>lua-TestMore</strong></big></div>
+  <div id="product_description">an Unit Testing Framework</div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+<h1>Test.Builder.SocketOutput</h1>
+  <ul>
+    <li><a href="index.html">Home</a>
+      <ul>
+        <li><a href="index.html#overview">Overview</a></li>
+        <li><a href="index.html#status">Status</a></li>
+        <li><a href="index.html#documentation">Documentation</a></li>
+        <li><a href="index.html#download">Download</a></li>
+        <li><a href="index.html#installation">Installation</a></li>
+        <li><a href="index.html#testsuite">Lua Test Suite</a></li>
+        <li><a href="index.html#license">License</a></li>
+      </ul>
+    </li>
+    <li><a href="testmore.html">module <code>Test.More</code></a>
+      <ul>
+        <li><a href="testmore.html#reference">Reference</a></li>
+        <li><a href="testmore.html#examples">Examples</a></li>
+      </ul>
+    </li>
+    <li><a href="testbuilder.html">module <code>Test.Builder</code></a>
+      <ul>
+        <li><a href="testbuilder.html#reference">Reference</a></li>
+        <li><a href="testbuilder.html#examples">Examples</a></li>
+      </ul>
+    </li>
+    <li><strong>module <code>T.B.SocketOutput</code></strong>
+      <ul>
+        <li><a href="socketoutput.html#reference">Reference</a></li>
+        <li><a href="socketoutput.html#examples">Examples</a></li>
+      </ul>
+    </li>
+    <li><a href="http://luaforge.net/projects/testmore/">Project</a>
+      <ul>
+        <li><a href="http://github.com/fperrad/lua-TestMore/">Git</a></li>
+        <li><script type="text/javascript" src="http://www.ohloh.net/p/438114/widgets/project_thin_badge.js"></script></li>
+      </ul>
+    </li>
+  </ul>
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h2><a name="reference"></a>References</h2>
+
+<p>This module allows to redirect the test output (<code>stdout</code>/<code>stderr</code>)
+to a socket.</p>
+
+<p>This feature is useful for embedded development where the test runs into a target
+but the output is consumed by a host.</p>
+
+<p>The use with the <strong>Corona SDK</strong> is described in this
+<a href="http://blog.anscamobile.com/2011/08/automated-testing-on-mobile-devices-part3/">blog</a>.</p>
+
+<p>This module requires <a href="http://w3.impa.br/~diego/software/luasocket/">LuaSocket</a>.</p>
+
+<h2><a name="examples"></a>Examples</h2>
+
+<pre class="example">
+    require 'Test.More'
+    require 'socket'
+    local conn = socket.connect(host, port)
+    require 'Test.Builder.SocketOutput'.init(conn)
+    -- now, as usual
+    plan(...)
+    ...
+
+
+
+
+
+
+
+</pre>
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->
+
+</body>
+</html>

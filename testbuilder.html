@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module Test.Builder</title>
+    <link rel="stylesheet" href="http://www.keplerproject.org/doc.css" type="text/css"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="Author" content="Fran&ccedil;ois Perrad"/>
+  <meta http-equiv="Language" content="en"/>
+  <meta http-equiv="Description" content="Module Test.Builder"/>
+  <meta http-equiv="Keywords" content="lua, tap, test, more, builder"/>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+  <div id="product_logo">
+    <a href="http://www.lua.org">
+      <img alt="Lua" src="http://www.andreas-rozek.de/Lua/Lua-Logo_128x128.png"/>
+    </a>
+  </div>
+  <div id="product_name"><big><strong>lua-TestMore</strong></big></div>
+  <div id="product_description">an Unit Testing Framework</div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+<h1>Test.Builder</h1>
+  <ul>
+    <li><a href="index.html">Home</a>
+      <ul>
+        <li><a href="index.html#overview">Overview</a></li>
+        <li><a href="index.html#status">Status</a></li>
+        <li><a href="index.html#documentation">Documentation</a></li>
+        <li><a href="index.html#download">Download</a></li>
+        <li><a href="index.html#installation">Installation</a></li>
+        <li><a href="index.html#testsuite">Lua Test Suite</a></li>
+        <li><a href="index.html#license">License</a></li>
+      </ul>
+    </li>
+    <li><a href="testmore.html">module <code>Test.More</code></a>
+      <ul>
+        <li><a href="testmore.html#reference">Reference</a></li>
+        <li><a href="testmore.html#examples">Examples</a></li>
+      </ul>
+    </li>
+    <li><strong>module <code>Test.Builder</code></strong>
+      <ul>
+        <li><a href="testbuilder.html#reference">Reference</a></li>
+        <li><a href="testbuilder.html#examples">Examples</a></li>
+      </ul>
+    </li>
+    <li><a href="socketoutput.html">module <code>T.B.SocketOutput</code></a>
+      <ul>
+        <li><a href="socketoutput.html#reference">Reference</a></li>
+        <li><a href="socketoutput.html#examples">Examples</a></li>
+      </ul>
+    </li>
+    <li><a href="http://luaforge.net/projects/testmore/">Project</a>
+      <ul>
+        <li><a href="http://github.com/fperrad/lua-TestMore/">Git</a></li>
+        <li><script type="text/javascript" src="http://www.ohloh.net/p/438114/widgets/project_thin_badge.js"></script></li>
+      </ul>
+    </li>
+  </ul>
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h2><a name="reference"></a>References</h2>
+
+<p>This module is the <em>core</em> of the framework. It allows its extensibility.</p>
+
+<p>All libraries built with <code>Test.Builder</code> could work together.</p>
+
+<p>See the module <a href="http://fperrad.github.com/lua-TestLongString/">Test.LongString</a>
+as a real example.</p>
+
+<p>Note : this kind of library could be tested with the help of the module
+<code>Test.Builder.Tester</code>.</p>
+
+<h2><a name="examples"></a>Examples</h2>
+
+<p>This minimal example shows how to add a function/predicate <code>iszero</code>.</p>
+
+<pre class="example">
+$ cat iszero.lua
+local tb = require 'Test.Builder':new()  -- it's a singleton shared by all libraries
+
+function _G.iszero(val, name)
+    local pass = val == 0
+    tb:ok(pass, name)
+    if not pass then
+        tb:diag("         got: " .. tostring(val))
+    end
+end
+</pre>
+
+<pre class="example">
+$ cat iszero.t
+require 'Test.More'
+require 'iszero'
+
+plan(1)
+
+val = 0
+iszero(val, "val is zero")
+</pre>
+
+<pre class="example">
+$ lua iszero.t
+1..1
+ok 1 - val is zero
+</pre>
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->
+
+</body>
+</html>
