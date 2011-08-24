@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2011-07-13</td>
+            <td class="headerValue">2011-08-24</td>
             <td></td>
           </tr>
           <tr>
@@ -137,9 +137,9 @@
 <span class="lineNum">      71 </span>            : }
 <span class="lineNum">      72 </span>            : 
 <span class="lineNum">      73 </span>            : 
-<span class="lineNum">      74 </span><span class="lineCov">         26 : static int os_remove (lua_State *L) {</span>
-<span class="lineNum">      75 </span><span class="lineCov">         26 :   const char *filename = luaL_checkstring(L, 1);</span>
-<span class="lineNum">      76 </span><span class="lineCov">         26 :   return luaL_fileresult(L, remove(filename) == 0, filename);</span>
+<span class="lineNum">      74 </span><span class="lineCov">         27 : static int os_remove (lua_State *L) {</span>
+<span class="lineNum">      75 </span><span class="lineCov">         27 :   const char *filename = luaL_checkstring(L, 1);</span>
+<span class="lineNum">      76 </span><span class="lineCov">         27 :   return luaL_fileresult(L, remove(filename) == 0, filename);</span>
 <span class="lineNum">      77 </span>            : }
 <span class="lineNum">      78 </span>            : 
 <span class="lineNum">      79 </span>            : 
@@ -363,9 +363,9 @@
 <span class="lineNum">     297 </span>            : 
 <span class="lineNum">     298 </span>            : 
 <span class="lineNum">     299 </span>            : 
-<span class="lineNum">     300 </span><span class="lineCov">         69 : LUAMOD_API int luaopen_os (lua_State *L) {</span>
-<span class="lineNum">     301 </span><span class="lineCov">         69 :   luaL_newlib(L, syslib);</span>
-<span class="lineNum">     302 </span><span class="lineCov">         69 :   return 1;</span>
+<span class="lineNum">     300 </span><span class="lineCov">         70 : LUAMOD_API int luaopen_os (lua_State *L) {</span>
+<span class="lineNum">     301 </span><span class="lineCov">         70 :   luaL_newlib(L, syslib);</span>
+<span class="lineNum">     302 </span><span class="lineCov">         70 :   return 1;</span>
 <span class="lineNum">     303 </span>            : }
 <span class="lineNum">     304 </span>            : 
 </pre>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2011-07-13</td>
+            <td class="headerValue">2011-08-24</td>
             <td></td>
           </tr>
           <tr>
@@ -338,13 +338,13 @@
 <span class="lineNum">     272 </span>            : /*
 <span class="lineNum">     273 </span>            : ** Open math library
 <span class="lineNum">     274 </span>            : */
-<span class="lineNum">     275 </span><span class="lineCov">         69 : LUAMOD_API int luaopen_math (lua_State *L) {</span>
-<span class="lineNum">     276 </span><span class="lineCov">         69 :   luaL_newlib(L, mathlib);</span>
-<span class="lineNum">     277 </span><span class="lineCov">         69 :   lua_pushnumber(L, PI);</span>
-<span class="lineNum">     278 </span><span class="lineCov">         69 :   lua_setfield(L, -2, &quot;pi&quot;);</span>
-<span class="lineNum">     279 </span><span class="lineCov">         69 :   lua_pushnumber(L, HUGE_VAL);</span>
-<span class="lineNum">     280 </span><span class="lineCov">         69 :   lua_setfield(L, -2, &quot;huge&quot;);</span>
-<span class="lineNum">     281 </span><span class="lineCov">         69 :   return 1;</span>
+<span class="lineNum">     275 </span><span class="lineCov">         70 : LUAMOD_API int luaopen_math (lua_State *L) {</span>
+<span class="lineNum">     276 </span><span class="lineCov">         70 :   luaL_newlib(L, mathlib);</span>
+<span class="lineNum">     277 </span><span class="lineCov">         70 :   lua_pushnumber(L, PI);</span>
+<span class="lineNum">     278 </span><span class="lineCov">         70 :   lua_setfield(L, -2, &quot;pi&quot;);</span>
+<span class="lineNum">     279 </span><span class="lineCov">         70 :   lua_pushnumber(L, HUGE_VAL);</span>
+<span class="lineNum">     280 </span><span class="lineCov">         70 :   lua_setfield(L, -2, &quot;huge&quot;);</span>
+<span class="lineNum">     281 </span><span class="lineCov">         70 :   return 1;</span>
 <span class="lineNum">     282 </span>            : }
 <span class="lineNum">     283 </span>            : 
 </pre>

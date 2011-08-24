@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.0 beta</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">190</td>
+            <td class="headerCovTableEntry">191</td>
             <td class="headerCovTableEntry">208</td>
-            <td class="headerCovTableEntryHi">91.3 %</td>
+            <td class="headerCovTableEntryHi">91.8 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2011-07-13</td>
+            <td class="headerValue">2011-08-24</td>
             <td></td>
           </tr>
           <tr>
@@ -219,10 +219,10 @@
 <span class="lineNum">     153 </span>            :  }
 <span class="lineNum">     154 </span>            : }
 <span class="lineNum">     155 </span>            : 
-<span class="lineNum">     156 </span><span class="lineCov">        290 : static int writer(lua_State* L, const void* p, size_t size, void* u)</span>
+<span class="lineNum">     156 </span><span class="lineCov">        292 : static int writer(lua_State* L, const void* p, size_t size, void* u)</span>
 <span class="lineNum">     157 </span>            : {
 <span class="lineNum">     158 </span>            :  UNUSED(L);
-<span class="lineNum">     159 </span><span class="lineCov">        290 :  return (fwrite(p,size,1,(FILE*)u)!=1) &amp;&amp; (size!=0);</span>
+<span class="lineNum">     159 </span><span class="lineCov">        292 :  return (fwrite(p,size,1,(FILE*)u)!=1) &amp;&amp; (size!=0);</span>
 <span class="lineNum">     160 </span>            : }
 <span class="lineNum">     161 </span>            : 
 <span class="lineNum">     162 </span><span class="lineCov">          6 : static int pmain(lua_State* L)</span>
@@ -287,15 +287,15 @@
 <span class="lineNum">     221 </span>            : #define Sizeof(x)       ((int)sizeof(x))
 <span class="lineNum">     222 </span>            : #define VOID(p)         ((const void*)(p))
 <span class="lineNum">     223 </span>            : 
-<span class="lineNum">     224 </span><span class="lineCov">         38 : static void PrintString(const TString* ts)</span>
+<span class="lineNum">     224 </span><span class="lineCov">         40 : static void PrintString(const TString* ts)</span>
 <span class="lineNum">     225 </span>            : {
-<span class="lineNum">     226 </span><span class="lineCov">         38 :  const char* s=getstr(ts);</span>
-<span class="lineNum">     227 </span><span class="lineCov">         38 :  size_t i,n=ts-&gt;tsv.len;</span>
-<span class="lineNum">     228 </span><span class="lineCov">         38 :  printf(&quot;%c&quot;,'&quot;');</span>
-<span class="lineNum">     229 </span><span class="lineCov">        223 :  for (i=0; i&lt;n; i++)</span>
+<span class="lineNum">     226 </span><span class="lineCov">         40 :  const char* s=getstr(ts);</span>
+<span class="lineNum">     227 </span><span class="lineCov">         40 :  size_t i,n=ts-&gt;tsv.len;</span>
+<span class="lineNum">     228 </span><span class="lineCov">         40 :  printf(&quot;%c&quot;,'&quot;');</span>
+<span class="lineNum">     229 </span><span class="lineCov">        227 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     230 </span>            :  {
-<span class="lineNum">     231 </span><span class="lineCov">        185 :   int c=(int)(unsigned char)s[i];</span>
-<span class="lineNum">     232 </span><span class="lineCov">        185 :   switch (c)</span>
+<span class="lineNum">     231 </span><span class="lineCov">        187 :   int c=(int)(unsigned char)s[i];</span>
+<span class="lineNum">     232 </span><span class="lineCov">        187 :   switch (c)</span>
 <span class="lineNum">     233 </span>            :   {
 <span class="lineNum">     234 </span><span class="lineCov">          3 :    case '&quot;':  printf(&quot;\\\&quot;&quot;); break;</span>
 <span class="lineNum">     235 </span><span class="lineCov">          3 :    case '\\': printf(&quot;\\\\&quot;); break;</span>
@@ -306,37 +306,37 @@
 <span class="lineNum">     240 </span><span class="lineCov">          3 :    case '\r': printf(&quot;\\r&quot;); break;</span>
 <span class="lineNum">     241 </span><span class="lineCov">          3 :    case '\t': printf(&quot;\\t&quot;); break;</span>
 <span class="lineNum">     242 </span><span class="lineCov">          3 :    case '\v': printf(&quot;\\v&quot;); break;</span>
-<span class="lineNum">     243 </span><span class="lineCov">        158 :    default:     if (isprint(c))</span>
-<span class="lineNum">     244 </span><span class="lineCov">        155 :                         printf(&quot;%c&quot;,c);</span>
+<span class="lineNum">     243 </span><span class="lineCov">        160 :    default:     if (isprint(c))</span>
+<span class="lineNum">     244 </span><span class="lineCov">        157 :                         printf(&quot;%c&quot;,c);</span>
 <span class="lineNum">     245 </span>            :                 else
 <span class="lineNum">     246 </span><span class="lineCov">          3 :                         printf(&quot;\\%03d&quot;,c);</span>
 <span class="lineNum">     247 </span>            :   }
 <span class="lineNum">     248 </span>            :  }
-<span class="lineNum">     249 </span><span class="lineCov">         38 :  printf(&quot;%c&quot;,'&quot;');</span>
-<span class="lineNum">     250 </span><span class="lineCov">         38 : }</span>
+<span class="lineNum">     249 </span><span class="lineCov">         40 :  printf(&quot;%c&quot;,'&quot;');</span>
+<span class="lineNum">     250 </span><span class="lineCov">         40 : }</span>
 <span class="lineNum">     251 </span>            : 
-<span class="lineNum">     252 </span><span class="lineCov">         46 : static void PrintConstant(const Proto* f, int i)</span>
+<span class="lineNum">     252 </span><span class="lineCov">         49 : static void PrintConstant(const Proto* f, int i)</span>
 <span class="lineNum">     253 </span>            : {
-<span class="lineNum">     254 </span><span class="lineCov">         46 :  const TValue* o=&amp;f-&gt;k[i];</span>
-<span class="lineNum">     255 </span><span class="lineCov">         46 :  switch (ttype(o))</span>
+<span class="lineNum">     254 </span><span class="lineCov">         49 :  const TValue* o=&amp;f-&gt;k[i];</span>
+<span class="lineNum">     255 </span><span class="lineCov">         49 :  switch (ttype(o))</span>
 <span class="lineNum">     256 </span>            :  {
 <span class="lineNum">     257 </span>            :   case LUA_TNIL:
-<span class="lineNum">     258 </span><span class="lineNoCov">          0 :         printf(&quot;nil&quot;);</span>
+<span class="lineNum">     258 </span><span class="lineCov">          3 :         printf(&quot;nil&quot;);</span>
 <span class="lineNum">     259 </span>            :         break;
 <span class="lineNum">     260 </span>            :   case LUA_TBOOLEAN:
 <span class="lineNum">     261 </span><span class="lineNoCov">          0 :         printf(bvalue(o) ? &quot;true&quot; : &quot;false&quot;);</span>
 <span class="lineNum">     262 </span>            :         break;
 <span class="lineNum">     263 </span>            :   case LUA_TNUMBER:
-<span class="lineNum">     264 </span><span class="lineCov">          8 :         printf(LUA_NUMBER_FMT,nvalue(o));</span>
+<span class="lineNum">     264 </span><span class="lineCov">          6 :         printf(LUA_NUMBER_FMT,nvalue(o));</span>
 <span class="lineNum">     265 </span>            :         break;
 <span class="lineNum">     266 </span>            :   case LUA_TSTRING:
-<span class="lineNum">     267 </span><span class="lineCov">         38 :         PrintString(rawtsvalue(o));</span>
-<span class="lineNum">     268 </span><span class="lineCov">         38 :         break;</span>
+<span class="lineNum">     267 </span><span class="lineCov">         40 :         PrintString(rawtsvalue(o));</span>
+<span class="lineNum">     268 </span><span class="lineCov">         40 :         break;</span>
 <span class="lineNum">     269 </span>            :   default:                              /* cannot happen */
 <span class="lineNum">     270 </span><span class="lineNoCov">          0 :         printf(&quot;? type=%d&quot;,ttype(o));</span>
 <span class="lineNum">     271 </span>            :         break;
 <span class="lineNum">     272 </span>            :  }
-<span class="lineNum">     273 </span><span class="lineCov">         46 : }</span>
+<span class="lineNum">     273 </span><span class="lineCov">         49 : }</span>
 <span class="lineNum">     274 </span>            : 
 <span class="lineNum">     275 </span>            : #define UPVALNAME(x) ((f-&gt;upvalues[x].name) ? getstr(f-&gt;upvalues[x].name) : &quot;-&quot;)
 <span class="lineNum">     276 </span>            : #define MYK(x)          (-1-(x))
@@ -345,31 +345,31 @@
 <span class="lineNum">     279 </span>            : {
 <span class="lineNum">     280 </span><span class="lineCov">          4 :  const Instruction* code=f-&gt;code;</span>
 <span class="lineNum">     281 </span><span class="lineCov">          4 :  int pc,n=f-&gt;sizecode;</span>
-<span class="lineNum">     282 </span><span class="lineCov">         50 :  for (pc=0; pc&lt;n; pc++)</span>
+<span class="lineNum">     282 </span><span class="lineCov">         52 :  for (pc=0; pc&lt;n; pc++)</span>
 <span class="lineNum">     283 </span>            :  {
-<span class="lineNum">     284 </span><span class="lineCov">         46 :   Instruction i=code[pc];</span>
-<span class="lineNum">     285 </span><span class="lineCov">         46 :   OpCode o=GET_OPCODE(i);</span>
-<span class="lineNum">     286 </span><span class="lineCov">         46 :   int a=GETARG_A(i);</span>
-<span class="lineNum">     287 </span><span class="lineCov">         46 :   int b=GETARG_B(i);</span>
-<span class="lineNum">     288 </span><span class="lineCov">         46 :   int c=GETARG_C(i);</span>
-<span class="lineNum">     289 </span><span class="lineCov">         46 :   int ax=GETARG_Ax(i);</span>
-<span class="lineNum">     290 </span><span class="lineCov">         46 :   int bx=GETARG_Bx(i);</span>
-<span class="lineNum">     291 </span><span class="lineCov">         46 :   int sbx=GETARG_sBx(i);</span>
-<span class="lineNum">     292 </span><span class="lineCov">         46 :   int line=getfuncline(f,pc);</span>
-<span class="lineNum">     293 </span><span class="lineCov">         46 :   printf(&quot;\t%d\t&quot;,pc+1);</span>
-<span class="lineNum">     294 </span><span class="lineCov">         46 :   if (line&gt;0) printf(&quot;[%d]\t&quot;,line); else printf(&quot;[-]\t&quot;);</span>
-<span class="lineNum">     295 </span><span class="lineCov">         46 :   printf(&quot;%-9s\t&quot;,luaP_opnames[o]);</span>
-<span class="lineNum">     296 </span><span class="lineCov">         46 :   switch (getOpMode(o))</span>
+<span class="lineNum">     284 </span><span class="lineCov">         48 :   Instruction i=code[pc];</span>
+<span class="lineNum">     285 </span><span class="lineCov">         48 :   OpCode o=GET_OPCODE(i);</span>
+<span class="lineNum">     286 </span><span class="lineCov">         48 :   int a=GETARG_A(i);</span>
+<span class="lineNum">     287 </span><span class="lineCov">         48 :   int b=GETARG_B(i);</span>
+<span class="lineNum">     288 </span><span class="lineCov">         48 :   int c=GETARG_C(i);</span>
+<span class="lineNum">     289 </span><span class="lineCov">         48 :   int ax=GETARG_Ax(i);</span>
+<span class="lineNum">     290 </span><span class="lineCov">         48 :   int bx=GETARG_Bx(i);</span>
+<span class="lineNum">     291 </span><span class="lineCov">         48 :   int sbx=GETARG_sBx(i);</span>
+<span class="lineNum">     292 </span><span class="lineCov">         48 :   int line=getfuncline(f,pc);</span>
+<span class="lineNum">     293 </span><span class="lineCov">         48 :   printf(&quot;\t%d\t&quot;,pc+1);</span>
+<span class="lineNum">     294 </span><span class="lineCov">         48 :   if (line&gt;0) printf(&quot;[%d]\t&quot;,line); else printf(&quot;[-]\t&quot;);</span>
+<span class="lineNum">     295 </span><span class="lineCov">         48 :   printf(&quot;%-9s\t&quot;,luaP_opnames[o]);</span>
+<span class="lineNum">     296 </span><span class="lineCov">         48 :   switch (getOpMode(o))</span>
 <span class="lineNum">     297 </span>            :   {
 <span class="lineNum">     298 </span>            :    case iABC:
-<span class="lineNum">     299 </span><span class="lineCov">         30 :     printf(&quot;%d&quot;,a);</span>
-<span class="lineNum">     300 </span><span class="lineCov">         30 :     if (getBMode(o)!=OpArgN) printf(&quot; %d&quot;,ISK(b) ? (MYK(INDEXK(b))) : b);</span>
-<span class="lineNum">     301 </span><span class="lineCov">         30 :     if (getCMode(o)!=OpArgN) printf(&quot; %d&quot;,ISK(c) ? (MYK(INDEXK(c))) : c);</span>
+<span class="lineNum">     299 </span><span class="lineCov">         34 :     printf(&quot;%d&quot;,a);</span>
+<span class="lineNum">     300 </span><span class="lineCov">         34 :     if (getBMode(o)!=OpArgN) printf(&quot; %d&quot;,ISK(b) ? (MYK(INDEXK(b))) : b);</span>
+<span class="lineNum">     301 </span><span class="lineCov">         34 :     if (getCMode(o)!=OpArgN) printf(&quot; %d&quot;,ISK(c) ? (MYK(INDEXK(c))) : c);</span>
 <span class="lineNum">     302 </span>            :     break;
 <span class="lineNum">     303 </span>            :    case iABx:
-<span class="lineNum">     304 </span><span class="lineCov">         14 :     printf(&quot;%d&quot;,a);</span>
-<span class="lineNum">     305 </span><span class="lineCov">         14 :     if (getBMode(o)==OpArgK) printf(&quot; %d&quot;,MYK(bx));</span>
-<span class="lineNum">     306 </span><span class="lineCov">         14 :     if (getBMode(o)==OpArgU) printf(&quot; %d&quot;,bx);</span>
+<span class="lineNum">     304 </span><span class="lineCov">         12 :     printf(&quot;%d&quot;,a);</span>
+<span class="lineNum">     305 </span><span class="lineCov">         12 :     if (getBMode(o)==OpArgK) printf(&quot; %d&quot;,MYK(bx));</span>
+<span class="lineNum">     306 </span><span class="lineCov">         12 :     if (getBMode(o)==OpArgU) printf(&quot; %d&quot;,bx);</span>
 <span class="lineNum">     307 </span>            :     break;
 <span class="lineNum">     308 </span>            :    case iAsBx:
 <span class="lineNum">     309 </span><span class="lineCov">          2 :     printf(&quot;%d %d&quot;,a,sbx);</span>
@@ -378,11 +378,11 @@
 <span class="lineNum">     312 </span><span class="lineNoCov">          0 :     printf(&quot;%d&quot;,MYK(ax));</span>
 <span class="lineNum">     313 </span>            :     break;
 <span class="lineNum">     314 </span>            :   }
-<span class="lineNum">     315 </span><span class="lineCov">         46 :   switch (o)</span>
+<span class="lineNum">     315 </span><span class="lineCov">         48 :   switch (o)</span>
 <span class="lineNum">     316 </span>            :   {
 <span class="lineNum">     317 </span>            :    case OP_LOADK:
-<span class="lineNum">     318 </span><span class="lineCov">         12 :     printf(&quot;\t; &quot;); PrintConstant(f,bx);</span>
-<span class="lineNum">     319 </span><span class="lineCov">         12 :     break;</span>
+<span class="lineNum">     318 </span><span class="lineCov">         10 :     printf(&quot;\t; &quot;); PrintConstant(f,bx);</span>
+<span class="lineNum">     319 </span><span class="lineCov">         10 :     break;</span>
 <span class="lineNum">     320 </span>            :    case OP_GETUPVAL:
 <span class="lineNum">     321 </span>            :    case OP_SETUPVAL:
 <span class="lineNum">     322 </span><span class="lineCov">          2 :     printf(&quot;\t; %s&quot;,UPVALNAME(b));</span>
@@ -392,9 +392,9 @@
 <span class="lineNum">     326 </span><span class="lineCov">         12 :     if (ISK(c)) { printf(&quot; &quot;); PrintConstant(f,INDEXK(c)); }</span>
 <span class="lineNum">     327 </span>            :     break;
 <span class="lineNum">     328 </span>            :    case OP_SETTABUP:
-<span class="lineNum">     329 </span><span class="lineCov">          6 :     printf(&quot;\t; %s&quot;,UPVALNAME(a));</span>
-<span class="lineNum">     330 </span><span class="lineCov">         12 :     if (ISK(b)) { printf(&quot; &quot;); PrintConstant(f,INDEXK(b)); }</span>
-<span class="lineNum">     331 </span><span class="lineCov">         10 :     if (ISK(c)) { printf(&quot; &quot;); PrintConstant(f,INDEXK(c)); }</span>
+<span class="lineNum">     329 </span><span class="lineCov">          8 :     printf(&quot;\t; %s&quot;,UPVALNAME(a));</span>
+<span class="lineNum">     330 </span><span class="lineCov">         16 :     if (ISK(b)) { printf(&quot; &quot;); PrintConstant(f,INDEXK(b)); }</span>
+<span class="lineNum">     331 </span><span class="lineCov">         14 :     if (ISK(c)) { printf(&quot; &quot;); PrintConstant(f,INDEXK(c)); }</span>
 <span class="lineNum">     332 </span>            :     break;
 <span class="lineNum">     333 </span>            :    case OP_GETTABLE:
 <span class="lineNum">     334 </span>            :    case OP_SELF:
@@ -435,7 +435,7 @@
 <span class="lineNum">     369 </span>            :    default:
 <span class="lineNum">     370 </span>            :     break;
 <span class="lineNum">     371 </span>            :   }
-<span class="lineNum">     372 </span><span class="lineCov">         46 :   printf(&quot;\n&quot;);</span>
+<span class="lineNum">     372 </span><span class="lineCov">         48 :   printf(&quot;\n&quot;);</span>
 <span class="lineNum">     373 </span>            :  }
 <span class="lineNum">     374 </span><span class="lineCov">          4 : }</span>
 <span class="lineNum">     375 </span>            : 
@@ -467,11 +467,11 @@
 <span class="lineNum">     401 </span>            :  int i,n;
 <span class="lineNum">     402 </span><span class="lineCov">          2 :  n=f-&gt;sizek;</span>
 <span class="lineNum">     403 </span><span class="lineCov">          2 :  printf(&quot;constants (%d) for %p:\n&quot;,n,VOID(f));</span>
-<span class="lineNum">     404 </span><span class="lineCov">         16 :  for (i=0; i&lt;n; i++)</span>
+<span class="lineNum">     404 </span><span class="lineCov">         17 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     405 </span>            :  {
-<span class="lineNum">     406 </span><span class="lineCov">         14 :   printf(&quot;\t%d\t&quot;,i+1);</span>
-<span class="lineNum">     407 </span><span class="lineCov">         14 :   PrintConstant(f,i);</span>
-<span class="lineNum">     408 </span><span class="lineCov">         14 :   printf(&quot;\n&quot;);</span>
+<span class="lineNum">     406 </span><span class="lineCov">         15 :   printf(&quot;\t%d\t&quot;,i+1);</span>
+<span class="lineNum">     407 </span><span class="lineCov">         15 :   PrintConstant(f,i);</span>
+<span class="lineNum">     408 </span><span class="lineCov">         15 :   printf(&quot;\n&quot;);</span>
 <span class="lineNum">     409 </span>            :  }
 <span class="lineNum">     410 </span><span class="lineCov">          2 :  n=f-&gt;sizelocvars;</span>
 <span class="lineNum">     411 </span><span class="lineCov">          2 :  printf(&quot;locals (%d) for %p:\n&quot;,n,VOID(f));</span>

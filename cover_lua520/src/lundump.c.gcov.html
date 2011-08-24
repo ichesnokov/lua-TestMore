@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.0 beta</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">103</td>
+            <td class="headerCovTableEntry">105</td>
             <td class="headerCovTableEntry">116</td>
-            <td class="headerCovTableEntryMed">88.8 %</td>
+            <td class="headerCovTableEntryHi">90.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2011-07-13</td>
+            <td class="headerValue">2011-08-24</td>
             <td></td>
           </tr>
           <tr>
@@ -108,16 +108,16 @@
 <span class="lineNum">      42 </span>            : #define luai_verifycode(L,b,f)  (f)
 <span class="lineNum">      43 </span>            : #endif
 <span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">        189 : static void LoadBlock(LoadState* S, void* b, size_t size)</span>
+<span class="lineNum">      45 </span><span class="lineCov">        190 : static void LoadBlock(LoadState* S, void* b, size_t size)</span>
 <span class="lineNum">      46 </span>            : {
-<span class="lineNum">      47 </span><span class="lineCov">        189 :  if (luaZ_read(S-&gt;Z,b,size)!=0) error(S,&quot;truncated&quot;);</span>
-<span class="lineNum">      48 </span><span class="lineCov">        189 : }</span>
+<span class="lineNum">      47 </span><span class="lineCov">        190 :  if (luaZ_read(S-&gt;Z,b,size)!=0) error(S,&quot;truncated&quot;);</span>
+<span class="lineNum">      48 </span><span class="lineCov">        190 : }</span>
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span><span class="lineCov">         52 : static int LoadChar(LoadState* S)</span>
+<span class="lineNum">      50 </span><span class="lineCov">         53 : static int LoadChar(LoadState* S)</span>
 <span class="lineNum">      51 </span>            : {
 <span class="lineNum">      52 </span>            :  char x;
-<span class="lineNum">      53 </span><span class="lineCov">         52 :  LoadVar(S,x);</span>
-<span class="lineNum">      54 </span><span class="lineCov">         52 :  return x;</span>
+<span class="lineNum">      53 </span><span class="lineCov">         53 :  LoadVar(S,x);</span>
+<span class="lineNum">      54 </span><span class="lineCov">         53 :  return x;</span>
 <span class="lineNum">      55 </span>            : }
 <span class="lineNum">      56 </span>            : 
 <span class="lineNum">      57 </span><span class="lineCov">         62 : static int LoadInt(LoadState* S)</span>
@@ -165,16 +165,16 @@
 <span class="lineNum">      99 </span><span class="lineCov">          6 :  n=LoadInt(S);</span>
 <span class="lineNum">     100 </span><span class="lineCov">          6 :  f-&gt;k=luaM_newvector(S-&gt;L,n,TValue);</span>
 <span class="lineNum">     101 </span><span class="lineCov">          6 :  f-&gt;sizek=n;</span>
-<span class="lineNum">     102 </span><span class="lineCov">         26 :  for (i=0; i&lt;n; i++) setnilvalue(&amp;f-&gt;k[i]);</span>
-<span class="lineNum">     103 </span><span class="lineCov">         26 :  for (i=0; i&lt;n; i++)</span>
+<span class="lineNum">     102 </span><span class="lineCov">         27 :  for (i=0; i&lt;n; i++) setnilvalue(&amp;f-&gt;k[i]);</span>
+<span class="lineNum">     103 </span><span class="lineCov">         27 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     104 </span>            :  {
-<span class="lineNum">     105 </span><span class="lineCov">         20 :   TValue* o=&amp;f-&gt;k[i];</span>
-<span class="lineNum">     106 </span><span class="lineCov">         20 :   int t=LoadChar(S);</span>
-<span class="lineNum">     107 </span><span class="lineCov">         20 :   switch (t)</span>
+<span class="lineNum">     105 </span><span class="lineCov">         21 :   TValue* o=&amp;f-&gt;k[i];</span>
+<span class="lineNum">     106 </span><span class="lineCov">         21 :   int t=LoadChar(S);</span>
+<span class="lineNum">     107 </span><span class="lineCov">         21 :   switch (t)</span>
 <span class="lineNum">     108 </span>            :   {
 <span class="lineNum">     109 </span>            :    case LUA_TNIL:
-<span class="lineNum">     110 </span><span class="lineNoCov">          0 :         setnilvalue(o);</span>
-<span class="lineNum">     111 </span><span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     110 </span><span class="lineCov">          1 :         setnilvalue(o);</span>
+<span class="lineNum">     111 </span><span class="lineCov">          1 :         break;</span>
 <span class="lineNum">     112 </span>            :    case LUA_TBOOLEAN:
 <span class="lineNum">     113 </span><span class="lineNoCov">          0 :         setbvalue(o,LoadChar(S));</span>
 <span class="lineNum">     114 </span><span class="lineNoCov">          0 :         break;</span>
