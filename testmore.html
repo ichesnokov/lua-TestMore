@@ -325,6 +325,8 @@ ok 8 - loadstring error
 ok 9 - function error with param
 </pre>
 
+<p>Now, with <a href="http://search.cpan.org/~andya/Test-Harness/bin/prove">prove</a>.</p>
+
 <pre class="example">
 $ prove 99example.t
 99example.t .. ok
@@ -333,6 +335,51 @@ Files=1, Tests=9,  0 wallclock secs ( 0.05 usr +  0.20 sys =  0.25 CPU)
 Result: PASS
 </pre>
 
+<p>If your continuous integration tool (for example,
+<a href="http://jenkins-ci.org/">Jenkins</a>) requires the JUnix XML format.</p>
+
+<pre class="example">
+$ prove --formatter=TAP::Formatter::JUnit 99example.t
+&lt;testsuites&gt;
+  &lt;testsuite failures="0"
+             errors="0"
+             tests="9"
+             name="test_99example_t"&gt;
+    &lt;testcase name="1 - true"&gt;&lt;/testcase&gt;
+    &lt;testcase name="2 - 1 is true"&gt;&lt;/testcase&gt;
+    &lt;testcase name="3 - false"&gt;&lt;/testcase&gt;
+    &lt;testcase name="4 - nil is false"&gt;&lt;/testcase&gt;
+    &lt;testcase name="5 - addition"&gt;&lt;/testcase&gt;
+    &lt;testcase name="6 - pattern matches"&gt;&lt;/testcase&gt;
+    &lt;testcase name="7 - pattern doesn't match"&gt;&lt;/testcase&gt;
+    &lt;testcase name="8 - loadstring error"&gt;&lt;/testcase&gt;
+    &lt;testcase name="9 - function error with param"&gt;&lt;/testcase&gt;
+    &lt;system-out&gt;&lt;![CDATA[1..9
+ok 1 - true
+ok 2 - 1 is true
+ok 3 - false
+ok 4 - nil is false
+ok 5 - addition
+ok 6 - pattern matches
+ok 7 - pattern doesn't match
+ok 8 - loadstring error
+ok 9 - function error with param
+]]&gt;&lt;/system-out&gt;
+    &lt;system-err&gt;&lt;/system-err&gt;
+  &lt;/testsuite&gt;
+&lt;/testsuites&gt;
+</pre>
+
+<p>If your results must be stored first, and processed after.</p>
+
+<pre class="example">
+$ lua 99example.t > 99example.tap
+$ prove --source=TAP::Parser::SourceHandler::RawTAP 99example.tap
+99example.tap .. ok
+All tests successful.
+Files=1, Tests=9,  0 wallclock secs ( 0.02 usr +  0.04 sys =  0.06 CPU)
+Result: PASS
+</pre>
 
 </div> <!-- id="content" -->
 
