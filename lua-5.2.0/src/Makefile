@@ -58,7 +58,7 @@ a:	$(ALL_A)
 lcov:
 	lcov --capture -d . -o lua.info
 	rm -rf ../../cover_lua520
-	genhtml -o ../../cover_lua520 -t "Lua 5.2.0 beta" --no-function-coverage --no-branch-coverage --legend --prefix /home/user/checkout/gh-pages/lua-TestMore/lua-5.2.0-beta lua.info
+	genhtml -o ../../cover_lua520 -t "Lua 5.2.0" --no-function-coverage --no-branch-coverage --legend --prefix /home/user/checkout/gh-pages/lua-TestMore/lua-5.2.0 lua.info
 
 $(LUA_A): $(BASE_O)
 	$(AR) $@ $?
@@ -117,6 +117,7 @@ mingw:
 	$(MAKE) "LUA_A=lua52.dll" "LUA_T=lua.exe" \
 	"AR=$(CC) -shared -o" "RANLIB=strip --strip-unneeded" \
 	"SYSCFLAGS=-DLUA_BUILD_AS_DLL" "SYSLIBS=" "SYSLDFLAGS=-s" lua.exe
+	$(MAKE) "LUAC_T=luac.exe" luac.exe
 
 posix:
 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_POSIX"
