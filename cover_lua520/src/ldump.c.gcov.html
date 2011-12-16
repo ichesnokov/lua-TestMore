@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - Lua 5.2.0 beta - src/ldump.c</title>
+  <title>LCOV - Lua 5.2.0 - src/ldump.c</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">Lua 5.2.0 beta</td>
+            <td class="headerValue">Lua 5.2.0</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">69</td>
-            <td class="headerCovTableEntry">71</td>
-            <td class="headerCovTableEntryHi">97.2 %</td>
+            <td class="headerCovTableEntry">61</td>
+            <td class="headerCovTableEntry">62</td>
+            <td class="headerCovTableEntryHi">98.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2011-08-24</td>
+            <td class="headerValue">2011-12-16</td>
             <td></td>
           </tr>
           <tr>
@@ -65,7 +65,7 @@
 <pre class="sourceHeading">          Line data    Source code</pre>
 <pre class="source">
 <span class="lineNum">       1 </span>            : /*
-<span class="lineNum">       2 </span>            : ** $Id: ldump.c,v 1.18 2011/05/06 13:35:17 lhf Exp $
+<span class="lineNum">       2 </span>            : ** $Id: ldump.c,v 1.19 2011/11/23 17:48:18 lhf Exp $
 <span class="lineNum">       3 </span>            : ** save precompiled Lua chunks
 <span class="lineNum">       4 </span>            : ** See Copyright Notice in lua.h
 <span class="lineNum">       5 </span>            : */
@@ -102,27 +102,27 @@
 <span class="lineNum">      36 </span>            :  }
 <span class="lineNum">      37 </span>            : }
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">         86 : static void DumpChar(int y, DumpState* D)</span>
+<span class="lineNum">      39 </span>            : static void DumpChar(int y, DumpState* D)
 <span class="lineNum">      40 </span>            : {
 <span class="lineNum">      41 </span><span class="lineCov">         86 :  char x=(char)y;</span>
 <span class="lineNum">      42 </span>            :  DumpVar(x,D);
-<span class="lineNum">      43 </span><span class="lineCov">         86 : }</span>
+<span class="lineNum">      43 </span>            : }
 <span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">         99 : static void DumpInt(int x, DumpState* D)</span>
+<span class="lineNum">      45 </span>            : static void DumpInt(int x, DumpState* D)
 <span class="lineNum">      46 </span>            : {
 <span class="lineNum">      47 </span>            :  DumpVar(x,D);
-<span class="lineNum">      48 </span><span class="lineCov">         99 : }</span>
+<span class="lineNum">      48 </span>            : }
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span>            : static void DumpNumber(lua_Number x, DumpState* D)
 <span class="lineNum">      51 </span>            : {
 <span class="lineNum">      52 </span>            :  DumpVar(x,D);
 <span class="lineNum">      53 </span>            : }
 <span class="lineNum">      54 </span>            : 
-<span class="lineNum">      55 </span><span class="lineCov">         18 : static void DumpVector(const void* b, int n, size_t size, DumpState* D)</span>
+<span class="lineNum">      55 </span>            : static void DumpVector(const void* b, int n, size_t size, DumpState* D)
 <span class="lineNum">      56 </span>            : {
-<span class="lineNum">      57 </span><span class="lineCov">         18 :  DumpInt(n,D);</span>
+<span class="lineNum">      57 </span>            :  DumpInt(n,D);
 <span class="lineNum">      58 </span><span class="lineCov">         18 :  DumpMem(b,n,size,D);</span>
-<span class="lineNum">      59 </span><span class="lineCov">         18 : }</span>
+<span class="lineNum">      59 </span>            : }
 <span class="lineNum">      60 </span>            : 
 <span class="lineNum">      61 </span><span class="lineCov">         56 : static void DumpString(const TString* s, DumpState* D)</span>
 <span class="lineNum">      62 </span>            : {
@@ -146,7 +146,7 @@
 <span class="lineNum">      80 </span><span class="lineCov">          9 : static void DumpConstants(const Proto* f, DumpState* D)</span>
 <span class="lineNum">      81 </span>            : {
 <span class="lineNum">      82 </span><span class="lineCov">          9 :  int i,n=f-&gt;sizek;</span>
-<span class="lineNum">      83 </span><span class="lineCov">          9 :  DumpInt(n,D);</span>
+<span class="lineNum">      83 </span>            :  DumpInt(n,D);
 <span class="lineNum">      84 </span><span class="lineCov">         46 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">      85 </span>            :  {
 <span class="lineNum">      86 </span><span class="lineCov">         37 :   const TValue* o=&amp;f-&gt;k[i];</span>
@@ -157,7 +157,7 @@
 <span class="lineNum">      91 </span>            :         break;
 <span class="lineNum">      92 </span>            :    case LUA_TBOOLEAN:
 <span class="lineNum">      93 </span><span class="lineNoCov">          0 :         DumpChar(bvalue(o),D);</span>
-<span class="lineNum">      94 </span><span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">      94 </span>            :         break;
 <span class="lineNum">      95 </span>            :    case LUA_TNUMBER:
 <span class="lineNum">      96 </span><span class="lineCov">          4 :         DumpNumber(nvalue(o),D);</span>
 <span class="lineNum">      97 </span>            :         break;
@@ -167,20 +167,20 @@
 <span class="lineNum">     101 </span>            :   }
 <span class="lineNum">     102 </span>            :  }
 <span class="lineNum">     103 </span><span class="lineCov">          9 :  n=f-&gt;sizep;</span>
-<span class="lineNum">     104 </span><span class="lineCov">          9 :  DumpInt(n,D);</span>
+<span class="lineNum">     104 </span>            :  DumpInt(n,D);
 <span class="lineNum">     105 </span><span class="lineCov">         13 :  for (i=0; i&lt;n; i++) DumpFunction(f-&gt;p[i],D);</span>
 <span class="lineNum">     106 </span><span class="lineCov">          9 : }</span>
 <span class="lineNum">     107 </span>            : 
-<span class="lineNum">     108 </span>            : static void DumpUpvalues(const Proto* f, DumpState* D)
+<span class="lineNum">     108 </span><span class="lineCov">          9 : static void DumpUpvalues(const Proto* f, DumpState* D)</span>
 <span class="lineNum">     109 </span>            : {
 <span class="lineNum">     110 </span><span class="lineCov">          9 :  int i,n=f-&gt;sizeupvalues;</span>
-<span class="lineNum">     111 </span><span class="lineCov">          9 :  DumpInt(n,D);</span>
+<span class="lineNum">     111 </span>            :  DumpInt(n,D);
 <span class="lineNum">     112 </span><span class="lineCov">         20 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     113 </span>            :  {
-<span class="lineNum">     114 </span><span class="lineCov">         11 :   DumpChar(f-&gt;upvalues[i].instack, D);</span>
-<span class="lineNum">     115 </span><span class="lineCov">         11 :   DumpChar(f-&gt;upvalues[i].idx, D);</span>
+<span class="lineNum">     114 </span><span class="lineCov">         11 :   DumpChar(f-&gt;upvalues[i].instack,D);</span>
+<span class="lineNum">     115 </span><span class="lineCov">         11 :   DumpChar(f-&gt;upvalues[i].idx,D);</span>
 <span class="lineNum">     116 </span>            :  }
-<span class="lineNum">     117 </span>            : }
+<span class="lineNum">     117 </span><span class="lineCov">          9 : }</span>
 <span class="lineNum">     118 </span>            : 
 <span class="lineNum">     119 </span><span class="lineCov">          9 : static void DumpDebug(const Proto* f, DumpState* D)</span>
 <span class="lineNum">     120 </span>            : {
@@ -189,7 +189,7 @@
 <span class="lineNum">     123 </span><span class="lineCov">          9 :  n= (D-&gt;strip) ? 0 : f-&gt;sizelineinfo;</span>
 <span class="lineNum">     124 </span><span class="lineCov">          9 :  DumpVector(f-&gt;lineinfo,n,sizeof(int),D);</span>
 <span class="lineNum">     125 </span><span class="lineCov">          9 :  n= (D-&gt;strip) ? 0 : f-&gt;sizelocvars;</span>
-<span class="lineNum">     126 </span><span class="lineCov">          9 :  DumpInt(n,D);</span>
+<span class="lineNum">     126 </span>            :  DumpInt(n,D);
 <span class="lineNum">     127 </span><span class="lineCov">         18 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     128 </span>            :  {
 <span class="lineNum">     129 </span><span class="lineCov">          9 :   DumpString(f-&gt;locvars[i].varname,D);</span>
@@ -197,7 +197,7 @@
 <span class="lineNum">     131 </span><span class="lineCov">          9 :   DumpInt(f-&gt;locvars[i].endpc,D);</span>
 <span class="lineNum">     132 </span>            :  }
 <span class="lineNum">     133 </span><span class="lineCov">          9 :  n= (D-&gt;strip) ? 0 : f-&gt;sizeupvalues;</span>
-<span class="lineNum">     134 </span><span class="lineCov">          9 :  DumpInt(n,D);</span>
+<span class="lineNum">     134 </span>            :  DumpInt(n,D);
 <span class="lineNum">     135 </span><span class="lineCov">         16 :  for (i=0; i&lt;n; i++) DumpString(f-&gt;upvalues[i].name,D);</span>
 <span class="lineNum">     136 </span><span class="lineCov">          9 : }</span>
 <span class="lineNum">     137 </span>            : 
@@ -210,7 +210,7 @@
 <span class="lineNum">     144 </span><span class="lineCov">          9 :  DumpChar(f-&gt;maxstacksize,D);</span>
 <span class="lineNum">     145 </span><span class="lineCov">          9 :  DumpCode(f,D);</span>
 <span class="lineNum">     146 </span><span class="lineCov">          9 :  DumpConstants(f,D);</span>
-<span class="lineNum">     147 </span>            :  DumpUpvalues(f,D);
+<span class="lineNum">     147 </span><span class="lineCov">          9 :  DumpUpvalues(f,D);</span>
 <span class="lineNum">     148 </span><span class="lineCov">          9 :  DumpDebug(f,D);</span>
 <span class="lineNum">     149 </span><span class="lineCov">          9 : }</span>
 <span class="lineNum">     150 </span>            : 
@@ -235,7 +235,7 @@
 <span class="lineNum">     169 </span>            :  DumpHeader(&amp;D);
 <span class="lineNum">     170 </span><span class="lineCov">          5 :  DumpFunction(f,&amp;D);</span>
 <span class="lineNum">     171 </span><span class="lineCov">          5 :  return D.status;</span>
-<span class="lineNum">     172 </span>            : }
+<span class="lineNum">     172 </span><span class="lineCov">          9 : }</span>
 </pre>
       </td>
     </tr>

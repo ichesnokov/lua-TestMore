@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - Lua 5.2.0 beta - src/ldblib.c</title>
+  <title>LCOV - Lua 5.2.0 - src/ldblib.c</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">Lua 5.2.0 beta</td>
+            <td class="headerValue">Lua 5.2.0</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">214</td>
-            <td class="headerCovTableEntry">219</td>
-            <td class="headerCovTableEntryHi">97.7 %</td>
+            <td class="headerCovTableEntry">204</td>
+            <td class="headerCovTableEntry">209</td>
+            <td class="headerCovTableEntryHi">97.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2011-08-24</td>
+            <td class="headerValue">2011-12-16</td>
             <td></td>
           </tr>
           <tr>
@@ -65,7 +65,7 @@
 <pre class="sourceHeading">          Line data    Source code</pre>
 <pre class="source">
 <span class="lineNum">       1 </span>            : /*
-<span class="lineNum">       2 </span>            : ** $Id: ldblib.c,v 1.130 2011/04/08 19:17:36 roberto Exp $
+<span class="lineNum">       2 </span>            : ** $Id: ldblib.c,v 1.131 2011/10/24 14:54:05 roberto Exp $
 <span class="lineNum">       3 </span>            : ** Interface from Lua to its debug API
 <span class="lineNum">       4 </span>            : ** See Copyright Notice in lua.h
 <span class="lineNum">       5 </span>            : */
@@ -220,8 +220,8 @@
 <span class="lineNum">     154 </span><span class="lineCov">          3 :   if (strchr(options, 'L'))</span>
 <span class="lineNum">     155 </span><span class="lineCov">          1 :     treatstackoption(L, L1, &quot;activelines&quot;);</span>
 <span class="lineNum">     156 </span><span class="lineCov">          3 :   if (strchr(options, 'f'))</span>
-<span class="lineNum">     157 </span><span class="lineCov">          2 :     treatstackoption(L, L1, &quot;func&quot;);</span>
-<span class="lineNum">     158 </span><span class="lineCov">          4 :   return 1;  /* return table */</span>
+<span class="lineNum">     157 </span><span class="lineCov">          4 :     treatstackoption(L, L1, &quot;func&quot;);</span>
+<span class="lineNum">     158 </span>            :   return 1;  /* return table */
 <span class="lineNum">     159 </span>            : }
 <span class="lineNum">     160 </span>            : 
 <span class="lineNum">     161 </span>            : 
@@ -291,7 +291,7 @@
 <span class="lineNum">     225 </span>            : }
 <span class="lineNum">     226 </span>            : 
 <span class="lineNum">     227 </span>            : 
-<span class="lineNum">     228 </span><span class="lineCov">          8 : static int checkupval (lua_State *L, int argf, int argnup) {</span>
+<span class="lineNum">     228 </span><span class="lineCov">          4 : static int checkupval (lua_State *L, int argf, int argnup) {</span>
 <span class="lineNum">     229 </span>            :   lua_Debug ar;
 <span class="lineNum">     230 </span><span class="lineCov">          6 :   int nup = luaL_checkint(L, argnup);</span>
 <span class="lineNum">     231 </span><span class="lineCov">          6 :   luaL_checktype(L, argf, LUA_TFUNCTION);</span>
@@ -326,138 +326,135 @@
 <span class="lineNum">     260 </span>            :   static const char *const hooknames[] =
 <span class="lineNum">     261 </span>            :     {&quot;call&quot;, &quot;return&quot;, &quot;line&quot;, &quot;count&quot;, &quot;tail call&quot;};
 <span class="lineNum">     262 </span><span class="lineCov">        452 :   gethooktable(L);</span>
-<span class="lineNum">     263 </span><span class="lineCov">        452 :   lua_pushlightuserdata(L, L);</span>
-<span class="lineNum">     264 </span><span class="lineCov">        452 :   lua_rawget(L, -2);</span>
-<span class="lineNum">     265 </span><span class="lineCov">        452 :   if (lua_isfunction(L, -1)) {</span>
-<span class="lineNum">     266 </span><span class="lineCov">        452 :     lua_pushstring(L, hooknames[(int)ar-&gt;event]);</span>
-<span class="lineNum">     267 </span><span class="lineCov">        452 :     if (ar-&gt;currentline &gt;= 0)</span>
-<span class="lineNum">     268 </span><span class="lineNoCov">          0 :       lua_pushinteger(L, ar-&gt;currentline);</span>
-<span class="lineNum">     269 </span><span class="lineCov">        452 :     else lua_pushnil(L);</span>
-<span class="lineNum">     270 </span>            :     lua_assert(lua_getinfo(L, &quot;lS&quot;, ar));
-<span class="lineNum">     271 </span><span class="lineCov">        452 :     lua_call(L, 2, 0);</span>
-<span class="lineNum">     272 </span>            :   }
-<span class="lineNum">     273 </span><span class="lineCov">        452 : }</span>
+<span class="lineNum">     263 </span><span class="lineCov">        452 :   lua_rawgetp(L, -1, L);</span>
+<span class="lineNum">     264 </span><span class="lineCov">        452 :   if (lua_isfunction(L, -1)) {</span>
+<span class="lineNum">     265 </span><span class="lineCov">        452 :     lua_pushstring(L, hooknames[(int)ar-&gt;event]);</span>
+<span class="lineNum">     266 </span><span class="lineCov">        452 :     if (ar-&gt;currentline &gt;= 0)</span>
+<span class="lineNum">     267 </span><span class="lineNoCov">          0 :       lua_pushinteger(L, ar-&gt;currentline);</span>
+<span class="lineNum">     268 </span><span class="lineCov">        452 :     else lua_pushnil(L);</span>
+<span class="lineNum">     269 </span>            :     lua_assert(lua_getinfo(L, &quot;lS&quot;, ar));
+<span class="lineNum">     270 </span><span class="lineCov">        452 :     lua_call(L, 2, 0);</span>
+<span class="lineNum">     271 </span>            :   }
+<span class="lineNum">     272 </span><span class="lineCov">        452 : }</span>
+<span class="lineNum">     273 </span>            : 
 <span class="lineNum">     274 </span>            : 
-<span class="lineNum">     275 </span>            : 
-<span class="lineNum">     276 </span>            : static int makemask (const char *smask, int count) {
-<span class="lineNum">     277 </span><span class="lineCov">          1 :   int mask = 0;</span>
-<span class="lineNum">     278 </span><span class="lineCov">          1 :   if (strchr(smask, 'c')) mask |= LUA_MASKCALL;</span>
-<span class="lineNum">     279 </span><span class="lineCov">          1 :   if (strchr(smask, 'r')) mask |= LUA_MASKRET;</span>
-<span class="lineNum">     280 </span><span class="lineCov">          1 :   if (strchr(smask, 'l')) mask |= LUA_MASKLINE;</span>
-<span class="lineNum">     281 </span><span class="lineCov">          1 :   if (count &gt; 0) mask |= LUA_MASKCOUNT;</span>
-<span class="lineNum">     282 </span><span class="lineCov">          1 :   return mask;</span>
-<span class="lineNum">     283 </span>            : }
+<span class="lineNum">     275 </span>            : static int makemask (const char *smask, int count) {
+<span class="lineNum">     276 </span>            :   int mask = 0;
+<span class="lineNum">     277 </span><span class="lineCov">          1 :   if (strchr(smask, 'c')) mask |= LUA_MASKCALL;</span>
+<span class="lineNum">     278 </span><span class="lineCov">          1 :   if (strchr(smask, 'r')) mask |= LUA_MASKRET;</span>
+<span class="lineNum">     279 </span><span class="lineCov">          1 :   if (strchr(smask, 'l')) mask |= LUA_MASKLINE;</span>
+<span class="lineNum">     280 </span><span class="lineCov">          1 :   if (count &gt; 0) mask |= LUA_MASKCOUNT;</span>
+<span class="lineNum">     281 </span>            :   return mask;
+<span class="lineNum">     282 </span>            : }
+<span class="lineNum">     283 </span>            : 
 <span class="lineNum">     284 </span>            : 
-<span class="lineNum">     285 </span>            : 
-<span class="lineNum">     286 </span>            : static char *unmakemask (int mask, char *smask) {
-<span class="lineNum">     287 </span><span class="lineCov">          3 :   int i = 0;</span>
-<span class="lineNum">     288 </span><span class="lineCov">          3 :   if (mask &amp; LUA_MASKCALL) smask[i++] = 'c';</span>
-<span class="lineNum">     289 </span><span class="lineCov">          3 :   if (mask &amp; LUA_MASKRET) smask[i++] = 'r';</span>
-<span class="lineNum">     290 </span><span class="lineCov">          3 :   if (mask &amp; LUA_MASKLINE) smask[i++] = 'l';</span>
-<span class="lineNum">     291 </span><span class="lineCov">          3 :   smask[i] = '\0';</span>
-<span class="lineNum">     292 </span><span class="lineCov">          3 :   return smask;</span>
-<span class="lineNum">     293 </span>            : }
+<span class="lineNum">     285 </span>            : static char *unmakemask (int mask, char *smask) {
+<span class="lineNum">     286 </span>            :   int i = 0;
+<span class="lineNum">     287 </span><span class="lineCov">          3 :   if (mask &amp; LUA_MASKCALL) smask[i++] = 'c';</span>
+<span class="lineNum">     288 </span><span class="lineCov">          3 :   if (mask &amp; LUA_MASKRET) smask[i++] = 'r';</span>
+<span class="lineNum">     289 </span><span class="lineCov">          3 :   if (mask &amp; LUA_MASKLINE) smask[i++] = 'l';</span>
+<span class="lineNum">     290 </span><span class="lineCov">          3 :   smask[i] = '\0';</span>
+<span class="lineNum">     291 </span>            :   return smask;
+<span class="lineNum">     292 </span>            : }
+<span class="lineNum">     293 </span>            : 
 <span class="lineNum">     294 </span>            : 
-<span class="lineNum">     295 </span>            : 
-<span class="lineNum">     296 </span><span class="lineCov">          2 : static int db_sethook (lua_State *L) {</span>
-<span class="lineNum">     297 </span>            :   int arg, mask, count;
-<span class="lineNum">     298 </span>            :   lua_Hook func;
-<span class="lineNum">     299 </span><span class="lineCov">          2 :   lua_State *L1 = getthread(L, &amp;arg);</span>
-<span class="lineNum">     300 </span><span class="lineCov">          2 :   if (lua_isnoneornil(L, arg+1)) {</span>
-<span class="lineNum">     301 </span><span class="lineCov">          1 :     lua_settop(L, arg+1);</span>
-<span class="lineNum">     302 </span><span class="lineCov">          1 :     func = NULL; mask = 0; count = 0;  /* turn off hooks */</span>
-<span class="lineNum">     303 </span>            :   }
-<span class="lineNum">     304 </span>            :   else {
-<span class="lineNum">     305 </span><span class="lineCov">          1 :     const char *smask = luaL_checkstring(L, arg+2);</span>
-<span class="lineNum">     306 </span><span class="lineCov">          1 :     luaL_checktype(L, arg+1, LUA_TFUNCTION);</span>
-<span class="lineNum">     307 </span><span class="lineCov">          1 :     count = luaL_optint(L, arg+3, 0);</span>
-<span class="lineNum">     308 </span><span class="lineCov">          1 :     func = hookf; mask = makemask(smask, count);</span>
-<span class="lineNum">     309 </span>            :   }
-<span class="lineNum">     310 </span><span class="lineCov">          2 :   gethooktable(L);</span>
-<span class="lineNum">     311 </span><span class="lineCov">          2 :   lua_pushlightuserdata(L, L1);</span>
-<span class="lineNum">     312 </span><span class="lineCov">          2 :   lua_pushvalue(L, arg+1);</span>
-<span class="lineNum">     313 </span><span class="lineCov">          2 :   lua_rawset(L, -3);  /* set new hook */</span>
-<span class="lineNum">     314 </span><span class="lineCov">          2 :   lua_pop(L, 1);  /* remove hook table */</span>
-<span class="lineNum">     315 </span><span class="lineCov">          2 :   lua_sethook(L1, func, mask, count);  /* set hooks */</span>
-<span class="lineNum">     316 </span><span class="lineCov">          2 :   return 0;</span>
-<span class="lineNum">     317 </span>            : }
-<span class="lineNum">     318 </span>            : 
-<span class="lineNum">     319 </span>            : 
-<span class="lineNum">     320 </span><span class="lineCov">          3 : static int db_gethook (lua_State *L) {</span>
-<span class="lineNum">     321 </span>            :   int arg;
-<span class="lineNum">     322 </span><span class="lineCov">          3 :   lua_State *L1 = getthread(L, &amp;arg);</span>
-<span class="lineNum">     323 </span>            :   char buff[5];
-<span class="lineNum">     324 </span><span class="lineCov">          3 :   int mask = lua_gethookmask(L1);</span>
-<span class="lineNum">     325 </span><span class="lineCov">          3 :   lua_Hook hook = lua_gethook(L1);</span>
-<span class="lineNum">     326 </span><span class="lineCov">          3 :   if (hook != NULL &amp;&amp; hook != hookf)  /* external hook? */</span>
-<span class="lineNum">     327 </span><span class="lineNoCov">          0 :     lua_pushliteral(L, &quot;external hook&quot;);</span>
-<span class="lineNum">     328 </span>            :   else {
-<span class="lineNum">     329 </span><span class="lineCov">          3 :     gethooktable(L);</span>
-<span class="lineNum">     330 </span><span class="lineCov">          3 :     lua_pushlightuserdata(L, L1);</span>
-<span class="lineNum">     331 </span><span class="lineCov">          3 :     lua_rawget(L, -2);   /* get hook */</span>
-<span class="lineNum">     332 </span><span class="lineCov">          3 :     lua_remove(L, -2);  /* remove hook table */</span>
-<span class="lineNum">     333 </span>            :   }
-<span class="lineNum">     334 </span><span class="lineCov">          3 :   lua_pushstring(L, unmakemask(mask, buff));</span>
-<span class="lineNum">     335 </span><span class="lineCov">          3 :   lua_pushinteger(L, lua_gethookcount(L1));</span>
-<span class="lineNum">     336 </span><span class="lineCov">          3 :   return 3;</span>
-<span class="lineNum">     337 </span>            : }
-<span class="lineNum">     338 </span>            : 
-<span class="lineNum">     339 </span>            : 
-<span class="lineNum">     340 </span><span class="lineCov">          3 : static int db_debug (lua_State *L) {</span>
-<span class="lineNum">     341 </span>            :   for (;;) {
-<span class="lineNum">     342 </span>            :     char buffer[250];
-<span class="lineNum">     343 </span><span class="lineCov">          3 :     luai_writestringerror(&quot;%s&quot;, &quot;lua_debug&gt; &quot;);</span>
-<span class="lineNum">     344 </span><span class="lineCov">          6 :     if (fgets(buffer, sizeof(buffer), stdin) == 0 ||</span>
-<span class="lineNum">     345 </span><span class="lineCov">          3 :         strcmp(buffer, &quot;cont\n&quot;) == 0)</span>
-<span class="lineNum">     346 </span><span class="lineCov">          1 :       return 0;</span>
-<span class="lineNum">     347 </span><span class="lineCov">          4 :     if (luaL_loadbuffer(L, buffer, strlen(buffer), &quot;=(debug command)&quot;) ||</span>
-<span class="lineNum">     348 </span><span class="lineCov">          2 :         lua_pcall(L, 0, 0, 0))</span>
-<span class="lineNum">     349 </span><span class="lineCov">          2 :       luai_writestringerror(&quot;%s\n&quot;, lua_tostring(L, -1));</span>
-<span class="lineNum">     350 </span><span class="lineCov">          2 :     lua_settop(L, 0);  /* remove eventual returns */</span>
-<span class="lineNum">     351 </span><span class="lineCov">          2 :   }</span>
-<span class="lineNum">     352 </span>            : }
-<span class="lineNum">     353 </span>            : 
-<span class="lineNum">     354 </span>            : 
-<span class="lineNum">     355 </span><span class="lineCov">          3 : static int db_traceback (lua_State *L) {</span>
-<span class="lineNum">     356 </span>            :   int arg;
-<span class="lineNum">     357 </span><span class="lineCov">          3 :   lua_State *L1 = getthread(L, &amp;arg);</span>
-<span class="lineNum">     358 </span><span class="lineCov">          3 :   const char *msg = lua_tostring(L, arg + 1);</span>
-<span class="lineNum">     359 </span><span class="lineCov">          3 :   if (msg == NULL &amp;&amp; !lua_isnoneornil(L, arg + 1))  /* non-string 'msg'? */</span>
-<span class="lineNum">     360 </span><span class="lineCov">          1 :     lua_pushvalue(L, arg + 1);  /* return it untouched */</span>
-<span class="lineNum">     361 </span>            :   else {
-<span class="lineNum">     362 </span><span class="lineCov">          2 :     int level = luaL_optint(L, arg + 2, (L == L1) ? 1 : 0);</span>
-<span class="lineNum">     363 </span><span class="lineCov">          2 :     luaL_traceback(L, L1, msg, level);</span>
-<span class="lineNum">     364 </span>            :   }
-<span class="lineNum">     365 </span><span class="lineCov">          3 :   return 1;</span>
-<span class="lineNum">     366 </span>            : }
-<span class="lineNum">     367 </span>            : 
-<span class="lineNum">     368 </span>            : 
-<span class="lineNum">     369 </span>            : static const luaL_Reg dblib[] = {
-<span class="lineNum">     370 </span>            :   {&quot;debug&quot;, db_debug},
-<span class="lineNum">     371 </span>            :   {&quot;getuservalue&quot;, db_getuservalue},
-<span class="lineNum">     372 </span>            :   {&quot;gethook&quot;, db_gethook},
-<span class="lineNum">     373 </span>            :   {&quot;getinfo&quot;, db_getinfo},
-<span class="lineNum">     374 </span>            :   {&quot;getlocal&quot;, db_getlocal},
-<span class="lineNum">     375 </span>            :   {&quot;getregistry&quot;, db_getregistry},
-<span class="lineNum">     376 </span>            :   {&quot;getmetatable&quot;, db_getmetatable},
-<span class="lineNum">     377 </span>            :   {&quot;getupvalue&quot;, db_getupvalue},
-<span class="lineNum">     378 </span>            :   {&quot;upvaluejoin&quot;, db_upvaluejoin},
-<span class="lineNum">     379 </span>            :   {&quot;upvalueid&quot;, db_upvalueid},
-<span class="lineNum">     380 </span>            :   {&quot;setuservalue&quot;, db_setuservalue},
-<span class="lineNum">     381 </span>            :   {&quot;sethook&quot;, db_sethook},
-<span class="lineNum">     382 </span>            :   {&quot;setlocal&quot;, db_setlocal},
-<span class="lineNum">     383 </span>            :   {&quot;setmetatable&quot;, db_setmetatable},
-<span class="lineNum">     384 </span>            :   {&quot;setupvalue&quot;, db_setupvalue},
-<span class="lineNum">     385 </span>            :   {&quot;traceback&quot;, db_traceback},
-<span class="lineNum">     386 </span>            :   {NULL, NULL}
-<span class="lineNum">     387 </span>            : };
-<span class="lineNum">     388 </span>            : 
-<span class="lineNum">     389 </span>            : 
-<span class="lineNum">     390 </span><span class="lineCov">         70 : LUAMOD_API int luaopen_debug (lua_State *L) {</span>
-<span class="lineNum">     391 </span><span class="lineCov">         70 :   luaL_newlib(L, dblib);</span>
-<span class="lineNum">     392 </span><span class="lineCov">         70 :   return 1;</span>
-<span class="lineNum">     393 </span>            : }
-<span class="lineNum">     394 </span>            : 
+<span class="lineNum">     295 </span><span class="lineCov">          2 : static int db_sethook (lua_State *L) {</span>
+<span class="lineNum">     296 </span>            :   int arg, mask, count;
+<span class="lineNum">     297 </span>            :   lua_Hook func;
+<span class="lineNum">     298 </span><span class="lineCov">          2 :   lua_State *L1 = getthread(L, &amp;arg);</span>
+<span class="lineNum">     299 </span><span class="lineCov">          2 :   if (lua_isnoneornil(L, arg+1)) {</span>
+<span class="lineNum">     300 </span><span class="lineCov">          1 :     lua_settop(L, arg+1);</span>
+<span class="lineNum">     301 </span>            :     func = NULL; mask = 0; count = 0;  /* turn off hooks */
+<span class="lineNum">     302 </span>            :   }
+<span class="lineNum">     303 </span>            :   else {
+<span class="lineNum">     304 </span><span class="lineCov">          1 :     const char *smask = luaL_checkstring(L, arg+2);</span>
+<span class="lineNum">     305 </span><span class="lineCov">          1 :     luaL_checktype(L, arg+1, LUA_TFUNCTION);</span>
+<span class="lineNum">     306 </span><span class="lineCov">          1 :     count = luaL_optint(L, arg+3, 0);</span>
+<span class="lineNum">     307 </span>            :     func = hookf; mask = makemask(smask, count);
+<span class="lineNum">     308 </span>            :   }
+<span class="lineNum">     309 </span><span class="lineCov">          2 :   gethooktable(L);</span>
+<span class="lineNum">     310 </span><span class="lineCov">          2 :   lua_pushvalue(L, arg+1);</span>
+<span class="lineNum">     311 </span><span class="lineCov">          2 :   lua_rawsetp(L, -2, L1);  /* set new hook */</span>
+<span class="lineNum">     312 </span><span class="lineCov">          2 :   lua_pop(L, 1);  /* remove hook table */</span>
+<span class="lineNum">     313 </span><span class="lineCov">          2 :   lua_sethook(L1, func, mask, count);  /* set hooks */</span>
+<span class="lineNum">     314 </span><span class="lineCov">          2 :   return 0;</span>
+<span class="lineNum">     315 </span>            : }
+<span class="lineNum">     316 </span>            : 
+<span class="lineNum">     317 </span>            : 
+<span class="lineNum">     318 </span><span class="lineCov">          3 : static int db_gethook (lua_State *L) {</span>
+<span class="lineNum">     319 </span>            :   int arg;
+<span class="lineNum">     320 </span><span class="lineCov">          3 :   lua_State *L1 = getthread(L, &amp;arg);</span>
+<span class="lineNum">     321 </span>            :   char buff[5];
+<span class="lineNum">     322 </span><span class="lineCov">          3 :   int mask = lua_gethookmask(L1);</span>
+<span class="lineNum">     323 </span><span class="lineCov">          3 :   lua_Hook hook = lua_gethook(L1);</span>
+<span class="lineNum">     324 </span><span class="lineCov">          3 :   if (hook != NULL &amp;&amp; hook != hookf)  /* external hook? */</span>
+<span class="lineNum">     325 </span><span class="lineNoCov">          0 :     lua_pushliteral(L, &quot;external hook&quot;);</span>
+<span class="lineNum">     326 </span>            :   else {
+<span class="lineNum">     327 </span><span class="lineCov">          3 :     gethooktable(L);</span>
+<span class="lineNum">     328 </span><span class="lineCov">          3 :     lua_rawgetp(L, -1, L1);   /* get hook */</span>
+<span class="lineNum">     329 </span><span class="lineCov">          3 :     lua_remove(L, -2);  /* remove hook table */</span>
+<span class="lineNum">     330 </span>            :   }
+<span class="lineNum">     331 </span><span class="lineCov">          3 :   lua_pushstring(L, unmakemask(mask, buff));</span>
+<span class="lineNum">     332 </span><span class="lineCov">          3 :   lua_pushinteger(L, lua_gethookcount(L1));</span>
+<span class="lineNum">     333 </span><span class="lineCov">          3 :   return 3;</span>
+<span class="lineNum">     334 </span>            : }
+<span class="lineNum">     335 </span>            : 
+<span class="lineNum">     336 </span>            : 
+<span class="lineNum">     337 </span><span class="lineCov">          1 : static int db_debug (lua_State *L) {</span>
+<span class="lineNum">     338 </span>            :   for (;;) {
+<span class="lineNum">     339 </span>            :     char buffer[250];
+<span class="lineNum">     340 </span><span class="lineCov">          3 :     luai_writestringerror(&quot;%s&quot;, &quot;lua_debug&gt; &quot;);</span>
+<span class="lineNum">     341 </span><span class="lineCov">          3 :     if (fgets(buffer, sizeof(buffer), stdin) == 0 ||</span>
+<span class="lineNum">     342 </span><span class="lineCov">          3 :         strcmp(buffer, &quot;cont\n&quot;) == 0)</span>
+<span class="lineNum">     343 </span><span class="lineCov">          1 :       return 0;</span>
+<span class="lineNum">     344 </span><span class="lineCov">          4 :     if (luaL_loadbuffer(L, buffer, strlen(buffer), &quot;=(debug command)&quot;) ||</span>
+<span class="lineNum">     345 </span><span class="lineCov">          2 :         lua_pcall(L, 0, 0, 0))</span>
+<span class="lineNum">     346 </span><span class="lineCov">          2 :       luai_writestringerror(&quot;%s\n&quot;, lua_tostring(L, -1));</span>
+<span class="lineNum">     347 </span><span class="lineCov">          2 :     lua_settop(L, 0);  /* remove eventual returns */</span>
+<span class="lineNum">     348 </span><span class="lineCov">          2 :   }</span>
+<span class="lineNum">     349 </span>            : }
+<span class="lineNum">     350 </span>            : 
+<span class="lineNum">     351 </span>            : 
+<span class="lineNum">     352 </span><span class="lineCov">          3 : static int db_traceback (lua_State *L) {</span>
+<span class="lineNum">     353 </span>            :   int arg;
+<span class="lineNum">     354 </span><span class="lineCov">          3 :   lua_State *L1 = getthread(L, &amp;arg);</span>
+<span class="lineNum">     355 </span><span class="lineCov">          3 :   const char *msg = lua_tostring(L, arg + 1);</span>
+<span class="lineNum">     356 </span><span class="lineCov">          3 :   if (msg == NULL &amp;&amp; !lua_isnoneornil(L, arg + 1))  /* non-string 'msg'? */</span>
+<span class="lineNum">     357 </span><span class="lineCov">          1 :     lua_pushvalue(L, arg + 1);  /* return it untouched */</span>
+<span class="lineNum">     358 </span>            :   else {
+<span class="lineNum">     359 </span><span class="lineCov">          2 :     int level = luaL_optint(L, arg + 2, (L == L1) ? 1 : 0);</span>
+<span class="lineNum">     360 </span><span class="lineCov">          2 :     luaL_traceback(L, L1, msg, level);</span>
+<span class="lineNum">     361 </span>            :   }
+<span class="lineNum">     362 </span><span class="lineCov">          3 :   return 1;</span>
+<span class="lineNum">     363 </span>            : }
+<span class="lineNum">     364 </span>            : 
+<span class="lineNum">     365 </span>            : 
+<span class="lineNum">     366 </span>            : static const luaL_Reg dblib[] = {
+<span class="lineNum">     367 </span>            :   {&quot;debug&quot;, db_debug},
+<span class="lineNum">     368 </span>            :   {&quot;getuservalue&quot;, db_getuservalue},
+<span class="lineNum">     369 </span>            :   {&quot;gethook&quot;, db_gethook},
+<span class="lineNum">     370 </span>            :   {&quot;getinfo&quot;, db_getinfo},
+<span class="lineNum">     371 </span>            :   {&quot;getlocal&quot;, db_getlocal},
+<span class="lineNum">     372 </span>            :   {&quot;getregistry&quot;, db_getregistry},
+<span class="lineNum">     373 </span>            :   {&quot;getmetatable&quot;, db_getmetatable},
+<span class="lineNum">     374 </span>            :   {&quot;getupvalue&quot;, db_getupvalue},
+<span class="lineNum">     375 </span>            :   {&quot;upvaluejoin&quot;, db_upvaluejoin},
+<span class="lineNum">     376 </span>            :   {&quot;upvalueid&quot;, db_upvalueid},
+<span class="lineNum">     377 </span>            :   {&quot;setuservalue&quot;, db_setuservalue},
+<span class="lineNum">     378 </span>            :   {&quot;sethook&quot;, db_sethook},
+<span class="lineNum">     379 </span>            :   {&quot;setlocal&quot;, db_setlocal},
+<span class="lineNum">     380 </span>            :   {&quot;setmetatable&quot;, db_setmetatable},
+<span class="lineNum">     381 </span>            :   {&quot;setupvalue&quot;, db_setupvalue},
+<span class="lineNum">     382 </span>            :   {&quot;traceback&quot;, db_traceback},
+<span class="lineNum">     383 </span>            :   {NULL, NULL}
+<span class="lineNum">     384 </span>            : };
+<span class="lineNum">     385 </span>            : 
+<span class="lineNum">     386 </span>            : 
+<span class="lineNum">     387 </span><span class="lineCov">         71 : LUAMOD_API int luaopen_debug (lua_State *L) {</span>
+<span class="lineNum">     388 </span><span class="lineCov">         71 :   luaL_newlib(L, dblib);</span>
+<span class="lineNum">     389 </span><span class="lineCov">         71 :   return 1;</span>
+<span class="lineNum">     390 </span>            : }
+<span class="lineNum">     391 </span>            : 
 </pre>
       </td>
     </tr>
