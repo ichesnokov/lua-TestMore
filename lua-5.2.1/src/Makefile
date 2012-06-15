@@ -57,11 +57,11 @@ a:	$(ALL_A)
 
 lcov:
 	lcov --capture -d . -o lua.info
-	rm -rf ../../cover_lua520
-	genhtml -o ../../cover_lua520 -t "Lua 5.2.0" --no-function-coverage --no-branch-coverage --legend --prefix /home/user/checkout/gh-pages/lua-TestMore/lua-5.2.0 lua.info
+	rm -rf ../../cover_lua521
+	genhtml -o ../../cover_lua521 -t "Lua 5.2.1" --no-function-coverage --no-branch-coverage --legend --prefix /home/user/checkout/gh-pages/lua-TestMore/lua-5.2.1 lua.info
 
 $(LUA_A): $(BASE_O)
-	$(AR) $@ $?
+	$(AR) $@ $(BASE_O)
 	$(RANLIB) $@
 
 $(LUA_T): $(LUA_O) $(LUA_A)
