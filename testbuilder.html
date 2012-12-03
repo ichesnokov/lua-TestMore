@@ -88,7 +88,7 @@ as a real example.</p>
 
 <pre class="example">
 $ cat iszero.lua
-local tb = require 'Test.Builder':new()  -- it's a singleton shared by all libraries
+local tb = require 'Test.Builder'.new()  -- it's a singleton shared by all libraries
 
 function _G.iszero(val, name)
     local pass = val == 0
