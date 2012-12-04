@@ -1,6 +1,8 @@
 Revision history for lua-TestMore
 
-0.3.1
+0.3.1  Tue Dec  4 16:30:00 2012
+	test suite aligned with LuaJIT 2.0.0
+	fix issues #2, #3, #5, #6
 	fix is_deeply when table with cycle
 	add subtest
 

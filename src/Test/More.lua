@@ -372,7 +372,7 @@ for k, v in pairs(m) do  -- injection
     _G[k] = v
 end
 
-m._VERSION = "0.3.0"
+m._VERSION = "0.3.1"
 m._DESCRIPTION = "lua-TestMore : an Unit Testing Framework"
 m._COPYRIGHT = "Copyright (c) 2009-2012 Francois Perrad"
 return m
