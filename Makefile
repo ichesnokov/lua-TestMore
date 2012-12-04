@@ -10,7 +10,7 @@ DPREFIX := $(DESTDIR)$(PREFIX)
 LIBDIR  := $(DPREFIX)/share/lua/$(LUAVER)
 INSTALL := install
 
-all: dist.cmake
+all:
 	@echo "Nothing to build here, you can just make install"
 
 install:
@@ -77,10 +77,7 @@ tag:
 doc:
 	git read-tree --prefix=doc/ -u remotes/origin/gh-pages
 
-dist.cmake:
-	wget https://raw.github.com/LuaDist/luadist/master/dist.cmake
-
-MANIFEST: doc dist.cmake
+MANIFEST: doc
 	git ls-files | perl -e '$(manifest_pl)' > MANIFEST
 
 $(TARBALL): MANIFEST
@@ -114,7 +111,6 @@ clean:
 	rm -f MANIFEST *.bak src/luacov.*.out README.html
 
 realclean: clean
-	rm -f dist.cmake
 
 .PHONY: test rockspec CHANGES dist.info
 
