@@ -85,7 +85,7 @@ is([==[
 alo
 123"]==], a)
 is("alo\n\z
-123\"", a)
+    123\"", a)
 
 f, msg = load [[a = " escape \z unauthorized
 new line" ]]
