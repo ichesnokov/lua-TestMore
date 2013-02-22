@@ -31,7 +31,7 @@ See "Programming in Lua", section 20 "The String Library".
 
 require 'Test.More'
 
-plan(111)
+plan(115)
 
 is(string.byte('ABC'), 65, "function byte")
 is(string.byte('ABC', 2), 66)
@@ -95,6 +95,7 @@ error_like(function () string.find(s, '%f') end,
 is(string.format("pi = %.4f", math.pi), 'pi = 3.1416', "function format")
 d = 5; m = 11; y = 1990
 is(string.format("%02d/%02d/%04d", d, m, y), "05/11/1990")
+is(string.format("%X %x", 126, 126), "7E 7e")
 tag, title = "h1", "a title"
 is(string.format("<%s>%s</%s>", tag, title, tag), "<h1>a title</h1>")
 
@@ -163,6 +164,12 @@ eq_array(output, {'from', 'world', 'to', 'Lua'})
 is(string.gsub("hello world", "(%w+)", "%1 %1"), "hello hello world world", "function gsub")
 is(string.gsub("hello world", "%w+", "%0 %0", 1), "hello hello world")
 is(string.gsub("hello world from Lua", "(%w+)%s*(%w+)", "%2 %1"), "world hello Lua from")
+if arg[-1] == 'luajit' then
+    todo("LuaJIT TODO. gsub.", 1)
+end
+error_like(function () string.gsub("hello world", "%w+", "%e") end,
+           "^[^:]+:%d+: invalid use of '%%' in replacement string",
+           "function gsub (invalid replacement string)")
 is(string.gsub("home = $HOME, user = $USER", "%$(%w+)", string.reverse), "home = EMOH, user = RESU")
 is(string.gsub("4+5 = $return 4+5$", "%$(.-)%$", function (s) return load(s)() end), "4+5 = 9")
 local t = {name='lua', version='5.1'}
@@ -259,6 +266,10 @@ error_like(function () string.match("hello world", "%1") end,
            "^[^:]+:%d+: invalid capture index",
            "function match invalid capture")
 
+error_like(function () string.match("hello world", "%w)") end,
+           "^[^:]+:%d+: invalid pattern capture",
+           "function match invalid capture")
+
 is(string.rep('ab', 3), 'ababab', "function rep")
 is(string.rep('ab', 0), '')
 is(string.rep('ab', -1), '')
@@ -276,6 +287,7 @@ is(string.sub('abcde', 3, 2), '')
 
 is(string.upper('Test'), 'TEST', "function upper")
 is(string.upper('TeSt'), 'TEST')
+is(string.upper(string.rep('Test', 10000)), string.rep('TEST', 10000))
 
 -- Local Variables:
 --   mode: lua

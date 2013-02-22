@@ -33,7 +33,7 @@ require 'Test.More'
 
 local lua = (platform and platform.lua) or arg[-1]
 
-plan(65)
+plan(66)
 
 like(io.stdin, '^file %(0?[Xx]?%x+%)$', "variable stdin")
 
@@ -114,6 +114,10 @@ end
 for line in io.lines('file.txt') do
     is(line, "file with text", "function lines(filename)")
 end
+
+error_like(function () io.lines('file.no') end,
+           "No such file or directory",
+           "function lines(no filename)")
 
 f = io.tmpfile()
 is(io.type(f), 'file', "function tmpfile")

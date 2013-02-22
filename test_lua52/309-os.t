@@ -31,7 +31,7 @@ See "Programming in Lua", section 22 "The Operating System Library".
 
 require 'Test.More'
 
-plan(51)
+plan(54)
 
 local lua = (platform and platform.lua) or arg[-1]
 
@@ -67,6 +67,11 @@ is(os.difftime(1234), 1234)
 
 r = os.execute()
 is(r, true, "function execute")
+
+r, s, n = os.execute('__IMPROBABLE__')
+is(r, nil, "function execute")
+is(s, 'exit')
+type_ok(n, 'number')
 
 cmd = lua .. [[ -e "print '# hello from external Lua'; os.exit(2)"]]
 r, s, n = os.execute(cmd)
