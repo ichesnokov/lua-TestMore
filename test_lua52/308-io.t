@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2012, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -33,7 +33,7 @@ require 'Test.More'
 
 local lua = (platform and platform.lua) or arg[-1]
 
-plan(66)
+plan(67)
 
 like(io.stdin, '^file %(0?[Xx]?%x+%)$', "variable stdin")
 
@@ -197,6 +197,13 @@ end
 is(io.type(f), 'file')
 f:close()
 is(io.type(f), 'closed file')
+
+f = io.open('file.txt')
+for two_char in f:lines(2) do
+    is(two_char, "fi", "method lines (with read option)")
+    break
+end
+f:close()
 
 error_like(function () f:seek('end', 0) end,
            "^[^:]+:%d+: attempt to use a closed file",
