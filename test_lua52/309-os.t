@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2012, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -137,7 +137,7 @@ os.remove('file.new') -- clean up
 
 r, msg = os.rename('file.old', 'file.new')
 is(r, nil, "function rename")
-like(msg, '^file.old: No such file or directory')
+like(msg, 'No such file or directory')
 
 is(os.setlocale('C', 'all'), 'C', "function setlocale")
 is(os.setlocale(), 'C')

@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2012, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -65,10 +65,19 @@ table.insert(t, 1, 'c')
 is(table.concat(t, ','), 'c,a,b')
 table.insert(t, 2, 'd')
 is(table.concat(t, ','), 'c,d,a,b')
-table.insert(t, 7, 'e')
-is(t[7], 'e')
-table.insert(t, -9, 'f')
-is(t[-9], 'f')
+table.insert(t, 5, 'e')
+is(table.concat(t, ','), 'c,d,a,b,e')
+
+if arg[-1] == 'luajit' then
+    todo("LuaJIT TODO. table.insert.", 2)
+end
+error_like(function () table.insert(t, 7, 'f') end,
+           "^[^:]+:%d+: bad argument #2 to 'insert' %(position out of bounds%)",
+           "function insert (out of bounds)")
+
+error_like(function () table.insert(t, -9, 'f') end,
+           "^[^:]+:%d+: bad argument #2 to 'insert' %(position out of bounds%)",
+           "function insert (out of bounds)")
 
 error_like(function () table.insert(t, 2, 'g', 'h')  end,
            "^[^:]+:%d+: wrong number of arguments to 'insert'",
@@ -116,9 +125,13 @@ is(table.concat(t, ','), 'a,b,d')
 a = table.remove(t,1)
 is(a, 'a')
 is(table.concat(t, ','), 'b,d')
-a = table.remove(t,7)
-is(a, nil)
-is(table.concat(t, ','), 'b,d')
+
+if arg[-1] == 'luajit' then
+    todo("LuaJIT TODO. table.remove.", 1)
+end
+error_like(function () table.remove(t,7) end,
+           "^[^:]+:%d+: bad argument #1 to 'remove' %(position out of bounds%)",
+           "function remove (out of bounds)")
 
 lines = {
     luaH_set = 10,

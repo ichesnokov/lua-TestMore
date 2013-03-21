@@ -69,7 +69,7 @@ if arg[-1] == 'luajit' then
     todo("LuaJIT TODO. open mode")
 end
 error_like(function () io.open('file.txt', 'baz') end,
-           "^[^:]+:%d+: invalid mode 'baz' %(should match '%[rwa%]%%%+%?b%?'%)",
+           "^[^:]+:%d+: bad argument #2 to 'open' %(invalid mode%)",
            "function open (bad mode)")
 
 is(io.type("not a file"), nil, "function type")
