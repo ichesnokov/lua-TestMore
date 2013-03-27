@@ -1,0 +1,851 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Lua 5.2.2 - /usr/include/i386-linux-gnu/bits/mathinline.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/i386-linux-gnu/bits</a> - mathinline.h</td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Lua 5.2.2</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-03-27</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<span class="lineNum">       1 </span>            : /* Inline math functions for i387.
+<span class="lineNum">       2 </span>            :    Copyright (C) 1995,1996,1997,1998,1999,2000,2001,2003,2004,2006,2007,2009,
+<span class="lineNum">       3 </span>            :    2010 Free Software Foundation, Inc.
+<span class="lineNum">       4 </span>            :    This file is part of the GNU C Library.
+<span class="lineNum">       5 </span>            :    Contributed by John C. Bowman &lt;bowman@math.ualberta.ca&gt;, 1995.
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            :    The GNU C Library is free software; you can redistribute it and/or
+<span class="lineNum">       8 </span>            :    modify it under the terms of the GNU Lesser General Public
+<span class="lineNum">       9 </span>            :    License as published by the Free Software Foundation; either
+<span class="lineNum">      10 </span>            :    version 2.1 of the License, or (at your option) any later version.
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            :    The GNU C Library is distributed in the hope that it will be useful,
+<span class="lineNum">      13 </span>            :    but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      14 </span>            :    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<span class="lineNum">      15 </span>            :    Lesser General Public License for more details.
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            :    You should have received a copy of the GNU Lesser General Public
+<span class="lineNum">      18 </span>            :    License along with the GNU C Library; if not, write to the Free
+<span class="lineNum">      19 </span>            :    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+<span class="lineNum">      20 </span>            :    02111-1307 USA.  */
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            : #ifndef _MATH_H
+<span class="lineNum">      23 </span>            : # error &quot;Never use &lt;bits/mathinline.h&gt; directly; include &lt;math.h&gt; instead.&quot;
+<span class="lineNum">      24 </span>            : #endif
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span>            : #ifndef __extern_inline
+<span class="lineNum">      27 </span>            : # define __MATH_INLINE __inline
+<span class="lineNum">      28 </span>            : #else
+<span class="lineNum">      29 </span>            : # define __MATH_INLINE __extern_inline
+<span class="lineNum">      30 </span>            : #endif
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span>            : #if defined __USE_ISOC99 &amp;&amp; defined __GNUC__ &amp;&amp; __GNUC__ &gt;= 2
+<span class="lineNum">      34 </span>            : /* GCC 2.97 and up have builtins that actually can be used.  */
+<span class="lineNum">      35 </span>            : # if !__GNUC_PREREQ (2,97)
+<span class="lineNum">      36 </span>            : /* ISO C99 defines some macros to perform unordered comparisons.  The
+<span class="lineNum">      37 </span>            :    ix87 FPU supports this with special opcodes and we should use them.
+<span class="lineNum">      38 </span>            :    These must not be inline functions since we have to be able to handle
+<span class="lineNum">      39 </span>            :    all floating-point types.  */
+<span class="lineNum">      40 </span>            : #  undef isgreater
+<span class="lineNum">      41 </span>            : #  undef isgreaterequal
+<span class="lineNum">      42 </span>            : #  undef isless
+<span class="lineNum">      43 </span>            : #  undef islessequal
+<span class="lineNum">      44 </span>            : #  undef islessgreater
+<span class="lineNum">      45 </span>            : #  undef isunordered
+<span class="lineNum">      46 </span>            : #  ifdef __i686__
+<span class="lineNum">      47 </span>            : /* For the PentiumPro and more recent processors we can provide
+<span class="lineNum">      48 </span>            :    better code.  */
+<span class="lineNum">      49 </span>            : #   define isgreater(x, y) \
+<span class="lineNum">      50 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      51 </span>            :         __asm__ (&quot;fucomip %%st(1), %%st; seta %%al&quot;                         \
+<span class="lineNum">      52 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (y), &quot;t&quot; (x) : &quot;cc&quot;, &quot;st&quot;);        \
+<span class="lineNum">      53 </span>            :         __result; })
+<span class="lineNum">      54 </span>            : #   define isgreaterequal(x, y) \
+<span class="lineNum">      55 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      56 </span>            :         __asm__ (&quot;fucomip %%st(1), %%st; setae %%al&quot;                        \
+<span class="lineNum">      57 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (y), &quot;t&quot; (x) : &quot;cc&quot;, &quot;st&quot;);        \
+<span class="lineNum">      58 </span>            :         __result; })
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            : #   define isless(x, y) \
+<span class="lineNum">      61 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      62 </span>            :         __asm__ (&quot;fucomip %%st(1), %%st; seta %%al&quot;                         \
+<span class="lineNum">      63 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (x), &quot;t&quot; (y) : &quot;cc&quot;, &quot;st&quot;);        \
+<span class="lineNum">      64 </span>            :         __result; })
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            : #   define islessequal(x, y) \
+<span class="lineNum">      67 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      68 </span>            :         __asm__ (&quot;fucomip %%st(1), %%st; setae %%al&quot;                        \
+<span class="lineNum">      69 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (x), &quot;t&quot; (y) : &quot;cc&quot;, &quot;st&quot;);        \
+<span class="lineNum">      70 </span>            :         __result; })
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span>            : #   define islessgreater(x, y) \
+<span class="lineNum">      73 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      74 </span>            :         __asm__ (&quot;fucomip %%st(1), %%st; setne %%al&quot;                        \
+<span class="lineNum">      75 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (y), &quot;t&quot; (x) : &quot;cc&quot;, &quot;st&quot;);        \
+<span class="lineNum">      76 </span>            :         __result; })
+<span class="lineNum">      77 </span>            : 
+<span class="lineNum">      78 </span>            : #   define isunordered(x, y) \
+<span class="lineNum">      79 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      80 </span>            :         __asm__ (&quot;fucomip %%st(1), %%st; setp %%al&quot;                         \
+<span class="lineNum">      81 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (y), &quot;t&quot; (x) : &quot;cc&quot;, &quot;st&quot;);        \
+<span class="lineNum">      82 </span>            :         __result; })
+<span class="lineNum">      83 </span>            : #  else
+<span class="lineNum">      84 </span>            : /* This is the dumb, portable code for i386 and above.  */
+<span class="lineNum">      85 </span>            : #   define isgreater(x, y) \
+<span class="lineNum">      86 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      87 </span>            :         __asm__ (&quot;fucompp; fnstsw; testb $0x45, %%ah; setz %%al&quot;            \
+<span class="lineNum">      88 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (y), &quot;t&quot; (x) : &quot;cc&quot;, &quot;st&quot;, &quot;st(1)&quot;); \
+<span class="lineNum">      89 </span>            :         __result; })
+<span class="lineNum">      90 </span>            : 
+<span class="lineNum">      91 </span>            : #   define isgreaterequal(x, y) \
+<span class="lineNum">      92 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      93 </span>            :         __asm__ (&quot;fucompp; fnstsw; testb $0x05, %%ah; setz %%al&quot;            \
+<span class="lineNum">      94 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (y), &quot;t&quot; (x) : &quot;cc&quot;, &quot;st&quot;, &quot;st(1)&quot;); \
+<span class="lineNum">      95 </span>            :         __result; })
+<span class="lineNum">      96 </span>            : 
+<span class="lineNum">      97 </span>            : #   define isless(x, y) \
+<span class="lineNum">      98 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">      99 </span>            :         __asm__ (&quot;fucompp; fnstsw; testb $0x45, %%ah; setz %%al&quot;            \
+<span class="lineNum">     100 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (x), &quot;t&quot; (y) : &quot;cc&quot;, &quot;st&quot;, &quot;st(1)&quot;); \
+<span class="lineNum">     101 </span>            :         __result; })
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span>            : #   define islessequal(x, y) \
+<span class="lineNum">     104 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">     105 </span>            :         __asm__ (&quot;fucompp; fnstsw; testb $0x05, %%ah; setz %%al&quot;            \
+<span class="lineNum">     106 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (x), &quot;t&quot; (y) : &quot;cc&quot;, &quot;st&quot;, &quot;st(1)&quot;); \
+<span class="lineNum">     107 </span>            :         __result; })
+<span class="lineNum">     108 </span>            : 
+<span class="lineNum">     109 </span>            : #   define islessgreater(x, y) \
+<span class="lineNum">     110 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">     111 </span>            :         __asm__ (&quot;fucompp; fnstsw; testb $0x44, %%ah; setz %%al&quot;            \
+<span class="lineNum">     112 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (y), &quot;t&quot; (x) : &quot;cc&quot;, &quot;st&quot;, &quot;st(1)&quot;); \
+<span class="lineNum">     113 </span>            :         __result; })
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span>            : #   define isunordered(x, y) \
+<span class="lineNum">     116 </span>            :      ({ register char __result;                                               \
+<span class="lineNum">     117 </span>            :         __asm__ (&quot;fucompp; fnstsw; sahf; setp %%al&quot;                         \
+<span class="lineNum">     118 </span>            :                  : &quot;=a&quot; (__result) : &quot;u&quot; (y), &quot;t&quot; (x) : &quot;cc&quot;, &quot;st&quot;, &quot;st(1)&quot;); \
+<span class="lineNum">     119 </span>            :         __result; })
+<span class="lineNum">     120 </span>            : #  endif /* __i686__ */
+<span class="lineNum">     121 </span>            : # endif /* GCC 2.97 */
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span>            : /* The gcc, version 2.7 or below, has problems with all this inlining
+<span class="lineNum">     124 </span>            :    code.  So disable it for this version of the compiler.  */
+<span class="lineNum">     125 </span>            : # if __GNUC_PREREQ (2, 8)
+<span class="lineNum">     126 </span>            : /* Test for negative number.  Used in the signbit() macro.  */
+<span class="lineNum">     127 </span>            : __MATH_INLINE int
+<span class="lineNum">     128 </span>            : __NTH (__signbitf (float __x))
+<span class="lineNum">     129 </span>            : {
+<span class="lineNum">     130 </span>            :   __extension__ union { float __f; int __i; } __u = { __f: __x };
+<span class="lineNum">     131 </span>            :   return __u.__i &lt; 0;
+<span class="lineNum">     132 </span>            : }
+<span class="lineNum">     133 </span>            : __MATH_INLINE int
+<span class="lineNum">     134 </span>            : __NTH (__signbit (double __x))
+<span class="lineNum">     135 </span>            : {
+<span class="lineNum">     136 </span>            :   __extension__ union { double __d; int __i[2]; } __u = { __d: __x };
+<span class="lineNum">     137 </span>            :   return __u.__i[1] &lt; 0;
+<span class="lineNum">     138 </span>            : }
+<span class="lineNum">     139 </span>            : __MATH_INLINE int
+<span class="lineNum">     140 </span>            : __NTH (__signbitl (long double __x))
+<span class="lineNum">     141 </span>            : {
+<span class="lineNum">     142 </span>            :   __extension__ union { long double __l; int __i[3]; } __u = { __l: __x };
+<span class="lineNum">     143 </span>            :   return (__u.__i[2] &amp; 0x8000) != 0;
+<span class="lineNum">     144 </span>            : }
+<span class="lineNum">     145 </span>            : # endif
+<span class="lineNum">     146 </span>            : #endif
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span>            : 
+<span class="lineNum">     149 </span>            : /* The gcc, version 2.7 or below, has problems with all this inlining
+<span class="lineNum">     150 </span>            :    code.  So disable it for this version of the compiler.  */
+<span class="lineNum">     151 </span>            : #if __GNUC_PREREQ (2, 8)
+<span class="lineNum">     152 </span>            : 
+<span class="lineNum">     153 </span>            : #if ((!defined __NO_MATH_INLINES || defined __LIBC_INTERNAL_MATH_INLINES) \
+<span class="lineNum">     154 </span>            :      &amp;&amp; defined __OPTIMIZE__)
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span>            : /* The inline functions do not set errno or raise necessarily the
+<span class="lineNum">     157 </span>            :    correct exceptions.  */
+<span class="lineNum">     158 </span>            : # undef math_errhandling
+<span class="lineNum">     159 </span>            : 
+<span class="lineNum">     160 </span>            : /* A macro to define float, double, and long double versions of various
+<span class="lineNum">     161 </span>            :    math functions for the ix87 FPU.  FUNC is the function name (which will
+<span class="lineNum">     162 </span>            :    be suffixed with f and l for the float and long double version,
+<span class="lineNum">     163 </span>            :    respectively).  OP is the name of the FPU operation.
+<span class="lineNum">     164 </span>            :    We define two sets of macros.  The set with the additional NP
+<span class="lineNum">     165 </span>            :    doesn't add a prototype declaration.  */
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span>            : #if defined __USE_MISC || defined __USE_ISOC99
+<span class="lineNum">     168 </span>            : # define __inline_mathop(func, op) \
+<span class="lineNum">     169 </span>            :   __inline_mathop_ (double, func, op)                                         \
+<span class="lineNum">     170 </span>            :   __inline_mathop_ (float, __CONCAT(func,f), op)                              \
+<span class="lineNum">     171 </span>            :   __inline_mathop_ (long double, __CONCAT(func,l), op)
+<span class="lineNum">     172 </span>            : # define __inline_mathopNP(func, op) \
+<span class="lineNum">     173 </span>            :   __inline_mathopNP_ (double, func, op)                                       \
+<span class="lineNum">     174 </span>            :   __inline_mathopNP_ (float, __CONCAT(func,f), op)                            \
+<span class="lineNum">     175 </span>            :   __inline_mathopNP_ (long double, __CONCAT(func,l), op)
+<span class="lineNum">     176 </span>            : #else
+<span class="lineNum">     177 </span>            : # define __inline_mathop(func, op) \
+<span class="lineNum">     178 </span>            :   __inline_mathop_ (double, func, op)
+<span class="lineNum">     179 </span>            : # define __inline_mathopNP(func, op) \
+<span class="lineNum">     180 </span>            :   __inline_mathopNP_ (double, func, op)
+<span class="lineNum">     181 </span>            : #endif
+<span class="lineNum">     182 </span>            : 
+<span class="lineNum">     183 </span>            : #define __inline_mathop_(float_type, func, op) \
+<span class="lineNum">     184 </span>            :   __inline_mathop_decl_ (float_type, func, op, &quot;0&quot; (__x))
+<span class="lineNum">     185 </span>            : #define __inline_mathopNP_(float_type, func, op) \
+<span class="lineNum">     186 </span>            :   __inline_mathop_declNP_ (float_type, func, op, &quot;0&quot; (__x))
+<span class="lineNum">     187 </span>            : 
+<span class="lineNum">     188 </span>            : 
+<span class="lineNum">     189 </span>            : #if defined __USE_MISC || defined __USE_ISOC99
+<span class="lineNum">     190 </span>            : # define __inline_mathop_decl(func, op, params...) \
+<span class="lineNum">     191 </span>            :   __inline_mathop_decl_ (double, func, op, params)                            \
+<span class="lineNum">     192 </span>            :   __inline_mathop_decl_ (float, __CONCAT(func,f), op, params)                 \
+<span class="lineNum">     193 </span>            :   __inline_mathop_decl_ (long double, __CONCAT(func,l), op, params)
+<span class="lineNum">     194 </span>            : # define __inline_mathop_declNP(func, op, params...) \
+<span class="lineNum">     195 </span>            :   __inline_mathop_declNP_ (double, func, op, params)                          \
+<span class="lineNum">     196 </span>            :   __inline_mathop_declNP_ (float, __CONCAT(func,f), op, params)               \
+<span class="lineNum">     197 </span>            :   __inline_mathop_declNP_ (long double, __CONCAT(func,l), op, params)
+<span class="lineNum">     198 </span>            : #else
+<span class="lineNum">     199 </span>            : # define __inline_mathop_decl(func, op, params...) \
+<span class="lineNum">     200 </span>            :   __inline_mathop_decl_ (double, func, op, params)
+<span class="lineNum">     201 </span>            : # define __inline_mathop_declNP(func, op, params...) \
+<span class="lineNum">     202 </span>            :   __inline_mathop_declNP_ (double, func, op, params)
+<span class="lineNum">     203 </span>            : #endif
+<span class="lineNum">     204 </span>            : 
+<span class="lineNum">     205 </span>            : #define __inline_mathop_decl_(float_type, func, op, params...) \
+<span class="lineNum">     206 </span>            :   __MATH_INLINE float_type func (float_type) __THROW;                         \
+<span class="lineNum">     207 </span>            :   __inline_mathop_declNP_ (float_type, func, op, params)
+<span class="lineNum">     208 </span>            : 
+<span class="lineNum">     209 </span>            : #define __inline_mathop_declNP_(float_type, func, op, params...) \
+<span class="lineNum">     210 </span>            :   __MATH_INLINE float_type __NTH (func (float_type __x))                      \
+<span class="lineNum">     211 </span>            :   {                                                                           \
+<span class="lineNum">     212 </span>            :     register float_type __result;                                             \
+<span class="lineNum">     213 </span>            :     __asm __volatile__ (op : &quot;=t&quot; (__result) : params);                             \
+<span class="lineNum">     214 </span>            :     return __result;                                                          \
+<span class="lineNum">     215 </span>            :   }
+<span class="lineNum">     216 </span>            : 
+<span class="lineNum">     217 </span>            : 
+<span class="lineNum">     218 </span>            : #if defined __USE_MISC || defined __USE_ISOC99
+<span class="lineNum">     219 </span>            : # define __inline_mathcode(func, arg, code) \
+<span class="lineNum">     220 </span>            :   __inline_mathcode_ (double, func, arg, code)                                \
+<span class="lineNum">     221 </span>            :   __inline_mathcode_ (float, __CONCAT(func,f), arg, code)                     \
+<span class="lineNum">     222 </span>            :   __inline_mathcode_ (long double, __CONCAT(func,l), arg, code)
+<span class="lineNum">     223 </span>            : # define __inline_mathcodeNP(func, arg, code) \
+<span class="lineNum">     224 </span>            :   __inline_mathcodeNP_ (double, func, arg, code)                              \
+<span class="lineNum">     225 </span>            :   __inline_mathcodeNP_ (float, __CONCAT(func,f), arg, code)                   \
+<span class="lineNum">     226 </span>            :   __inline_mathcodeNP_ (long double, __CONCAT(func,l), arg, code)
+<span class="lineNum">     227 </span>            : # define __inline_mathcode2(func, arg1, arg2, code) \
+<span class="lineNum">     228 </span>            :   __inline_mathcode2_ (double, func, arg1, arg2, code)                        \
+<span class="lineNum">     229 </span>            :   __inline_mathcode2_ (float, __CONCAT(func,f), arg1, arg2, code)             \
+<span class="lineNum">     230 </span>            :   __inline_mathcode2_ (long double, __CONCAT(func,l), arg1, arg2, code)
+<span class="lineNum">     231 </span>            : # define __inline_mathcodeNP2(func, arg1, arg2, code) \
+<span class="lineNum">     232 </span>            :   __inline_mathcodeNP2_ (double, func, arg1, arg2, code)                      \
+<span class="lineNum">     233 </span>            :   __inline_mathcodeNP2_ (float, __CONCAT(func,f), arg1, arg2, code)           \
+<span class="lineNum">     234 </span>            :   __inline_mathcodeNP2_ (long double, __CONCAT(func,l), arg1, arg2, code)
+<span class="lineNum">     235 </span>            : # define __inline_mathcode3(func, arg1, arg2, arg3, code) \
+<span class="lineNum">     236 </span>            :   __inline_mathcode3_ (double, func, arg1, arg2, arg3, code)                  \
+<span class="lineNum">     237 </span>            :   __inline_mathcode3_ (float, __CONCAT(func,f), arg1, arg2, arg3, code)       \
+<span class="lineNum">     238 </span>            :   __inline_mathcode3_ (long double, __CONCAT(func,l), arg1, arg2, arg3, code)
+<span class="lineNum">     239 </span>            : # define __inline_mathcodeNP3(func, arg1, arg2, arg3, code) \
+<span class="lineNum">     240 </span>            :   __inline_mathcodeNP3_ (double, func, arg1, arg2, arg3, code)                \
+<span class="lineNum">     241 </span>            :   __inline_mathcodeNP3_ (float, __CONCAT(func,f), arg1, arg2, arg3, code)     \
+<span class="lineNum">     242 </span>            :   __inline_mathcodeNP3_ (long double, __CONCAT(func,l), arg1, arg2, arg3, code)
+<span class="lineNum">     243 </span>            : #else
+<span class="lineNum">     244 </span>            : # define __inline_mathcode(func, arg, code) \
+<span class="lineNum">     245 </span>            :   __inline_mathcode_ (double, func, (arg), code)
+<span class="lineNum">     246 </span>            : # define __inline_mathcodeNP(func, arg, code) \
+<span class="lineNum">     247 </span>            :   __inline_mathcodeNP_ (double, func, (arg), code)
+<span class="lineNum">     248 </span>            : # define __inline_mathcode2(func, arg1, arg2, code) \
+<span class="lineNum">     249 </span>            :   __inline_mathcode2_ (double, func, arg1, arg2, code)
+<span class="lineNum">     250 </span>            : # define __inline_mathcodeNP2(func, arg1, arg2, code) \
+<span class="lineNum">     251 </span>            :   __inline_mathcodeNP2_ (double, func, arg1, arg2, code)
+<span class="lineNum">     252 </span>            : # define __inline_mathcode3(func, arg1, arg2, arg3, code) \
+<span class="lineNum">     253 </span>            :   __inline_mathcode3_ (double, func, arg1, arg2, arg3, code)
+<span class="lineNum">     254 </span>            : # define __inline_mathcodeNP3(func, arg1, arg2, arg3, code) \
+<span class="lineNum">     255 </span>            :   __inline_mathcodeNP3_ (double, func, arg1, arg2, arg3, code)
+<span class="lineNum">     256 </span>            : #endif
+<span class="lineNum">     257 </span>            : 
+<span class="lineNum">     258 </span>            : #define __inline_mathcode_(float_type, func, arg, code) \
+<span class="lineNum">     259 </span>            :   __MATH_INLINE float_type func (float_type) __THROW;                         \
+<span class="lineNum">     260 </span>            :   __inline_mathcodeNP_(float_type, func, arg, code)
+<span class="lineNum">     261 </span>            : 
+<span class="lineNum">     262 </span>            : #define __inline_mathcodeNP_(float_type, func, arg, code) \
+<span class="lineNum">     263 </span>            :   __MATH_INLINE float_type __NTH (func (float_type arg))                      \
+<span class="lineNum">     264 </span>            :   {                                                                           \
+<span class="lineNum">     265 </span>            :     code;                                                                     \
+<span class="lineNum">     266 </span>            :   }
+<span class="lineNum">     267 </span>            : 
+<span class="lineNum">     268 </span>            : 
+<span class="lineNum">     269 </span>            : #define __inline_mathcode2_(float_type, func, arg1, arg2, code) \
+<span class="lineNum">     270 </span>            :   __MATH_INLINE float_type func (float_type, float_type) __THROW;             \
+<span class="lineNum">     271 </span>            :   __inline_mathcodeNP2_ (float_type, func, arg1, arg2, code)
+<span class="lineNum">     272 </span>            : 
+<span class="lineNum">     273 </span>            : #define __inline_mathcodeNP2_(float_type, func, arg1, arg2, code) \
+<span class="lineNum">     274 </span>            :   __MATH_INLINE float_type __NTH (func (float_type arg1, float_type arg2))    \
+<span class="lineNum">     275 </span>            :   {                                                                           \
+<span class="lineNum">     276 </span>            :     code;                                                                     \
+<span class="lineNum">     277 </span>            :   }
+<span class="lineNum">     278 </span>            : 
+<span class="lineNum">     279 </span>            : #define __inline_mathcode3_(float_type, func, arg1, arg2, arg3, code) \
+<span class="lineNum">     280 </span>            :   __MATH_INLINE float_type func (float_type, float_type, float_type) __THROW; \
+<span class="lineNum">     281 </span>            :   __inline_mathcodeNP3_(float_type, func, arg1, arg2, arg3, code)
+<span class="lineNum">     282 </span>            : 
+<span class="lineNum">     283 </span>            : #define __inline_mathcodeNP3_(float_type, func, arg1, arg2, arg3, code) \
+<span class="lineNum">     284 </span>            :   __MATH_INLINE float_type __NTH (func (float_type arg1, float_type arg2,     \
+<span class="lineNum">     285 </span>            :                                         float_type arg3))                     \
+<span class="lineNum">     286 </span>            :   {                                                                           \
+<span class="lineNum">     287 </span>            :     code;                                                                     \
+<span class="lineNum">     288 </span>            :   }
+<span class="lineNum">     289 </span>            : #endif
+<span class="lineNum">     290 </span>            : 
+<span class="lineNum">     291 </span>            : 
+<span class="lineNum">     292 </span>            : #if !defined __NO_MATH_INLINES &amp;&amp; defined __OPTIMIZE__
+<span class="lineNum">     293 </span>            : /* Miscellaneous functions */
+<span class="lineNum">     294 </span>            : 
+<span class="lineNum">     295 </span>            : __inline_mathcode (__sgn, __x, \
+<span class="lineNum">     296 </span>            :   return __x == 0.0 ? 0.0 : (__x &gt; 0.0 ? 1.0 : -1.0))
+<span class="lineNum">     297 </span>            : 
+<span class="lineNum">     298 </span>            : /* __FAST_MATH__ is defined by gcc -ffast-math.  */
+<span class="lineNum">     299 </span>            : #ifdef __FAST_MATH__
+<span class="lineNum">     300 </span>            : __inline_mathcode (__pow2, __x, \
+<span class="lineNum">     301 </span>            :   register long double __value;                                               \
+<span class="lineNum">     302 </span>            :   register long double __exponent;                                            \
+<span class="lineNum">     303 </span>            :   __extension__ long long int __p = (long long int) __x;                      \
+<span class="lineNum">     304 </span>            :   if (__x == (long double) __p)                                               \
+<span class="lineNum">     305 </span>            :     {                                                                         \
+<span class="lineNum">     306 </span>            :       __asm __volatile__                                                      \
+<span class="lineNum">     307 </span>            :         (&quot;fscale&quot;                                                           \
+<span class="lineNum">     308 </span>            :          : &quot;=t&quot; (__value) : &quot;0&quot; (1.0), &quot;u&quot; (__x));                              \
+<span class="lineNum">     309 </span>            :       return __value;                                                         \
+<span class="lineNum">     310 </span>            :     }                                                                         \
+<span class="lineNum">     311 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     312 </span>            :     (&quot;fld  %%st(0)\n\t&quot;                                                     \
+<span class="lineNum">     313 </span>            :      &quot;frndint                      # int(x)\n\t&quot;                                    \
+<span class="lineNum">     314 </span>            :      &quot;fxch\n\t&quot;                                                                     \
+<span class="lineNum">     315 </span>            :      &quot;fsub %%st(1)         # fract(x)\n\t&quot;                                  \
+<span class="lineNum">     316 </span>            :      &quot;f2xm1                        # 2^(fract(x)) - 1\n\t&quot;                          \
+<span class="lineNum">     317 </span>            :      : &quot;=t&quot; (__value), &quot;=u&quot; (__exponent) : &quot;0&quot; (__x));                          \
+<span class="lineNum">     318 </span>            :   __value += 1.0;                                                             \
+<span class="lineNum">     319 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     320 </span>            :     (&quot;fscale&quot;                                                               \
+<span class="lineNum">     321 </span>            :      : &quot;=t&quot; (__value) : &quot;0&quot; (__value), &quot;u&quot; (__exponent));               \
+<span class="lineNum">     322 </span>            :   return __value)
+<span class="lineNum">     323 </span>            : 
+<span class="lineNum">     324 </span>            : # ifdef __USE_GNU
+<span class="lineNum">     325 </span>            : #  define __sincos_code \
+<span class="lineNum">     326 </span>            :   register long double __cosr;                                                \
+<span class="lineNum">     327 </span>            :   register long double __sinr;                                                \
+<span class="lineNum">     328 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     329 </span>            :     (&quot;fsincos\n\t&quot;                                                          \
+<span class="lineNum">     330 </span>            :      &quot;fnstsw       %%ax\n\t&quot;                                                \
+<span class="lineNum">     331 </span>            :      &quot;testl        $0x400, %%eax\n\t&quot;                                       \
+<span class="lineNum">     332 </span>            :      &quot;jz   1f\n\t&quot;                                                          \
+<span class="lineNum">     333 </span>            :      &quot;fldpi\n\t&quot;                                                            \
+<span class="lineNum">     334 </span>            :      &quot;fadd %%st(0)\n\t&quot;                                                     \
+<span class="lineNum">     335 </span>            :      &quot;fxch %%st(1)\n\t&quot;                                                     \
+<span class="lineNum">     336 </span>            :      &quot;2: fprem1\n\t&quot;                                                        \
+<span class="lineNum">     337 </span>            :      &quot;fnstsw       %%ax\n\t&quot;                                                \
+<span class="lineNum">     338 </span>            :      &quot;testl        $0x400, %%eax\n\t&quot;                                       \
+<span class="lineNum">     339 </span>            :      &quot;jnz  2b\n\t&quot;                                                          \
+<span class="lineNum">     340 </span>            :      &quot;fstp %%st(1)\n\t&quot;                                                     \
+<span class="lineNum">     341 </span>            :      &quot;fsincos\n\t&quot;                                                          \
+<span class="lineNum">     342 </span>            :      &quot;1:&quot;                                                                   \
+<span class="lineNum">     343 </span>            :      : &quot;=t&quot; (__cosr), &quot;=u&quot; (__sinr) : &quot;0&quot; (__x));                       \
+<span class="lineNum">     344 </span>            :   *__sinx = __sinr;                                                           \
+<span class="lineNum">     345 </span>            :   *__cosx = __cosr
+<span class="lineNum">     346 </span>            : 
+<span class="lineNum">     347 </span>            : __MATH_INLINE void
+<span class="lineNum">     348 </span>            : __NTH (__sincos (double __x, double *__sinx, double *__cosx))
+<span class="lineNum">     349 </span>            : {
+<span class="lineNum">     350 </span>            :   __sincos_code;
+<span class="lineNum">     351 </span>            : }
+<span class="lineNum">     352 </span>            : 
+<span class="lineNum">     353 </span>            : __MATH_INLINE void
+<span class="lineNum">     354 </span>            : __NTH (__sincosf (float __x, float *__sinx, float *__cosx))
+<span class="lineNum">     355 </span>            : {
+<span class="lineNum">     356 </span>            :   __sincos_code;
+<span class="lineNum">     357 </span>            : }
+<span class="lineNum">     358 </span>            : 
+<span class="lineNum">     359 </span>            : __MATH_INLINE void
+<span class="lineNum">     360 </span>            : __NTH (__sincosl (long double __x, long double *__sinx, long double *__cosx))
+<span class="lineNum">     361 </span>            : {
+<span class="lineNum">     362 </span>            :   __sincos_code;
+<span class="lineNum">     363 </span>            : }
+<span class="lineNum">     364 </span>            : # endif
+<span class="lineNum">     365 </span>            : 
+<span class="lineNum">     366 </span>            : 
+<span class="lineNum">     367 </span>            : /* Optimized inline implementation, sometimes with reduced precision
+<span class="lineNum">     368 </span>            :    and/or argument range.  */
+<span class="lineNum">     369 </span>            : 
+<span class="lineNum">     370 </span>            : # if __GNUC_PREREQ (3, 5)
+<span class="lineNum">     371 </span>            : #  define __expm1_code \
+<span class="lineNum">     372 </span>            :   register long double __temp;                                                \
+<span class="lineNum">     373 </span>            :   __temp = __builtin_expm1l (__x);                                            \
+<span class="lineNum">     374 </span>            :   return __temp ? __temp : __x
+<span class="lineNum">     375 </span>            : # else
+<span class="lineNum">     376 </span>            : #  define __expm1_code \
+<span class="lineNum">     377 </span>            :   register long double __value;                                               \
+<span class="lineNum">     378 </span>            :   register long double __exponent;                                            \
+<span class="lineNum">     379 </span>            :   register long double __temp;                                                \
+<span class="lineNum">     380 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     381 </span>            :     (&quot;fldl2e                       # e^x - 1 = 2^(x * log2(e)) - 1\n\t&quot;             \
+<span class="lineNum">     382 </span>            :      &quot;fmul %%st(1)         # x * log2(e)\n\t&quot;                       \
+<span class="lineNum">     383 </span>            :      &quot;fst  %%st(1)\n\t&quot;                                                     \
+<span class="lineNum">     384 </span>            :      &quot;frndint                      # int(x * log2(e))\n\t&quot;                          \
+<span class="lineNum">     385 </span>            :      &quot;fxch\n\t&quot;                                                                     \
+<span class="lineNum">     386 </span>            :      &quot;fsub %%st(1)         # fract(x * log2(e))\n\t&quot;                \
+<span class="lineNum">     387 </span>            :      &quot;f2xm1                        # 2^(fract(x * log2(e))) - 1\n\t&quot;        \
+<span class="lineNum">     388 </span>            :      &quot;fscale                       # 2^(x * log2(e)) - 2^(int(x * log2(e)))\n\t&quot; \
+<span class="lineNum">     389 </span>            :      : &quot;=t&quot; (__value), &quot;=u&quot; (__exponent) : &quot;0&quot; (__x));                          \
+<span class="lineNum">     390 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     391 </span>            :     (&quot;fscale                       # 2^int(x * log2(e))\n\t&quot;                \
+<span class="lineNum">     392 </span>            :      : &quot;=t&quot; (__temp) : &quot;0&quot; (1.0), &quot;u&quot; (__exponent));                            \
+<span class="lineNum">     393 </span>            :   __temp -= 1.0;                                                              \
+<span class="lineNum">     394 </span>            :   __temp += __value;                                                          \
+<span class="lineNum">     395 </span>            :   return __temp ? __temp : __x
+<span class="lineNum">     396 </span>            : # endif
+<span class="lineNum">     397 </span>            : __inline_mathcodeNP_ (long double, __expm1l, __x, __expm1_code)
+<span class="lineNum">     398 </span>            : 
+<span class="lineNum">     399 </span>            : # if __GNUC_PREREQ (3, 4)
+<span class="lineNum">     400 </span>            : __inline_mathcodeNP_ (long double, __expl, __x, return __builtin_expl (__x))
+<span class="lineNum">     401 </span>            : # else
+<span class="lineNum">     402 </span>            : #  define __exp_code \
+<span class="lineNum">     403 </span>            :   register long double __value;                                               \
+<span class="lineNum">     404 </span>            :   register long double __exponent;                                            \
+<span class="lineNum">     405 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     406 </span>            :     (&quot;fldl2e                       # e^x = 2^(x * log2(e))\n\t&quot;                     \
+<span class="lineNum">     407 </span>            :      &quot;fmul %%st(1)         # x * log2(e)\n\t&quot;                       \
+<span class="lineNum">     408 </span>            :      &quot;fst  %%st(1)\n\t&quot;                                                     \
+<span class="lineNum">     409 </span>            :      &quot;frndint                      # int(x * log2(e))\n\t&quot;                          \
+<span class="lineNum">     410 </span>            :      &quot;fxch\n\t&quot;                                                                     \
+<span class="lineNum">     411 </span>            :      &quot;fsub %%st(1)         # fract(x * log2(e))\n\t&quot;                \
+<span class="lineNum">     412 </span>            :      &quot;f2xm1                        # 2^(fract(x * log2(e))) - 1\n\t&quot;        \
+<span class="lineNum">     413 </span>            :      : &quot;=t&quot; (__value), &quot;=u&quot; (__exponent) : &quot;0&quot; (__x));                          \
+<span class="lineNum">     414 </span>            :   __value += 1.0;                                                             \
+<span class="lineNum">     415 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     416 </span>            :     (&quot;fscale&quot;                                                               \
+<span class="lineNum">     417 </span>            :      : &quot;=t&quot; (__value) : &quot;0&quot; (__value), &quot;u&quot; (__exponent));               \
+<span class="lineNum">     418 </span>            :   return __value
+<span class="lineNum">     419 </span>            : __inline_mathcodeNP (exp, __x, __exp_code)
+<span class="lineNum">     420 </span>            : __inline_mathcodeNP_ (long double, __expl, __x, __exp_code)
+<span class="lineNum">     421 </span>            : # endif
+<span class="lineNum">     422 </span>            : 
+<span class="lineNum">     423 </span>            : 
+<span class="lineNum">     424 </span>            : # if !__GNUC_PREREQ (3, 5)
+<span class="lineNum">     425 </span>            : __inline_mathcodeNP (tan, __x, \
+<span class="lineNum">     426 </span>            :   register long double __value;                                               \
+<span class="lineNum">     427 </span>            :   register long double __value2 __attribute__ ((__unused__));                 \
+<span class="lineNum">     428 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     429 </span>            :     (&quot;fptan&quot;                                                                \
+<span class="lineNum">     430 </span>            :      : &quot;=t&quot; (__value2), &quot;=u&quot; (__value) : &quot;0&quot; (__x));                            \
+<span class="lineNum">     431 </span>            :   return __value)
+<span class="lineNum">     432 </span>            : # endif
+<span class="lineNum">     433 </span>            : #endif /* __FAST_MATH__ */
+<span class="lineNum">     434 </span>            : 
+<span class="lineNum">     435 </span>            : 
+<span class="lineNum">     436 </span>            : #if __GNUC_PREREQ (3, 4)
+<span class="lineNum">     437 </span>            : __inline_mathcodeNP2_ (long double, __atan2l, __y, __x,
+<span class="lineNum">     438 </span>            :                        return __builtin_atan2l (__y, __x))
+<span class="lineNum">     439 </span>            : #else
+<span class="lineNum">     440 </span>            : # define __atan2_code \
+<span class="lineNum">     441 </span>            :   register long double __value;                                               \
+<span class="lineNum">     442 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     443 </span>            :     (&quot;fpatan&quot;                                                               \
+<span class="lineNum">     444 </span>            :      : &quot;=t&quot; (__value) : &quot;0&quot; (__x), &quot;u&quot; (__y) : &quot;st(1)&quot;);                      \
+<span class="lineNum">     445 </span>            :   return __value
+<span class="lineNum">     446 </span>            : # ifdef __FAST_MATH__
+<span class="lineNum">     447 </span>            : __inline_mathcodeNP2 (atan2, __y, __x, __atan2_code)
+<span class="lineNum">     448 </span>            : # endif
+<span class="lineNum">     449 </span>            : __inline_mathcodeNP2_ (long double, __atan2l, __y, __x, __atan2_code)
+<span class="lineNum">     450 </span>            : #endif
+<span class="lineNum">     451 </span>            : 
+<span class="lineNum">     452 </span>            : 
+<span class="lineNum">     453 </span>            : #if defined __FAST_MATH__ &amp;&amp; !__GNUC_PREREQ (3, 5)
+<span class="lineNum">     454 </span>            : __inline_mathcodeNP2 (fmod, __x, __y, \
+<span class="lineNum">     455 </span>            :   register long double __value;                                               \
+<span class="lineNum">     456 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     457 </span>            :     (&quot;1:   fprem\n\t&quot;                                               \
+<span class="lineNum">     458 </span>            :      &quot;fnstsw       %%ax\n\t&quot;                                                \
+<span class="lineNum">     459 </span>            :      &quot;sahf\n\t&quot;                                                                     \
+<span class="lineNum">     460 </span>            :      &quot;jp   1b&quot;                                                              \
+<span class="lineNum">     461 </span>            :      : &quot;=t&quot; (__value) : &quot;0&quot; (__x), &quot;u&quot; (__y) : &quot;ax&quot;, &quot;cc&quot;);                 \
+<span class="lineNum">     462 </span>            :   return __value)
+<span class="lineNum">     463 </span>            : #endif
+<span class="lineNum">     464 </span>            : 
+<span class="lineNum">     465 </span>            : 
+<span class="lineNum">     466 </span>            : #ifdef __FAST_MATH__
+<span class="lineNum">     467 </span>            : # if !__GNUC_PREREQ (3,3)
+<span class="lineNum">     468 </span>            : __inline_mathopNP (sqrt, &quot;fsqrt&quot;)
+<span class="lineNum">     469 </span>            : __inline_mathopNP_ (long double, __sqrtl, &quot;fsqrt&quot;)
+<span class="lineNum">     470 </span>            : #  define __libc_sqrtl(n) __sqrtl (n)
+<span class="lineNum">     471 </span>            : # else
+<span class="lineNum">     472 </span>            : #  define __libc_sqrtl(n) __builtin_sqrtl (n)
+<span class="lineNum">     473 </span>            : # endif
+<span class="lineNum">     474 </span>            : #endif
+<span class="lineNum">     475 </span>            : 
+<span class="lineNum">     476 </span>            : #if __GNUC_PREREQ (2, 8)
+<span class="lineNum">     477 </span>            : __inline_mathcodeNP_ (double, fabs, __x, return __builtin_fabs (__x))
+<span class="lineNum">     478 </span>            : # if defined __USE_MISC || defined __USE_ISOC99
+<span class="lineNum">     479 </span>            : __inline_mathcodeNP_ (float, fabsf, __x, return __builtin_fabsf (__x))
+<span class="lineNum">     480 </span>            : __inline_mathcodeNP_ (long double, fabsl, __x, return __builtin_fabsl (__x))
+<span class="lineNum">     481 </span>            : # endif
+<span class="lineNum">     482 </span>            : __inline_mathcodeNP_ (long double, __fabsl, __x, return __builtin_fabsl (__x))
+<span class="lineNum">     483 </span>            : #else
+<span class="lineNum">     484 </span>            : __inline_mathop (fabs, &quot;fabs&quot;)
+<span class="lineNum">     485 </span>            : __inline_mathop_ (long double, __fabsl, &quot;fabs&quot;)
+<span class="lineNum">     486 </span>            : #endif
+<span class="lineNum">     487 </span>            : 
+<span class="lineNum">     488 </span>            : #ifdef __FAST_MATH__
+<span class="lineNum">     489 </span>            : # if !__GNUC_PREREQ (3, 4)
+<span class="lineNum">     490 </span>            : /* The argument range of this inline version is reduced.  */
+<span class="lineNum">     491 </span>            : __inline_mathopNP (sin, &quot;fsin&quot;)
+<span class="lineNum">     492 </span>            : /* The argument range of this inline version is reduced.  */
+<span class="lineNum">     493 </span>            : __inline_mathopNP (cos, &quot;fcos&quot;)
+<span class="lineNum">     494 </span>            : 
+<span class="lineNum">     495 </span>            : __inline_mathop_declNP (log, &quot;fldln2; fxch; fyl2x&quot;, &quot;0&quot; (__x) : &quot;st(1)&quot;)
+<span class="lineNum">     496 </span>            : # endif
+<span class="lineNum">     497 </span>            : 
+<span class="lineNum">     498 </span>            : # if !__GNUC_PREREQ (3, 5)
+<span class="lineNum">     499 </span>            : __inline_mathop_declNP (log10, &quot;fldlg2; fxch; fyl2x&quot;, &quot;0&quot; (__x) : &quot;st(1)&quot;)
+<span class="lineNum">     500 </span>            : 
+<span class="lineNum">     501 </span>            : __inline_mathcodeNP (asin, __x, return __atan2l (__x, __libc_sqrtl (1.0 - __x * __x)))
+<span class="lineNum">     502 </span>            : __inline_mathcodeNP (acos, __x, return __atan2l (__libc_sqrtl (1.0 - __x * __x), __x))
+<span class="lineNum">     503 </span>            : # endif
+<span class="lineNum">     504 </span>            : 
+<span class="lineNum">     505 </span>            : # if !__GNUC_PREREQ (3, 4)
+<span class="lineNum">     506 </span>            : __inline_mathop_declNP (atan, &quot;fld1; fpatan&quot;, &quot;0&quot; (__x) : &quot;st(1)&quot;)
+<span class="lineNum">     507 </span>            : # endif
+<span class="lineNum">     508 </span>            : #endif /* __FAST_MATH__ */
+<span class="lineNum">     509 </span>            : 
+<span class="lineNum">     510 </span>            : __inline_mathcode_ (long double, __sgn1l, __x, \
+<span class="lineNum">     511 </span>            :   __extension__ union { long double __xld; unsigned int __xi[3]; } __n =      \
+<span class="lineNum">     512 </span>            :     { __xld: __x };                                                           \
+<span class="lineNum">     513 </span>            :   __n.__xi[2] = (__n.__xi[2] &amp; 0x8000) | 0x3fff;                          \
+<span class="lineNum">     514 </span>            :   __n.__xi[1] = 0x80000000;                                                   \
+<span class="lineNum">     515 </span>            :   __n.__xi[0] = 0;                                                            \
+<span class="lineNum">     516 </span>            :   return __n.__xld)
+<span class="lineNum">     517 </span>            : 
+<span class="lineNum">     518 </span>            : 
+<span class="lineNum">     519 </span>            : #ifdef __FAST_MATH__
+<span class="lineNum">     520 </span>            : /* The argument range of the inline version of sinhl is slightly reduced.  */
+<span class="lineNum">     521 </span>            : __inline_mathcodeNP (sinh, __x, \
+<span class="lineNum">     522 </span>            :   register long double __exm1 = __expm1l (__fabsl (__x));                     \
+<span class="lineNum">     523 </span>            :   return 0.5 * (__exm1 / (__exm1 + 1.0) + __exm1) * __sgn1l (__x))
+<span class="lineNum">     524 </span>            : 
+<span class="lineNum">     525 </span>            : __inline_mathcodeNP (cosh, __x, \
+<span class="lineNum">     526 </span>            :   register long double __ex = __expl (__x);                                   \
+<span class="lineNum">     527 </span>            :   return 0.5 * (__ex + 1.0 / __ex))
+<span class="lineNum">     528 </span>            : 
+<span class="lineNum">     529 </span>            : __inline_mathcodeNP (tanh, __x, \
+<span class="lineNum">     530 </span>            :   register long double __exm1 = __expm1l (-__fabsl (__x + __x));              \
+<span class="lineNum">     531 </span>            :   return __exm1 / (__exm1 + 2.0) * __sgn1l (-__x))
+<span class="lineNum">     532 </span>            : #endif
+<span class="lineNum">     533 </span>            : 
+<span class="lineNum">     534 </span><span class="lineCov">         11 : __inline_mathcodeNP (floor, __x, \</span>
+<span class="lineNum">     535 </span>            :   register long double __value;                                               \
+<span class="lineNum">     536 </span>            :   register int __ignore;                                                      \
+<span class="lineNum">     537 </span>            :   unsigned short int __cw;                                                    \
+<span class="lineNum">     538 </span>            :   unsigned short int __cwtmp;                                                 \
+<span class="lineNum">     539 </span>            :   __asm __volatile (&quot;fnstcw %3\n\t&quot;                                         \
+<span class="lineNum">     540 </span>            :                     &quot;movzwl %3, %1\n\t&quot;                                             \
+<span class="lineNum">     541 </span>            :                     &quot;andl $0xf3ff, %1\n\t&quot;                                  \
+<span class="lineNum">     542 </span>            :                     &quot;orl $0x0400, %1\n\t&quot;     /* rounding down */           \
+<span class="lineNum">     543 </span>            :                     &quot;movw %w1, %2\n\t&quot;                                              \
+<span class="lineNum">     544 </span>            :                     &quot;fldcw %2\n\t&quot;                                          \
+<span class="lineNum">     545 </span>            :                     &quot;frndint\n\t&quot;                                           \
+<span class="lineNum">     546 </span>            :                     &quot;fldcw %3&quot;                                                      \
+<span class="lineNum">     547 </span>            :                     : &quot;=t&quot; (__value), &quot;=&amp;q&quot; (__ignore), &quot;=m&quot; (__cwtmp),             \
+<span class="lineNum">     548 </span>            :                       &quot;=m&quot; (__cw)                                           \
+<span class="lineNum">     549 </span>            :                     : &quot;0&quot; (__x));                                           \
+<span class="lineNum">     550 </span>            :   return __value)
+<span class="lineNum">     551 </span>            : 
+<span class="lineNum">     552 </span><span class="lineCov">          2 : __inline_mathcodeNP (ceil, __x, \</span>
+<span class="lineNum">     553 </span>            :   register long double __value;                                               \
+<span class="lineNum">     554 </span>            :   register int __ignore;                                                      \
+<span class="lineNum">     555 </span>            :   unsigned short int __cw;                                                    \
+<span class="lineNum">     556 </span>            :   unsigned short int __cwtmp;                                                 \
+<span class="lineNum">     557 </span>            :   __asm __volatile (&quot;fnstcw %3\n\t&quot;                                         \
+<span class="lineNum">     558 </span>            :                     &quot;movzwl %3, %1\n\t&quot;                                             \
+<span class="lineNum">     559 </span>            :                     &quot;andl $0xf3ff, %1\n\t&quot;                                  \
+<span class="lineNum">     560 </span>            :                     &quot;orl $0x0800, %1\n\t&quot;     /* rounding up */             \
+<span class="lineNum">     561 </span>            :                     &quot;movw %w1, %2\n\t&quot;                                              \
+<span class="lineNum">     562 </span>            :                     &quot;fldcw %2\n\t&quot;                                          \
+<span class="lineNum">     563 </span>            :                     &quot;frndint\n\t&quot;                                           \
+<span class="lineNum">     564 </span>            :                     &quot;fldcw %3&quot;                                                      \
+<span class="lineNum">     565 </span>            :                     : &quot;=t&quot; (__value), &quot;=&amp;q&quot; (__ignore), &quot;=m&quot; (__cwtmp),             \
+<span class="lineNum">     566 </span>            :                       &quot;=m&quot; (__cw)                                           \
+<span class="lineNum">     567 </span>            :                     : &quot;0&quot; (__x));                                           \
+<span class="lineNum">     568 </span>            :   return __value)
+<span class="lineNum">     569 </span>            : 
+<span class="lineNum">     570 </span>            : #ifdef __FAST_MATH__
+<span class="lineNum">     571 </span>            : # define __ldexp_code \
+<span class="lineNum">     572 </span>            :   register long double __value;                                               \
+<span class="lineNum">     573 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     574 </span>            :     (&quot;fscale&quot;                                                               \
+<span class="lineNum">     575 </span>            :      : &quot;=t&quot; (__value) : &quot;0&quot; (__x), &quot;u&quot; ((long double) __y));                    \
+<span class="lineNum">     576 </span>            :   return __value
+<span class="lineNum">     577 </span>            : 
+<span class="lineNum">     578 </span>            : __MATH_INLINE double
+<span class="lineNum">     579 </span>            : __NTH (ldexp (double __x, int __y))
+<span class="lineNum">     580 </span>            : {
+<span class="lineNum">     581 </span>            :   __ldexp_code;
+<span class="lineNum">     582 </span>            : }
+<span class="lineNum">     583 </span>            : #endif
+<span class="lineNum">     584 </span>            : 
+<span class="lineNum">     585 </span>            : 
+<span class="lineNum">     586 </span>            : /* Optimized versions for some non-standardized functions.  */
+<span class="lineNum">     587 </span>            : #if defined __USE_ISOC99 || defined __USE_MISC
+<span class="lineNum">     588 </span>            : 
+<span class="lineNum">     589 </span>            : # ifdef __FAST_MATH__
+<span class="lineNum">     590 </span>            : __inline_mathcodeNP (expm1, __x, __expm1_code)
+<span class="lineNum">     591 </span>            : 
+<span class="lineNum">     592 </span>            : /* We cannot rely on M_SQRT being defined.  So we do it for ourself
+<span class="lineNum">     593 </span>            :    here.  */
+<span class="lineNum">     594 </span>            : #  define __M_SQRT2     1.41421356237309504880L /* sqrt(2) */
+<span class="lineNum">     595 </span>            : 
+<span class="lineNum">     596 </span>            : #  if !__GNUC_PREREQ (3, 5)
+<span class="lineNum">     597 </span>            : __inline_mathcodeNP (log1p, __x, \
+<span class="lineNum">     598 </span>            :   register long double __value;                                               \
+<span class="lineNum">     599 </span>            :   if (__fabsl (__x) &gt;= 1.0 - 0.5 * __M_SQRT2)                                      \
+<span class="lineNum">     600 </span>            :     __value = logl (1.0 + __x);                                               \
+<span class="lineNum">     601 </span>            :   else                                                                        \
+<span class="lineNum">     602 </span>            :     __asm __volatile__                                                        \
+<span class="lineNum">     603 </span>            :       (&quot;fldln2\n\t&quot;                                                         \
+<span class="lineNum">     604 </span>            :        &quot;fxch\n\t&quot;                                                           \
+<span class="lineNum">     605 </span>            :        &quot;fyl2xp1&quot;                                                            \
+<span class="lineNum">     606 </span>            :        : &quot;=t&quot; (__value) : &quot;0&quot; (__x) : &quot;st(1)&quot;);                                 \
+<span class="lineNum">     607 </span>            :   return __value)
+<span class="lineNum">     608 </span>            : #  endif
+<span class="lineNum">     609 </span>            : 
+<span class="lineNum">     610 </span>            : 
+<span class="lineNum">     611 </span>            : /* The argument range of the inline version of asinhl is slightly reduced.  */
+<span class="lineNum">     612 </span>            : __inline_mathcodeNP (asinh, __x, \
+<span class="lineNum">     613 </span>            :   register long double  __y = __fabsl (__x);                                  \
+<span class="lineNum">     614 </span>            :   return (log1pl (__y * __y / (__libc_sqrtl (__y * __y + 1.0) + 1.0) + __y)   \
+<span class="lineNum">     615 </span>            :           * __sgn1l (__x)))
+<span class="lineNum">     616 </span>            : 
+<span class="lineNum">     617 </span>            : __inline_mathcodeNP (acosh, __x, \
+<span class="lineNum">     618 </span>            :   return logl (__x + __libc_sqrtl (__x - 1.0) * __libc_sqrtl (__x + 1.0)))
+<span class="lineNum">     619 </span>            : 
+<span class="lineNum">     620 </span>            : __inline_mathcodeNP (atanh, __x, \
+<span class="lineNum">     621 </span>            :   register long double __y = __fabsl (__x);                                   \
+<span class="lineNum">     622 </span>            :   return -0.5 * log1pl (-(__y + __y) / (1.0 + __y)) * __sgn1l (__x))
+<span class="lineNum">     623 </span>            : 
+<span class="lineNum">     624 </span>            : /* The argument range of the inline version of hypotl is slightly reduced.  */
+<span class="lineNum">     625 </span>            : __inline_mathcodeNP2 (hypot, __x, __y,
+<span class="lineNum">     626 </span>            :                       return __libc_sqrtl (__x * __x + __y * __y))
+<span class="lineNum">     627 </span>            : 
+<span class="lineNum">     628 </span>            : #  if !__GNUC_PREREQ (3, 5)
+<span class="lineNum">     629 </span>            : __inline_mathcodeNP(logb, __x, \
+<span class="lineNum">     630 </span>            :   register long double __value;                                               \
+<span class="lineNum">     631 </span>            :   register long double __junk;                                                \
+<span class="lineNum">     632 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     633 </span>            :     (&quot;fxtract\n\t&quot;                                                          \
+<span class="lineNum">     634 </span>            :      : &quot;=t&quot; (__junk), &quot;=u&quot; (__value) : &quot;0&quot; (__x));                              \
+<span class="lineNum">     635 </span>            :   return __value)
+<span class="lineNum">     636 </span>            : #  endif
+<span class="lineNum">     637 </span>            : 
+<span class="lineNum">     638 </span>            : # endif
+<span class="lineNum">     639 </span>            : #endif
+<span class="lineNum">     640 </span>            : 
+<span class="lineNum">     641 </span>            : #ifdef __USE_ISOC99
+<span class="lineNum">     642 </span>            : # ifdef __FAST_MATH__
+<span class="lineNum">     643 </span>            : 
+<span class="lineNum">     644 </span>            : #  if !__GNUC_PREREQ (3, 5)
+<span class="lineNum">     645 </span>            : __inline_mathop_declNP (log2, &quot;fld1; fxch; fyl2x&quot;, &quot;0&quot; (__x) : &quot;st(1)&quot;)
+<span class="lineNum">     646 </span>            : #  endif
+<span class="lineNum">     647 </span>            : 
+<span class="lineNum">     648 </span>            : __MATH_INLINE float
+<span class="lineNum">     649 </span>            : __NTH (ldexpf (float __x, int __y))
+<span class="lineNum">     650 </span>            : {
+<span class="lineNum">     651 </span>            :   __ldexp_code;
+<span class="lineNum">     652 </span>            : }
+<span class="lineNum">     653 </span>            : 
+<span class="lineNum">     654 </span>            : __MATH_INLINE long double
+<span class="lineNum">     655 </span>            : __NTH (ldexpl (long double __x, int __y))
+<span class="lineNum">     656 </span>            : {
+<span class="lineNum">     657 </span>            :   __ldexp_code;
+<span class="lineNum">     658 </span>            : }
+<span class="lineNum">     659 </span>            : 
+<span class="lineNum">     660 </span>            : __inline_mathopNP (rint, &quot;frndint&quot;)
+<span class="lineNum">     661 </span>            : # endif /* __FAST_MATH__ */
+<span class="lineNum">     662 </span>            : 
+<span class="lineNum">     663 </span>            : # define __lrint_code \
+<span class="lineNum">     664 </span>            :   long int __lrintres;                                                        \
+<span class="lineNum">     665 </span>            :   __asm__ __volatile__                                                        \
+<span class="lineNum">     666 </span>            :     (&quot;fistpl %0&quot;                                                            \
+<span class="lineNum">     667 </span>            :      : &quot;=m&quot; (__lrintres) : &quot;t&quot; (__x) : &quot;st&quot;);                                   \
+<span class="lineNum">     668 </span>            :   return __lrintres
+<span class="lineNum">     669 </span>            : __MATH_INLINE long int
+<span class="lineNum">     670 </span>            : __NTH (lrintf (float __x))
+<span class="lineNum">     671 </span>            : {
+<span class="lineNum">     672 </span>            :   __lrint_code;
+<span class="lineNum">     673 </span>            : }
+<span class="lineNum">     674 </span>            : __MATH_INLINE long int
+<span class="lineNum">     675 </span>            : __NTH (lrint (double __x))
+<span class="lineNum">     676 </span>            : {
+<span class="lineNum">     677 </span>            :   __lrint_code;
+<span class="lineNum">     678 </span>            : }
+<span class="lineNum">     679 </span>            : __MATH_INLINE long int
+<span class="lineNum">     680 </span>            : __NTH (lrintl (long double __x))
+<span class="lineNum">     681 </span>            : {
+<span class="lineNum">     682 </span>            :   __lrint_code;
+<span class="lineNum">     683 </span>            : }
+<span class="lineNum">     684 </span>            : # undef __lrint_code
+<span class="lineNum">     685 </span>            : 
+<span class="lineNum">     686 </span>            : # define __llrint_code \
+<span class="lineNum">     687 </span>            :   long long int __llrintres;                                                  \
+<span class="lineNum">     688 </span>            :   __asm__ __volatile__                                                        \
+<span class="lineNum">     689 </span>            :     (&quot;fistpll %0&quot;                                                           \
+<span class="lineNum">     690 </span>            :      : &quot;=m&quot; (__llrintres) : &quot;t&quot; (__x) : &quot;st&quot;);                                  \
+<span class="lineNum">     691 </span>            :   return __llrintres
+<span class="lineNum">     692 </span>            : __MATH_INLINE long long int
+<span class="lineNum">     693 </span>            : __NTH (llrintf (float __x))
+<span class="lineNum">     694 </span>            : {
+<span class="lineNum">     695 </span>            :   __llrint_code;
+<span class="lineNum">     696 </span>            : }
+<span class="lineNum">     697 </span>            : __MATH_INLINE long long int
+<span class="lineNum">     698 </span>            : __NTH (llrint (double __x))
+<span class="lineNum">     699 </span>            : {
+<span class="lineNum">     700 </span>            :   __llrint_code;
+<span class="lineNum">     701 </span>            : }
+<span class="lineNum">     702 </span>            : __MATH_INLINE long long int
+<span class="lineNum">     703 </span>            : __NTH (llrintl (long double __x))
+<span class="lineNum">     704 </span>            : {
+<span class="lineNum">     705 </span>            :   __llrint_code;
+<span class="lineNum">     706 </span>            : }
+<span class="lineNum">     707 </span>            : # undef __llrint_code
+<span class="lineNum">     708 </span>            : 
+<span class="lineNum">     709 </span>            : #endif
+<span class="lineNum">     710 </span>            : 
+<span class="lineNum">     711 </span>            : 
+<span class="lineNum">     712 </span>            : #ifdef __USE_MISC
+<span class="lineNum">     713 </span>            : 
+<span class="lineNum">     714 </span>            : # if defined __FAST_MATH__ &amp;&amp; !__GNUC_PREREQ (3, 5)
+<span class="lineNum">     715 </span>            : __inline_mathcodeNP2 (drem, __x, __y, \
+<span class="lineNum">     716 </span>            :   register double __value;                                                    \
+<span class="lineNum">     717 </span>            :   register int __clobbered;                                                   \
+<span class="lineNum">     718 </span>            :   __asm __volatile__                                                          \
+<span class="lineNum">     719 </span>            :     (&quot;1:   fprem1\n\t&quot;                                                      \
+<span class="lineNum">     720 </span>            :      &quot;fstsw        %%ax\n\t&quot;                                                \
+<span class="lineNum">     721 </span>            :      &quot;sahf\n\t&quot;                                                                     \
+<span class="lineNum">     722 </span>            :      &quot;jp   1b&quot;                                                              \
+<span class="lineNum">     723 </span>            :      : &quot;=t&quot; (__value), &quot;=&amp;a&quot; (__clobbered) : &quot;0&quot; (__x), &quot;u&quot; (__y) : &quot;cc&quot;);    \
+<span class="lineNum">     724 </span>            :   return __value)
+<span class="lineNum">     725 </span>            : # endif
+<span class="lineNum">     726 </span>            : 
+<span class="lineNum">     727 </span>            : 
+<span class="lineNum">     728 </span>            : /* This function is used in the `isfinite' macro.  */
+<span class="lineNum">     729 </span>            : __MATH_INLINE int
+<span class="lineNum">     730 </span>            : __NTH (__finite (double __x))
+<span class="lineNum">     731 </span>            : {
+<span class="lineNum">     732 </span>            :   return (__extension__
+<span class="lineNum">     733 </span>            :           (((((union { double __d; int __i[2]; }) {__d: __x}).__i[1]
+<span class="lineNum">     734 </span>            :              | 0x800fffffu) + 1) &gt;&gt; 31));
+<span class="lineNum">     735 </span>            : }
+<span class="lineNum">     736 </span>            : 
+<span class="lineNum">     737 </span>            : /* Miscellaneous functions */
+<span class="lineNum">     738 </span>            : # ifdef __FAST_MATH__
+<span class="lineNum">     739 </span>            : __inline_mathcode (__coshm1, __x, \
+<span class="lineNum">     740 </span>            :   register long double __exm1 = __expm1l (__fabsl (__x));                     \
+<span class="lineNum">     741 </span>            :   return 0.5 * (__exm1 / (__exm1 + 1.0)) * __exm1)
+<span class="lineNum">     742 </span>            : 
+<span class="lineNum">     743 </span>            : __inline_mathcode (__acosh1p, __x, \
+<span class="lineNum">     744 </span>            :   return log1pl (__x + __libc_sqrtl (__x) * __libc_sqrtl (__x + 2.0)))
+<span class="lineNum">     745 </span>            : 
+<span class="lineNum">     746 </span>            : # endif /* __FAST_MATH__ */
+<span class="lineNum">     747 </span>            : #endif /* __USE_MISC  */
+<span class="lineNum">     748 </span>            : 
+<span class="lineNum">     749 </span>            : /* Undefine some of the large macros which are not used anymore.  */
+<span class="lineNum">     750 </span>            : #undef __atan2_code
+<span class="lineNum">     751 </span>            : #ifdef __FAST_MATH__
+<span class="lineNum">     752 </span>            : # undef __expm1_code
+<span class="lineNum">     753 </span>            : # undef __exp_code
+<span class="lineNum">     754 </span>            : # undef __sincos_code
+<span class="lineNum">     755 </span>            : #endif /* __FAST_MATH__ */
+<span class="lineNum">     756 </span>            : 
+<span class="lineNum">     757 </span>            : #endif /* __NO_MATH_INLINES  */
+<span class="lineNum">     758 </span>            : 
+<span class="lineNum">     759 </span>            : 
+<span class="lineNum">     760 </span>            : /* This code is used internally in the GNU libc.  */
+<span class="lineNum">     761 </span>            : #ifdef __LIBC_INTERNAL_MATH_INLINES
+<span class="lineNum">     762 </span>            : __inline_mathop (__ieee754_sqrt, &quot;fsqrt&quot;)
+<span class="lineNum">     763 </span>            : __inline_mathcode2 (__ieee754_atan2, __y, __x,
+<span class="lineNum">     764 </span>            :                     register long double __value;
+<span class="lineNum">     765 </span>            :                     __asm __volatile__ (&quot;fpatan\n\t&quot;
+<span class="lineNum">     766 </span>            :                                         : &quot;=t&quot; (__value)
+<span class="lineNum">     767 </span>            :                                         : &quot;0&quot; (__x), &quot;u&quot; (__y) : &quot;st(1)&quot;);
+<span class="lineNum">     768 </span>            :                     return __value;)
+<span class="lineNum">     769 </span>            : #endif
+<span class="lineNum">     770 </span>            : 
+<span class="lineNum">     771 </span>            : #endif /* __GNUC__  */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
