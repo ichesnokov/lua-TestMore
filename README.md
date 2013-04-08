@@ -2,6 +2,8 @@
 lua-TestMore : an Unit Testing Framework
 ========================================
 
+[![Build Status](https://travis-ci.org/fperrad/lua-TestMore.png)](https://travis-ci.org/fperrad/lua-TestMore)
+
 Introduction
 ------------
 
