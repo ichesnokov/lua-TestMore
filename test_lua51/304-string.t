@@ -95,16 +95,19 @@ error_like(function () string.format('%k', 'toto') end,
            "^[^:]+:%d+: invalid option '%%k' to 'format'",
            "function format (invalid option)")
 
+if jit and jit.version_num >= 20100 then
+    todo("LuaJIT TODO. format.", 1)
+end
 error_like(function () string.format('%------s', 'toto') end,
            "^[^:]+:%d+: invalid format %(repeated flags%)",
            "function format (invalid format)")
 
 error_like(function () string.format('pi = %.123f', math.pi) end,
-           "^[^:]+:%d+: invalid format %(width or precision too long%)",
+           "^[^:]+:%d+: invalid ",
            "function format (invalid format)")
 
 error_like(function () string.format('% 123s', 'toto') end,
-           "^[^:]+:%d+: invalid format %(width or precision too long%)",
+           "^[^:]+:%d+: invalid ",
            "function format (invalid format)")
 
 s = "hello"
