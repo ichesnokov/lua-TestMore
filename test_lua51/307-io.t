@@ -37,7 +37,7 @@ plan(61)
 
 is(getfenv(io.lines), _G, "environment")
 local env = debug.getfenv(io.lines)
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT intentional. It is an implementation-defined behavior.", 3)
 end
 type_ok(env.__close, 'function')

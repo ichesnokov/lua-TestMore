@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2011, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -45,10 +45,9 @@ type_ok(package.path, 'string')
 type_ok(package.preload, 'table', "table package.preload")
 is(# package.preload, 0)
 
-if (platform and platform.compat)
-or (arg[-1] == 'luajit') then
+if (platform and platform.compat) or jit then
     type_ok(package.loaders, 'table', "table package.loaders")
-    if arg[-1] == 'luajit' then
+    if jit then
         todo("LuaJIT TODO. package.searchers", 1)
     end
     is(package.searchers, package.loaders, "alias")
@@ -58,8 +57,7 @@ else
 end
 
 m = {}
-if (platform and platform.compat)
-or (arg[-1] == 'luajit') then
+if (platform and platform.compat) or jit then
     package.seeall(m)
     m.pass("function package.seeall")
 else
@@ -192,8 +190,7 @@ is(cplx.i.r, 0, "function require & module")
 is(cplx.i.i, 1)
 os.remove('cplx.lua') -- clean up
 
-if (platform and platform.compat)
-or (arg[-1] == 'luajit') then
+if (platform and platform.compat) or jit then
     is(mod, nil, "function module & seeall")
     module('mod', package.seeall)
     type_ok(mod, 'table')

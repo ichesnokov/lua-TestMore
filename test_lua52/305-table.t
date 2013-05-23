@@ -68,7 +68,7 @@ is(table.concat(t, ','), 'c,d,a,b')
 table.insert(t, 5, 'e')
 is(table.concat(t, ','), 'c,d,a,b,e')
 
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT TODO. table.insert.", 2)
 end
 error_like(function () table.insert(t, 7, 'f') end,
@@ -83,8 +83,7 @@ error_like(function () table.insert(t, 2, 'g', 'h')  end,
            "^[^:]+:%d+: wrong number of arguments to 'insert'",
            "function insert (too many arg)")
 
-if (platform and platform.compat)
-or (arg[-1] == 'luajit') then
+if (platform and platform.compat) or jit then
     t = {}
     is(table.maxn(t), 0, "function maxn")
     t[1] = 'a'
@@ -126,7 +125,7 @@ a = table.remove(t,1)
 is(a, 'a')
 is(table.concat(t, ','), 'b,d')
 
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT TODO. table.remove.", 1)
 end
 error_like(function () table.remove(t,7) end,

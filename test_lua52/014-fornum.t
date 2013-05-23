@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2010, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -89,7 +89,7 @@ for i = 5, 7, 0 do
     v = true
     break -- avoid infinite loop with luajit
 end
-if arg[-1] == 'luajit' then
+if jit then
     print("not ok 28 - for 5, 7, 0 # TODO # LuaJIT intentional.")
 elseif v then
     print("not ok 28 - for 5, 7, 0")

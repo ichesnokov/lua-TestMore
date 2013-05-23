@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2012, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -73,8 +73,7 @@ like(math.log(47), '^3%.85', "function log")
 like(math.log(47, 2), '^5%.554', "function log (base 2)")
 like(math.log(47, 10), '^1%.672', "function log (base 10)")
 
-if (platform and platform.compat)
-or (arg[-1] == 'luajit') then
+if (platform and platform.compat) or jit then
     like(math.log10(47), '^1%.672', "function log10")
 else
     is(math.log10, nil, "function log10 (removed)")
@@ -108,7 +107,7 @@ like(math.random(9), '^%d$', "function random 1 arg")
 
 like(math.random(10, 19), '^1%d$', "function random 2 arg")
 
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT intentional. Don't check empty interval.", 2)
 end
 error_like(function () math.random(0) end,
@@ -119,7 +118,7 @@ error_like(function () math.random(19, 10) end,
            "^[^:]+:%d+: bad argument #2 to 'random' %(interval is empty%)",
            "function random empty interval")
 
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT intentional. Don't care about extra arguments.")
 end
 error_like(function () math.random(1, 2, 3) end,

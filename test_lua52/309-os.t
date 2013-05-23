@@ -54,7 +54,7 @@ is(os.date('!%d/%m/%y %H:%M:%S', 0), '01/01/70 00:00:00', "function date")
 
 like(os.date('%H:%M:%S'), '^%d%d:%d%d:%d%d', "function date")
 
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT TODO. invalid strftime.", 2)
 end
 is(os.date('%Oy', 0), '70')

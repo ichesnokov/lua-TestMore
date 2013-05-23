@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2010-2012, Perrad Francois
+-- Copyright (C) 2010-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -44,7 +44,7 @@ function f()
     print "after"
 end
 ]]
-if arg[-1] == 'luajit' then
+if jit then
     like(msg, "^[^:]+:%d+: no loop to break", "orphan break")
 else
     like(msg, "^[^:]+:%d+: <break> at line 5 not inside a loop", "orphan break")
@@ -68,7 +68,7 @@ f, msg = load [[
 ::label::
 goto unknown
 ]]
-if arg[-1] == 'luajit' then
+if jit then
     like(msg, ":%d+: undefined label 'unknown'", "unknown goto")
 else
     like(msg, ":%d+: no visible label 'unknown' for <goto> at line %d+", "unknown goto")
@@ -79,7 +79,7 @@ f, msg = load [[
 goto label
 ::label::
 ]]
-if arg[-1] == 'luajit' then
+if jit then
     like(msg, ":%d+: duplicate label 'label'", "duplicate label")
 else
     like(msg, ":%d+: label 'label' already defined on line %d+", "duplicate label")
@@ -92,7 +92,7 @@ local x
 ::f::
 goto e
 ]]
-if arg[-1] == 'luajit' then
+if jit then
     like(msg, ":%d+: <goto f> jumps into the scope of local 'x'", "bad goto")
 else
     like(msg, ":%d+: <goto f> at line %d+ jumps into the scope of local 'x'", "bad goto")

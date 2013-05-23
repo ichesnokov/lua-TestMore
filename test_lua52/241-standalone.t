@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2012, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -53,7 +53,7 @@ f = io.popen(cmd)
 like(f:read'*l', "^[^:]+: cannot open no_file.lua", "no file")
 f:close()
 
-if arg[-1] == 'luajit' then
+if jit then
     os.execute(lua .. " -b hello.lua hello.luac")
 else
     os.execute(luac .. " -s -o hello.luac hello.lua")
@@ -64,7 +64,7 @@ is(f:read'*l', 'Hello World', "bytecode")
 f:close()
 os.remove('hello.luac') -- clean up
 
-if arg[-1] == 'luajit' then
+if jit then
     skip("LuaJIT intentional. cannot combine sources", 2)
 else
     os.execute(luac .. " -s -o hello2.luac hello.lua hello.lua")
@@ -95,7 +95,7 @@ f:close()
 cmd = lua .. [[ -e "error(setmetatable({}, {__tostring=function() return 'MSG' end}))"  2>&1]]
 f = io.popen(cmd)
 is(f:read'*l', lua .. [[: MSG]], "error with object")
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT intentional.", 1)
 end
 is(f:read'*l', nil, "not backtrace")
@@ -103,7 +103,7 @@ f:close()
 
 cmd = lua .. [[ -e "error{}"  2>&1]]
 f = io.popen(cmd)
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT TODO.", 1)
 end
 is(f:read'*l', lua .. [[: (no error message)]], "error")
@@ -123,7 +123,7 @@ f:close()
 
 cmd = lua .. [[ -e 2>&1]]
 f = io.popen(cmd)
-if arg[-1] == 'luajit' then
+if jit then
     skip("LuaJIT.", 1)
 else
     like(f:read'*l', "^[^:]+: '%-e' needs argument", "no file")
@@ -149,7 +149,7 @@ f:close()
 
 cmd = lua .. [[ -u 2>&1]]
 f = io.popen(cmd)
-if arg[-1] == 'luajit' then
+if jit then
     skip("LuaJIT.", 1)
 else
     like(f:read'*l', "^[^:]+: unrecognized option '%-u'", "unknown option")

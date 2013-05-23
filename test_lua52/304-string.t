@@ -164,7 +164,7 @@ eq_array(output, {'from', 'world', 'to', 'Lua'})
 is(string.gsub("hello world", "(%w+)", "%1 %1"), "hello hello world world", "function gsub")
 is(string.gsub("hello world", "%w+", "%0 %0", 1), "hello hello world")
 is(string.gsub("hello world from Lua", "(%w+)%s*(%w+)", "%2 %1"), "world hello Lua from")
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT TODO. gsub.", 1)
 end
 error_like(function () string.gsub("hello world", "%w+", "%e") end,

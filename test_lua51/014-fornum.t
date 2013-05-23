@@ -89,7 +89,7 @@ for i = 5, 7, 0 do
     v = true
     break -- avoid infinite loop with LuaJIT
 end
-if arg[-1] == 'luajit' then
+if jit then
     print("not ok 28 - for 5, 7, 0 # TODO # LuaJIT intentional.")
 elseif v then
     print("not ok 28 - for 5, 7, 0")

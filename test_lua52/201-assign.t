@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2010, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -34,7 +34,7 @@ plan(38)
 is(b, nil, "global variable")
 b = 10
 is(b, 10)
-if arg[-1] == 'luajit' then
+if jit then
     skip("LuaJIT intentional. _ENV.", 3)
 else
     is(_ENV.b, 10, "_ENV")

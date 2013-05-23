@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2012, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -88,7 +88,7 @@ is(#t, 42, "__len")
 t = {}
 mt = { __len=function () return nil end }
 setmetatable(t, mt)
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT TODO. __len.", 1)
 end
 error_like(function () print(table.concat(t)) end,

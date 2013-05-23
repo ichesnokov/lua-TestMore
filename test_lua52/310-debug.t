@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2012, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -106,7 +106,7 @@ is(count, 42)
 
 co = coroutine.create(function () print "thread" end)
 hook = debug.gethook(co)
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT TODO. debug.gethook(thread)", 1)
 end
 is(hook, nil, "function gethook(thread)")
@@ -137,7 +137,7 @@ is(name, nil)
 
 local u = io.tmpfile()
 local old = debug.getuservalue(u)
-if arg[-1] == 'luajit' then
+if jit then
     type_ok(old, 'table', "function getuservalue")
 else
     is(old, nil, "function getuservalue")

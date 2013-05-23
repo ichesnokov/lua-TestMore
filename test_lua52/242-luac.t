@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2010-2012, Perrad Francois
+-- Copyright (C) 2010-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -27,8 +27,8 @@ L<http://www.lua.org/manual/5.2/manual.html#7>.
 
 require 'Test.More'
 
-if arg[-1] == 'luajit' then
-    skip_all("LuaJIT. no bytecode")
+if jit then
+    skip_all("LuaJIT")
 end
 
 local lua = (platform and platform.lua) or arg[-1]

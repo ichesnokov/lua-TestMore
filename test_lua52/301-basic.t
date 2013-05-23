@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2012, Perrad Francois
+-- Copyright (C) 2009-2013, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -31,10 +31,10 @@ require 'Test.More'
 
 plan(168)
 
-if arg[-1] == 'luajit' then
-    like(_VERSION, '^Lua 5%.1', "variable _VERSION")
+if jit then
+    like(_VERSION, '^Lua 5%.1$', "variable _VERSION")
 else
-    like(_VERSION, '^Lua 5%.2', "variable _VERSION")
+    like(_VERSION, '^Lua 5%.2$', "variable _VERSION")
 end
 
 v, msg = assert('text', "assert string")
@@ -56,14 +56,14 @@ error_like(function () assert(false, nil) end,
            "function assert(false, nil)")
 
 is(collectgarbage('stop'), 0, "function collectgarbage 'stop/restart/collect'")
-if arg[-1] == 'luajit' then
+if jit then
     skip("LuaJIT. gc isrunning", 1)
 else
     is(collectgarbage('isrunning'), false)
 end
 is(collectgarbage('step'), false)
 is(collectgarbage('restart'), 0)
-if arg[-1] == 'luajit' then
+if jit then
     skip("LuaJIT. gc isrunning", 1)
 else
     is(collectgarbage('isrunning'), true)
@@ -73,7 +73,7 @@ is(collectgarbage('collect'), 0)
 is(collectgarbage('setpause', 10), 200)
 is(collectgarbage('setstepmul', 200), 200)
 is(collectgarbage(), 0)
-if arg[-1] == 'luajit' then
+if jit then
     skip("LuaJIT. gc mode gen/inc", 4)
 else
     is(collectgarbage('generational'), 0)
@@ -255,8 +255,7 @@ is(f, nil, "function loadfile (syntax error)")
 like(msg, '^foo%.lua:%d+:')
 os.remove('foo.lua') -- clean up
 
-if (platform and platform.compat)
-or (arg[-1] == 'luajit') then
+if (platform and platform.compat) or jit then
     ok(loadstring[[i = i + 1]], "function loadstring")
 else
     is(loadstring, nil, "function loadstring (removed)")
@@ -442,14 +441,13 @@ error_like(function () tostring() end,
            "^[^:]+:%d+: bad argument #1 to 'tostring' %(value expected%)",
            "function tostring (no arg)")
 
-if (platform and platform.compat)
-or (arg[-1] == 'luajit') then
+if (platform and platform.compat) or jit then
     type_ok(unpack, 'function', "function unpack")
 else
     is(unpack, nil, "function unpack (removed)")
 end
 
-if arg[-1] == 'luajit' then
+if jit then
     error_like(function () xpcall(assert, nil) end,
                "bad argument #2 to 'xpcall' %(function expected, got nil%)",
                "function xpcall")

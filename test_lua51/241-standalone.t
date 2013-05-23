@@ -47,7 +47,7 @@ f = io.popen(cmd)
 is(f:read'*l', 'Hello World', "file")
 f:close()
 
-if arg[-1] == 'luajit' then
+if jit then
     os.execute(lua .. " -b hello.lua hello.luac")
 else
     os.execute(luac .. " -o hello.luac hello.lua")

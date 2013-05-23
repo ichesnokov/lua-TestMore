@@ -65,7 +65,7 @@ error_like(function () io.close(f) end,
            "^[^:]+:%d+: attempt to use a closed file",
            "function close (closed)")
 
-if arg[-1] == 'luajit' then
+if jit then
     todo("LuaJIT TODO. open mode")
 end
 error_like(function () io.open('file.txt', 'baz') end,
