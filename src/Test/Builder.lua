@@ -6,7 +6,6 @@
 local debug = require 'debug'
 local io = require 'io'
 local os = require 'os'
-local table = require 'table'
 local error = error
 local gsub = require 'string'.gsub
 local match = require 'string'.match
@@ -15,6 +14,7 @@ local pcall = pcall
 local print = print
 local rawget = rawget
 local setmetatable = setmetatable
+local tconcat = require 'table'.concat
 local tonumber = tonumber
 local tostring = tostring
 local type = type
@@ -31,7 +31,7 @@ end
 
 local function _print_to_fh (self, f, ...)
     if f then
-        local msg = table.concat({...})
+        local msg = tconcat({...})
         gsub(msg, "\n", "\n" .. self.indent)
         m.puts(f, self.indent .. msg .. "\n")
     else
@@ -48,7 +48,7 @@ local function print_comment (self, f, ...)
     for k, v in pairs(arg) do
         arg[k] = tostring(v)
     end
-    local msg = table.concat(arg)
+    local msg = tconcat(arg)
     msg = gsub(msg, "\n", "\n# ")
     msg = gsub(msg, "\n# \n", "\n#\n")
     msg = gsub(msg, "\n# $", '')
