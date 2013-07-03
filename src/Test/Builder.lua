@@ -8,6 +8,8 @@ local io = require 'io'
 local os = require 'os'
 local table = require 'table'
 local error = error
+local gsub = require 'string'.gsub
+local match = require 'string'.match
 local pairs = pairs
 local pcall = pcall
 local print = print
@@ -30,7 +32,7 @@ end
 local function _print_to_fh (self, f, ...)
     if f then
         local msg = table.concat({...})
-        msg:gsub("\n", "\n" .. self.indent)
+        gsub(msg, "\n", "\n" .. self.indent)
         m.puts(f, self.indent .. msg .. "\n")
     else
         print(self.indent, ...)
@@ -47,9 +49,9 @@ local function print_comment (self, f, ...)
         arg[k] = tostring(v)
     end
     local msg = table.concat(arg)
-    msg = msg:gsub("\n", "\n# ")
-    msg = msg:gsub("\n# \n", "\n#\n")
-    msg = msg:gsub("\n# $", '')
+    msg = gsub(msg, "\n", "\n# ")
+    msg = gsub(msg, "\n# \n", "\n#\n")
+    msg = gsub(msg, "\n# $", '')
     _print_to_fh(self, f, "# ", msg)
 end
 
@@ -260,7 +262,7 @@ function m:ok (test, name, level)
     level = level or 0
     self.curr_test = self.curr_test + 1
     name = tostring(name)
-    if name:match('^[%d%s]+$') then
+    if match(name, '^[%d%s]+$') then
         self:diag("    You named your test '" .. name .."'.  You shouldn't use numbers for your test names."
         .. "\n    Very confusing.")
     end

@@ -9,6 +9,7 @@ local pcall = pcall
 local require = require
 local tostring = tostring
 local type = type
+local match = require 'string'.match
 local unpack = require 'table'.unpack or unpack
 local _G = _G
 
@@ -66,7 +67,7 @@ function m.like (got, pattern, name)
         return
     end
     got = tostring(got)
-    local pass = got:match(pattern)
+    local pass = match(got, pattern)
     tb:ok(pass, name)
     if not pass then
         tb:diag("                  '" .. got .. "'"
@@ -81,7 +82,7 @@ function m.unlike (got, pattern, name)
         return
     end
     got = tostring(got)
-    local pass = not got:match(pattern)
+    local pass = not match(got, pattern)
     tb:ok(pass, name)
     if not pass then
         tb:diag("                  '" .. got .. "'"
@@ -303,7 +304,7 @@ function m.error_like (code, arg2, arg3, arg4)
             tb:diag("pattern isn't a string : " .. tostring(pattern))
             return
         end
-        local pass = msg:match(pattern)
+        local pass = match(msg, pattern)
         tb:ok(pass, name)
         if not pass then
             tb:diag("                  '" .. msg .. "'"
