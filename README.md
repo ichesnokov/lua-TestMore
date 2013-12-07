@@ -25,13 +25,13 @@ It supplies a Test Suite for Lua itself.
 Links
 -----
 
-The homepage is at [http://fperrad.github.com/lua-TestMore/](http://fperrad.github.com/lua-TestMore/),
+The homepage is at [http://fperrad.github.io/lua-TestMore/](http://fperrad.github.io/lua-TestMore/),
 and the sources are hosted at [http://github.com/fperrad/lua-TestMore/](http://github.com/fperrad/lua-TestMore/).
 
 Copyright and License
 ---------------------
 
-Copyright (c) 2009-2012 Francois Perrad
+Copyright (c) 2009-2013 Francois Perrad
 
 This library is licensed under the terms of the MIT/X11 license, like Lua itself.
 
