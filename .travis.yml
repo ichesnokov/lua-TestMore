@@ -1,16 +1,22 @@
-# Lua is not officially supported, but an erlang environment will do.
-language: erlang
+language: c
 
 env:
-  matrix:
-    - LUA=lua5.1                LUAVER=5.1
-    - LUA=lua5.2                LUAVER=5.2
+  - LUA=lua5.1                  LUAVER=5.1
+  - LUA=lua5.2                  LUAVER=5.2
+  - LUA=luajit                  LUAVER=5.1
 
 # Tool setup.
 install:
-  - sudo apt-get install lua5.1
-  - sudo apt-get install lua5.2
+  - sudo apt-get install -qq lua5.1
+  - sudo apt-get install -qq lua5.2
+  - sudo apt-get install -qq luajit
+  - sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
 
 # Build and test.
 script:
   - make LUA="$LUA" test
+
+branches:
+  only:
+    - master
+
