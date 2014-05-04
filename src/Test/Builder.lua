@@ -103,6 +103,7 @@ function m:subtest (name, func)
     if type(func) ~= 'function' then
         error("subtest()'s second argument must be a function")
     end
+    self:diag('Subtest: ' .. name)
     local child = self:child(name)
     local parent = self.data
     self.data = child.data
