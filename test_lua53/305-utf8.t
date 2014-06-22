@@ -99,7 +99,7 @@ is(utf8.len('ABC', -1), 1)
 is(utf8.len('ABC', -2), 2)
 
 error_like(function () utf8.len('A', 3) end,
-           "^[^:]+:%d+: bad argument #1 to 'len' %(initial position out of string%)",
+           "^[^:]+:%d+: bad argument #2 to 'len' %(initial position out of string%)",
            "function len (out of range)")
 
 
@@ -109,7 +109,7 @@ is(utf8.offset("A\u{20AC}3", 3), 5)
 is(utf8.offset("A\u{20AC}3", 4), 6) -- ?? nil
 is(utf8.offset("A\u{20AC}3", 5), nil)
 is(utf8.offset("A\u{20AC}3", 6), nil)
-is(utf8.offset("A\u{20AC}3", -1), nil)
+is(utf8.offset("A\u{20AC}3", -1), 5) -- ?? nil
 is(utf8.offset("A\u{20AC}3", 1, 2), 2)
 is(utf8.offset("A\u{20AC}3", 2, 2), 5)
 is(utf8.offset("A\u{20AC}3", 3, 2), 6) -- ?? nil
