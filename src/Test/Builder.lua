@@ -160,7 +160,7 @@ local function _output_plan (self, max, directive, reason)
     if self.have_output_plan then
         error("The plan was already output")
     end
-    local out = "1.." .. max
+    local out = "1.." .. tostring(max)
     if directive then
         out = out .. " # " .. directive
     end
@@ -182,7 +182,7 @@ function m:plan (arg)
     elseif type(arg) ~= 'number' then
         error("Need a number of tests")
     elseif arg < 0 then
-        error("Number of tests must be a positive integer.  You gave it '" .. arg .."'.")
+        error("Number of tests must be a positive integer.  You gave it '" .. tostring(arg) .."'.")
     else
         self.expected_tests = arg
         self.have_plan = true
@@ -271,7 +271,7 @@ function m:ok (test, name, level)
     if not test then
         out = "not "
     end
-    out = out .. "ok " .. self.curr_test
+    out = out .. "ok " .. tostring(self.curr_test)
     if name ~= '' then
         out = out .. " - " .. name
     end
@@ -285,7 +285,7 @@ function m:ok (test, name, level)
         if info then
             local file = info.short_src
             local line = info.currentline
-            self:diag("    " .. msg .. " test (" .. file .. " at line " .. line .. ")")
+            self:diag("    " .. msg .. " test (" .. file .. " at line " .. tostring(line) .. ")")
         else
             self:diag("    " .. msg .. " test")
         end

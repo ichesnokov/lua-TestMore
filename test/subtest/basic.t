@@ -8,8 +8,8 @@ local tb = require 'Test.Builder.NoOutput'.create()
 tb:plan(7)
 tb:failure_output(tb:output())
 for i = 1, 3 do
-    tb:ok(i, "We're on " .. i)
-    tb:diag("We ran " .. i)
+    tb:ok(i, "We're on " .. tostring(i))
+    tb:diag("We ran " .. tostring(i))
 end
 do
     local indented = tb:child()
@@ -21,7 +21,7 @@ do
     indented:finalize()
 end
 for i = 7, 9 do
-    tb:ok(i, "We're on " .. i)
+    tb:ok(i, "We're on " .. tostring(i))
 end
 is(tb:read'out', [[
 1..7
@@ -45,8 +45,8 @@ local tb = require 'Test.Builder.NoOutput'.create()
 tb:plan'no_plan'
 tb:failure_output(tb:output())
 for i = 1, 1 do
-    tb:ok(true, "We're on " .. i)
-    tb:diag("We ran " .. i)
+    tb:ok(true, "We're on " .. tostring(i))
+    tb:diag("We ran " .. tostring(i))
 end
 do
     local indented = tb:child()
@@ -65,8 +65,8 @@ do
     indented:finalize()
 end
 for i = 7, 7 do
-    tb:ok(true, "We're on " .. i)
-    tb:diag("We ran " .. i)
+    tb:ok(true, "We're on " .. tostring(i))
+    tb:diag("We ran " .. tostring(i))
 end
 tb:done_testing()
 

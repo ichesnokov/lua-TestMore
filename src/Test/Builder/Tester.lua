@@ -5,6 +5,7 @@
 
 local error = error
 local pairs = pairs
+local tostring = tostring
 local type = type
 local _G = _G
 local debug = require 'debug'
@@ -71,7 +72,7 @@ function m.test_fail (offset)
     local info = debug.getinfo(2)
     local prog = info.short_src
     local line = info.currentline + offset
-    err:expect("#     Failed test (" .. prog .. " at line " .. line .. ")")
+    err:expect("#     Failed test (" .. prog .. " at line " .. tostring(line) .. ")")
 end
 
 function m.test_diag (...)
