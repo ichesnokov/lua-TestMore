@@ -3,6 +3,8 @@ lua-TestMore : an Unit Testing Framework
 ========================================
 
 [![Build Status](https://travis-ci.org/fperrad/lua-TestMore.png)](https://travis-ci.org/fperrad/lua-TestMore)
+[![Coverage Status](https://coveralls.io/repos/fperrad/lua-TestMore/badge.png?branch=master)](https://coveralls.io/r/fperrad/lua-TestMore?branch=master)
+[![Licence](http://img.shields.io/badge/Licence-MIT-brightgreen.svg)](COPYRIGHT)
 
 Introduction
 ------------
