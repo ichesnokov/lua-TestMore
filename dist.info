@@ -5,7 +5,7 @@ version = "0.3.1"
 desc = "an Unit Testing Framework"
 author = "Francois Perrad"
 license = "MIT/X11"
-url = "http://fperrad.github.com/lua-TestMore/"
+url = "http://fperrad.github.io/lua-TestMore/"
 maintainer = "Francois Perrad"
 
 depends = {
