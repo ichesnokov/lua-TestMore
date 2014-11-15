@@ -7,7 +7,6 @@ LUAC = luac.exe
 RUN_LUA = $(LUA)
 RUN_LUAC = $(LUAC)
 OSNAME = MSWin32
-INTSIZE = 4
 
 harness: env
 	@prove --exec=$(LUA) *.t
@@ -20,5 +19,5 @@ luajit: env
 
 env:
 	@set LUA_PATH=;;../src/?.lua
-	@set LUA_INIT=platform = { lua=[[$(RUN_LUA)]], luac=[[$(RUN_LUAC)]], osname=[[$(OSNAME)]], intsize=$(INTSIZE), compat=true }
+	@set LUA_INIT=platform = { lua=[[$(RUN_LUA)]], luac=[[$(RUN_LUAC)]], osname=[[$(OSNAME)]], compat=true }
 
