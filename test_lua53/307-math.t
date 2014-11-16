@@ -46,14 +46,22 @@ like(math.asin(0.5), '^0%.523', "function asin")
 
 like(math.atan(0.5), '^0%.463', "function atan")
 
-like(math.atan2(1, 2), '^0%.463', "function atan2")
+if (platform and platform.compat) or jit then
+    like(math.atan2(1, 2), '^0%.463', "function atan2")
+else
+    is(math.atan2, nil, "function atan2 (removed)")
+end
 
 is(math.ceil(12.34), 13, "function ceil")
 is(math.ceil(-12.34), -12)
 
 like(math.cos(0), '^1%.?', "function cos")
 
-like(math.cosh(0), '^1%.?', "function cosh")
+if (platform and platform.compat) or jit then
+    like(math.cosh(0), '^1%.?', "function cosh")
+else
+    is(math.cosh, nil, "function cosh (removed)")
+end
 
 is(math.deg(math.pi), 180, "function deg")
 
@@ -65,9 +73,17 @@ is(math.floor(-12.34), -13)
 is(math.fmod(7, 3), 1, "function fmod")
 is(math.fmod(-7, 3), -1)
 
-eq_array({math.frexp(1.5)}, {0.75, 1}, "function frexp")
+if (platform and platform.compat) or jit then
+    eq_array({math.frexp(1.5)}, {0.75, 1}, "function frexp")
+else
+    is(math.frexp, nil, "function frexp (removed)")
+end
 
-is(math.ldexp(1.2, 3), 9.6, "function ldexp")
+if (platform and platform.compat) or jit then
+    is(math.ldexp(1.2, 3), 9.6, "function ldexp")
+else
+    is(math.ldexp, nil, "function ldexp (removed)")
+end
 
 like(math.log(47), '^3%.85', "function log")
 like(math.log(47, 2), '^5%.554', "function log (base 2)")
@@ -97,7 +113,11 @@ is(math.min(1, 2, 3, -4), -4)
 
 eq_array({math.modf(2.25)}, {2, 0.25}, "function modf")
 
-is(math.pow(-2, 3), -8, "function pow")
+if (platform and platform.compat) or jit then
+    is(math.pow(-2, 3), -8, "function pow")
+else
+    is(math.pow, nil, "function pow (removed)")
+end
 
 like(math.rad(180), '^3%.14', "function rad")
 
@@ -133,13 +153,21 @@ is(a, b, "function randomseed")
 
 like(math.sin(math.pi/2), '^1%.?', "function sin")
 
-like(math.sinh(1), '^1%.175', "function sinh")
+if (platform and platform.compat) or jit then
+    like(math.sinh(1), '^1%.175', "function sinh")
+else
+    is(math.sinh, nil, "function sinh (removed)")
+end
 
 like(math.sqrt(2), '^1%.414', "function sqrt")
 
 like(math.tan(math.pi/3), '^1%.732', "function tan")
 
-like(math.tanh(1), '^0%.761', "function sinh")
+if (platform and platform.compat) or jit then
+    like(math.tanh(1), '^0%.761', "function sinh")
+else
+    is(math.tanh, nil, "function tanh (removed)")
+end
 
 -- Local Variables:
 --   mode: lua

@@ -322,21 +322,25 @@ end
 table.sort(r)
 is( table.concat(r, ','), 'a,b,c', "__pairs" )
 
-local t = {
-    _VALUES = { 'a', 'b', 'c' }
-}
-local mt = {
-    __ipairs = function (op)
-        return ipairs(op._VALUES)
-    end
-}
-setmetatable(t, mt)
+if (platform and platform.compat) or jit then
+    local t = {
+        _VALUES = { 'a', 'b', 'c' }
+    }
+    local mt = {
+        __ipairs = function (op)
+            return ipairs(op._VALUES)
+        end
+    }
+    setmetatable(t, mt)
 
-r = ''
-for i, v in ipairs(t) do
-    r = r .. v
+    r = ''
+    for i, v in ipairs(t) do
+        r = r .. v
+    end
+    is( r, 'abc', "__ipairs" )
+else
+    skip('metamethod __ipairs (removed)', 1)
 end
-is( r, 'abc', "__ipairs" )
 
 --[[ Window ]]
 

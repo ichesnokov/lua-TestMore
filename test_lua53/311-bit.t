@@ -31,6 +31,9 @@ require 'Test.More'
 if jit then
     skip_all("LuaJIT. bit32")
 end
+if platform and not platform.compat then
+    skip_all("bit32 (removed)")
+end
 
 plan(20)
 
