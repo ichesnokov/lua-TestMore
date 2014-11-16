@@ -29,7 +29,7 @@ L<http://www.lua.org/manual/3.2/manual.html#6.1>.
 
 require 'Test.More'
 
-plan(165)
+plan(163)
 
 if jit then
     like(_VERSION, '^Lua 5%.1$', "variable _VERSION")
@@ -252,29 +252,23 @@ is(f, nil, "function loadfile (syntax error)")
 like(msg, '^foo%.lua:%d+:')
 os.remove('foo.lua') -- clean up
 
-if jit then
-    ok(loadstring[[i = i + 1]], "function loadstring")
-else
-    is(loadstring, nil, "function loadstring (removed)")
-    loadstring = load
-end
-
-f = loadstring([[i = i + 1]])
+-- loadstring
+f = load([[i = i + 1]])
 i = 0
 f()
-is(i, 1, "function loadstring")
+is(i, 1, "function load")
 f()
 is(i, 2)
 
 i = 32
 local i = 0
-f = loadstring([[i = i + 1; return i]])
+f = load([[i = i + 1; return i]])
 g = function () i = i + 1; return i end
-is(f(), 33, "function loadstring")
+is(f(), 33, "function load")
 is(g(), 1)
 
-f, msg = loadstring([[?syntax error?]])
-is(f, nil, "function loadstring (syntax error)")
+f, msg = load([[?syntax error?]])
+is(f, nil, "function load (syntax error)")
 like(msg, '^%[string "%?syntax error%?"%]:%d+:')
 
 t = {'a','b','c'}
@@ -437,12 +431,6 @@ like(tostring(print), '^function: 0?[Xx]?[builtin]*#?%x+$')
 error_like(function () tostring() end,
            "^[^:]+:%d+: bad argument #1 to 'tostring' %(value expected%)",
            "function tostring (no arg)")
-
-if jit then
-    type_ok(unpack, 'function', "function unpack")
-else
-    is(unpack, nil, "function unpack (removed)")
-end
 
 error_like(function () xpcall(assert, nil) end,
            "bad argument #2 to 'xpcall' %(function expected, got nil%)",

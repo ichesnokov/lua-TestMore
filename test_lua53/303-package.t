@@ -29,7 +29,7 @@ L<http://www.lua.org/manual/5.3/manual.html#6.3>.
 
 require 'Test.More'
 
-plan(33)
+plan(26)
 
 ok(package.loaded._G, "table package.loaded")
 ok(package.loaded.coroutine)
@@ -47,21 +47,11 @@ is(# package.preload, 0)
 
 if jit then
     type_ok(package.loaders, 'table', "table package.loaders")
-    if jit then
-        todo("LuaJIT TODO. package.searchers", 1)
-    end
+    todo("LuaJIT TODO. package.searchers", 1)
     is(package.searchers, package.loaders, "alias")
 else
     type_ok(package.searchers, 'table', "table package.searchers")
     is(package.loaders, nil)
-end
-
-m = {}
-if jit then
-    package.seeall(m)
-    m.pass("function package.seeall")
-else
-    is(package.seeall, nil, "package.seeall (removed)")
 end
 
 local m = require 'Test.More'
@@ -189,22 +179,6 @@ require 'cplx'
 is(cplx.i.r, 0, "function require & module")
 is(cplx.i.i, 1)
 os.remove('cplx.lua') -- clean up
-
-if jit then
-    is(mod, nil, "function module & seeall")
-    module('mod', package.seeall)
-    type_ok(mod, 'table')
-    is(mod, package.loaded.mod)
-
-    is(modz, nil, "function module")
-    local _G = _G
-    module('modz')
-    _G.type_ok(_G.modz, 'table')
-    _G.is(_G.modz, _G.package.loaded.modz)
-else
-    is(module, nil, "module (removed)")
-    skip("module (removed)", 5)
-end
 
 -- Local Variables:
 --   mode: lua
