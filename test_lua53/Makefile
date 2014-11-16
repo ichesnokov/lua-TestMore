@@ -6,9 +6,10 @@ LUA_COMPAT = true
 
 LUA_VERSION = $(shell $(LUA) -e "print(_VERSION)")
 OSNAME = $(shell perl -MConfig -e "print Config->{osname}")
+INTSIZE = $(shell perl -MConfig -e "print Config->{longsize}")
 
 export LUA_PATH=;;../src/?.lua
-export LUA_INIT=platform = { osname=[[$(OSNAME)]], compat=$(LUA_COMPAT) }
+export LUA_INIT=platform = { osname=[[$(OSNAME)]], intsize=$(INTSIZE), compat=$(LUA_COMPAT) }
 
 version:
 	@echo $(LUA_VERSION)

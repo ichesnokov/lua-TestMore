@@ -160,7 +160,8 @@ like(os.time({
     isdst = 0,
 }), '^946%d+$', "function time")
 
-if platform and platform.intsize == 8 then
+if (platform and platform.intsize == 8)
+or (string.pack and #string.pack('i', 0) == 8) then
     todo("pb on 64bit platforms")
     -- os.time returns nil when C mktime returns < 0
     -- this test needs a out of range value on any platform
