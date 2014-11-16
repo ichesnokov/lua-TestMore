@@ -35,6 +35,8 @@ end
 
 plan(58)
 
+-- LuaJIT does not support \u{} escape
+load[=====[
 is(utf8.char(65, 66, 67), 'ABC', "function char")
 is(utf8.char(0x20AC), '\u{20AC}')
 is(utf8.char(), '')
@@ -47,7 +49,7 @@ error_like(function () utf8.char(0, 'bad') end,
            "^[^:]+:%d+: bad argument #2 to 'char' %(number expected, got string%)",
            "function char (bad)")
 
-is(utf8.charpatt, "[\0-\x7F\xC2-\xF4][\x80-\xBF]*", "charpatt")
+is(utf8.charpattern, "[\0-\x7F\xC2-\xF4][\x80-\xBF]*", "charpattern")
 
 local ap = {}
 local ac = {}
@@ -136,7 +138,7 @@ is(utf8.offset("A\u{20AC}3", -2, -4), nil)
 error_like(function () utf8.offset("A\u{20AC}3", 1, 7) end,
            "^[^:]+:%d+: bad argument #3 to 'offset' %(position out of range%)",
            "function offset (out of range)")
-
+]=====]()
 
 -- Local Variables:
 --   mode: lua
