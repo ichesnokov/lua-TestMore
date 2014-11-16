@@ -81,13 +81,13 @@ is(f:read'*l', 'file')
 f:close()
 
 f = io.open('number.txt', 'w')
-f:write("6.0     -3.23   15e12\n")
+f:write("6.0     -3.23   15e3\n")
 f:write("4.3     234     1000001\n")
 f:close()
 
 cmd = lua .. [[ -e "while true do local n1, n2, n3 = io.read('*number', '*number', '*number'); if not n1 then break end; print(math.max(n1, n2, n3)) end" < number.txt]]
 f = io.popen(cmd)
-like(f:read'*l', '^15000000000000%.?', "function io:read *number")
+like(f:read'*l', '15000%.?', "function io:read *number")
 is(f:read'*l', '1000001')
 f:close()
 

@@ -32,7 +32,7 @@ require 'Test.More'
 plan(39)
 
 x = math.pi
-is(x - x%0.01, 3.14, "modulo")
+is(x - x%0.0001, 3.1415, "modulo")
 
 a = {}; a.x = 1; a.y = 0;
 b = {}; b.x = 1; b.y = 0;

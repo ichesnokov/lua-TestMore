@@ -36,7 +36,11 @@ plan(20)
 
 is(bit32.band(0x01, 0x03, 0x07), 0x01, "function band")
 
-is(bit32.bnot(0x03), (-1 - 0x03) % 2^32, "function bnot")
+if #string.pack('n', 0) == 4 then
+    is(bit32.bnot(0x03), (-1 - 0x03), "function bnot")
+else
+    is(bit32.bnot(0x03), (-1 - 0x03) % 2^32, "function bnot")
+end
 
 is(bit32.bor(0x01, 0x03, 0x07), 0x07, "function bor")
 
