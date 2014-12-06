@@ -44,11 +44,7 @@ function f()
     print "after"
 end
 ]]
-if jit then
-    like(msg, "^[^:]+:%d+: no loop to break", "orphan break")
-else
-    like(msg, "^[^:]+:%d+: <break> at line 5 not inside a loop", "orphan break")
-end
+like(msg, "^[^:]+:%d+: <break> at line 5 not inside a loop", "orphan break")
 
 --[[ break anywhere ]]
 lives_ok( [[
@@ -68,22 +64,14 @@ f, msg = load [[
 ::label::
 goto unknown
 ]]
-if jit then
-    like(msg, ":%d+: undefined label 'unknown'", "unknown goto")
-else
-    like(msg, ":%d+: no visible label 'unknown' for <goto> at line %d+", "unknown goto")
-end
+like(msg, ":%d+: no visible label 'unknown' for <goto> at line %d+", "unknown goto")
 
 f, msg = load [[
 ::label::
 goto label
 ::label::
 ]]
-if jit then
-    like(msg, ":%d+: duplicate label 'label'", "duplicate label")
-else
-    like(msg, ":%d+: label 'label' already defined on line %d+", "duplicate label")
-end
+like(msg, ":%d+: label 'label' already defined on line %d+", "duplicate label")
 
 f, msg = load [[
 ::e::
@@ -92,11 +80,7 @@ local x
 ::f::
 goto e
 ]]
-if jit then
-    like(msg, ":%d+: <goto f> jumps into the scope of local 'x'", "bad goto")
-else
-    like(msg, ":%d+: <goto f> at line %d+ jumps into the scope of local 'x'", "bad goto")
-end
+like(msg, ":%d+: <goto f> at line %d+ jumps into the scope of local 'x'", "bad goto")
 
 -- Local Variables:
 --   mode: lua

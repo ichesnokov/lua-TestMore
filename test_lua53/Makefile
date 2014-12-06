@@ -1,6 +1,5 @@
 
 LUA = ../../lua-5.3.0-beta/src/lua
-LUAJIT = ../../luajit-2.0/src/luajit
 LUA_COVER = ../../gh-pages/lua-TestMore/lua-5.3.0-beta/src/lua
 LUA_COMPAT = true
 
@@ -19,9 +18,6 @@ harness:
 
 sanity:
 	prove --exec=$(LUA) 0*.t
-
-luajit:
-	prove --exec=$(LUAJIT) *.t
 
 coverage:
 	prove --exec=$(LUA_COVER) *.t

@@ -53,28 +53,20 @@ f = io.popen(cmd)
 like(f:read'*l', "^[^:]+: cannot open no_file.lua", "no file")
 f:close()
 
-if jit then
-    os.execute(lua .. " -b hello.lua hello.luac")
-else
-    os.execute(luac .. " -s -o hello.luac hello.lua")
-end
+os.execute(luac .. " -s -o hello.luac hello.lua")
 cmd = lua .. " hello.luac"
 f = io.popen(cmd)
 is(f:read'*l', 'Hello World', "bytecode")
 f:close()
 os.remove('hello.luac') -- clean up
 
-if jit then
-    skip("LuaJIT intentional. cannot combine sources", 2)
-else
-    os.execute(luac .. " -s -o hello2.luac hello.lua hello.lua")
-    cmd = lua .. " hello2.luac"
-    f = io.popen(cmd)
-    is(f:read'*l', 'Hello World', "combine 1")
-    is(f:read'*l', 'Hello World', "combine 2")
-    f:close()
-    os.remove('hello2.luac') -- clean up
-end
+os.execute(luac .. " -s -o hello2.luac hello.lua hello.lua")
+cmd = lua .. " hello2.luac"
+f = io.popen(cmd)
+is(f:read'*l', 'Hello World', "combine 1")
+is(f:read'*l', 'Hello World', "combine 2")
+f:close()
+os.remove('hello2.luac') -- clean up
 
 cmd = lua .. " < hello.lua"
 f = io.popen(cmd)
@@ -95,17 +87,11 @@ f:close()
 cmd = lua .. [[ -e "error(setmetatable({}, {__tostring=function() return 'MSG' end}))"  2>&1]]
 f = io.popen(cmd)
 is(f:read'*l', lua .. [[: MSG]], "error with object")
-if jit then
-    todo("LuaJIT intentional.", 1)
-end
 is(f:read'*l', nil, "not backtrace")
 f:close()
 
 cmd = lua .. [[ -e "error{}"  2>&1]]
 f = io.popen(cmd)
-if jit then
-    todo("LuaJIT TODO.", 2)
-end
 is(f:read'*l', lua .. [[: (error object is a table value)]], "error")
 is(f:read'*l', "stack traceback:", "backtrace")
 f:close()
@@ -123,11 +109,7 @@ f:close()
 
 cmd = lua .. [[ -e 2>&1]]
 f = io.popen(cmd)
-if jit then
-    skip("LuaJIT.", 1)
-else
-    like(f:read'*l', "^[^:]+: '%-e' needs argument", "no file")
-end
+like(f:read'*l', "^[^:]+: '%-e' needs argument", "no file")
 like(f:read'*l', "^usage: ", "no file")
 f:close()
 
@@ -149,11 +131,7 @@ f:close()
 
 cmd = lua .. [[ -u 2>&1]]
 f = io.popen(cmd)
-if jit then
-    skip("LuaJIT.", 1)
-else
-    like(f:read'*l', "^[^:]+: unrecognized option '%-u'", "unknown option")
-end
+like(f:read'*l', "^[^:]+: unrecognized option '%-u'", "unknown option")
 like(f:read'*l', "^usage: ", "no file")
 f:close()
 

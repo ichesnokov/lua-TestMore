@@ -123,9 +123,6 @@ error_like(function () string.format('%k', 'toto') end,
            "^[^:]+:%d+: invalid option '%%k' to 'format'",
            "function format (invalid option)")
 
-if jit and jit.version_num >= 20100 then
-    todo("LuaJIT TODO. format.", 1)
-end
 error_like(function () string.format('%------s', 'toto') end,
            "^[^:]+:%d+: invalid format %(repeated flags%)",
            "function format (invalid format)")
@@ -167,9 +164,6 @@ eq_array(output, {'from', 'world', 'to', 'Lua'})
 is(string.gsub("hello world", "(%w+)", "%1 %1"), "hello hello world world", "function gsub")
 is(string.gsub("hello world", "%w+", "%0 %0", 1), "hello hello world")
 is(string.gsub("hello world from Lua", "(%w+)%s*(%w+)", "%2 %1"), "world hello Lua from")
-if jit then
-    todo("LuaJIT TODO. gsub.", 1)
-end
 error_like(function () string.gsub("hello world", "%w+", "%e") end,
            "^[^:]+:%d+: invalid use of '%%' in replacement string",
            "function gsub (invalid replacement string)")

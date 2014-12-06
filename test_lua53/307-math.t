@@ -46,7 +46,7 @@ like(math.asin(0.5), '^0%.523', "function asin")
 
 like(math.atan(0.5), '^0%.463', "function atan")
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     like(math.atan2(1, 2), '^0%.463', "function atan2")
 else
     is(math.atan2, nil, "function atan2 (removed)")
@@ -57,7 +57,7 @@ is(math.ceil(-12.34), -12)
 
 like(math.cos(0), '^1%.?', "function cos")
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     like(math.cosh(0), '^1%.?', "function cosh")
 else
     is(math.cosh, nil, "function cosh (removed)")
@@ -73,13 +73,13 @@ is(math.floor(-12.34), -13)
 is(math.fmod(7, 3), 1, "function fmod")
 is(math.fmod(-7, 3), -1)
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     eq_array({math.frexp(1.5)}, {0.75, 1}, "function frexp")
 else
     is(math.frexp, nil, "function frexp (removed)")
 end
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     is(math.ldexp(1.2, 3), 9.6, "function ldexp")
 else
     is(math.ldexp, nil, "function ldexp (removed)")
@@ -89,7 +89,7 @@ like(math.log(47), '^3%.85', "function log")
 like(math.log(47, 2), '^5%.554', "function log (base 2)")
 like(math.log(47, 10), '^1%.672', "function log (base 10)")
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     like(math.log10(47), '^1%.672', "function log10")
 else
     is(math.log10, nil, "function log10 (removed)")
@@ -113,7 +113,7 @@ is(math.min(1, 2, 3, -4), -4)
 
 eq_array({math.modf(2.25)}, {2, 0.25}, "function modf")
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     is(math.pow(-2, 3), -8, "function pow")
 else
     is(math.pow, nil, "function pow (removed)")
@@ -127,9 +127,6 @@ like(math.random(9), '^%d$', "function random 1 arg")
 
 like(math.random(10, 19), '^1%d$', "function random 2 arg")
 
-if jit then
-    todo("LuaJIT intentional. Don't check empty interval.", 2)
-end
 error_like(function () math.random(0) end,
            "^[^:]+:%d+: bad argument #1 to 'random' %(interval is empty%)",
            "function random empty interval")
@@ -138,9 +135,6 @@ error_like(function () math.random(19, 10) end,
            "^[^:]+:%d+: bad argument #%d to 'random' %(interval is empty%)",
            "function random empty interval")
 
-if jit then
-    todo("LuaJIT intentional. Don't care about extra arguments.")
-end
 error_like(function () math.random(1, 2, 3) end,
            "^[^:]+:%d+: wrong number of arguments",
            "function random too many arg")
@@ -153,7 +147,7 @@ is(a, b, "function randomseed")
 
 like(math.sin(math.pi/2), '^1%.?', "function sin")
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     like(math.sinh(1), '^1%.175', "function sinh")
 else
     is(math.sinh, nil, "function sinh (removed)")
@@ -163,7 +157,7 @@ like(math.sqrt(2), '^1%.414', "function sqrt")
 
 like(math.tan(math.pi/3), '^1%.732', "function tan")
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     like(math.tanh(1), '^0%.761', "function sinh")
 else
     is(math.tanh, nil, "function tanh (removed)")

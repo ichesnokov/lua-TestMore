@@ -27,10 +27,6 @@ L<http://www.lua.org/manual/5.3/manual.html#7>.
 
 require 'Test.More'
 
-if jit then
-    skip_all("LuaJIT")
-end
-
 local lua = (platform and platform.lua) or arg[-1]
 local luac = (platform and platform.luac) or lua .. 'c'
 

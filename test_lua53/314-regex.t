@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2013, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -61,13 +61,6 @@ local test_files = {
 
 local todo_info = {
 }
-
-if jit then
-    todo_info[147] = "LuaJIT TODO. \\0"
-    todo_info[149] = "LuaJIT TODO. \\0"
-    todo_info[151] = "LuaJIT TODO. [^\\0]"
-    todo_info[153] = "LuaJIT TODO. [^\\0]"
-end
 
 local function split (line)
     local pattern, target, result, desc = '', '', '', ''

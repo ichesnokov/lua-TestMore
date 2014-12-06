@@ -65,9 +65,6 @@ error_like(function () io.close(f) end,
            "^[^:]+:%d+: attempt to use a closed file",
            "function close (closed)")
 
-if jit then
-    todo("LuaJIT TODO. open mode")
-end
 error_like(function () io.open('file.txt', 'baz') end,
            "^[^:]+:%d+: bad argument #2 to 'open' %(invalid mode%)",
            "function open (bad mode)")

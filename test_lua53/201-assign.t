@@ -34,14 +34,10 @@ plan(38)
 is(b, nil, "global variable")
 b = 10
 is(b, 10)
-if jit then
-    skip("LuaJIT intentional. _ENV.", 3)
-else
-    is(_ENV.b, 10, "_ENV")
-    is(_G, _ENV, "_G")
-    error_like([[ _ENV = nil; b = 20 ]],
-               "^[^:]+:%d+: attempt to index a nil value %(upvalue '_ENV'%)")
-end
+is(_ENV.b, 10, "_ENV")
+is(_G, _ENV, "_G")
+error_like([[ _ENV = nil; b = 20 ]],
+           "^[^:]+:%d+: attempt to index a nil value %(upvalue '_ENV'%)")
 b = nil
 is(b, nil)
 

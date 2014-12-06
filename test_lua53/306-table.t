@@ -68,9 +68,6 @@ is(table.concat(t, ','), 'c,d,a,b')
 table.insert(t, 5, 'e')
 is(table.concat(t, ','), 'c,d,a,b,e')
 
-if jit then
-    todo("LuaJIT TODO. table.insert.", 2)
-end
 error_like(function () table.insert(t, 7, 'f') end,
            "^[^:]+:%d+: bad argument #2 to 'insert' %(position out of bounds%)",
            "function insert (out of bounds)")
@@ -109,9 +106,6 @@ a = table.remove(t,1)
 is(a, 'a')
 is(table.concat(t, ','), 'b,d')
 
-if jit then
-    todo("LuaJIT TODO. table.remove.", 1)
-end
 error_like(function () table.remove(t,7) end,
            "^[^:]+:%d+: bad argument #1 to 'remove' %(position out of bounds%)",
            "function remove (out of bounds)")

@@ -28,9 +28,6 @@ This library was introduced in Lua 5.2 and deprecated in Lua 5.3.
 
 require 'Test.More'
 
-if jit then
-    skip_all("LuaJIT. bit32")
-end
 if platform and not platform.compat then
     skip_all("bit32 (removed)")
 end

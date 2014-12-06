@@ -106,9 +106,6 @@ is(count, 42)
 
 co = coroutine.create(function () print "thread" end)
 hook = debug.gethook(co)
-if jit then
-    todo("LuaJIT TODO. debug.gethook(thread)", 1)
-end
 is(hook, nil, "function gethook(thread)")
 
 local name = debug.setlocal(0, 1, 0)
@@ -137,11 +134,7 @@ is(name, nil)
 
 local u = io.tmpfile()
 local old = debug.getuservalue(u)
-if jit then
-    type_ok(old, 'table', "function getuservalue")
-else
-    is(old, nil, "function getuservalue")
-end
+is(old, nil, "function getuservalue")
 is(debug.getuservalue(true), nil)
 local data = {}
 r = debug.setuservalue(u, data)

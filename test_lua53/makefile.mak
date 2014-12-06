@@ -1,6 +1,5 @@
 # nmake /F makefile.mak
 
-LUAJIT = luajit.exe
 LUA = lua.exe
 LUAC = luac.exe
 
@@ -13,9 +12,6 @@ harness: env
 
 sanity: env
 	@prove --exec=$(LUA) 0*.t
-
-luajit: env
-	@prove --exec=$(LUAJIT) *.t
 
 env:
 	@set LUA_PATH=;;../src/?.lua

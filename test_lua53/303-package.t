@@ -45,14 +45,8 @@ type_ok(package.path, 'string')
 type_ok(package.preload, 'table', "table package.preload")
 is(# package.preload, 0)
 
-if jit then
-    type_ok(package.loaders, 'table', "table package.loaders")
-    todo("LuaJIT TODO. package.searchers", 1)
-    is(package.searchers, package.loaders, "alias")
-else
-    type_ok(package.searchers, 'table', "table package.searchers")
-    is(package.loaders, nil)
-end
+type_ok(package.searchers, 'table', "table package.searchers")
+is(package.loaders, nil)
 
 local m = require 'Test.More'
 m.ok(true, "function require")

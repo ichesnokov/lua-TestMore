@@ -88,9 +88,6 @@ is(#t, 42, "__len")
 t = {}
 mt = { __len=function () return nil end }
 setmetatable(t, mt)
-if jit then
-    todo("LuaJIT TODO. __len.", 1)
-end
 error_like(function () print(table.concat(t)) end,
            "object length is not a.-er",
            "__len invalid")
@@ -322,7 +319,7 @@ end
 table.sort(r)
 is( table.concat(r, ','), 'a,b,c', "__pairs" )
 
-if (platform and platform.compat) or jit then
+if platform and platform.compat then
     local t = {
         _VALUES = { 'a', 'b', 'c' }
     }

@@ -31,11 +31,7 @@ require 'Test.More'
 
 plan(163)
 
-if jit then
-    like(_VERSION, '^Lua 5%.1$', "variable _VERSION")
-else
-    like(_VERSION, '^Lua 5%.3$', "variable _VERSION")
-end
+like(_VERSION, '^Lua 5%.3$', "variable _VERSION")
 
 v, msg = assert('text', "assert string")
 is(v, 'text', "function assert")
@@ -56,28 +52,16 @@ error_like(function () assert(false, 42) end,
            "function assert(false, 42)")
 
 is(collectgarbage('stop'), 0, "function collectgarbage 'stop/restart/collect'")
-if jit then
-    skip("LuaJIT. gc isrunning", 1)
-else
-    is(collectgarbage('isrunning'), false)
-end
+is(collectgarbage('isrunning'), false)
 is(collectgarbage('step'), false)
 is(collectgarbage('restart'), 0)
-if jit then
-    skip("LuaJIT. gc isrunning", 1)
-else
-    is(collectgarbage('isrunning'), true)
-end
+is(collectgarbage('isrunning'), true)
 is(collectgarbage('step'), false)
 is(collectgarbage('collect'), 0)
 is(collectgarbage('setpause', 10), 200)
 is(collectgarbage('setstepmul', 200), 200)
 is(collectgarbage(), 0)
-if jit then
-    skip("LuaJIT. gc mode gen/inc", 1)
-else
-    is(collectgarbage('step'), false)
-end
+is(collectgarbage('step'), false)
 
 type_ok(collectgarbage('count'), 'number', "function collectgarbage 'count'")
 
