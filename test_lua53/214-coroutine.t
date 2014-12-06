@@ -29,7 +29,7 @@ See "Programming in Lua", section 9 "Coroutines".
 
 require 'Test.More'
 
-plan(30)
+plan(31)
 
 --[[ ]]
 output = {}
@@ -182,6 +182,7 @@ like(msg, "^[^:]+:%d+: in coro$")
 error_like(function () coroutine.yield() end,
            "attempt to yield")
 
+is(coroutine.isyieldable(), false, "isyieldable")
 
 -- Local Variables:
 --   mode: lua

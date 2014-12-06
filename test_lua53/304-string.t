@@ -31,7 +31,7 @@ See "Programming in Lua", section 20 "The String Library".
 
 require 'Test.More'
 
-plan(115)
+plan(169)
 
 is(string.byte('ABC'), 65, "function byte")
 is(string.byte('ABC', 2), 66)
@@ -285,6 +285,82 @@ is(string.sub('abcde', 3, 2), '')
 is(string.upper('Test'), 'TEST', "function upper")
 is(string.upper('TeSt'), 'TEST')
 is(string.upper(string.rep('Test', 10000)), string.rep('TEST', 10000))
+
+is(string.pack('b', 0x31), '\x31', "function pack")
+is(string.pack('>b', 0x31), '\x31')
+is(string.pack('<b', 0x31), '\x31')
+is(string.pack('>B', 0x91), '\x91')
+is(string.pack('<B', 0x91), '\x91')
+is(string.byte(string.pack('<h', 1)), 1)
+is(string.byte(string.pack('>h', 1):reverse()), 1)
+is(string.byte(string.pack('<H', 1)), 1)
+is(string.byte(string.pack('>H', 1):reverse()), 1)
+is(string.byte(string.pack('<l', 1)), 1)
+is(string.byte(string.pack('>l', 1):reverse()), 1)
+is(string.byte(string.pack('<L', 1)), 1)
+is(string.byte(string.pack('>L', 1):reverse()), 1)
+is(string.byte(string.pack('<j', 1)), 1)
+is(string.byte(string.pack('>j', 1):reverse()), 1)
+is(string.byte(string.pack('<J', 1)), 1)
+is(string.byte(string.pack('>J', 1):reverse()), 1)
+is(string.byte(string.pack('<T', 1)), 1)
+is(string.byte(string.pack('>T', 1):reverse()), 1)
+is(string.byte(string.pack('<i', 1)), 1)
+is(string.byte(string.pack('>i', 1):reverse()), 1)
+is(string.byte(string.pack('<I', 1)), 1)
+is(string.byte(string.pack('>I', 1):reverse()), 1)
+is(string.pack('i1', 0):len(), 1)
+is(string.pack('i2', 0):len(), 2)
+is(string.pack('i4', 0):len(), 4)
+is(string.pack('i8', 0):len(), 8)
+is(string.pack('i16', 0):len(), 16)
+error_like(function () string.pack('i20', 0) end,
+           "^[^:]+:%d+: integral size %(20%) out of limits %[1,16%]",
+           "function pack out limit")
+
+is(string.pack('!2 i1 i4', 0, 0):len(), 6)
+is(string.pack('i1 Xb i1', 0, 0):len(), 2)
+is(string.pack('i1 x x i1', 0, 0):len(), 4)
+
+is(string.pack('c3', 'foo'), 'foo')
+is(string.pack('z', 'foo'), 'foo\0')
+
+error_like(function () string.pack('w', 0) end,
+           "^[^:]+:%d+: invalid format option 'w'",
+           "function pack invalid format")
+
+error_like(function () string.pack('i1 Xz i1', 0, 0) end,
+           "^[^:]+:%d+: bad argument #1 to 'pack' %(invalid next option for option 'X'%)",
+           "function pack invalid next")
+
+error_like(function () string.pack('i', 'foo') end,
+           "^[^:]+:%d+: bad argument #2 to 'pack' %(number expected, got string%)",
+           "function pack bad arg")
+
+error_like(function () string.pack('c4', 'foo') end,
+           "^[^:]+:%d+: bad argument #2 to 'pack' %(wrong length%)",
+           "function pack wrong length")
+
+is(string.unpack('<h', string.pack('>h', 1):reverse()), 1, "function unpack")
+is(string.unpack('<H', string.pack('>H', 1):reverse()), 1)
+is(string.unpack('<l', string.pack('>l', 1):reverse()), 1)
+is(string.unpack('<L', string.pack('>L', 1):reverse()), 1)
+is(string.unpack('<j', string.pack('>j', 1):reverse()), 1)
+is(string.unpack('<J', string.pack('>J', 1):reverse()), 1)
+is(string.unpack('<T', string.pack('>T', 1):reverse()), 1)
+is(string.unpack('<i', string.pack('>i', 1):reverse()), 1)
+is(string.unpack('<I', string.pack('>I', 1):reverse()), 1)
+is(string.unpack('<f', string.pack('>f', 1.0):reverse()), 1.0)
+is(string.unpack('<d', string.pack('>d', 1.0):reverse()), 1.0)
+is(string.unpack('<n', string.pack('>n', 1.0):reverse()), 1.0)
+
+is(string.unpack('c3', string.pack('c3', 'foo')), 'foo')
+is(string.unpack('z', string.pack('z', 'foo')), 'foo')
+is(string.unpack('s', string.pack('s', 'foo')), 'foo')
+
+error_like(function () string.unpack('c4', 'foo') end,
+           "^[^:]+:%d+: bad argument #2 to 'unpack' %(data string too short%)",
+           "function unpack data too short")
 
 -- Local Variables:
 --   mode: lua

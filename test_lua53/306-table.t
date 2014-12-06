@@ -31,7 +31,7 @@ See "Programming in Lua", section 19 "The Table Library".
 
 require 'Test.More'
 
-plan(40)
+plan(48)
 
 t = {'a','b','c','d','e'}
 is(table.concat(t), 'abcde', "function concat")
@@ -212,6 +212,34 @@ eq_array({table.unpack({'a','b','c'})}, {'a','b','c'})
 eq_array({(table.unpack({'a','b','c'}))}, {'a'})
 eq_array({table.unpack({'a','b','c','d','e'},2,4)}, {'b','c','d'})
 eq_array({table.unpack({'a','b','c'},2,4)}, {'b','c'})
+
+a = {'a', 'b', 'c'}
+t = { 1, 2, 3, 4}
+table.move(a, 1, 3, 1, t)
+eq_array(t, {'a', 'b', 'c', 4}, "function move")
+table.move(a, 1, 3, 3, t)
+eq_array(t, {'a', 'b', 'a', 'b', 'c'})
+
+table.move(a, 1, 3, 1)
+eq_array(a, {'a', 'b', 'c'})
+table.move(a, 1, 3, 3)
+eq_array(a, {'a', 'b', 'a', 'b', 'c'})
+
+error_like(function () table.move(a, -2, 1, 1) end,
+           "^[^:]+:%d+: bad argument #2 to 'move' %(initial position must be positive%)",
+           "function move (negative)")
+
+error_like(function () table.move(a, 1, 2, 1, 2) end,
+           "^[^:]+:%d+: bad argument #5 to 'move' %(table expected, got number%)",
+           "function move (bad arg)")
+
+error_like(function () table.move(a, 1, 2) end,
+           "^[^:]+:%d+: bad argument #4 to 'move' %(number expected, got no value%)",
+           "function move (bad arg)")
+
+error_like(function () table.move(a, 1) end,
+           "^[^:]+:%d+: bad argument #3 to 'move' %(number expected, got no value%)",
+           "function move (bad arg)")
 
 -- Local Variables:
 --   mode: lua

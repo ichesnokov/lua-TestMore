@@ -31,14 +31,19 @@ See "Programming in Lua", section 18 "The Mathematical Library".
 
 require 'Test.More'
 
-plan(47)
+plan(67)
 
 like(tostring(math.pi), '^3%.14', "variable pi")
 
 type_ok(math.huge, 'number', "variable huge")
 
-is(math.abs(-12.34), 12.34, "function abs")
+type_ok(math.maxinteger, 'number', "variable maxinteger")
+type_ok(math.mininteger, 'number', "variable mininteger")
+
+is(math.abs(-12.34), 12.34, "function abs (float)")
 is(math.abs(12.34), 12.34)
+is(math.abs(-12), 12, "function abs (integer)")
+is(math.abs(12), 12)
 
 like(math.acos(0.5), '^1%.047', "function acos")
 
@@ -54,6 +59,7 @@ end
 
 is(math.ceil(12.34), 13, "function ceil")
 is(math.ceil(-12.34), -12)
+is(math.ceil(-12), -12)
 
 like(math.cos(0), '^1%.?', "function cos")
 
@@ -69,9 +75,17 @@ like(math.exp(1.0), '^2%.718', "function exp")
 
 is(math.floor(12.34), 12, "function floor")
 is(math.floor(-12.34), -13)
+is(math.floor(-12), -12)
 
 is(math.fmod(7, 3), 1, "function fmod")
 is(math.fmod(-7, 3), -1)
+is(math.fmod(-7, -1), 0)
+is(math.fmod(7, 0.5), 0.0)
+is(math.fmod(-7, -0.5), 0.0)
+
+error_like(function () math.fmod(7, 0) end,
+           "^[^:]+:%d+: bad argument #2 to 'fmod' %(zero%)",
+           "function fmod 0")
 
 if platform and platform.compat then
     eq_array({math.frexp(1.5)}, {0.75, 1}, "function frexp")
@@ -112,6 +126,7 @@ is(math.min(1, 2), 1)
 is(math.min(1, 2, 3, -4), -4)
 
 eq_array({math.modf(2.25)}, {2, 0.25}, "function modf")
+eq_array({math.modf(2)}, {2, 0})
 
 if platform and platform.compat then
     is(math.pow(-2, 3), -8, "function pow")
@@ -162,6 +177,18 @@ if platform and platform.compat then
 else
     is(math.tanh, nil, "function tanh (removed)")
 end
+
+is(math.tointeger(-12), -12, "function tointeger")
+is(math.tointeger(-12.0), -12)
+is(math.tointeger(-12.34), nil)
+
+is(math.type(3), 'integer', "function type")
+is(math.type(3.14), 'float')
+is(math.type('3.14'), nil)
+
+is(math.ult(2, 3), true, "function ult")
+is(math.ult(2, 2), false)
+is(math.ult(2, 1), false)
 
 -- Local Variables:
 --   mode: lua

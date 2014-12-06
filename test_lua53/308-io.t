@@ -33,7 +33,7 @@ require 'Test.More'
 
 local lua = (platform and platform.lua) or arg[-1]
 
-plan(67)
+plan(70)
 
 like(io.stdin, '^file %(0?[Xx]?%x+%)$', "variable stdin")
 
@@ -174,6 +174,22 @@ n1, n2 = f:read('*n', '*n')
 is(n1, nil, "method read *n")
 is(n2, nil)
 f:close()
+
+f = io.open('file.num', 'w')
+f:write('1\n')
+f:write('0xFF\n')
+f:write(string.rep('012', 90) .. '\n')
+f:close()
+
+f = io.open('file.num')
+n1, n2 = f:read('n', 'n')
+is(n1, 1, "method read *n")
+is(n2, 255, "method read *n")
+n = f:read('n')
+is(n, nil, "method read *n too long")
+f:close()
+
+os.remove('file.num') -- clean up
 
 f = io.open('file.txt')
 s = f:read('*a')

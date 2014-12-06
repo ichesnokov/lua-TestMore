@@ -98,7 +98,14 @@ error_like(function () dofile('foo.lua') end,
            "function dofile (syntax error)")
 os.remove('foo.lua') -- clean up
 
-a = {'a','b','c'}
+a = setmetatable({
+  [1] = 'a',
+  [3] = 'c',
+}, {
+  __index = {
+    [2] = 'b',
+  }
+})
 local f, v, s = ipairs(a)
 type_ok(f, 'function', "function ipairs")
 type_ok(v, 'table')
