@@ -31,7 +31,7 @@ See "Programming in Lua", section 20 "The String Library".
 
 require 'Test.More'
 
-plan(169)
+plan(174)
 
 is(string.byte('ABC'), 65, "function byte")
 is(string.byte('ABC', 2), 66)
@@ -288,8 +288,10 @@ is(string.upper(string.rep('Test', 10000)), string.rep('TEST', 10000))
 
 is(string.pack('b', 0x31), '\x31', "function pack")
 is(string.pack('>b', 0x31), '\x31')
+is(string.pack('=b', 0x31), '\x31')
 is(string.pack('<b', 0x31), '\x31')
 is(string.pack('>B', 0x91), '\x91')
+is(string.pack('=B', 0x91), '\x91')
 is(string.pack('<B', 0x91), '\x91')
 is(string.byte(string.pack('<h', 1)), 1)
 is(string.byte(string.pack('>h', 1):reverse()), 1)
@@ -361,6 +363,16 @@ is(string.unpack('s', string.pack('s', 'foo')), 'foo')
 error_like(function () string.unpack('c4', 'foo') end,
            "^[^:]+:%d+: bad argument #2 to 'unpack' %(data string too short%)",
            "function unpack data too short")
+
+error_like(function () string.unpack('c', 'foo') end,
+           "^[^:]+:%d+: missing size for format option 'c'",
+           "function unpack missing size")
+
+is(string.packsize('b'), 1, "function packsize")
+
+error_like(function () string.packsize('z') end,
+           "^[^:]+:%d+: bad argument #1 to 'packsize' %(variable%-length format%)",
+           "function packsize bad arg")
 
 -- Local Variables:
 --   mode: lua
