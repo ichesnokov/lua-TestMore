@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2011, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(51)
+plan(54)
 
 is(- '1', -1, "-'1'")
 
@@ -115,6 +115,12 @@ is('1' .. 2, '12', "'1' .. 2")
 error_like(function () return '1' .. true end,
            "^[^:]+:%d+: attempt to concatenate a boolean value",
            "'1' .. true")
+
+is('foo\0bar' <= 'foo\0baz', true, "'foo\\0bar' <= 'foo\\0baz'")
+
+is('foo\0bar' ~= 'foo', true, "'foo\\0bar' ~= 'foo'")
+
+is('foo\0bar' >= 'foo', true, "'foo\\0bar' >= 'foo'")
 
 is('1.0' == '1', false, "'1.0' == '1'")
 

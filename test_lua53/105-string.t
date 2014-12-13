@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(79)
+plan(82)
 
 is(- '1', -1, "-'1'")
 
@@ -197,6 +197,12 @@ is('1' .. 2, '12', "'1' .. 2")
 error_like(function () return '1' .. true end,
            "^[^:]+:%d+: attempt to concatenate a boolean value",
            "'1' .. true")
+
+is('foo\0bar' <= 'foo\0baz', true, "'foo\\0bar' <= 'foo\\0baz'")
+
+is('foo\0bar' ~= 'foo', true, "'foo\\0bar' ~= 'foo'")
+
+is('foo\0bar' >= 'foo', true, "'foo\\0bar' >= 'foo'")
 
 is('1.0' == '1', false, "'1.0' == '1'")
 
