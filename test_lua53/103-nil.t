@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(24)
+plan(31)
 
 error_like(function () return -nil end,
            "^[^:]+:%d+: attempt to perform arithmetic on a nil value",
@@ -33,6 +33,10 @@ error_like(function () return -nil end,
 error_like(function () return #nil end,
            "^[^:]+:%d+: attempt to get length of a nil value",
            "#nil")
+
+error_like(function () return ~nil end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a nil value",
+           "~nil")
 
 is(not nil, true, "not nil")
 
@@ -63,6 +67,30 @@ error_like(function () return nil ^ 3 end,
 error_like(function () return nil .. 'end' end,
            "^[^:]+:%d+: attempt to concatenate a nil value",
            "nil .. 'end'")
+
+error_like(function () return  nil // 3 end,
+           "^[^:]+:%d+: attempt to perform arithmetic on a nil value",
+           "nil // 3")
+
+error_like(function () return nil & 7 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a nil value",
+           "nil & 7")
+
+error_like(function () return nil | 1 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a nil value",
+           "nil | 1")
+
+error_like(function () return nil ~ 4 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a nil value",
+           "nil ~ 4")
+
+error_like(function () return nil >> 5 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a nil value",
+           "nil >> 5")
+
+error_like(function () return nil << 2 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a nil value",
+           "nil << 2")
 
 is(nil == nil, true, "nil == nil")
 

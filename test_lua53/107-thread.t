@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2011, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(25)
+plan(32)
 
 co = coroutine.create(function () return 1 end)
 
@@ -35,6 +35,10 @@ error_like(function () return -co end,
 error_like(function () return #co end,
            "^[^:]+:%d+: attempt to get length of",
            "#co")
+
+error_like(function () return ~co end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a thread value",
+           "~co")
 
 is(not co, false, "not co")
 
@@ -65,6 +69,30 @@ error_like(function () return co ^ 3 end,
 error_like(function () return co .. 'end' end,
            "^[^:]+:%d+: attempt to concatenate",
            "co .. 'end'")
+
+error_like(function () return co // 3 end,
+           "^[^:]+:%d+: attempt to perform arithmetic on",
+           "co // 3")
+
+error_like(function () return co & 7 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a thread value",
+           "co & 7")
+
+error_like(function () return co | 1 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a thread value",
+           "co | 1")
+
+error_like(function () return co ~ 4 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a thread value",
+           "co ~ 4")
+
+error_like(function () return co >> 5 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a thread value",
+           "co >> 5")
+
+error_like(function () return co << 2 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a thread value",
+           "co << 2")
 
 is(co == co, true, "co == co")
 

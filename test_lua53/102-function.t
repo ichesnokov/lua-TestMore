@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2011, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(51)
+plan(65)
 
 f = function () return 1 end
 
@@ -41,6 +41,13 @@ error_like(function () return #f end,
 
 error_like(function () f = print; return #f end,
            "^[^:]+:%d+: attempt to get length of")
+
+error_like(function () return ~f end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value",
+           "~f")
+
+error_like(function () f = print; return ~f end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value")
 
 is(not f, false, "not f")
 
@@ -94,6 +101,48 @@ error_like(function () return f .. 'end' end,
 
 error_like(function () f = print; return f .. 'end' end,
            "^[^:]+:%d+: attempt to concatenate")
+
+error_like(function () return f // 3 end,
+           "^[^:]+:%d+: attempt to perform arithmetic on",
+           "f // 3")
+
+error_like(function () f = print; return f // 3 end,
+           "^[^:]+:%d+: attempt to perform arithmetic on")
+
+error_like(function () return f & 7 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value",
+           "f & 7")
+
+error_like(function () f = print; return f & 7 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value")
+
+error_like(function () return f | 1 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value",
+           "f | 1")
+
+error_like(function () f = print; return f | 1 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value")
+
+error_like(function () return f ~ 4 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value",
+           "f ~ 4")
+
+error_like(function () f = print; return f ~ 4 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value")
+
+error_like(function () return f >> 5 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value",
+           "f >> 5")
+
+error_like(function () f = print; return f >> 5 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value")
+
+error_like(function () return f << 2 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value",
+           "f << 2")
+
+error_like(function () f = print; return f << 2 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a function value")
 
 g = f
 is(f == g, true, "f == f")

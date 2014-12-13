@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2011, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(25)
+plan(32)
 
 u = io.stdin
 
@@ -35,6 +35,10 @@ error_like(function () return -u end,
 error_like(function () return #u end,
            "^[^:]+:%d+: attempt to get length of",
            "#u")
+
+error_like(function () return ~u end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "~u")
 
 is(not u, false, "not u")
 
@@ -65,6 +69,30 @@ error_like(function () return u ^ 3 end,
 error_like(function () return u .. 'end' end,
            "^[^:]+:%d+: attempt to concatenate",
            "u .. 'end'")
+
+error_like(function () return u // 3 end,
+           "^[^:]+:%d+: attempt to perform arithmetic on",
+           "u // 3")
+
+error_like(function () return u & 7 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "u & 7")
+
+error_like(function () return u | 1 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "u | 1")
+
+error_like(function () return u ~ 4 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "u ~ 4")
+
+error_like(function () return u >> 5 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "u >> 5")
+
+error_like(function () return u << 2 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "u << 2")
 
 is(u == u, true, "u == u")
 

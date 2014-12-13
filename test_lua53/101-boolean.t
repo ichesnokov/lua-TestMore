@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(24)
+plan(31)
 
 error_like(function () return -true end,
            "^[^:]+:%d+: attempt to perform arithmetic on a %w+ value",
@@ -33,6 +33,10 @@ error_like(function () return -true end,
 error_like(function () return #true end,
            "^[^:]+:%d+: attempt to get length of a boolean value",
            "#true")
+
+error_like(function () return ~true end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "~true")
 
 is(not false, true, "not false")
 
@@ -63,6 +67,30 @@ error_like(function () return true ^ 3 end,
 error_like(function () return true .. 'end' end,
            "^[^:]+:%d+: attempt to concatenate a boolean value",
            "true .. 'end'")
+
+error_like(function () return true // 3 end,
+           "^[^:]+:%d+: attempt to perform arithmetic on a boolean value",
+           "true // 3")
+
+error_like(function () return true & 7 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "true & 7")
+
+error_like(function () return true | 1 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "true | 1")
+
+error_like(function () return true ~ 4 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "true ~ 4")
+
+error_like(function () return true >> 5 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "true >> 5")
+
+error_like(function () return true << 2 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "true << 2")
 
 is(true == true, true, "true == true")
 

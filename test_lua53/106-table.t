@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2011, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(28)
+plan(35)
 
 error_like(function () return -{} end,
            "^[^:]+:%d+: attempt to perform arithmetic on",
@@ -32,6 +32,10 @@ error_like(function () return -{} end,
 
 is(# {}, 0, "#{}")
 is(# {4,5,6}, 3)
+
+error_like(function () return ~{} end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a table value",
+           "~{}")
 
 is(not {}, false, "not {}")
 
@@ -62,6 +66,30 @@ error_like(function () return {} ^ 3 end,
 error_like(function () return {} .. 'end' end,
            "^[^:]+:%d+: attempt to concatenate",
            "{} .. 'end'")
+
+error_like(function () return {} // 3 end,
+           "^[^:]+:%d+: attempt to perform arithmetic on",
+           "{} // 3")
+
+error_like(function () return {} & 7 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a table value",
+           "{} & 7")
+
+error_like(function () return {} | 1 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a table value",
+           "{} | 1")
+
+error_like(function () return {} ~ 4 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a table value",
+           "{} ~ 4")
+
+error_like(function () return {} >> 5 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a table value",
+           "{} >> 5")
+
+error_like(function () return {} << 2 end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a table value",
+           "{} << 2")
 
 is({} == {}, false, "{} == {}")
 

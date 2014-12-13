@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2011, Perrad Francois
+-- Copyright (C) 2009-2014, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(51)
+plan(79)
 
 is(- '1', -1, "-'1'")
 
@@ -33,6 +33,12 @@ error_like(function () return - 'text' end,
            "-'text'")
 
 is(# 'text', 4, "#'text'")
+
+is(~'4', -5, "~'4'")
+
+error_like(function () return ~'text' end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a string value",
+           "~'text'")
 
 is(not 'text', false, "not 'text'")
 
@@ -47,6 +53,20 @@ is('-7' / 0.5, -14, "'-7' / 0.5")
 is('-25' % 3, 2, "'-25' % 3")
 
 is('3' ^ 3, 27, "'3' ^ 3")
+
+is('25.5' // 3.5, 7.0, "'25.5' // 3.5")
+
+is('25' // 3, 8, "'25' // 3")
+
+is('3' & 7, 3, "'3' & 7")
+
+is('4' | 1, 5, "'4' | 1")
+
+is('7' ~ 1, 6, "'7' ~ 1")
+
+is('100' >> 5, 3, "'100' >> 5")
+
+is('3' << 2, 12, "'3' << 2")
 
 error_like(function () return '10' + true end,
            "^[^:]+:%d+: attempt to perform arithmetic on a boolean value",
@@ -72,6 +92,30 @@ error_like(function () return '3' ^ true end,
            "^[^:]+:%d+: attempt to perform arithmetic on a boolean value",
            "'3' ^ true")
 
+error_like(function () return '25' // {} end,
+           "^[^:]+:%d+: attempt to perform arithmetic on a table value",
+           "'25' // {}")
+
+error_like(function () return '3' & true end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "'3' & true")
+
+error_like(function () return '4' | true end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "'4' | true")
+
+error_like(function () return '7' ~ true end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "'7' ~ true")
+
+error_like(function () return '100' >> true end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "'100' >> true")
+
+error_like(function () return '3' << true end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a boolean value",
+           "'3' << true")
+
 error_like(function () return '10' + 'text' end,
            "^[^:]+:%d+: attempt to perform arithmetic on a string value",
            "'10' + 'text'")
@@ -96,6 +140,30 @@ error_like(function () return '3' ^ 'text' end,
            "^[^:]+:%d+: attempt to perform arithmetic on a string value",
            "'3' ^ 'text'")
 
+error_like(function () return '25' // 'text' end,
+           "^[^:]+:%d+: attempt to perform arithmetic on a string value",
+           "'25' // 'text'")
+
+error_like(function () return '3' & 'text' end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a string value",
+           "'3' & 'text'")
+
+error_like(function () return '4' | 'text' end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a string value",
+           "'4' | 'text'")
+
+error_like(function () return '7' ~ 'text' end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a string value",
+           "'7' ~ 'text'")
+
+error_like(function () return '100' >> 'text' end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a string value",
+           "'100' >> 'text'")
+
+error_like(function () return '3' << 'text' end,
+           "^[^:]+:%d+: attempt to perform bitwise operation on a string value",
+           "'3' << 'text'")
+
 is('10' + '2', 12, "'10' + '2'")
 
 is('2' - '10', -8, "'2' - '10'")
@@ -107,6 +175,20 @@ is('-7' / '0.5', -14, "'-7' / '0.5'")
 is('-25' % '3', 2, "'-25' % '3'")
 
 is('3' ^ '3', 27, "'3' ^ '3'")
+
+is('25.5' // '3.5', 7.0, "'25.5' // '3.5'")
+
+is('25' // '3', 8, "'25' // '3'")
+
+is('3' & '7', 3, "'3' & '7'")
+
+is('4' | '1', 5, "'4' | '1'")
+
+is('7' ~ '1', 6, "'7' ~ '1'")
+
+is('100' >> '5', 3, "'100' >> '5'")
+
+is('3' << '2', 12, "'3' << 2")
 
 is('1' .. 'end', '1end', "'1' .. 'end'")
 
