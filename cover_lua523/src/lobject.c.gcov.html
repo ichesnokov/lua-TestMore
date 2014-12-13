@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">83</td>
-            <td class="headerCovTableEntry">93</td>
-            <td class="headerCovTableEntryMed">89.2 %</td>
+            <td class="headerCovTableEntry">94</td>
+            <td class="headerCovTableEntryMed">88.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2013-12-07</td>
+            <td class="headerValue">2014-12-13 17:48:25</td>
             <td></td>
           </tr>
           <tr>
@@ -118,7 +118,7 @@
 <span class="lineNum">      52 </span>            : }
 <span class="lineNum">      53 </span>            : 
 <span class="lineNum">      54 </span>            : 
-<span class="lineNum">      55 </span><span class="lineCov">      45118 : int luaO_ceillog2 (unsigned int x) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">      45112 : int luaO_ceillog2 (unsigned int x) {</span>
 <span class="lineNum">      56 </span>            :   static const lu_byte log_2[256] = {
 <span class="lineNum">      57 </span>            :     0,1,2,2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 <span class="lineNum">      58 </span>            :     6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
@@ -130,9 +130,9 @@
 <span class="lineNum">      64 </span>            :     8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8
 <span class="lineNum">      65 </span>            :   };
 <span class="lineNum">      66 </span>            :   int l = 0;
-<span class="lineNum">      67 </span><span class="lineCov">      45118 :   x--;</span>
-<span class="lineNum">      68 </span><span class="lineCov">      45161 :   while (x &gt;= 256) { l += 8; x &gt;&gt;= 8; }</span>
-<span class="lineNum">      69 </span><span class="lineCov">      45118 :   return l + log_2[x];</span>
+<span class="lineNum">      67 </span><span class="lineCov">      45112 :   x--;</span>
+<span class="lineNum">      68 </span><span class="lineCov">      45112 :   while (x &gt;= 256) { l += 8; x &gt;&gt;= 8; }</span>
+<span class="lineNum">      69 </span><span class="lineCov">      45112 :   return l + log_2[x];</span>
 <span class="lineNum">      70 </span>            : }
 <span class="lineNum">      71 </span>            : 
 <span class="lineNum">      72 </span>            : 
@@ -142,7 +142,7 @@
 <span class="lineNum">      76 </span><span class="lineCov">          5 :     case LUA_OPSUB: return luai_numsub(NULL, v1, v2);</span>
 <span class="lineNum">      77 </span><span class="lineCov">          7 :     case LUA_OPMUL: return luai_nummul(NULL, v1, v2);</span>
 <span class="lineNum">      78 </span><span class="lineCov">          7 :     case LUA_OPDIV: return luai_numdiv(NULL, v1, v2);</span>
-<span class="lineNum">      79 </span><span class="lineCov">          5 :     case LUA_OPMOD: return luai_nummod(NULL, v1, v2);</span>
+<span class="lineNum">      79 </span><span class="lineCov">         10 :     case LUA_OPMOD: return luai_nummod(NULL, v1, v2);</span>
 <span class="lineNum">      80 </span><span class="lineCov">          5 :     case LUA_OPPOW: return luai_numpow(NULL, v1, v2);</span>
 <span class="lineNum">      81 </span><span class="lineCov">          1 :     case LUA_OPUNM: return luai_numunm(NULL, v1);</span>
 <span class="lineNum">      82 </span>            :     default: lua_assert(0); return 0;
@@ -221,7 +221,7 @@
 <span class="lineNum">     155 </span>            : #endif
 <span class="lineNum">     156 </span>            : 
 <span class="lineNum">     157 </span>            : 
-<span class="lineNum">     158 </span><span class="lineCov">       5874 : int luaO_str2d (const char *s, size_t len, lua_Number *result) {</span>
+<span class="lineNum">     158 </span><span class="lineCov">       2937 : int luaO_str2d (const char *s, size_t len, lua_Number *result) {</span>
 <span class="lineNum">     159 </span>            :   char *endptr;
 <span class="lineNum">     160 </span><span class="lineCov">       2937 :   if (strpbrk(s, &quot;nN&quot;))  /* reject 'inf' and 'nan' */</span>
 <span class="lineNum">     161 </span>            :     return 0;
@@ -230,7 +230,7 @@
 <span class="lineNum">     164 </span>            :   else
 <span class="lineNum">     165 </span><span class="lineCov">       2871 :     *result = lua_str2number(s, &amp;endptr);</span>
 <span class="lineNum">     166 </span><span class="lineCov">       2937 :   if (endptr == s) return 0;  /* nothing recognized */</span>
-<span class="lineNum">     167 </span><span class="lineCov">       2919 :   while (lisspace(cast_uchar(*endptr))) endptr++;</span>
+<span class="lineNum">     167 </span><span class="lineCov">          2 :   while (lisspace(cast_uchar(*endptr))) endptr++;</span>
 <span class="lineNum">     168 </span><span class="lineCov">       2917 :   return (endptr == s + len);  /* OK if no trailing characters */</span>
 <span class="lineNum">     169 </span>            : }
 <span class="lineNum">     170 </span>            : 
@@ -242,7 +242,7 @@
 <span class="lineNum">     176 </span>            : 
 <span class="lineNum">     177 </span>            : 
 <span class="lineNum">     178 </span>            : /* this function handles only `%d', `%c', %f, %p, and `%s' formats */
-<span class="lineNum">     179 </span><span class="lineCov">       1890 : const char *luaO_pushvfstring (lua_State *L, const char *fmt, va_list argp) {</span>
+<span class="lineNum">     179 </span><span class="lineCov">        945 : const char *luaO_pushvfstring (lua_State *L, const char *fmt, va_list argp) {</span>
 <span class="lineNum">     180 </span>            :   int n = 0;
 <span class="lineNum">     181 </span>            :   for (;;) {
 <span class="lineNum">     182 </span><span class="lineCov">       2784 :     const char *e = strchr(fmt, '%');</span>
@@ -283,7 +283,7 @@
 <span class="lineNum">     217 </span>            :       default: {
 <span class="lineNum">     218 </span><span class="lineNoCov">          0 :         luaG_runerror(L,</span>
 <span class="lineNum">     219 </span>            :             &quot;invalid option &quot; LUA_QL(&quot;%%%c&quot;) &quot; to &quot; LUA_QL(&quot;lua_pushfstring&quot;),
-<span class="lineNum">     220 </span>            :             *(e + 1));
+<span class="lineNum">     220 </span><span class="lineNoCov">          0 :             *(e + 1));</span>
 <span class="lineNum">     221 </span>            :       }
 <span class="lineNum">     222 </span>            :     }
 <span class="lineNum">     223 </span><span class="lineCov">       1839 :     n += 2;</span>
@@ -359,7 +359,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
   </table>
   <br>
 

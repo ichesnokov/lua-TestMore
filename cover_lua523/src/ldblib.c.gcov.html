@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2013-12-07</td>
+            <td class="headerValue">2014-12-13 17:48:25</td>
             <td></td>
           </tr>
           <tr>
@@ -322,21 +322,21 @@
 <span class="lineNum">     256 </span>            : #define gethooktable(L) luaL_getsubtable(L, LUA_REGISTRYINDEX, HOOKKEY)
 <span class="lineNum">     257 </span>            : 
 <span class="lineNum">     258 </span>            : 
-<span class="lineNum">     259 </span><span class="lineCov">       1249 : static void hookf (lua_State *L, lua_Debug *ar) {</span>
+<span class="lineNum">     259 </span><span class="lineCov">       1284 : static void hookf (lua_State *L, lua_Debug *ar) {</span>
 <span class="lineNum">     260 </span>            :   static const char *const hooknames[] =
 <span class="lineNum">     261 </span>            :     {&quot;call&quot;, &quot;return&quot;, &quot;line&quot;, &quot;count&quot;, &quot;tail call&quot;};
-<span class="lineNum">     262 </span><span class="lineCov">       1249 :   gethooktable(L);</span>
-<span class="lineNum">     263 </span><span class="lineCov">       1249 :   lua_pushthread(L);</span>
-<span class="lineNum">     264 </span><span class="lineCov">       1249 :   lua_rawget(L, -2);</span>
-<span class="lineNum">     265 </span><span class="lineCov">       1249 :   if (lua_isfunction(L, -1)) {</span>
-<span class="lineNum">     266 </span><span class="lineCov">       1249 :     lua_pushstring(L, hooknames[(int)ar-&gt;event]);</span>
-<span class="lineNum">     267 </span><span class="lineCov">       1249 :     if (ar-&gt;currentline &gt;= 0)</span>
+<span class="lineNum">     262 </span><span class="lineCov">       1284 :   gethooktable(L);</span>
+<span class="lineNum">     263 </span><span class="lineCov">       1284 :   lua_pushthread(L);</span>
+<span class="lineNum">     264 </span><span class="lineCov">       1284 :   lua_rawget(L, -2);</span>
+<span class="lineNum">     265 </span><span class="lineCov">       1284 :   if (lua_isfunction(L, -1)) {</span>
+<span class="lineNum">     266 </span><span class="lineCov">       1284 :     lua_pushstring(L, hooknames[(int)ar-&gt;event]);</span>
+<span class="lineNum">     267 </span><span class="lineCov">       1284 :     if (ar-&gt;currentline &gt;= 0)</span>
 <span class="lineNum">     268 </span><span class="lineNoCov">          0 :       lua_pushinteger(L, ar-&gt;currentline);</span>
-<span class="lineNum">     269 </span><span class="lineCov">       1249 :     else lua_pushnil(L);</span>
+<span class="lineNum">     269 </span><span class="lineCov">       1284 :     else lua_pushnil(L);</span>
 <span class="lineNum">     270 </span>            :     lua_assert(lua_getinfo(L, &quot;lS&quot;, ar));
-<span class="lineNum">     271 </span><span class="lineCov">       1249 :     lua_call(L, 2, 0);</span>
+<span class="lineNum">     271 </span><span class="lineCov">       1284 :     lua_call(L, 2, 0);</span>
 <span class="lineNum">     272 </span>            :   }
-<span class="lineNum">     273 </span><span class="lineCov">       1249 : }</span>
+<span class="lineNum">     273 </span><span class="lineCov">       1284 : }</span>
 <span class="lineNum">     274 </span>            : 
 <span class="lineNum">     275 </span>            : 
 <span class="lineNum">     276 </span><span class="lineCov">          1 : static int makemask (const char *smask, int count) {</span>
@@ -407,11 +407,11 @@
 <span class="lineNum">     341 </span>            : }
 <span class="lineNum">     342 </span>            : 
 <span class="lineNum">     343 </span>            : 
-<span class="lineNum">     344 </span><span class="lineCov">          2 : static int db_debug (lua_State *L) {</span>
+<span class="lineNum">     344 </span><span class="lineCov">          1 : static int db_debug (lua_State *L) {</span>
 <span class="lineNum">     345 </span>            :   for (;;) {
 <span class="lineNum">     346 </span>            :     char buffer[250];
-<span class="lineNum">     347 </span><span class="lineCov">          3 :     luai_writestringerror(&quot;%s&quot;, &quot;lua_debug&gt; &quot;);</span>
-<span class="lineNum">     348 </span><span class="lineCov">          3 :     if (fgets(buffer, sizeof(buffer), stdin) == 0 ||</span>
+<span class="lineNum">     347 </span><span class="lineCov">          6 :     luai_writestringerror(&quot;%s&quot;, &quot;lua_debug&gt; &quot;);</span>
+<span class="lineNum">     348 </span><span class="lineCov">          9 :     if (fgets(buffer, sizeof(buffer), stdin) == 0 ||</span>
 <span class="lineNum">     349 </span><span class="lineCov">          3 :         strcmp(buffer, &quot;cont\n&quot;) == 0)</span>
 <span class="lineNum">     350 </span><span class="lineCov">          1 :       return 0;</span>
 <span class="lineNum">     351 </span><span class="lineCov">          4 :     if (luaL_loadbuffer(L, buffer, strlen(buffer), &quot;=(debug command)&quot;) ||</span>
@@ -470,7 +470,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
   </table>
   <br>
 

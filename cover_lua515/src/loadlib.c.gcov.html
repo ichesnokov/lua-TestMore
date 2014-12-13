@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.1.5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">173</td>
+            <td class="headerCovTableEntry">171</td>
             <td class="headerCovTableEntry">250</td>
-            <td class="headerCovTableEntryLo">69.2 %</td>
+            <td class="headerCovTableEntryLo">68.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-02-18</td>
+            <td class="headerValue">2014-12-13 17:49:16</td>
             <td></td>
           </tr>
           <tr>
@@ -399,18 +399,18 @@
 <span class="lineNum">     333 </span><span class="lineCov">        158 :   FILE *f = fopen(filename, &quot;r&quot;);  /* try to open file */</span>
 <span class="lineNum">     334 </span><span class="lineCov">        158 :   if (f == NULL) return 0;  /* open failed */</span>
 <span class="lineNum">     335 </span><span class="lineCov">         72 :   fclose(f);</span>
-<span class="lineNum">     336 </span><span class="lineCov">        158 :   return 1;</span>
+<span class="lineNum">     336 </span><span class="lineCov">         72 :   return 1;</span>
 <span class="lineNum">     337 </span>            : }
 <span class="lineNum">     338 </span>            : 
 <span class="lineNum">     339 </span>            : 
 <span class="lineNum">     340 </span><span class="lineCov">        162 : static const char *pushnexttemplate (lua_State *L, const char *path) {</span>
 <span class="lineNum">     341 </span>            :   const char *l;
-<span class="lineNum">     342 </span><span class="lineCov">        318 :   while (*path == *LUA_PATHSEP) path++;  /* skip separators */</span>
+<span class="lineNum">     342 </span><span class="lineCov">        162 :   while (*path == *LUA_PATHSEP) path++;  /* skip separators */</span>
 <span class="lineNum">     343 </span><span class="lineCov">        162 :   if (*path == '\0') return NULL;  /* no more templates */</span>
 <span class="lineNum">     344 </span><span class="lineCov">        158 :   l = strchr(path, *LUA_PATHSEP);  /* find next separator */</span>
 <span class="lineNum">     345 </span><span class="lineCov">        158 :   if (l == NULL) l = path + strlen(path);</span>
 <span class="lineNum">     346 </span><span class="lineCov">        158 :   lua_pushlstring(L, path, l - path);  /* template */</span>
-<span class="lineNum">     347 </span><span class="lineCov">        162 :   return l;</span>
+<span class="lineNum">     347 </span><span class="lineCov">        158 :   return l;</span>
 <span class="lineNum">     348 </span>            : }
 <span class="lineNum">     349 </span>            : 
 <span class="lineNum">     350 </span>            : 
@@ -423,7 +423,7 @@
 <span class="lineNum">     357 </span><span class="lineCov">         76 :   if (path == NULL)</span>
 <span class="lineNum">     358 </span><span class="lineNoCov">          0 :     luaL_error(L, LUA_QL(&quot;package.%s&quot;) &quot; must be a string&quot;, pname);</span>
 <span class="lineNum">     359 </span><span class="lineCov">         76 :   lua_pushliteral(L, &quot;&quot;);  /* error accumulator */</span>
-<span class="lineNum">     360 </span><span class="lineCov">        162 :   while ((path = pushnexttemplate(L, path)) != NULL) {</span>
+<span class="lineNum">     360 </span><span class="lineCov">        238 :   while ((path = pushnexttemplate(L, path)) != NULL) {</span>
 <span class="lineNum">     361 </span>            :     const char *filename;
 <span class="lineNum">     362 </span><span class="lineCov">        158 :     filename = luaL_gsub(L, lua_tostring(L, -1), LUA_PATH_MARK, name);</span>
 <span class="lineNum">     363 </span><span class="lineCov">        158 :     lua_remove(L, -2);  /* remove path template */</span>
@@ -433,7 +433,7 @@
 <span class="lineNum">     367 </span><span class="lineCov">         86 :     lua_remove(L, -2);  /* remove file name */</span>
 <span class="lineNum">     368 </span><span class="lineCov">         86 :     lua_concat(L, 2);  /* add entry to possible error message */</span>
 <span class="lineNum">     369 </span>            :   }
-<span class="lineNum">     370 </span><span class="lineCov">         76 :   return NULL;  /* not found */</span>
+<span class="lineNum">     370 </span><span class="lineCov">          4 :   return NULL;  /* not found */</span>
 <span class="lineNum">     371 </span>            : }
 <span class="lineNum">     372 </span>            : 
 <span class="lineNum">     373 </span>            : 
@@ -450,7 +450,7 @@
 <span class="lineNum">     384 </span><span class="lineCov">         74 :   if (filename == NULL) return 1;  /* library not found in this path */</span>
 <span class="lineNum">     385 </span><span class="lineCov">         72 :   if (luaL_loadfile(L, filename) != 0)</span>
 <span class="lineNum">     386 </span><span class="lineCov">          1 :     loaderror(L, filename);</span>
-<span class="lineNum">     387 </span><span class="lineCov">         73 :   return 1;  /* library loaded successfully */</span>
+<span class="lineNum">     387 </span><span class="lineCov">         71 :   return 1;  /* library loaded successfully */</span>
 <span class="lineNum">     388 </span>            : }
 <span class="lineNum">     389 </span>            : 
 <span class="lineNum">     390 </span>            : 
@@ -473,7 +473,7 @@
 <span class="lineNum">     407 </span><span class="lineNoCov">          0 :   funcname = mkfuncname(L, name);</span>
 <span class="lineNum">     408 </span><span class="lineNoCov">          0 :   if (ll_loadfunc(L, filename, funcname) != 0)</span>
 <span class="lineNum">     409 </span><span class="lineNoCov">          0 :     loaderror(L, filename);</span>
-<span class="lineNum">     410 </span><span class="lineCov">          2 :   return 1;  /* library loaded successfully */</span>
+<span class="lineNum">     410 </span><span class="lineNoCov">          0 :   return 1;  /* library loaded successfully */</span>
 <span class="lineNum">     411 </span>            : }
 <span class="lineNum">     412 </span>            : 
 <span class="lineNum">     413 </span>            : 
@@ -494,7 +494,7 @@
 <span class="lineNum">     428 </span>            :                        name, filename);
 <span class="lineNum">     429 </span><span class="lineNoCov">          0 :     return 1;  /* function not found */</span>
 <span class="lineNum">     430 </span>            :   }
-<span class="lineNum">     431 </span><span class="lineCov">          2 :   return 1;</span>
+<span class="lineNum">     431 </span><span class="lineNoCov">          0 :   return 1;</span>
 <span class="lineNum">     432 </span>            : }
 <span class="lineNum">     433 </span>            : 
 <span class="lineNum">     434 </span>            : 
@@ -514,23 +514,23 @@
 <span class="lineNum">     448 </span>            : #define sentinel        ((void *)&amp;sentinel_)
 <span class="lineNum">     449 </span>            : 
 <span class="lineNum">     450 </span>            : 
-<span class="lineNum">     451 </span><span class="lineCov">        246 : static int ll_require (lua_State *L) {</span>
-<span class="lineNum">     452 </span><span class="lineCov">        246 :   const char *name = luaL_checkstring(L, 1);</span>
+<span class="lineNum">     451 </span><span class="lineCov">        348 : static int ll_require (lua_State *L) {</span>
+<span class="lineNum">     452 </span><span class="lineCov">        348 :   const char *name = luaL_checkstring(L, 1);</span>
 <span class="lineNum">     453 </span>            :   int i;
-<span class="lineNum">     454 </span><span class="lineCov">        246 :   lua_settop(L, 1);  /* _LOADED table will be at index 2 */</span>
-<span class="lineNum">     455 </span><span class="lineCov">        246 :   lua_getfield(L, LUA_REGISTRYINDEX, &quot;_LOADED&quot;);</span>
-<span class="lineNum">     456 </span><span class="lineCov">        246 :   lua_getfield(L, 2, name);</span>
-<span class="lineNum">     457 </span><span class="lineCov">        246 :   if (lua_toboolean(L, -1)) {  /* is it there? */</span>
-<span class="lineNum">     458 </span><span class="lineCov">        171 :     if (lua_touserdata(L, -1) == sentinel)  /* check loops */</span>
+<span class="lineNum">     454 </span><span class="lineCov">        348 :   lua_settop(L, 1);  /* _LOADED table will be at index 2 */</span>
+<span class="lineNum">     455 </span><span class="lineCov">        348 :   lua_getfield(L, LUA_REGISTRYINDEX, &quot;_LOADED&quot;);</span>
+<span class="lineNum">     456 </span><span class="lineCov">        348 :   lua_getfield(L, 2, name);</span>
+<span class="lineNum">     457 </span><span class="lineCov">        348 :   if (lua_toboolean(L, -1)) {  /* is it there? */</span>
+<span class="lineNum">     458 </span><span class="lineCov">        273 :     if (lua_touserdata(L, -1) == sentinel)  /* check loops */</span>
 <span class="lineNum">     459 </span><span class="lineNoCov">          0 :       luaL_error(L, &quot;loop or previous error loading module &quot; LUA_QS, name);</span>
-<span class="lineNum">     460 </span><span class="lineCov">        171 :     return 1;  /* package is already loaded */</span>
+<span class="lineNum">     460 </span><span class="lineCov">        273 :     return 1;  /* package is already loaded */</span>
 <span class="lineNum">     461 </span>            :   }
 <span class="lineNum">     462 </span>            :   /* else must load it; iterate over available loaders */
 <span class="lineNum">     463 </span><span class="lineCov">         75 :   lua_getfield(L, LUA_ENVIRONINDEX, &quot;loaders&quot;);</span>
 <span class="lineNum">     464 </span><span class="lineCov">         75 :   if (!lua_istable(L, -1))</span>
 <span class="lineNum">     465 </span><span class="lineNoCov">          0 :     luaL_error(L, LUA_QL(&quot;package.loaders&quot;) &quot; must be a table&quot;);</span>
 <span class="lineNum">     466 </span><span class="lineCov">         75 :   lua_pushliteral(L, &quot;&quot;);  /* error message accumulator */</span>
-<span class="lineNum">     467 </span><span class="lineCov">         75 :   for (i=1; ; i++) {</span>
+<span class="lineNum">     467 </span><span class="lineCov">        155 :   for (i=1; ; i++) {</span>
 <span class="lineNum">     468 </span><span class="lineCov">        155 :     lua_rawgeti(L, -2, i);  /* get a loader */</span>
 <span class="lineNum">     469 </span><span class="lineCov">        155 :     if (lua_isnil(L, -1))</span>
 <span class="lineNum">     470 </span><span class="lineCov">          2 :       luaL_error(L, &quot;module &quot; LUA_QS &quot; not found:%s&quot;,</span>
@@ -556,7 +556,7 @@
 <span class="lineNum">     490 </span><span class="lineCov">          1 :     lua_pushvalue(L, -1);  /* extra copy to be returned */</span>
 <span class="lineNum">     491 </span><span class="lineCov">          1 :     lua_setfield(L, 2, name);  /* _LOADED[name] = true */</span>
 <span class="lineNum">     492 </span>            :   }
-<span class="lineNum">     493 </span><span class="lineCov">        243 :   return 1;</span>
+<span class="lineNum">     493 </span><span class="lineCov">         72 :   return 1;</span>
 <span class="lineNum">     494 </span>            : }
 <span class="lineNum">     495 </span>            : 
 <span class="lineNum">     496 </span>            : /* }====================================================== */
@@ -655,21 +655,21 @@
 <span class="lineNum">     589 </span>            : /* auxiliary mark (for internal use) */
 <span class="lineNum">     590 </span>            : #define AUXMARK         &quot;\1&quot;
 <span class="lineNum">     591 </span>            : 
-<span class="lineNum">     592 </span><span class="lineCov">        116 : static void setpath (lua_State *L, const char *fieldname, const char *envname,</span>
+<span class="lineNum">     592 </span><span class="lineCov">        124 : static void setpath (lua_State *L, const char *fieldname, const char *envname,</span>
 <span class="lineNum">     593 </span>            :                                    const char *def) {
-<span class="lineNum">     594 </span><span class="lineCov">        116 :   const char *path = getenv(envname);</span>
-<span class="lineNum">     595 </span><span class="lineCov">        116 :   if (path == NULL)  /* no environment variable? */</span>
-<span class="lineNum">     596 </span><span class="lineCov">         58 :     lua_pushstring(L, def);  /* use default */</span>
+<span class="lineNum">     594 </span><span class="lineCov">        124 :   const char *path = getenv(envname);</span>
+<span class="lineNum">     595 </span><span class="lineCov">        124 :   if (path == NULL)  /* no environment variable? */</span>
+<span class="lineNum">     596 </span><span class="lineCov">         62 :     lua_pushstring(L, def);  /* use default */</span>
 <span class="lineNum">     597 </span>            :   else {
 <span class="lineNum">     598 </span>            :     /* replace &quot;;;&quot; by &quot;;AUXMARK;&quot; and then AUXMARK by default path */
-<span class="lineNum">     599 </span><span class="lineCov">         58 :     path = luaL_gsub(L, path, LUA_PATHSEP LUA_PATHSEP,</span>
+<span class="lineNum">     599 </span><span class="lineCov">         62 :     path = luaL_gsub(L, path, LUA_PATHSEP LUA_PATHSEP,</span>
 <span class="lineNum">     600 </span>            :                               LUA_PATHSEP AUXMARK LUA_PATHSEP);
-<span class="lineNum">     601 </span><span class="lineCov">         58 :     luaL_gsub(L, path, AUXMARK, def);</span>
-<span class="lineNum">     602 </span><span class="lineCov">         58 :     lua_remove(L, -2);</span>
+<span class="lineNum">     601 </span><span class="lineCov">         62 :     luaL_gsub(L, path, AUXMARK, def);</span>
+<span class="lineNum">     602 </span><span class="lineCov">         62 :     lua_remove(L, -2);</span>
 <span class="lineNum">     603 </span>            :   }
 <span class="lineNum">     604 </span>            :   setprogdir(L);
-<span class="lineNum">     605 </span><span class="lineCov">        116 :   lua_setfield(L, -2, fieldname);</span>
-<span class="lineNum">     606 </span><span class="lineCov">        116 : }</span>
+<span class="lineNum">     605 </span><span class="lineCov">        124 :   lua_setfield(L, -2, fieldname);</span>
+<span class="lineNum">     606 </span><span class="lineCov">        124 : }</span>
 <span class="lineNum">     607 </span>            : 
 <span class="lineNum">     608 </span>            : 
 <span class="lineNum">     609 </span>            : static const luaL_Reg pk_funcs[] = {
@@ -690,44 +690,44 @@
 <span class="lineNum">     624 </span>            :   {loader_preload, loader_Lua, loader_C, loader_Croot, NULL};
 <span class="lineNum">     625 </span>            : 
 <span class="lineNum">     626 </span>            : 
-<span class="lineNum">     627 </span><span class="lineCov">         58 : LUALIB_API int luaopen_package (lua_State *L) {</span>
+<span class="lineNum">     627 </span><span class="lineCov">         62 : LUALIB_API int luaopen_package (lua_State *L) {</span>
 <span class="lineNum">     628 </span>            :   int i;
 <span class="lineNum">     629 </span>            :   /* create new type _LOADLIB */
-<span class="lineNum">     630 </span><span class="lineCov">         58 :   luaL_newmetatable(L, &quot;_LOADLIB&quot;);</span>
-<span class="lineNum">     631 </span><span class="lineCov">         58 :   lua_pushcfunction(L, gctm);</span>
-<span class="lineNum">     632 </span><span class="lineCov">         58 :   lua_setfield(L, -2, &quot;__gc&quot;);</span>
+<span class="lineNum">     630 </span><span class="lineCov">         62 :   luaL_newmetatable(L, &quot;_LOADLIB&quot;);</span>
+<span class="lineNum">     631 </span><span class="lineCov">         62 :   lua_pushcfunction(L, gctm);</span>
+<span class="lineNum">     632 </span><span class="lineCov">         62 :   lua_setfield(L, -2, &quot;__gc&quot;);</span>
 <span class="lineNum">     633 </span>            :   /* create `package' table */
-<span class="lineNum">     634 </span><span class="lineCov">         58 :   luaL_register(L, LUA_LOADLIBNAME, pk_funcs);</span>
+<span class="lineNum">     634 </span><span class="lineCov">         62 :   luaL_register(L, LUA_LOADLIBNAME, pk_funcs);</span>
 <span class="lineNum">     635 </span>            : #if defined(LUA_COMPAT_LOADLIB) 
 <span class="lineNum">     636 </span>            :   lua_getfield(L, -1, &quot;loadlib&quot;);
 <span class="lineNum">     637 </span>            :   lua_setfield(L, LUA_GLOBALSINDEX, &quot;loadlib&quot;);
 <span class="lineNum">     638 </span>            : #endif
-<span class="lineNum">     639 </span><span class="lineCov">         58 :   lua_pushvalue(L, -1);</span>
-<span class="lineNum">     640 </span><span class="lineCov">         58 :   lua_replace(L, LUA_ENVIRONINDEX);</span>
+<span class="lineNum">     639 </span><span class="lineCov">         62 :   lua_pushvalue(L, -1);</span>
+<span class="lineNum">     640 </span><span class="lineCov">         62 :   lua_replace(L, LUA_ENVIRONINDEX);</span>
 <span class="lineNum">     641 </span>            :   /* create `loaders' table */
-<span class="lineNum">     642 </span><span class="lineCov">         58 :   lua_createtable(L, sizeof(loaders)/sizeof(loaders[0]) - 1, 0);</span>
+<span class="lineNum">     642 </span><span class="lineCov">         62 :   lua_createtable(L, sizeof(loaders)/sizeof(loaders[0]) - 1, 0);</span>
 <span class="lineNum">     643 </span>            :   /* fill it with pre-defined loaders */
-<span class="lineNum">     644 </span><span class="lineCov">        290 :   for (i=0; loaders[i] != NULL; i++) {</span>
-<span class="lineNum">     645 </span><span class="lineCov">        232 :     lua_pushcfunction(L, loaders[i]);</span>
-<span class="lineNum">     646 </span><span class="lineCov">        232 :     lua_rawseti(L, -2, i+1);</span>
+<span class="lineNum">     644 </span><span class="lineCov">        310 :   for (i=0; loaders[i] != NULL; i++) {</span>
+<span class="lineNum">     645 </span><span class="lineCov">        248 :     lua_pushcfunction(L, loaders[i]);</span>
+<span class="lineNum">     646 </span><span class="lineCov">        248 :     lua_rawseti(L, -2, i+1);</span>
 <span class="lineNum">     647 </span>            :   }
-<span class="lineNum">     648 </span><span class="lineCov">         58 :   lua_setfield(L, -2, &quot;loaders&quot;);  /* put it in field `loaders' */</span>
-<span class="lineNum">     649 </span><span class="lineCov">         58 :   setpath(L, &quot;path&quot;, LUA_PATH, LUA_PATH_DEFAULT);  /* set field `path' */</span>
-<span class="lineNum">     650 </span><span class="lineCov">         58 :   setpath(L, &quot;cpath&quot;, LUA_CPATH, LUA_CPATH_DEFAULT); /* set field `cpath' */</span>
+<span class="lineNum">     648 </span><span class="lineCov">         62 :   lua_setfield(L, -2, &quot;loaders&quot;);  /* put it in field `loaders' */</span>
+<span class="lineNum">     649 </span><span class="lineCov">         62 :   setpath(L, &quot;path&quot;, LUA_PATH, LUA_PATH_DEFAULT);  /* set field `path' */</span>
+<span class="lineNum">     650 </span><span class="lineCov">         62 :   setpath(L, &quot;cpath&quot;, LUA_CPATH, LUA_CPATH_DEFAULT); /* set field `cpath' */</span>
 <span class="lineNum">     651 </span>            :   /* store config information */
-<span class="lineNum">     652 </span><span class="lineCov">         58 :   lua_pushliteral(L, LUA_DIRSEP &quot;\n&quot; LUA_PATHSEP &quot;\n&quot; LUA_PATH_MARK &quot;\n&quot;</span>
+<span class="lineNum">     652 </span><span class="lineCov">         62 :   lua_pushliteral(L, LUA_DIRSEP &quot;\n&quot; LUA_PATHSEP &quot;\n&quot; LUA_PATH_MARK &quot;\n&quot;</span>
 <span class="lineNum">     653 </span>            :                      LUA_EXECDIR &quot;\n&quot; LUA_IGMARK);
-<span class="lineNum">     654 </span><span class="lineCov">         58 :   lua_setfield(L, -2, &quot;config&quot;);</span>
+<span class="lineNum">     654 </span><span class="lineCov">         62 :   lua_setfield(L, -2, &quot;config&quot;);</span>
 <span class="lineNum">     655 </span>            :   /* set field `loaded' */
-<span class="lineNum">     656 </span><span class="lineCov">         58 :   luaL_findtable(L, LUA_REGISTRYINDEX, &quot;_LOADED&quot;, 2);</span>
-<span class="lineNum">     657 </span><span class="lineCov">         58 :   lua_setfield(L, -2, &quot;loaded&quot;);</span>
+<span class="lineNum">     656 </span><span class="lineCov">         62 :   luaL_findtable(L, LUA_REGISTRYINDEX, &quot;_LOADED&quot;, 2);</span>
+<span class="lineNum">     657 </span><span class="lineCov">         62 :   lua_setfield(L, -2, &quot;loaded&quot;);</span>
 <span class="lineNum">     658 </span>            :   /* set field `preload' */
-<span class="lineNum">     659 </span><span class="lineCov">         58 :   lua_newtable(L);</span>
-<span class="lineNum">     660 </span><span class="lineCov">         58 :   lua_setfield(L, -2, &quot;preload&quot;);</span>
-<span class="lineNum">     661 </span><span class="lineCov">         58 :   lua_pushvalue(L, LUA_GLOBALSINDEX);</span>
-<span class="lineNum">     662 </span><span class="lineCov">         58 :   luaL_register(L, NULL, ll_funcs);  /* open lib into global table */</span>
-<span class="lineNum">     663 </span><span class="lineCov">         58 :   lua_pop(L, 1);</span>
-<span class="lineNum">     664 </span><span class="lineCov">         58 :   return 1;  /* return 'package' table */</span>
+<span class="lineNum">     659 </span><span class="lineCov">         62 :   lua_newtable(L);</span>
+<span class="lineNum">     660 </span><span class="lineCov">         62 :   lua_setfield(L, -2, &quot;preload&quot;);</span>
+<span class="lineNum">     661 </span><span class="lineCov">         62 :   lua_pushvalue(L, LUA_GLOBALSINDEX);</span>
+<span class="lineNum">     662 </span><span class="lineCov">         62 :   luaL_register(L, NULL, ll_funcs);  /* open lib into global table */</span>
+<span class="lineNum">     663 </span><span class="lineCov">         62 :   lua_pop(L, 1);</span>
+<span class="lineNum">     664 </span><span class="lineCov">         62 :   return 1;  /* return 'package' table */</span>
 <span class="lineNum">     665 </span>            : }
 <span class="lineNum">     666 </span>            : 
 </pre>
@@ -738,7 +738,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
   </table>
   <br>
 

@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">85</td>
+            <td class="headerCovTableEntry">84</td>
             <td class="headerCovTableEntry">86</td>
-            <td class="headerCovTableEntryHi">98.8 %</td>
+            <td class="headerCovTableEntryHi">97.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2013-12-07</td>
+            <td class="headerValue">2014-12-13 17:48:25</td>
             <td></td>
           </tr>
           <tr>
@@ -97,7 +97,7 @@
 <span class="lineNum">      31 </span><span class="lineCov">       4338 :   Closure *c = &amp;luaC_newobj(L, LUA_TLCL, sizeLclosure(n), NULL, 0)-&gt;cl;</span>
 <span class="lineNum">      32 </span><span class="lineCov">       4338 :   c-&gt;l.p = NULL;</span>
 <span class="lineNum">      33 </span><span class="lineCov">       4338 :   c-&gt;l.nupvalues = cast_byte(n);</span>
-<span class="lineNum">      34 </span><span class="lineCov">      14838 :   while (n--) c-&gt;l.upvals[n] = NULL;</span>
+<span class="lineNum">      34 </span><span class="lineCov">       4338 :   while (n--) c-&gt;l.upvals[n] = NULL;</span>
 <span class="lineNum">      35 </span><span class="lineCov">       4338 :   return c;</span>
 <span class="lineNum">      36 </span>            : }
 <span class="lineNum">      37 </span>            : 
@@ -110,21 +110,21 @@
 <span class="lineNum">      44 </span>            : }
 <span class="lineNum">      45 </span>            : 
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">       8884 : UpVal *luaF_findupval (lua_State *L, StkId level) {</span>
-<span class="lineNum">      48 </span><span class="lineCov">       8884 :   global_State *g = G(L);</span>
-<span class="lineNum">      49 </span><span class="lineCov">       8884 :   GCObject **pp = &amp;L-&gt;openupval;</span>
+<span class="lineNum">      47 </span><span class="lineCov">       8958 : UpVal *luaF_findupval (lua_State *L, StkId level) {</span>
+<span class="lineNum">      48 </span><span class="lineCov">       8958 :   global_State *g = G(L);</span>
+<span class="lineNum">      49 </span><span class="lineCov">       8958 :   GCObject **pp = &amp;L-&gt;openupval;</span>
 <span class="lineNum">      50 </span>            :   UpVal *p;
 <span class="lineNum">      51 </span>            :   UpVal *uv;
-<span class="lineNum">      52 </span><span class="lineCov">      28134 :   while (*pp != NULL &amp;&amp; (p = gco2uv(*pp))-&gt;v &gt;= level) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">      37647 :   while (*pp != NULL &amp;&amp; (p = gco2uv(*pp))-&gt;v &gt;= level) {</span>
 <span class="lineNum">      53 </span>            :     GCObject *o = obj2gco(p);
 <span class="lineNum">      54 </span>            :     lua_assert(p-&gt;v != &amp;p-&gt;u.value);
 <span class="lineNum">      55 </span>            :     lua_assert(!isold(o) || isold(obj2gco(L)));
-<span class="lineNum">      56 </span><span class="lineCov">      22015 :     if (p-&gt;v == level) {  /* found a corresponding upvalue? */</span>
-<span class="lineNum">      57 </span><span class="lineCov">       2765 :       if (isdead(g, o))  /* is it dead? */</span>
+<span class="lineNum">      56 </span><span class="lineCov">      22570 :     if (p-&gt;v == level) {  /* found a corresponding upvalue? */</span>
+<span class="lineNum">      57 </span><span class="lineCov">       2839 :       if (isdead(g, o))  /* is it dead? */</span>
 <span class="lineNum">      58 </span><span class="lineNoCov">          0 :         changewhite(o);  /* resurrect it */</span>
-<span class="lineNum">      59 </span><span class="lineCov">      22015 :       return p;</span>
+<span class="lineNum">      59 </span><span class="lineCov">       2839 :       return p;</span>
 <span class="lineNum">      60 </span>            :     }
-<span class="lineNum">      61 </span>            :     pp = &amp;p-&gt;next;
+<span class="lineNum">      61 </span><span class="lineCov">      19731 :     pp = &amp;p-&gt;next;</span>
 <span class="lineNum">      62 </span>            :   }
 <span class="lineNum">      63 </span>            :   /* not found: create a new one */
 <span class="lineNum">      64 </span><span class="lineCov">       6119 :   uv = &amp;luaC_newobj(L, LUA_TUPVAL, sizeof(UpVal), pp, 0)-&gt;uv;</span>
@@ -141,7 +141,7 @@
 <span class="lineNum">      75 </span>            : static void unlinkupval (UpVal *uv) {
 <span class="lineNum">      76 </span>            :   lua_assert(uv-&gt;u.l.next-&gt;u.l.prev == uv &amp;&amp; uv-&gt;u.l.prev-&gt;u.l.next == uv);
 <span class="lineNum">      77 </span><span class="lineCov">       6119 :   uv-&gt;u.l.next-&gt;u.l.prev = uv-&gt;u.l.prev;  /* remove from `uvhead' list */</span>
-<span class="lineNum">      78 </span><span class="lineCov">          2 :   uv-&gt;u.l.prev-&gt;u.l.next = uv-&gt;u.l.next;</span>
+<span class="lineNum">      78 </span><span class="lineCov">       6119 :   uv-&gt;u.l.prev-&gt;u.l.next = uv-&gt;u.l.next;</span>
 <span class="lineNum">      79 </span>            : }
 <span class="lineNum">      80 </span>            : 
 <span class="lineNum">      81 </span>            : 
@@ -153,20 +153,20 @@
 <span class="lineNum">      87 </span>            : 
 <span class="lineNum">      88 </span>            : 
 <span class="lineNum">      89 </span><span class="lineCov">       1516 : void luaF_close (lua_State *L, StkId level) {</span>
-<span class="lineNum">      90 </span><span class="lineCov">       6117 :   UpVal *uv;</span>
+<span class="lineNum">      90 </span>            :   UpVal *uv;
 <span class="lineNum">      91 </span><span class="lineCov">       1516 :   global_State *g = G(L);</span>
-<span class="lineNum">      92 </span><span class="lineCov">       7635 :   while (L-&gt;openupval != NULL &amp;&amp; (uv = gco2uv(L-&gt;openupval))-&gt;v &gt;= level) {</span>
+<span class="lineNum">      92 </span><span class="lineCov">       9151 :   while (L-&gt;openupval != NULL &amp;&amp; (uv = gco2uv(L-&gt;openupval))-&gt;v &gt;= level) {</span>
 <span class="lineNum">      93 </span>            :     GCObject *o = obj2gco(uv);
 <span class="lineNum">      94 </span>            :     lua_assert(!isblack(o) &amp;&amp; uv-&gt;v != &amp;uv-&gt;u.value);
 <span class="lineNum">      95 </span><span class="lineCov">       6119 :     L-&gt;openupval = uv-&gt;next;  /* remove from `open' list */</span>
 <span class="lineNum">      96 </span><span class="lineCov">       6119 :     if (isdead(g, o))</span>
-<span class="lineNum">      97 </span><span class="lineCov">          2 :       luaF_freeupval(L, uv);  /* free upvalue */</span>
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :       luaF_freeupval(L, uv);  /* free upvalue */</span>
 <span class="lineNum">      98 </span>            :     else {
 <span class="lineNum">      99 </span>            :       unlinkupval(uv);  /* remove upvalue from 'uvhead' list */
-<span class="lineNum">     100 </span><span class="lineCov">       6117 :       setobj(L, &amp;uv-&gt;u.value, uv-&gt;v);  /* move value to upvalue slot */</span>
-<span class="lineNum">     101 </span><span class="lineCov">       6117 :       uv-&gt;v = &amp;uv-&gt;u.value;  /* now current value lives here */</span>
-<span class="lineNum">     102 </span><span class="lineCov">       6117 :       gch(o)-&gt;next = g-&gt;allgc;  /* link upvalue into 'allgc' list */</span>
-<span class="lineNum">     103 </span><span class="lineCov">       6117 :       g-&gt;allgc = o;</span>
+<span class="lineNum">     100 </span><span class="lineCov">       6119 :       setobj(L, &amp;uv-&gt;u.value, uv-&gt;v);  /* move value to upvalue slot */</span>
+<span class="lineNum">     101 </span><span class="lineCov">       6119 :       uv-&gt;v = &amp;uv-&gt;u.value;  /* now current value lives here */</span>
+<span class="lineNum">     102 </span><span class="lineCov">       6119 :       gch(o)-&gt;next = g-&gt;allgc;  /* link upvalue into 'allgc' list */</span>
+<span class="lineNum">     103 </span><span class="lineCov">       6119 :       g-&gt;allgc = o;</span>
 <span class="lineNum">     104 </span><span class="lineCov">       6119 :       luaC_checkupvalcolor(g, uv);</span>
 <span class="lineNum">     105 </span>            :     }
 <span class="lineNum">     106 </span>            :   }
@@ -233,7 +233,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
   </table>
   <br>
 

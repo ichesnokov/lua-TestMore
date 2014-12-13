@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.1.5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">210</td>
+            <td class="headerCovTableEntry">208</td>
             <td class="headerCovTableEntry">341</td>
-            <td class="headerCovTableEntryLo">61.6 %</td>
+            <td class="headerCovTableEntryLo">61.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-02-18</td>
+            <td class="headerValue">2014-12-13 17:49:16</td>
             <td></td>
           </tr>
           <tr>
@@ -103,7 +103,7 @@
 <span class="lineNum">      37 </span><span class="lineCov">        356 :   if (!isLua(ci)) return -1;  /* function is not a Lua function? */</span>
 <span class="lineNum">      38 </span><span class="lineCov">        345 :   if (ci == L-&gt;ci)</span>
 <span class="lineNum">      39 </span><span class="lineCov">        254 :     ci-&gt;savedpc = L-&gt;savedpc;</span>
-<span class="lineNum">      40 </span><span class="lineCov">        356 :   return pcRel(ci-&gt;savedpc, ci_func(ci)-&gt;l.p);</span>
+<span class="lineNum">      40 </span><span class="lineCov">        345 :   return pcRel(ci-&gt;savedpc, ci_func(ci)-&gt;l.p);</span>
 <span class="lineNum">      41 </span>            : }
 <span class="lineNum">      42 </span>            : 
 <span class="lineNum">      43 </span>            : 
@@ -112,7 +112,7 @@
 <span class="lineNum">      46 </span><span class="lineCov">        244 :   if (pc &lt; 0)</span>
 <span class="lineNum">      47 </span><span class="lineCov">         11 :     return -1;  /* only active lua functions have current-line information */</span>
 <span class="lineNum">      48 </span>            :   else
-<span class="lineNum">      49 </span><span class="lineCov">        244 :     return getline(ci_func(ci)-&gt;l.p, pc);</span>
+<span class="lineNum">      49 </span><span class="lineCov">        233 :     return getline(ci_func(ci)-&gt;l.p, pc);</span>
 <span class="lineNum">      50 </span>            : }
 <span class="lineNum">      51 </span>            : 
 <span class="lineNum">      52 </span>            : 
@@ -556,7 +556,7 @@
 <span class="lineNum">     490 </span><span class="lineCov">          8 :   if (ISK(c) &amp;&amp; ttisstring(&amp;p-&gt;k[INDEXK(c)]))</span>
 <span class="lineNum">     491 </span><span class="lineCov">          8 :     return svalue(&amp;p-&gt;k[INDEXK(c)]);</span>
 <span class="lineNum">     492 </span>            :   else
-<span class="lineNum">     493 </span><span class="lineCov">          8 :     return &quot;?&quot;;</span>
+<span class="lineNum">     493 </span><span class="lineNoCov">          0 :     return &quot;?&quot;;</span>
 <span class="lineNum">     494 </span>            : }
 <span class="lineNum">     495 </span>            : 
 <span class="lineNum">     496 </span>            : 
@@ -603,7 +603,7 @@
 <span class="lineNum">     537 </span><span class="lineCov">         20 :       default: break;</span>
 <span class="lineNum">     538 </span>            :     }
 <span class="lineNum">     539 </span>            :   }
-<span class="lineNum">     540 </span><span class="lineCov">         93 :   return NULL;  /* no useful name found */</span>
+<span class="lineNum">     540 </span><span class="lineCov">         21 :   return NULL;  /* no useful name found */</span>
 <span class="lineNum">     541 </span>            : }
 <span class="lineNum">     542 </span>            : 
 <span class="lineNum">     543 </span>            : 
@@ -617,7 +617,7 @@
 <span class="lineNum">     551 </span><span class="lineNoCov">          0 :       GET_OPCODE(i) == OP_TFORLOOP)</span>
 <span class="lineNum">     552 </span><span class="lineCov">         20 :     return getobjname(L, ci, GETARG_A(i), name);</span>
 <span class="lineNum">     553 </span>            :   else
-<span class="lineNum">     554 </span><span class="lineCov">         31 :     return NULL;  /* no useful name can be found */</span>
+<span class="lineNum">     554 </span><span class="lineNoCov">          0 :     return NULL;  /* no useful name can be found */</span>
 <span class="lineNum">     555 </span>            : }
 <span class="lineNum">     556 </span>            : 
 <span class="lineNum">     557 </span>            : 
@@ -626,14 +626,14 @@
 <span class="lineNum">     560 </span>            :   StkId p;
 <span class="lineNum">     561 </span><span class="lineCov">        181 :   for (p = ci-&gt;base; p &lt; ci-&gt;top; p++)</span>
 <span class="lineNum">     562 </span><span class="lineCov">        146 :     if (o == p) return 1;</span>
-<span class="lineNum">     563 </span><span class="lineCov">        108 :   return 0;</span>
+<span class="lineNum">     563 </span><span class="lineCov">         35 :   return 0;</span>
 <span class="lineNum">     564 </span>            : }
 <span class="lineNum">     565 </span>            : 
 <span class="lineNum">     566 </span>            : 
 <span class="lineNum">     567 </span><span class="lineCov">        108 : void luaG_typeerror (lua_State *L, const TValue *o, const char *op) {</span>
 <span class="lineNum">     568 </span><span class="lineCov">        108 :   const char *name = NULL;</span>
 <span class="lineNum">     569 </span><span class="lineCov">        108 :   const char *t = luaT_typenames[ttype(o)];</span>
-<span class="lineNum">     570 </span><span class="lineCov">        108 :   const char *kind = (isinstack(L-&gt;ci, o)) ?</span>
+<span class="lineNum">     570 </span><span class="lineCov">        216 :   const char *kind = (isinstack(L-&gt;ci, o)) ?</span>
 <span class="lineNum">     571 </span><span class="lineCov">        108 :                          getobjname(L, L-&gt;ci, cast_int(o - L-&gt;base), &amp;name) :</span>
 <span class="lineNum">     572 </span>            :                          NULL;
 <span class="lineNum">     573 </span><span class="lineCov">        108 :   if (kind)</span>
@@ -710,7 +710,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
   </table>
   <br>
 

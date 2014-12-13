@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">161</td>
-            <td class="headerCovTableEntry">176</td>
-            <td class="headerCovTableEntryHi">91.5 %</td>
+            <td class="headerCovTableEntry">160</td>
+            <td class="headerCovTableEntry">175</td>
+            <td class="headerCovTableEntryHi">91.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2013-12-07</td>
+            <td class="headerValue">2014-12-13 17:48:25</td>
             <td></td>
           </tr>
           <tr>
@@ -137,7 +137,7 @@
 <span class="lineNum">      71 </span>            :  int i;
 <span class="lineNum">      72 </span>            :  int version=0;
 <span class="lineNum">      73 </span><span class="lineCov">         12 :  if (argv[0]!=NULL &amp;&amp; *argv[0]!=0) progname=argv[0];</span>
-<span class="lineNum">      74 </span><span class="lineCov">         23 :  for (i=1; i&lt;argc; i++)</span>
+<span class="lineNum">      74 </span><span class="lineCov">         11 :  for (i=1; i&lt;argc; i++)</span>
 <span class="lineNum">      75 </span>            :  {
 <span class="lineNum">      76 </span><span class="lineCov">         22 :   if (*argv[i]!='-')                    /* end of options; keep it */</span>
 <span class="lineNum">      77 </span>            :    break;
@@ -232,7 +232,7 @@
 <span class="lineNum">     166 </span>            :  const Proto* f;
 <span class="lineNum">     167 </span>            :  int i;
 <span class="lineNum">     168 </span><span class="lineCov">         10 :  if (!lua_checkstack(L,argc)) fatal(&quot;too many input files&quot;);</span>
-<span class="lineNum">     169 </span><span class="lineCov">         16 :  for (i=0; i&lt;argc; i++)</span>
+<span class="lineNum">     169 </span><span class="lineCov">          6 :  for (i=0; i&lt;argc; i++)</span>
 <span class="lineNum">     170 </span>            :  {
 <span class="lineNum">     171 </span><span class="lineCov">         11 :   const char* filename=IS(&quot;-&quot;) ? NULL : argv[i];</span>
 <span class="lineNum">     172 </span><span class="lineCov">         11 :   if (luaL_loadfile(L,filename)!=LUA_OK) fatal(lua_tostring(L,-1));</span>
@@ -288,7 +288,7 @@
 <span class="lineNum">     222 </span>            : 
 <span class="lineNum">     223 </span><span class="lineCov">         40 : static void PrintString(const TString* ts)</span>
 <span class="lineNum">     224 </span>            : {
-<span class="lineNum">     225 </span><span class="lineCov">         40 :  const char* s=getstr(ts);</span>
+<span class="lineNum">     225 </span>            :  const char* s=getstr(ts);
 <span class="lineNum">     226 </span><span class="lineCov">         40 :  size_t i,n=ts-&gt;tsv.len;</span>
 <span class="lineNum">     227 </span>            :  printf(&quot;%c&quot;,'&quot;');
 <span class="lineNum">     228 </span><span class="lineCov">        227 :  for (i=0; i&lt;n; i++)</span>
@@ -314,7 +314,7 @@
 <span class="lineNum">     248 </span>            :  printf(&quot;%c&quot;,'&quot;');
 <span class="lineNum">     249 </span><span class="lineCov">         40 : }</span>
 <span class="lineNum">     250 </span>            : 
-<span class="lineNum">     251 </span><span class="lineCov">         98 : static void PrintConstant(const Proto* f, int i)</span>
+<span class="lineNum">     251 </span><span class="lineCov">         49 : static void PrintConstant(const Proto* f, int i)</span>
 <span class="lineNum">     252 </span>            : {
 <span class="lineNum">     253 </span><span class="lineCov">         49 :  const TValue* o=&amp;f-&gt;k[i];</span>
 <span class="lineNum">     254 </span><span class="lineCov">         49 :  switch (ttypenv(o))</span>
@@ -450,14 +450,14 @@
 <span class="lineNum">     384 </span>            :   s=&quot;(bstring)&quot;;
 <span class="lineNum">     385 </span>            :  else
 <span class="lineNum">     386 </span>            :   s=&quot;(string)&quot;;
-<span class="lineNum">     387 </span><span class="lineCov">          4 :  printf(&quot;\n%s &lt;%s:%d,%d&gt; (%d instruction%s at %p)\n&quot;,</span>
+<span class="lineNum">     387 </span><span class="lineCov">          8 :  printf(&quot;\n%s &lt;%s:%d,%d&gt; (%d instruction%s at %p)\n&quot;,</span>
 <span class="lineNum">     388 </span><span class="lineCov">          4 :         (f-&gt;linedefined==0)?&quot;main&quot;:&quot;function&quot;,s,</span>
 <span class="lineNum">     389 </span>            :         f-&gt;linedefined,f-&gt;lastlinedefined,
 <span class="lineNum">     390 </span><span class="lineCov">          4 :         S(f-&gt;sizecode),VOID(f));</span>
-<span class="lineNum">     391 </span><span class="lineCov">          4 :  printf(&quot;%d%s param%s, %d slot%s, %d upvalue%s, &quot;,</span>
+<span class="lineNum">     391 </span><span class="lineCov">         16 :  printf(&quot;%d%s param%s, %d slot%s, %d upvalue%s, &quot;,</span>
 <span class="lineNum">     392 </span><span class="lineCov">          8 :         (int)(f-&gt;numparams),f-&gt;is_vararg?&quot;+&quot;:&quot;&quot;,SS(f-&gt;numparams),</span>
 <span class="lineNum">     393 </span><span class="lineCov">          8 :         S(f-&gt;maxstacksize),S(f-&gt;sizeupvalues));</span>
-<span class="lineNum">     394 </span><span class="lineCov">          4 :  printf(&quot;%d local%s, %d constant%s, %d function%s\n&quot;,</span>
+<span class="lineNum">     394 </span><span class="lineCov">         12 :  printf(&quot;%d local%s, %d constant%s, %d function%s\n&quot;,</span>
 <span class="lineNum">     395 </span><span class="lineCov">         12 :         S(f-&gt;sizelocvars),S(f-&gt;sizek),S(f-&gt;sizep));</span>
 <span class="lineNum">     396 </span><span class="lineCov">          4 : }</span>
 <span class="lineNum">     397 </span>            : 
@@ -466,7 +466,7 @@
 <span class="lineNum">     400 </span>            :  int i,n;
 <span class="lineNum">     401 </span><span class="lineCov">          2 :  n=f-&gt;sizek;</span>
 <span class="lineNum">     402 </span>            :  printf(&quot;constants (%d) for %p:\n&quot;,n,VOID(f));
-<span class="lineNum">     403 </span><span class="lineCov">         17 :  for (i=0; i&lt;n; i++)</span>
+<span class="lineNum">     403 </span><span class="lineCov">         19 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     404 </span>            :  {
 <span class="lineNum">     405 </span><span class="lineCov">         15 :   printf(&quot;\t%d\t&quot;,i+1);</span>
 <span class="lineNum">     406 </span><span class="lineCov">         15 :   PrintConstant(f,i);</span>
@@ -483,7 +483,7 @@
 <span class="lineNum">     417 </span>            :  printf(&quot;upvalues (%d) for %p:\n&quot;,n,VOID(f));
 <span class="lineNum">     418 </span><span class="lineCov">          5 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     419 </span>            :  {
-<span class="lineNum">     420 </span><span class="lineCov">          3 :   printf(&quot;\t%d\t%s\t%d\t%d\n&quot;,</span>
+<span class="lineNum">     420 </span><span class="lineCov">          9 :   printf(&quot;\t%d\t%s\t%d\t%d\n&quot;,</span>
 <span class="lineNum">     421 </span><span class="lineCov">          9 :   i,UPVALNAME(i),f-&gt;upvalues[i].instack,f-&gt;upvalues[i].idx);</span>
 <span class="lineNum">     422 </span>            :  }
 <span class="lineNum">     423 </span><span class="lineCov">          2 : }</span>
@@ -494,7 +494,7 @@
 <span class="lineNum">     428 </span><span class="lineCov">          4 :  PrintHeader(f);</span>
 <span class="lineNum">     429 </span><span class="lineCov">          4 :  PrintCode(f);</span>
 <span class="lineNum">     430 </span><span class="lineCov">          4 :  if (full) PrintDebug(f);</span>
-<span class="lineNum">     431 </span><span class="lineCov">          6 :  for (i=0; i&lt;n; i++) PrintFunction(f-&gt;p[i],full);</span>
+<span class="lineNum">     431 </span><span class="lineCov">          2 :  for (i=0; i&lt;n; i++) PrintFunction(f-&gt;p[i],full);</span>
 <span class="lineNum">     432 </span><span class="lineCov">          4 : }</span>
 </pre>
       </td>
@@ -504,7 +504,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
   </table>
   <br>
 

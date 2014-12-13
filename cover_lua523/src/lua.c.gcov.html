@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">148</td>
-            <td class="headerCovTableEntry">227</td>
-            <td class="headerCovTableEntryLo">65.2 %</td>
+            <td class="headerCovTableEntry">149</td>
+            <td class="headerCovTableEntry">229</td>
+            <td class="headerCovTableEntryLo">65.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2013-12-07</td>
+            <td class="headerValue">2014-12-13 17:48:25</td>
             <td></td>
           </tr>
           <tr>
@@ -172,12 +172,12 @@
 <span class="lineNum">     106 </span>            : 
 <span class="lineNum">     107 </span>            : 
 <span class="lineNum">     108 </span><span class="lineCov">          2 : static void print_usage (const char *badoption) {</span>
-<span class="lineNum">     109 </span><span class="lineCov">          2 :   luai_writestringerror(&quot;%s: &quot;, progname);</span>
+<span class="lineNum">     109 </span><span class="lineCov">          4 :   luai_writestringerror(&quot;%s: &quot;, progname);</span>
 <span class="lineNum">     110 </span><span class="lineCov">          2 :   if (badoption[1] == 'e' || badoption[1] == 'l')</span>
-<span class="lineNum">     111 </span><span class="lineCov">          1 :     luai_writestringerror(&quot;'%s' needs argument\n&quot;, badoption);</span>
+<span class="lineNum">     111 </span><span class="lineCov">          2 :     luai_writestringerror(&quot;'%s' needs argument\n&quot;, badoption);</span>
 <span class="lineNum">     112 </span>            :   else
-<span class="lineNum">     113 </span><span class="lineCov">          1 :     luai_writestringerror(&quot;unrecognized option '%s'\n&quot;, badoption);</span>
-<span class="lineNum">     114 </span><span class="lineCov">          2 :   luai_writestringerror(</span>
+<span class="lineNum">     113 </span><span class="lineCov">          2 :     luai_writestringerror(&quot;unrecognized option '%s'\n&quot;, badoption);</span>
+<span class="lineNum">     114 </span><span class="lineCov">          4 :   luai_writestringerror(</span>
 <span class="lineNum">     115 </span>            :   &quot;usage: %s [options] [script [args]]\n&quot;
 <span class="lineNum">     116 </span>            :   &quot;Available options are:\n&quot;
 <span class="lineNum">     117 </span>            :   &quot;  -e stat  execute string &quot; LUA_QL(&quot;stat&quot;) &quot;\n&quot;
@@ -194,7 +194,7 @@
 <span class="lineNum">     128 </span>            : 
 <span class="lineNum">     129 </span><span class="lineCov">          6 : static void l_message (const char *pname, const char *msg) {</span>
 <span class="lineNum">     130 </span><span class="lineCov">         12 :   if (pname) luai_writestringerror(&quot;%s: &quot;, pname);</span>
-<span class="lineNum">     131 </span><span class="lineCov">          6 :   luai_writestringerror(&quot;%s\n&quot;, msg);</span>
+<span class="lineNum">     131 </span><span class="lineCov">         12 :   luai_writestringerror(&quot;%s\n&quot;, msg);</span>
 <span class="lineNum">     132 </span><span class="lineCov">          6 : }</span>
 <span class="lineNum">     133 </span>            : 
 <span class="lineNum">     134 </span>            : 
@@ -259,7 +259,7 @@
 <span class="lineNum">     193 </span>            :   int narg;
 <span class="lineNum">     194 </span>            :   int i;
 <span class="lineNum">     195 </span>            :   int argc = 0;
-<span class="lineNum">     196 </span><span class="lineCov">        152 :   while (argv[argc]) argc++;  /* count total number of arguments */</span>
+<span class="lineNum">     196 </span><span class="lineCov">         49 :   while (argv[argc]) argc++;  /* count total number of arguments */</span>
 <span class="lineNum">     197 </span><span class="lineCov">         49 :   narg = argc - (n + 1);  /* number of arguments to the script */</span>
 <span class="lineNum">     198 </span><span class="lineCov">         49 :   luaL_checkstack(L, narg + 3, &quot;too many arguments to script&quot;);</span>
 <span class="lineNum">     199 </span><span class="lineCov">         49 :   for (i=n+1; i &lt; argc; i++)</span>
@@ -424,13 +424,13 @@
 <span class="lineNum">     358 </span>            :   int i;
 <span class="lineNum">     359 </span><span class="lineCov">        112 :   for (i = 1; argv[i] != NULL; i++) {</span>
 <span class="lineNum">     360 </span><span class="lineCov">         86 :     if (argv[i][0] != '-')  /* not an option? */</span>
-<span class="lineNum">     361 </span>            :         return i;
+<span class="lineNum">     361 </span><span class="lineCov">         50 :         return i;</span>
 <span class="lineNum">     362 </span><span class="lineCov">         36 :     switch (argv[i][1]) {  /* option */</span>
 <span class="lineNum">     363 </span>            :       case '-':
 <span class="lineNum">     364 </span><span class="lineNoCov">          0 :         noextrachars(argv[i]);</span>
 <span class="lineNum">     365 </span><span class="lineNoCov">          0 :         return (argv[i+1] != NULL ? i+1 : 0);</span>
 <span class="lineNum">     366 </span>            :       case '\0':
-<span class="lineNum">     367 </span>            :         return i;
+<span class="lineNum">     367 </span><span class="lineNoCov">          0 :         return i;</span>
 <span class="lineNum">     368 </span>            :       case 'E':
 <span class="lineNum">     369 </span><span class="lineCov">          1 :         args[has_E] = 1;</span>
 <span class="lineNum">     370 </span><span class="lineCov">          1 :         break;</span>
@@ -569,7 +569,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
   </table>
   <br>
 
