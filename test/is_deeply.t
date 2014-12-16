@@ -44,14 +44,14 @@ test_test "fail is_deeply (missing)"
 test_out "not ok 1 - got is'nt a table"
 test_fail(2)
 test_diag "got value isn't a table : nil"
-eq_array( nil, t, "got is'nt a table" )
+is_deeply( nil, t, "got is'nt a table" )
 test_test "fail is_deeply (bad)"
 
 
 test_out "not ok 1 - expected is'nt a table"
 test_fail(2)
 test_diag "expected value isn't a table : nil"
-eq_array( t, nil, "expected is'nt a table" )
+is_deeply( t, nil, "expected is'nt a table" )
 test_test "fail is_deeply (bad)"
 
 
