@@ -270,11 +270,13 @@ function m.error_is (code, arg2, arg3, arg4)
         tb:diag("    unexpected success"
            .. "\n    expected: " .. tostring(expected))
     else
+        msg = tostring(msg)
+        expected = tostring(expected)
         local pass = msg == expected
         tb:ok(pass, name)
         if not pass then
             tb:diag("         got: " .. msg
-               .. "\n    expected: " .. tostring(expected))
+               .. "\n    expected: " .. expected)
         end
     end
 end
@@ -307,6 +309,7 @@ function m.error_like (code, arg2, arg3, arg4)
             tb:diag("pattern isn't a string : " .. tostring(pattern))
             return
         end
+        msg = tostring(msg)
         local pass = match(msg, pattern)
         tb:ok(pass, name)
         if not pass then
