@@ -236,6 +236,17 @@ function m.is_deeply (got, expected, name)
     end
 end
 
+local function compile(code, name)
+    local msg
+    code, msg = loadstring(code)
+    if not code then
+        tb:ok(false, name, 1)
+        tb:diag("    can't compile code :"
+           .. "\n    " .. msg)
+    end
+    return code
+end
+
 function m.error_is (code, arg2, arg3, arg4)
     local params, expected, name
     if type(arg2) == 'table' then
@@ -248,12 +259,8 @@ function m.error_is (code, arg2, arg3, arg4)
         name = arg3
     end
     if type(code) == 'string' then
-        local msg
-        code, msg = loadstring(code)
+        code = compile(code, name)
         if not code then
-            tb:ok(false, name)
-            tb:diag("    can't compile code :"
-               .. "\n    " .. msg)
             return
         end
     end
@@ -284,12 +291,8 @@ function m.error_like (code, arg2, arg3, arg4)
         name = arg3
     end
     if type(code) == 'string' then
-        local msg
-        code, msg = loadstring(code)
+        code = compile(code, name)
         if not code then
-            tb:ok(false, name)
-            tb:diag("    can't compile code :"
-               .. "\n    " .. msg)
             return
         end
     end
@@ -323,12 +326,8 @@ function m.lives_ok (code, arg2, arg3)
         name = arg2
     end
     if type(code) == 'string' then
-        local msg
-        code, msg = loadstring(code)
+        code = compile(code, name)
         if not code then
-            tb:ok(false, name)
-            tb:diag("    can't compile code :"
-               .. "\n    " .. msg)
             return
         end
     end
