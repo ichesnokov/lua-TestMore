@@ -335,8 +335,8 @@ function m:todo_skip (reason)
 end
 
 function m:skip_rest (reason)
-    for i = self.curr_test, self.expected_tests do
-        tb:skip(reason)
+    for i = self.curr_test + 1, self.expected_tests do
+        self:skip(reason)
     end
 end
 
