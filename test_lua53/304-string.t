@@ -31,7 +31,7 @@ See "Programming in Lua", section 20 "The String Library".
 
 require 'Test.More'
 
-plan(174)
+plan(175)
 
 is(string.byte('ABC'), 65, "function byte")
 is(string.byte('ABC', 2), 66)
@@ -369,6 +369,8 @@ error_like(function () string.unpack('c', 'foo') end,
            "function unpack missing size")
 
 is(string.packsize('b'), 1, "function packsize")
+
+is(string.packsize(''), 0, "function packsize empty")
 
 error_like(function () string.packsize('z') end,
            "^[^:]+:%d+: bad argument #1 to 'packsize' %(variable%-length format%)",
