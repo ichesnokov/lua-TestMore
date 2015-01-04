@@ -90,7 +90,7 @@ co = coroutine.create(function ()
     end)
 
 coroutine.resume(co)
-thr, ismain = coroutine.running(co)
+thr, ismain = coroutine.running()
 type_ok(thr, 'thread', "running")
 is(ismain, true, "running")
 is(coroutine.status(co), 'suspended', "basics")
