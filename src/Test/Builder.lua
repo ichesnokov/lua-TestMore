@@ -64,7 +64,7 @@ function m.create ()
                         return rawget(t, 'data')[k]
                   end,
         __newindex = function (t, k, v)
-                        rawget(o, 'data')[k] = v
+                        rawget(t, 'data')[k] = v
                   end,
     })
     o:reset()
