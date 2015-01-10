@@ -4,7 +4,6 @@
 --
 
 local io = require 'io'
-local pairs = pairs
 local require = require
 
 _ENV = nil
