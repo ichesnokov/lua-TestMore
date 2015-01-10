@@ -351,14 +351,14 @@ end
 
 function m.skip (reason, count)
     count = count or 1
-    for i = 1, count do
+    for _ = 1, count do
         tb:skip(reason)
     end
 end
 
 function m.todo_skip (reason, count)
     count = count or 1
-    for i = 1, count do
+    for _ = 1, count do
         tb:todo_skip(reason)
     end
 end
