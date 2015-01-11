@@ -100,6 +100,7 @@ test:
 
 luacheck:
 	luacheck --std=max src
+	luacheck --std=min --config .test.luacheckrc test/*.t test/subtest/*.t
 
 coverage:
 	rm -f src/luacov.stats.out src/luacov.report.out

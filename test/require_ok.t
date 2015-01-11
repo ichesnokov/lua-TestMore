@@ -6,7 +6,7 @@ plan(6)
 
 
 test_out "ok 1 - require 'Test.More'"
-ret = require_ok "Test.More"
+local ret = require_ok "Test.More"
 test_test "ok require_ok"
 is( ret, true, "return true" )
 

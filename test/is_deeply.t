@@ -4,7 +4,7 @@ require 'Test.More'
 require 'Test.Builder.Tester'
 plan(8)
 
-t = {
+local t = {
     a = 1,
     b = 2,
     c = 3,
@@ -74,7 +74,7 @@ is_deeply( t, {a=1, b='text', c=true, d={'x','w','z'}}, "key d.2 differents" )
 test_test "fail is_deeply (recursif)"
 
 
-local t = {}
+t = {}
 t.foo = t
 local a = {}
 a.foo = a

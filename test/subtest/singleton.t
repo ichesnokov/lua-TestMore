@@ -5,7 +5,7 @@ require 'Test.More'
 plan(3)
 
 local tb = require 'Test.Builder'.new()
-function singleton_ok (val, name)
+local function singleton_ok (val, name)
     tb:ok(val, name)
 end
 

@@ -12,7 +12,7 @@ end)
 nok(r)
 like(msg, "subtest%(%)'s second argument must be a function")
 
-local r, msg = pcall(function ()
+r, msg = pcall(function ()
                 tb:subtest('foo')
 end)
 nok(r)

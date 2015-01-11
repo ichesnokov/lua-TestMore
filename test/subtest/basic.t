@@ -41,7 +41,7 @@ ok 6 - We're on 8
 ok 7 - We're on 9
 ]], 'Output should nest properly')
 
-local tb = require 'Test.Builder.NoOutput'.create()
+tb = require 'Test.Builder.NoOutput'.create()
 tb:plan'no_plan'
 tb:failure_output(tb:output())
 for i = 1, 1 do
@@ -86,7 +86,7 @@ ok 3 - We're on 7
 1..3
 ]], 'We should allow arbitrary nesting')
 
-local tb = require 'Test.Builder.NoOutput'.create()
+tb = require 'Test.Builder.NoOutput'.create()
 do
     local child = tb:child('expected to fail')
     child:plan(3)
@@ -119,18 +119,18 @@ not ok 1 - expected to fail
 ok 2 - expected to pass
 ]], 'Previous child failures should not force subsequent failures')
 
-local tb = require 'Test.Builder.NoOutput'.create()
+tb = require 'Test.Builder.NoOutput'.create()
 local child = tb:child('one')
 is(child:output(), tb:output(), "The child should copy the filehandle")
 is(child:failure_output(), tb:failure_output())
 is(child:todo_output(), tb:todo_output())
 
-local tb = require 'Test.Builder.NoOutput'.create()
-local child = tb:child('one')
+tb = require 'Test.Builder.NoOutput'.create()
+child = tb:child('one')
 is(child.parent, tb, 'the parent of the child')
 nok(tb.parent, '... but top level builders should not have parents')
 
-local tb = require 'Test.Builder.NoOutput'.create()
+tb = require 'Test.Builder.NoOutput'.create()
 do
     local child = tb:child('skippy says he loves you')
     local r, msg = pcall(function ()
@@ -140,9 +140,9 @@ do
     is(msg, "skip_all in child")
 end
 
-local tb = require 'Test.Builder.NoOutput'.create()
+tb = require 'Test.Builder.NoOutput'.create()
 tb:plan(1)
-local child = tb:child()
+child = tb:child()
 child:plan(1)
 child:todo('message', 1)
 child:ok(false)
@@ -155,9 +155,9 @@ is(tb:read'out', [[
 ok 1
 ]], 'TODO tests should not make the parent test fail')
 
-local tb = require 'Test.Builder.NoOutput'.create()
+tb = require 'Test.Builder.NoOutput'.create()
 tb:plan(1)
-local child = tb:child("Child")
+child = tb:child("Child")
 child:finalize()
 is(tb:read'out', [[
 1..1

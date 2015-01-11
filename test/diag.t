@@ -12,7 +12,7 @@ tb:diag "a single line"
 is( tb:read'todo', "# a single line\n", "diag() with todo_output set" )
 
 
-ret = tb:diag("multiple\n", "lines")
+local ret = tb:diag("multiple\n", "lines")
 is( tb:read'todo', "# multiple\n# lines\n", "  multi line" )
 is( ret, nil, "diag returns nil" )
 tb:todo("todo_end", -1)
