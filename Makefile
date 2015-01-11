@@ -98,6 +98,9 @@ check: test
 test:
 	cd src && prove --exec=$(LUA) ../test/*.t ../test/subtest/*.t
 
+luacheck:
+	luacheck --std=max src
+
 coverage:
 	rm -f src/luacov.stats.out src/luacov.report.out
 	cd src && prove --exec="$(LUA) -lluacov" ../test/*.t ../test/subtest/*.t

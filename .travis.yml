@@ -21,9 +21,11 @@ install:
   - sudo make install
   - cd ..
   - sudo luarocks install luacov-coveralls
+  - sudo luarocks install luacheck
 
 # Build and test.
 script:
+  - make luacheck
   - make LUA=lua$LUASUFFIX coveralls
 
 branches:
