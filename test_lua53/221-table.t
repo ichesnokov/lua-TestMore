@@ -96,7 +96,6 @@ error_like(function () a() end,
            "^[^:]+:%d+: attempt to call")
 
 --[[ ]]
-local tt
 tt = { {'a','b','c'}, 10 }
 is((tt)[2], 10)
 is((tt[1])[3], 'c');

@@ -293,7 +293,7 @@ a = next(t, nil)
 is(a, nil, "function next (empty table)")
 
 a = {'a','b','c'}
-local f, v, s = pairs(a)
+f, v, s = pairs(a)
 type_ok(f, 'function', "function pairs")
 type_ok(v, 'table')
 is(s, nil)

@@ -41,14 +41,14 @@ else
 end
 
 a = {"ok 2 - while ", "ok 3", "ok 4"}
-local i = 1
+i = 1
 while a[i] do
     print(a[i])
     i = i + 1
 end
 
 a = {"ok 5 - with break", "ok 6", "stop", "more"}
-local i = 1
+i = 1
 while a[i] do
     if a[i] == 'stop' then break end
     print(a[i])
@@ -61,7 +61,7 @@ else
 end
 
 x = 3
-local i = 1
+i = 1
 while i<=x do
     print("ok " .. 7+i)
     i = i + 1

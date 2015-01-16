@@ -384,7 +384,7 @@ is(tab.x, 10)
 is(tab.z, 0)
 
 --[[ tables with default values ]]
-local mt = {__index = function (t) return t.___ end}
+mt = {__index = function (t) return t.___ end}
 function setDefault_2 (t, d)
     t.___ = d
     setmetatable (t, mt)
@@ -399,7 +399,7 @@ is(tab.z, 0)
 
 --[[ tables with default values ]]
 local key = {}
-local mt = {__index = function (t) return t[key] end}
+mt = {__index = function (t) return t[key] end}
 function setDefault_3 (t, d)
     t[key] = d
     setmetatable (t, mt)
@@ -419,7 +419,7 @@ local _t = t
 -- create proxy
 t = {}
 -- create metatable
-local mt = {
+mt = {
     __index = function (t,k)
         r = "*access to element " .. tostring(k)
         return _t[k]  -- access the original table
@@ -444,7 +444,7 @@ is(r, "*access to element 2")
 -- create private index
 local index = {}
 -- create metatable
-local mt = {
+mt = {
     __index = function (t,k)
         r = "*access to element " .. tostring(k)
         return t[index][k]  -- access the original table
@@ -519,10 +519,10 @@ is(new_a, 1)
 --[[ ]]
 local newindex = {}
 -- create metatable
-local mt = {
+mt = {
     __newindex = newindex
 }
-local t = setmetatable({}, mt)
+t = setmetatable({}, mt)
 t[1] = 42
 is(newindex[1], 42, "__newindex")
 

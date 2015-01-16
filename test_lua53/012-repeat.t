@@ -44,7 +44,7 @@ else
 end
 
 a = {"ok 5 - with break", "ok 6", 'stop', 'more'}
-local i = 0
+i = 0
 repeat
     i = i + 1
     if a[i] == 'stop' then break end
@@ -58,7 +58,7 @@ end
 
 function f () return true end
 
-local i = 1
+i = 1
 repeat
     local v = f()
     if i == 1 then

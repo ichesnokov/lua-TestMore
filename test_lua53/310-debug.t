@@ -65,7 +65,7 @@ error_like(function () debug.getlocal(42, 1) end,
            "bad argument #1 to 'getlocal' %(level out of range%)",
            "function getlocal (out of range)")
 
-local name, value = debug.getlocal(like, 1)
+name, value = debug.getlocal(like, 1)
 type_ok(name, 'string', "function getlocal (func)")
 is(value, nil)
 
@@ -89,7 +89,7 @@ local reg = debug.getregistry()
 type_ok(reg, 'table', "function getregistry")
 type_ok(reg._LOADED, 'table')
 
-local name = debug.getupvalue(plan, 1)
+name = debug.getupvalue(plan, 1)
 type_ok(name, 'string', "function getupvalue")
 
 debug.sethook()
@@ -108,10 +108,10 @@ co = coroutine.create(function () print "thread" end)
 hook = debug.gethook(co)
 is(hook, nil, "function gethook(thread)")
 
-local name = debug.setlocal(0, 1, 0)
+name = debug.setlocal(0, 1, 0)
 type_ok(name, 'string', "function setlocal (level)")
 
-local name = debug.setlocal(0, 42, 0)
+name = debug.setlocal(0, 42, 0)
 is(name, nil, "function setlocal (level)")
 
 error_like(function () debug.setlocal(42, 1, true) end,
@@ -126,10 +126,10 @@ is(getmetatable(t), t1)
 error_like(function () debug.setmetatable(t, true) end,
            "^[^:]+:%d+: bad argument #2 to 'setmetatable' %(nil or table expected%)")
 
-local name = debug.setupvalue(plan, 1, require 'Test.Builder':new())
+name = debug.setupvalue(plan, 1, require 'Test.Builder':new())
 type_ok(name, 'string', "function setupvalue")
 
-local name = debug.setupvalue(plan, 42, true)
+name = debug.setupvalue(plan, 42, true)
 is(name, nil)
 
 local u = io.tmpfile()

@@ -120,7 +120,7 @@ local function g(a, b, ...)
 end
 g(3)
 
-local function g(a, b, ...)
+function g(a, b, ...)
     local arg = {...}
     is(a, 3)
     is(b, 4)
@@ -129,7 +129,7 @@ local function g(a, b, ...)
 end
 g(3, 4)
 
-local function g(a, b, ...)
+function g(a, b, ...)
     local arg = {...}
     is(a, 3)
     is(b, 4)
@@ -140,7 +140,7 @@ end
 g(3, 4, 5, 8)
 
 --[[ var args ]]
-local function g(a, b, ...)
+function g(a, b, ...)
     local c, d, e = ...
     is(a, 3, "var args")
     is(b, nil)
@@ -150,7 +150,7 @@ local function g(a, b, ...)
 end
 g(3)
 
-local function g(a, b, ...)
+function g(a, b, ...)
     local c, d, e = ...
     is(a, 3)
     is(b, 4)
@@ -160,7 +160,7 @@ local function g(a, b, ...)
 end
 g(3, 4)
 
-local function g(a, b, ...)
+function g(a, b, ...)
     local c, d, e = ...
     is(a, 3)
     is(b, 4)
@@ -170,17 +170,17 @@ local function g(a, b, ...)
 end
 
 --[[ var args ]]
-local function g(a, b, ...)
+function g(a, b, ...)
     is(#{a, b, ...}, 1, "varargs")
 end
 g(3)
 
-local function g(a, b, ...)
+function g(a, b, ...)
     is(#{a, b, ...}, 2)
 end
 g(3, 4)
 
-local function g(a, b, ...)
+function g(a, b, ...)
     is(#{a, b, ...}, 4)
 end
 g(3, 4, 5, 8)
@@ -230,7 +230,7 @@ eq_array(output, {3, 2, 1, 0})
 
 --[[ no tail call ]]
 output = {}
-local function foo (n)
+function foo (n)
     output[#output+1] = n
     if n > 0 then
         return (foo(n -1))
@@ -243,7 +243,7 @@ eq_array(output, {3, 2, 1, 0})
 
 --[[ no tail call ]]
 output = {}
-local function foo (n)
+function foo (n)
     output[#output+1] = n
     if n > 0 then
         foo(n -1)
@@ -257,7 +257,7 @@ eq_array(output, {3, 2, 1, 0})
 local function f () return 1 end
 is(f(), 1, "sub name")
 
-local function f () return 2 end
+function f () return 2 end
 is(f(), 2)
 
 -- Local Variables:

@@ -40,10 +40,11 @@ function foo1 (a)
 end
 
 co = coroutine.create(function (a,b)
+        local r, s
         output[#output+1] = "co-body " .. a .." " .. b
-        local r = foo1(a+1)
+        r = foo1(a+1)
         output[#output+1] = "co-body " .. r
-        local r, s = coroutine.yield(a+b, a-b)
+        r, s = coroutine.yield(a+b, a-b)
         output[#output+1] = "co-body " .. r .. " " .. s
         return b, 'end'
     end)

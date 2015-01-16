@@ -64,7 +64,6 @@ for k in pairs(t) do
 end
 
 a = {"ok 13 - for break", "ok 14 - for break", "stop", "more"}
-local i
 for _, v in ipairs(a) do
     if v == "stop" then break end
     print(v)

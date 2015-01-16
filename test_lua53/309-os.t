@@ -123,7 +123,7 @@ r, msg = os.remove('file.rm')
 is(r, nil, "function remove")
 like(msg, '^file.rm: No such file or directory')
 
-local f = io.open('file.old', 'w')
+f = io.open('file.old', 'w')
 f:write("file to rename")
 f:close()
 os.remove('file.new')

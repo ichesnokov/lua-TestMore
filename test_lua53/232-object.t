@@ -204,7 +204,7 @@ is(account.balance, 100)
 
 --[[ multiple inheritance (patched) ]]
 -- look up for 'k' in list of tables 'plist'
-local function search (k, plist)
+function search (k, plist)
     for i=1, #plist do
         local v = plist[i][k]  -- try 'i'-th superclass
         if v then return v end
