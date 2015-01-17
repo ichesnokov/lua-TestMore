@@ -112,23 +112,23 @@ is(pos, 8)
 is(utf8.offset("A\u{20AC}3", 1), 1, "function offset")
 is(utf8.offset("A\u{20AC}3", 2), 2)
 is(utf8.offset("A\u{20AC}3", 3), 5)
-is(utf8.offset("A\u{20AC}3", 4), 6) -- ?? nil
+is(utf8.offset("A\u{20AC}3", 4), 6)
 is(utf8.offset("A\u{20AC}3", 5), nil)
 is(utf8.offset("A\u{20AC}3", 6), nil)
-is(utf8.offset("A\u{20AC}3", -1), 5) -- ?? nil
+is(utf8.offset("A\u{20AC}3", -1), 5)
 is(utf8.offset("A\u{20AC}3", 1, 2), 2)
 is(utf8.offset("A\u{20AC}3", 2, 2), 5)
-is(utf8.offset("A\u{20AC}3", 3, 2), 6) -- ?? nil
+is(utf8.offset("A\u{20AC}3", 3, 2), 6)
 is(utf8.offset("A\u{20AC}3", 4, 2), nil)
 is(utf8.offset("A\u{20AC}3", -1, 2), 1)
 is(utf8.offset("A\u{20AC}3", -2, 2), nil)
 is(utf8.offset("A\u{20AC}3", 1, 5), 5)
-is(utf8.offset("A\u{20AC}3", 2, 5), 6) -- ?? nil
+is(utf8.offset("A\u{20AC}3", 2, 5), 6)
 is(utf8.offset("A\u{20AC}3", 3, 5), nil)
 is(utf8.offset("A\u{20AC}3", -1, 5), 2)
 is(utf8.offset("A\u{20AC}3", -2, 5), 1)
 is(utf8.offset("A\u{20AC}3", -3, 5), nil)
-is(utf8.offset("A\u{20AC}3", 1, 6), 6) -- ?? nil
+is(utf8.offset("A\u{20AC}3", 1, 6), 6)
 is(utf8.offset("A\u{20AC}3", 2, 6), nil)
 is(utf8.offset("A\u{20AC}3", 1, -1), 5)
 is(utf8.offset("A\u{20AC}3", -1, -1), 2)
