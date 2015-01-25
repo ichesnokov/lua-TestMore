@@ -1,4 +1,5 @@
-globals = {
+codes = true
+read_globals = {
     -- Test.More
     'plan',
     'done_testing',
@@ -35,3 +36,5 @@ globals = {
     'test_test',
     'line_num',
 }
+files['test/bail_out.t'].ignore = { '122/os' }
+files['test/skipall.t'].ignore = { '122/os' }

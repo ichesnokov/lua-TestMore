@@ -132,7 +132,7 @@ nok(tb.parent, '... but top level builders should not have parents')
 
 tb = require 'Test.Builder.NoOutput'.create()
 do
-    local child = tb:child('skippy says he loves you')
+    child = tb:child('skippy says he loves you')
     local r, msg = pcall(function ()
                                 child:skip_all'cuz I said so'
                          end)
