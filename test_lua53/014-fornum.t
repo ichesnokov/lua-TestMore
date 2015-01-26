@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -64,65 +64,77 @@ for i = 5, 5, -1 do
     print("ok " .. 20+i .. " - for 5, 5, -1")
 end
 
-local v = false
-for i = 5, 3 do
-    v = true
-end
-if v then
-    print("not ok 26 - for 5, 3")
-else
-    print("ok 26 - for 5, 3")
-end
-
-v = false
-for i = 5, 7, -1 do
-    v = true
-end
-if v then
-    print("not ok 27 - for 5, 7, -1")
-else
-    print("ok 27 - for 5, 7, -1")
+do
+    local v = false
+    for i = 5, 3 do
+        v = true
+    end
+    if v then
+        print("not ok 26 - for 5, 3")
+    else
+        print("ok 26 - for 5, 3")
+    end
 end
 
-v = false
-for i = 5, 7, 0 do
-    v = true
-end
-if v then
-    print("not ok 28 - for 5, 7, 0")
-else
-    print("ok 28 - for 5, 7, 0")
-end
-
-v = nil
-for i = 1, 10, 2 do
-    if i > 4 then break end
-    print("ok " .. (i+57)/2 .. " - for break")
-    v = i
-end
-if v == 3 then
-    print("ok 31 - break")
-else
-    print("not ok 31 - " .. v)
+do
+    local v = false
+    for i = 5, 7, -1 do
+        v = true
+    end
+    if v then
+        print("not ok 27 - for 5, 7, -1")
+    else
+        print("ok 27 - for 5, 7, -1")
+    end
 end
 
-local function first() return 1 end
-local function limit() return 8 end
-local function step()  return 2 end
-for i = first(), limit(), step() do
-    print("ok " .. (i+63)/2 .. " - with functions")
+do
+    local v = false
+    for i = 5, 7, 0 do
+        v = true
+    end
+    if v then
+        print("not ok 28 - for 5, 7, 0")
+    else
+        print("ok 28 - for 5, 7, 0")
+    end
 end
 
-local a = {}
-for i = 1, 10 do
-    a[i] = function () return i end
+do
+    local v = nil
+    for i = 1, 10, 2 do
+        if i > 4 then break end
+        print("ok " .. (i+57)/2 .. " - for break")
+        v = i
+    end
+    if v == 3 then
+        print("ok 31 - break")
+    else
+        print("not ok 31 - " .. v)
+    end
 end
-v = a[5]()
-if v == 5 then
-    print("ok 36 - for & upval")
-else
-    print("not ok 36 - for & upval")
-    print("#", v)
+
+do
+    local function first() return 1 end
+    local function limit() return 8 end
+    local function step()  return 2 end
+    for i = first(), limit(), step() do
+        print("ok " .. (i+63)/2 .. " - with functions")
+    end
+end
+
+do
+    local a = {}
+    for i = 1, 10 do
+        a[i] = function () return i end
+    end
+    local v = a[5]()
+    if v == 5 then
+        print("ok 36 - for & upval")
+    else
+        print("not ok 36 - for & upval")
+        print("#", v)
+    end
 end
 
 -- Local Variables:

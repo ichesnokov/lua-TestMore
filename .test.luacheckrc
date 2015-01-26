@@ -41,7 +41,6 @@ read_globals = {
 
 files['test/bail_out.t'].ignore = { '122/os' }
 files['test/skipall.t'].ignore = { '122/os' }
-files['test_lua53/015-forlist.t'].ignore = { '421' }
 files['test_lua53/201-assign.t'].ignore = { '411/my_i', '531', '532' }
 files['test_lua53/211-scope.t'].ignore = { '421' }
 files['test_lua53/231-metatable.t'].ignore = { '421' }

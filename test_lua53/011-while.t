@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -29,47 +29,55 @@ See "Programming in Lua", section 4.3 "Control Structures".
 
 print("1..11")
 
-local a = {}
-local i = 1
-while a[i] do
-    i = i + 1
-end
-if i == 1 then
-    print("ok 1 - while empty")
-else
-    print("not ok 1 - " .. i)
-end
-
-a = {"ok 2 - while ", "ok 3", "ok 4"}
-i = 1
-while a[i] do
-    print(a[i])
-    i = i + 1
+do
+    local a = {}
+    local i = 1
+    while a[i] do
+        i = i + 1
+    end
+    if i == 1 then
+        print("ok 1 - while empty")
+    else
+        print("not ok 1 - " .. i)
+    end
 end
 
-a = {"ok 5 - with break", "ok 6", "stop", "more"}
-i = 1
-while a[i] do
-    if a[i] == 'stop' then break end
-    print(a[i])
-    i = i + 1
-end
-if i == 3 then
-    print("ok 7 - break")
-else
-    print("not ok 7 - " .. i)
+do
+    local a = {"ok 2 - while ", "ok 3", "ok 4"}
+    local i = 1
+    while a[i] do
+        print(a[i])
+        i = i + 1
+    end
 end
 
-local x = 3
-i = 1
-while i<=x do
-    print("ok " .. 7+i)
-    i = i + 1
+do
+    local a = {"ok 5 - with break", "ok 6", "stop", "more"}
+    local i = 1
+    while a[i] do
+        if a[i] == 'stop' then break end
+        print(a[i])
+        i = i + 1
+    end
+    if i == 3 then
+        print("ok 7 - break")
+    else
+        print("not ok 7 - " .. i)
+    end
 end
-if i == 4 then
-    print("ok 11")
-else
-    print("not ok 11 - " .. i)
+
+do
+    local x = 3
+    local i = 1
+    while i<=x do
+        print("ok " .. 7+i)
+        i = i + 1
+    end
+    if i == 4 then
+        print("ok 11")
+    else
+        print("not ok 11 - " .. i)
+    end
 end
 
 -- Local Variables:

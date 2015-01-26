@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -29,46 +29,52 @@ See "Programming in Lua", section 4.3 "Control Structures".
 
 print("1..8")
 
-local a = {"ok 1 - repeat", "ok 2", "ok 3"}
-local i = 0
-repeat
-    i = i + 1
-    if a[i] then
-        print(a[i])
-    end
-until not a[i]
-if i == 4 then
-    print("ok 4")
-else
-    print("not ok 4 - " .. i)
-end
-
-a = {"ok 5 - with break", "ok 6", 'stop', 'more'}
-i = 0
-repeat
-    i = i + 1
-    if a[i] == 'stop' then break end
-    print(a[i])
-until not a[i]
-if a[i] == 'stop' then
-    print("ok 7 - break")
-else
-    print("not ok 7 - " .. a[i])
-end
-
-local function f () return true end
-
-i = 1
-repeat
-    local v = f()
-    if i == 1 then
-        print("ok 8 - scope")
+do
+    local a = {"ok 1 - repeat", "ok 2", "ok 3"}
+    local i = 0
+    repeat
+        i = i + 1
+        if a[i] then
+            print(a[i])
+        end
+    until not a[i]
+    if i == 4 then
+        print("ok 4")
     else
-        print("not ok")
-        break
+        print("not ok 4 - " .. i)
     end
-    i = i + 1
-until v
+end
+
+do
+    local a = {"ok 5 - with break", "ok 6", 'stop', 'more'}
+    local i = 0
+    repeat
+        i = i + 1
+        if a[i] == 'stop' then break end
+        print(a[i])
+    until not a[i]
+    if a[i] == 'stop' then
+        print("ok 7 - break")
+    else
+        print("not ok 7 - " .. a[i])
+    end
+end
+
+do
+    local function f () return true end
+
+    local i = 1
+    repeat
+        local v = f()
+        if i == 1 then
+            print("ok 8 - scope")
+        else
+            print("not ok")
+            break
+        end
+        i = i + 1
+    until v
+end
 
 -- Local Variables:
 --   mode: lua

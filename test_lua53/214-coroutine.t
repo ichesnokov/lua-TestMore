@@ -32,158 +32,180 @@ require 'Test.More'
 plan(31)
 
 --[[ ]]
-local output = {}
+do
+    local output = {}
 
-local function foo1 (a)
-    output[#output+1] = "foo " .. a
-    return coroutine.yield(2*a)
+    local function foo1 (a)
+        output[#output+1] = "foo " .. a
+        return coroutine.yield(2*a)
+    end
+
+    local co = coroutine.create(function (a,b)
+            local r, s
+            output[#output+1] = "co-body " .. a .." " .. b
+            r = foo1(a+1)
+            output[#output+1] = "co-body " .. r
+            r, s = coroutine.yield(a+b, a-b)
+            output[#output+1] = "co-body " .. r .. " " .. s
+            return b, 'end'
+        end)
+
+    eq_array({coroutine.resume(co, 1, 10)}, {true, 4}, "foo1")
+    eq_array({coroutine.resume(co, 'r')}, {true, 11, -9})
+    eq_array({coroutine.resume(co, "x", "y")}, {true, 10, 'end'})
+    eq_array({coroutine.resume(co, "x", "y")}, {false, "cannot resume dead coroutine"})
+    eq_array(output, {
+        'co-body 1 10',
+        'foo 2',
+        'co-body r',
+        'co-body x y',
+    })
 end
 
-local co = coroutine.create(function (a,b)
-        local r, s
-        output[#output+1] = "co-body " .. a .." " .. b
-        r = foo1(a+1)
-        output[#output+1] = "co-body " .. r
-        r, s = coroutine.yield(a+b, a-b)
-        output[#output+1] = "co-body " .. r .. " " .. s
-        return b, 'end'
-    end)
+--[[ ]]
+do
+    local output = ''
+    local co = coroutine.create(function ()
+            output = 'hi'
+        end)
+    like(co, '^thread: 0?[Xx]?%x+$', "basics")
 
-eq_array({coroutine.resume(co, 1, 10)}, {true, 4}, "foo1")
-eq_array({coroutine.resume(co, 'r')}, {true, 11, -9})
-eq_array({coroutine.resume(co, "x", "y")}, {true, 10, 'end'})
-eq_array({coroutine.resume(co, "x", "y")}, {false, "cannot resume dead coroutine"})
-eq_array(output, {
-    'co-body 1 10',
-    'foo 2',
-    'co-body r',
-    'co-body x y',
-})
+    is(coroutine.status(co), 'suspended')
+    coroutine.resume(co)
+    is(output, 'hi')
+    is(coroutine.status(co), 'dead')
+
+    error_like(function () coroutine.create(true) end,
+               "^[^:]+:%d+: bad argument #1 to 'create' %(function expected, got boolean%)")
+
+    error_like(function () coroutine.resume(true) end,
+               "^[^:]+:%d+: bad argument #1 to 'resume' %(.- expected%)")
+
+    error_like(function () coroutine.status(true) end,
+               "^[^:]+:%d+: bad argument #1 to 'status' %(.- expected%)")
+end
 
 --[[ ]]
-co = coroutine.create(function ()
-        output = 'hi'
-    end)
-like(co, '^thread: 0?[Xx]?%x+$', "basics")
+do
+    local output = {}
+    local co = coroutine.create(function ()
+            for i=1,10 do
+                output[#output+1] = i
+                coroutine.yield()
+            end
+        end)
 
-is(coroutine.status(co), 'suspended')
-output = ''
-coroutine.resume(co)
-is(output, 'hi')
-is(coroutine.status(co), 'dead')
-
-error_like(function () coroutine.create(true) end,
-           "^[^:]+:%d+: bad argument #1 to 'create' %(function expected, got boolean%)")
-
-error_like(function () coroutine.resume(true) end,
-           "^[^:]+:%d+: bad argument #1 to 'resume' %(.- expected%)")
-
-error_like(function () coroutine.status(true) end,
-           "^[^:]+:%d+: bad argument #1 to 'status' %(.- expected%)")
+    coroutine.resume(co)
+    local thr, ismain = coroutine.running()
+    type_ok(thr, 'thread', "running")
+    is(ismain, true, "running")
+    is(coroutine.status(co), 'suspended', "basics")
+    coroutine.resume(co)
+    coroutine.resume(co)
+    coroutine.resume(co)
+    coroutine.resume(co)
+    coroutine.resume(co)
+    coroutine.resume(co)
+    coroutine.resume(co)
+    coroutine.resume(co)
+    coroutine.resume(co)
+    coroutine.resume(co)
+    eq_array({coroutine.resume(co)}, {false, 'cannot resume dead coroutine'})
+    eq_array(output, {1,2,3,4,5,6,7,8,9,10})
+end
 
 --[[ ]]
-output = {}
-co = coroutine.create(function ()
-        for i=1,10 do
-            output[#output+1] = i
-            coroutine.yield()
+do
+    local co = coroutine.create(function (a,b)
+            coroutine.yield(a + b, a - b)
+        end)
+
+    eq_array({coroutine.resume(co, 20, 10)}, {true, 30, 10}, "basics")
+end
+
+--[[ ]]
+do
+    local co = coroutine.create(function ()
+            return 6, 7
+        end)
+
+    eq_array({coroutine.resume(co)}, {true, 6, 7}, "basics")
+end
+
+--[[ ]]
+do
+    local co = coroutine.wrap(function(...)
+        return pcall(function(...)
+            return coroutine.yield(...)
+        end, ...)
+    end)
+    eq_array({co("Hello")}, {"Hello"})
+    eq_array({co("World")}, {true, "World"})
+end
+
+do
+    local co = coroutine.wrap(function(...)
+        local function backtrace ()
+            return 'not a back trace'
+        end
+        return xpcall(function(...)
+            return coroutine.yield(...)
+        end, backtrace, ...)
+    end)
+    eq_array({co("Hello")}, {"Hello"})
+    eq_array({co("World")}, {true, "World"})
+end
+
+--[[ ]]
+do
+    local output = {}
+    local co = coroutine.wrap(function()
+        while true do
+            local t = setmetatable({}, {
+                __eq = function(...)
+                    return coroutine.yield(...)
+                end}
+            )
+            local t2 = setmetatable({}, getmetatable(t))
+            output[#output+1] = t == t2
         end
     end)
-
-coroutine.resume(co)
-local thr, ismain = coroutine.running()
-type_ok(thr, 'thread', "running")
-is(ismain, true, "running")
-is(coroutine.status(co), 'suspended', "basics")
-coroutine.resume(co)
-coroutine.resume(co)
-coroutine.resume(co)
-coroutine.resume(co)
-coroutine.resume(co)
-coroutine.resume(co)
-coroutine.resume(co)
-coroutine.resume(co)
-coroutine.resume(co)
-coroutine.resume(co)
-eq_array({coroutine.resume(co)}, {false, 'cannot resume dead coroutine'})
-eq_array(output, {1,2,3,4,5,6,7,8,9,10})
+    co()
+    co(true)
+    co(false)
+    eq_array(output, {true, false})
+end
 
 --[[ ]]
-co = coroutine.create(function (a,b)
-        coroutine.yield(a + b, a - b)
-    end)
+do
+    local co = coroutine.wrap(print)
+    type_ok(co, 'function')
 
-eq_array({coroutine.resume(co, 20, 10)}, {true, 30, 10}, "basics")
+    error_like(function () coroutine.wrap(true) end,
+               "^[^:]+:%d+: bad argument #1 to 'wrap' %(function expected, got boolean%)")
 
---[[ ]]
-co = coroutine.create(function ()
-        return 6, 7
-    end)
-
-eq_array({coroutine.resume(co)}, {true, 6, 7}, "basics")
-
---[[ ]]
-co = coroutine.wrap(function(...)
-  return pcall(function(...)
-    return coroutine.yield(...)
-  end, ...)
-end)
-eq_array({co("Hello")}, {"Hello"})
-eq_array({co("World")}, {true, "World"})
-
-co = coroutine.wrap(function(...)
-  local function backtrace ()
-    return 'not a back trace'
-  end
-  return xpcall(function(...)
-    return coroutine.yield(...)
-  end, backtrace, ...)
-end)
-eq_array({co("Hello")}, {"Hello"})
-eq_array({co("World")}, {true, "World"})
+    co = coroutine.wrap(function () error"in coro" end)
+    error_like(function () co() end,
+               "^[^:]+:%d+: [^:]+:%d+: in coro$")
+end
 
 --[[ ]]
-output = {}
-co = coroutine.wrap(function()
-  while true do
-    local t = setmetatable({}, {
-      __eq = function(...)
-        return coroutine.yield(...)
-      end}
-    )
-    local t2 = setmetatable({}, getmetatable(t))
-    output[#output+1] = t == t2
-  end
-end)
-co()
-co(true)
-co(false)
-eq_array(output, {true, false})
+do
+    local co = coroutine.create(function ()
+            error "in coro"
+        end)
+    local r, msg = coroutine.resume(co)
+    is(r, false)
+    like(msg, "^[^:]+:%d+: in coro$")
+end
 
 --[[ ]]
-co = coroutine.wrap(print)
-type_ok(co, 'function')
+do
+    error_like(function () coroutine.yield() end,
+               "attempt to yield")
 
-error_like(function () coroutine.wrap(true) end,
-           "^[^:]+:%d+: bad argument #1 to 'wrap' %(function expected, got boolean%)")
-
-co = coroutine.wrap(function () error"in coro" end)
-error_like(function () co() end,
-           "^[^:]+:%d+: [^:]+:%d+: in coro$")
-
---[[ ]]
-co = coroutine.create(function ()
-        error "in coro"
-    end)
-local r, msg = coroutine.resume(co)
-is(r, false)
-like(msg, "^[^:]+:%d+: in coro$")
-
---[[ ]]
-error_like(function () coroutine.yield() end,
-           "attempt to yield")
-
-is(coroutine.isyieldable(), false, "isyieldable")
+    is(coroutine.isyieldable(), false, "isyieldable")
+end
 
 -- Local Variables:
 --   mode: lua
