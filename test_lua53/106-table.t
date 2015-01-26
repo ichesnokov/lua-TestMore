@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -93,8 +93,8 @@ error_like(function () return {} << 2 end,
 
 is({} == {}, false, "{} == {}")
 
-t1 = {}
-t2 = {}
+local t1 = {}
+local t2 = {}
 is(t1 == t1, true, "t1 == t1")
 is(t1 == t2, false, "t1 == t2")
 is(t1 ~= t2, true, "t1 ~= t2")
@@ -135,7 +135,7 @@ error_like(function () return {} >= 0 end,
            "^[^:]+:%d+: attempt to compare %w+ with %w+",
            "{} >= 0")
 
-t = {}
+local t = {}
 is( t[1], nil, "index" )
 t[1] = 42
 is( t[1], 42, "index" )

@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -32,7 +32,7 @@ require 'Test.More'
 plan(63)
 
 --[[ add ]]
-function add (a)
+local function add (a)
     local sum = 0
     for i,v in ipairs(a) do
         sum = sum + v
@@ -40,20 +40,20 @@ function add (a)
     return sum
 end
 
-t = { 10, 20, 30, 40 }
+local t = { 10, 20, 30, 40 }
 is(add(t), 100, "add")
 
 --[[ f ]]
-function f(a, b) return a or b end
+local function f(a, b) return a or b end
 
 is(f(3), 3, "f")
 is(f(3, 4), 3)
 is(f(3, 4, 5), 3)
 
 --[[ incCount ]]
-count = 0
+local count = 0
 
-function incCount (n)
+local function incCount (n)
     n = n or 1
     count = count + n
 end
@@ -67,7 +67,7 @@ incCount(1)
 is(count, 4)
 
 --[[ maximum ]]
-function maximum (a)
+local function maximum (a)
     local mi = 1                -- maximum index
     local m = a[mi]             -- maximum value
     for i,val in ipairs(a) do
@@ -89,12 +89,12 @@ function f (n)
     return n
 end
 
-a = 12
+local a = 12
 is(a, 12, "call by value")
-b = f(a)
+local b = f(a)
 is(b, 11)
 is(a, 12)
-c = f(12)
+local c = f(12)
 is(c, 11)
 is(a, 12)
 
@@ -188,12 +188,13 @@ g(3, 4, 5, 8)
 --[[ var args ]]
 function f() return 1, 2 end
 function g() return 'a', f() end
-function h() return f(), 'b' end
-function k() return 'c', (f()) end
+local function h() return f(), 'b' end
+local function k() return 'c', (f()) end
 
-x, y = f()
+local x, y = f()
 is(x, 1, "var args")
 is(y, 2)
+local z
 x, y, z = g()
 is(x, 'a')
 is(y, 1)
@@ -208,6 +209,7 @@ is(z, nil)
 
 
 --[[ invalid var args ]]
+local msg
 f, msg = load [[
 function f ()
     print(...)
@@ -216,7 +218,7 @@ end
 like(msg, "^[^:]+:%d+: cannot use '...' outside a vararg function", "invalid var args")
 
 --[[ tail call ]]
-output = {}
+local output = {}
 local function foo (n)
     output[#output+1] = n
     if n > 0 then
@@ -254,7 +256,7 @@ is(foo(3), nil, "no tail call")
 eq_array(output, {3, 2, 1, 0})
 
 --[[ sub name ]]
-local function f () return 1 end
+function f () return 1 end
 is(f(), 1, "sub name")
 
 function f () return 2 end

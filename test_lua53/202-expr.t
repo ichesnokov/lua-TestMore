@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -31,12 +31,12 @@ require 'Test.More'
 
 plan(39)
 
-x = math.pi
+local x = math.pi
 is(x - x%0.0001, 3.1415, "modulo")
 
-a = {}; a.x = 1; a.y = 0;
-b = {}; b.x = 1; b.y = 0;
-c = a
+local a = {}; a.x = 1; a.y = 0;
+local b = {}; b.x = 1; b.y = 0;
+local c = a
 is(a == c, true, "relational op (by reference)")
 is(a ~= b, true)
 

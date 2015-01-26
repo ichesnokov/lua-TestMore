@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -32,19 +32,19 @@ require 'Test.More'
 plan(14)
 
 --[[ list-style init ]]
-days = {'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-        'Thursday', 'Friday', 'Saturday'}
+local days = {'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+              'Thursday', 'Friday', 'Saturday'}
 is(days[4], 'Wednesday', "list-style init")
 is(#days, 7)
 
 --[[ record-style init ]]
-a = {x=0, y=0}
+local a = {x=0, y=0}
 is(a.x, 0, "record-style init")
 is(a.y, 0)
 
 --[[ ]]
-w = {x=0, y=0, label='console'}
-x = {0, 1, 2}
+local w = {x=0, y=0, label='console'}
+local x = {0, 1, 2}
 w[1] = "another field"
 x.f = w
 is(w['x'], 0, "ctor")
@@ -53,18 +53,18 @@ is(x.f[1], "another field")
 w.x = nil
 
 --[[ mix record-style and list-style init ]]
-polyline = {color='blue', thickness=2, npoints=4,
-             {x=0,   y=0},
-             {x=-10, y=0},
-             {x=-10, y=1},
-             {x=0,   y=1}
-           }
+local polyline = {color='blue', thickness=2, npoints=4,
+                  {x=0,   y=0},
+                  {x=-10, y=0},
+                  {x=-10, y=1},
+                  {x=0,   y=1}
+                 }
 is(polyline[2].x, -10, "mix record-style and list-style init")
 
 --[[ ]]
-opnames = {['+'] = 'add', ['-'] = 'sub',
-           ['*'] = 'mul', ['/'] = 'div'}
-i = 20; s = '-'
+local opnames = {['+'] = 'add', ['-'] = 'sub',
+                 ['*'] = 'mul', ['/'] = 'div'}
+local i = 20; local s = '-'
 a = {[i+0] = s, [i+1] = s..s, [i+2] = s..s..s}
 is(opnames[s], 'sub', "ctor")
 is(a[22], '---')

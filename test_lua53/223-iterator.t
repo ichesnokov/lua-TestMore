@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2010, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -30,7 +30,7 @@ require 'Test.More'
 plan(8)
 
 --[[ list_iter ]]
-function list_iter (t)
+local function list_iter (t)
     local i = 0
     local n = #t
     return function ()
@@ -43,15 +43,15 @@ function list_iter (t)
            end
 end
 
-t = {10, 20, 30}
-output = {}
+local t = {10, 20, 30}
+local output = {}
 for element in list_iter(t) do
     output[#output+1] = element
 end
 eq_array(output, t, "list_iter")
 
 --[[ values ]]
-function values (t)
+local function values (t)
     local i = 0
     return function ()
                i = i + 1
@@ -79,7 +79,7 @@ local function my_ipairs (a)
     return iter, a, 0
 end
 
-a = {'one', 'two', 'three'}
+local a = {'one', 'two', 'three'}
 output = {}
 for i, v in my_ipairs(a) do
     output[#output+1] = i
@@ -110,7 +110,7 @@ end
 eq_array(output, {1, 'one', 2, 'two', 3, 'three'}, "with next")
 
 --[[ permutations ]]
-function permgen (a, n)
+local function permgen (a, n)
     n = n or #a         -- default for 'n' is size of 'a'
     if n <= 1 then      -- nothing to change?
         coroutine.yield(a)
@@ -126,7 +126,7 @@ function permgen (a, n)
     end
 end
 
-function permutations (a)
+local function permutations (a)
     local co = coroutine.create(function () permgen(a) end)
     return function ()  -- iterator
                local code, res = coroutine.resume(co)
@@ -169,7 +169,7 @@ end
 eq_array(output, {'b c a','c b a','c a b','a c b','b a c','a b c'}, "permutations with wrap")
 
 --[[ fibo ]]
-function fibogen ()
+local function fibogen ()
     local x, y = 0, 1
     while true do
         coroutine.yield(x)
@@ -177,7 +177,7 @@ function fibogen ()
     end
 end
 
-function fibo ()
+local function fibo ()
     return coroutine.wrap(function () fibogen() end)
 end
 

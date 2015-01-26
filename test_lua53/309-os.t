@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -35,11 +35,11 @@ plan(53)
 
 local lua = (platform and platform.lua) or arg[-1]
 
-clk = os.clock()
+local clk = os.clock()
 type_ok(clk, 'number', "function clock")
 ok(clk <= os.clock())
 
-d = os.date('!*t', 0)
+local d = os.date('!*t', 0)
 is(d.year, 1970, "function date")
 is(d.month, 1)
 is(d.day, 1)
@@ -61,15 +61,15 @@ error_like(function () os.date('%Ja', 0) end,
 
 is(os.difftime(1234, 1200), 34, "function difftime")
 
-r = os.execute()
-is(r, true, "function execute")
+local res = os.execute()
+is(res, true, "function execute")
 
-r, s, n = os.execute('__IMPROBABLE__')
+local r, s, n = os.execute('__IMPROBABLE__')
 is(r, nil, "function execute")
 is(s, 'exit')
 type_ok(n, 'number')
 
-cmd = lua .. [[ -e "print '# hello from external Lua'; os.exit(2)"]]
+local cmd = lua .. [[ -e "print '# hello from external Lua'; os.exit(2)"]]
 r, s, n = os.execute(cmd)
 is(r, nil)
 is(s, 'exit', "function execute & exit")
@@ -85,11 +85,12 @@ cmd = lua .. [[ -e "print '# hello from external Lua'; os.exit(true, true)"]]
 is(os.execute(cmd), true, "function execute & exit")
 
 cmd = lua .. [[ -e "print 'reached'; os.exit(); print 'not reached';"]]
+local f
 r, f = pcall(io.popen, cmd)
 if r then
     is(f:read'*l', 'reached', "function exit")
     is(f:read'*l', nil)
-    code = f:close()
+    local code = f:close()
     is(code, true, "exit code")
 else
     skip("io.popen not supported", 3)
@@ -110,15 +111,16 @@ end
 
 is(os.getenv('__IMPROBABLE__'), nil, "function getenv")
 
-user = os.getenv('LOGNAME') or os.getenv('USERNAME')
+local user = os.getenv('LOGNAME') or os.getenv('USERNAME')
 type_ok(user, 'string', "function getenv")
 
-local f = io.open('file.rm', 'w')
+f = io.open('file.rm', 'w')
 f:write("file to remove")
 f:close()
 r = os.remove("file.rm")
 is(r, true, "function remove")
 
+local msg
 r, msg = os.remove('file.rm')
 is(r, nil, "function remove")
 like(msg, '^file.rm: No such file or directory')
@@ -173,7 +175,7 @@ error_like(function () os.time{} end,
            "^[^:]+:%d+: field 'day' missing in date table",
            "function time (missing field)")
 
-fname = os.tmpname()
+local fname = os.tmpname()
 type_ok(fname, 'string', "function tmpname")
 ok(fname ~= os.tmpname())
 

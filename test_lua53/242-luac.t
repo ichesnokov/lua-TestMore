@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2010-2014, Perrad Francois
+-- Copyright (C) 2010-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -37,7 +37,7 @@ end
 plan(14)
 diag(luac)
 
-f = io.open('hello.lua', 'w')
+local f = io.open('hello.lua', 'w')
 f:write([[
 local a = false
 b = a + 1
@@ -52,7 +52,7 @@ print 'Hello World'
 ]])
 f:close()
 
-cmd = luac .. [[ -v 2>&1]]
+local cmd = luac .. [[ -v 2>&1]]
 f = io.popen(cmd)
 like(f:read'*l', '^Lua', "-v")
 f:close()

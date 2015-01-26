@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2014, Perrad Francois
+-- Copyright (C) 2014-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -105,7 +105,7 @@ error_like(function () utf8.len('A', 3) end,
            "^[^:]+:%d+: bad argument #2 to 'len' %(initial position out of string%)",
            "function len (out of range)")
 
-len, pos = utf8.len('invalid\xFF')
+local len, pos = utf8.len('invalid\xFF')
 is(len, nil, "function len (invalid)")
 is(pos, 8)
 

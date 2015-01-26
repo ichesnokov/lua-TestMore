@@ -29,7 +29,7 @@ See "Programming in Lua", section 4.3 "Control Structures".
 
 print("1..18")
 
-a = {"ok 1 - for ipairs", "ok 2 - for ipairs", "ok 3 - for ipairs"}
+local a = {"ok 1 - for ipairs", "ok 2 - for ipairs", "ok 3 - for ipairs"}
 for _, v in ipairs(a) do
     print(v)
 end
@@ -37,8 +37,8 @@ for i, v in ipairs(a) do
     print("ok " .. 3+i .. " - for ipairs")
 end
 
-r = false
-t = {a=10, b=100}
+local r = false
+local t = {a=10, b=100}
 for i, v in ipairs(t) do
     print(i, v)
     r = true
@@ -75,7 +75,7 @@ else
     print("not ok 15 - " .. i)
 end
 
-local a = {"ok 16 - for & upval", "ok 17 - for & upval", "ok 18 - for & upval"}
+a = {"ok 16 - for & upval", "ok 17 - for & upval", "ok 18 - for & upval"}
 local b = {}
 for i, v in ipairs(a) do
     b[i] = function () return v end

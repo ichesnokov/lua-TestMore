@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -32,14 +32,14 @@ require 'Test.More'
 plan(31)
 
 --[[ ]]
-output = {}
+local output = {}
 
-function foo1 (a)
+local function foo1 (a)
     output[#output+1] = "foo " .. a
     return coroutine.yield(2*a)
 end
 
-co = coroutine.create(function (a,b)
+local co = coroutine.create(function (a,b)
         local r, s
         output[#output+1] = "co-body " .. a .." " .. b
         r = foo1(a+1)
@@ -91,7 +91,7 @@ co = coroutine.create(function ()
     end)
 
 coroutine.resume(co)
-thr, ismain = coroutine.running()
+local thr, ismain = coroutine.running()
 type_ok(thr, 'thread', "running")
 is(ismain, true, "running")
 is(coroutine.status(co), 'suspended', "basics")
@@ -132,7 +132,7 @@ eq_array({co("Hello")}, {"Hello"})
 eq_array({co("World")}, {true, "World"})
 
 co = coroutine.wrap(function(...)
-  function backtrace ()
+  local function backtrace ()
     return 'not a back trace'
   end
   return xpcall(function(...)
@@ -143,7 +143,7 @@ eq_array({co("Hello")}, {"Hello"})
 eq_array({co("World")}, {true, "World"})
 
 --[[ ]]
-local output = {}
+output = {}
 co = coroutine.wrap(function()
   while true do
     local t = setmetatable({}, {
@@ -175,7 +175,7 @@ error_like(function () co() end,
 co = coroutine.create(function ()
         error "in coro"
     end)
-r, msg = coroutine.resume(co)
+local r, msg = coroutine.resume(co)
 is(r, false)
 like(msg, "^[^:]+:%d+: in coro$")
 

@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -256,7 +256,7 @@ error_like(function () return '1' > 0 end,
            "^[^:]+:%d+: attempt to compare %w+ with %w+",
            "'1' >== 0")
 
-a = 'text'
+local a = 'text'
 is(a[1], nil, "index")
 
 error_like(function () a = 'text'; a[1] = 1; end,

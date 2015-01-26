@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -175,12 +175,13 @@ for _, filename in ipairs(test_files) do
                         return table.concat(t, "\t")
                     end
             ]]
-            local compiled, msg = load(code)
+            local compiled
+            compiled, msg = load(code)
             if not compiled then
                 error("can't compile : " .. code .. "\n" .. msg)
             end
             if result:sub(1, 1) == '/' then
-                local pattern = result:sub(2, result:len() - 1)
+                pattern = result:sub(2, result:len() - 1)
                 error_like(compiled, pattern, desc)
             else
                 local out

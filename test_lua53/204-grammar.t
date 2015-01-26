@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2010-2014, Perrad Francois
+-- Copyright (C) 2010-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -30,7 +30,7 @@ require 'Test.More'
 plan(6)
 
 --[[ empty statement ]]
-f, msg = load [[; a = 1]]
+local f, msg = load [[; a = 1]]
 type_ok(f, 'function', "empty statement")
 
 --[[ orphan break ]]

@@ -34,13 +34,13 @@ for i = 1, 10, 2 do
 end
 
 for i = 1, 10, 2 do
-    function f ()
+    local function f ()
         print("ok " .. (i+11)/2 .. " - for 1, 10, 2 lex")
     end
     f()
 end
 
-function f (i)
+local function f (i)
     print("ok " .. (i+21)/2 .. " - for 1, 10, 2 !lex")
 end
 for i = 1, 10, 2 do
@@ -64,7 +64,7 @@ for i = 5, 5, -1 do
     print("ok " .. 20+i .. " - for 5, 5, -1")
 end
 
-v = false
+local v = false
 for i = 5, 3 do
     v = true
 end
@@ -117,7 +117,7 @@ local a = {}
 for i = 1, 10 do
     a[i] = function () return i end
 end
-local v = a[5]()
+v = a[5]()
 if v == 5 then
     print("ok 36 - for & upval")
 else

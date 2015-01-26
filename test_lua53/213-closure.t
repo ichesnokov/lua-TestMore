@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -34,7 +34,7 @@ plan(15)
 --[[ inc ]]
 local counter = 0
 
-function inc (x)
+local function inc (x)
     counter = counter + x
     return counter
 end
@@ -43,7 +43,7 @@ is(inc(1), 1, "inc")
 is(inc(2), 3)
 
 --[[ newCounter ]]
-function newCounter ()
+local function newCounter ()
     local i = 0
     return function ()  -- anonymous function
                i = i + 1
@@ -51,11 +51,11 @@ function newCounter ()
            end
 end
 
-c1 = newCounter()
+local c1 = newCounter()
 is(c1(), 1, "newCounter")
 is(c1(), 2)
 
-c2 = newCounter()
+local c2 = newCounter()
 is(c2(), 1)
 is(c1(), 3)
 is(c2(), 2)
@@ -65,7 +65,7 @@ The loop creates ten closures (that is, ten instances of the anonymous
 function). Each of these closures uses a different y variable, while all
 of them share the same x.
 ]]
-a = {}
+local a = {}
 local x = 20
 for i=1,10 do
     local y = 0
@@ -78,14 +78,14 @@ is(a[2](), 21)
 
 
 --[[ add ]]
-function add(x)
+local function add(x)
     return function (y) return (x + y) end
 end
 
-f = add(2)
+local f = add(2)
 type_ok(f, 'function', "add")
 is(f(10), 12)
-g = add(5)
+local g = add(5)
 is(g(1), 6)
 is(g(10), 15)
 is(f(1), 3)

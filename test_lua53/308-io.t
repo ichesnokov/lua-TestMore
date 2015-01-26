@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -41,13 +41,14 @@ like(io.stdout, '^file %(0?[Xx]?%x+%)$', "variable stdout")
 
 like(io.stderr, '^file %(0?[Xx]?%x+%)$', "variable stderr")
 
-r, msg = io.close(io.stderr)
+local r, msg = io.close(io.stderr)
 is(r, nil, "close (std)")
 is(msg, "cannot close standard file")
 
 is(io.flush(), true, "function flush")
 
 os.remove('file.no')
+local f
 f, msg = io.open("file.no")
 is(f, nil, "function open")
 is(msg, "file.no: No such file or directory")
@@ -142,7 +143,7 @@ error_like(function () f:read() end,
            "method read (closed)")
 
 f = io.open('file.txt')
-s = f:read()
+local s = f:read()
 is(s:len(), 14, "method read")
 is(s, "file with text")
 s = f:read()
@@ -156,7 +157,7 @@ error_like(function () f:read('*z') end,
 f:close()
 
 f = io.open('file.txt')
-s1, s2 = f:read('*l', '*l')
+local s1, s2 = f:read('*l', '*l')
 is(s1:len(), 14, "method read *l")
 is(s1, "file with text")
 is(s2, nil)
@@ -170,7 +171,7 @@ is(s2, nil)
 f:close()
 
 f = io.open('file.txt')
-n1, n2 = f:read('*n', '*n')
+local n1, n2 = f:read('*n', '*n')
 is(n1, nil, "method read *n")
 is(n2, nil)
 f:close()
@@ -185,7 +186,7 @@ f = io.open('file.num')
 n1, n2 = f:read('n', 'n')
 is(n1, 1, "method read *n")
 is(n2, 255, "method read *n")
-n = f:read('n')
+local n = f:read('n')
 is(n, nil, "method read *n too long")
 f:close()
 

@@ -35,6 +35,25 @@ read_globals = {
     'test_diag',
     'test_test',
     'line_num',
+    -- test suite
+    'platform',
 }
+
 files['test/bail_out.t'].ignore = { '122/os' }
 files['test/skipall.t'].ignore = { '122/os' }
+files['test_lua53/015-forlist.t'].ignore = { '421' }
+files['test_lua53/201-assign.t'].ignore = { '411/my_i', '531', '532' }
+files['test_lua53/211-scope.t'].ignore = { '421' }
+files['test_lua53/231-metatable.t'].ignore = { '421' }
+files['test_lua53/308-io.t'].ignore = { '512' }
+
+files['test_lua53/000-sanity.t'].globals = { 'f', 'g', 'i', 'j', 'k' }
+files['test_lua53/001-if.t'].globals = { 'a', 'b' }
+files['test_lua53/002-table.t'].globals = { 'a', 'i', 't' }
+files['test_lua53/200-examples.t'].globals = { 'factorial' }
+files['test_lua53/201-assign.t'].globals = { 'b' }
+files['test_lua53/211-scope.t'].globals = { 'x' }
+files['test_lua53/231-metatable.t'].globals = { 'new_a' }
+files['test_lua53/301-basic.t'].globals = { 'norm', 'twice', 'foo', 'bar', 'baz', 't', 'i', 'X' }
+files['test_lua53/303-package.t'].globals = { 'complex', 'cplx', 'a' }
+files['test_lua53/304-string.t'].globals = { 'name', 'status' }

@@ -29,7 +29,7 @@ See "Programming in Lua", section 4.3 "Control Structures".
 
 print("1..8")
 
-a = {"ok 1 - repeat", "ok 2", "ok 3"}
+local a = {"ok 1 - repeat", "ok 2", "ok 3"}
 local i = 0
 repeat
     i = i + 1
@@ -56,7 +56,7 @@ else
     print("not ok 7 - " .. a[i])
 end
 
-function f () return true end
+local function f () return true end
 
 i = 1
 repeat

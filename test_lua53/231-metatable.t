@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -31,16 +31,16 @@ require 'Test.More'
 
 plan(96)
 
-t = {}
+local t = {}
 is(getmetatable(t), nil, "metatable")
-t1 = {}
+local t1 = {}
 is(setmetatable(t, t1), t)
 is(getmetatable(t), t1)
 is(setmetatable(t, nil), t)
 error_like(function () setmetatable(t, true) end,
            "^[^:]+:%d+: bad argument #2 to 'setmetatable' %(nil or table expected%)")
 
-mt = {}
+local mt = {}
 mt.__metatable = "not your business"
 setmetatable(t, mt)
 is(getmetatable(t), "not your business", "protected metatable")
@@ -60,7 +60,7 @@ setmetatable(t, mt)
 is(tostring(t), '__TABLE__', "__tostring")
 
 mt = {}
-a = nil
+local a = nil
 function mt.__tostring () a = "return nothing" end
 setmetatable(t, mt)
 is(tostring(t), nil, "__tostring no-output")
@@ -104,7 +104,7 @@ is(t .. t .. t .. 4 ..'end', "t|t|t|4end", "__concat")
 
 
 --[[ Cplx ]]
-Cplx = {}
+local Cplx = {}
 Cplx.mt = {}
 local tointeger = math.tointeger or math.floor
 
@@ -135,8 +135,8 @@ function Cplx.mt.__add (a, b)
     return r
 end
 
-c1 = Cplx.new(1, 3)
-c2 = Cplx.new(2, -1)
+local c1 = Cplx.new(1, 3)
+local c2 = Cplx.new(2, -1)
 
 is(tostring(c1 + c2), '(3,2)', "cplx __add")
 is(tostring(c1 + 3), '(4,3)')
@@ -232,7 +232,7 @@ end
 
 c1 = Cplx.new(2, 0)
 c2 = Cplx.new(1, 3)
-c3 = Cplx.new(2, 0)
+local c3 = Cplx.new(2, 0)
 
 is(c1 ~= c2, true, "cplx __eq")
 is(c1 == c3, true)
@@ -280,7 +280,7 @@ end
 
 c1 = Cplx.new(2, 0)
 a = nil
-r = c1()
+local r = c1()
 is(r, true, "cplx __call (without args)")
 is(a, "Cplx.__call (2,0)")
 
@@ -298,14 +298,14 @@ is(a, "Cplx.__call (2,0), a, b, c")
 
 --[[ delegate ]]
 
-local t = {
+t = {
     _VALUES = {
         a = 1,
         b = 'text',
         c = true,
     }
 }
-local mt = {
+mt = {
     __pairs = function (op)
         return next, op._VALUES
     end
@@ -342,7 +342,7 @@ end
 --[[ Window ]]
 
 -- create a namespace
-Window = {}
+local Window = {}
 -- create a prototype with default values
 Window.prototype = {x=0, y=0, width=100, heigth=100, }
 -- create a metatable
@@ -357,7 +357,7 @@ Window.mt.__index = function (table, key)
     return Window.prototype[key]
 end
 
-w = Window.new{x=10, y=20}
+local w = Window.new{x=10, y=20}
 is(w.x, 10, "table-access")
 is(w.width, 100)
 is(rawget(w, 'x'), 10)
@@ -371,12 +371,12 @@ is(rawget(w, 'x'), 10)
 is(rawget(w, 'width'), nil)
 
 --[[ tables with default values ]]
-function setDefault_1 (t, d)
+local function setDefault_1 (t, d)
     local mt = {__index = function () return d end}
     setmetatable (t, mt)
 end
 
-tab = {x=10, y=20}
+local tab = {x=10, y=20}
 is(tab.x, 10, "tables with default values")
 is(tab.z, nil)
 setDefault_1(tab, 0)
@@ -385,7 +385,7 @@ is(tab.z, 0)
 
 --[[ tables with default values ]]
 mt = {__index = function (t) return t.___ end}
-function setDefault_2 (t, d)
+local function setDefault_2 (t, d)
     t.___ = d
     setmetatable (t, mt)
 end
@@ -400,7 +400,7 @@ is(tab.z, 0)
 --[[ tables with default values ]]
 local key = {}
 mt = {__index = function (t) return t[key] end}
-function setDefault_3 (t, d)
+local function setDefault_3 (t, d)
     t[key] = d
     setmetatable (t, mt)
 end
@@ -456,7 +456,7 @@ mt = {
         t[index][k] = v  -- update original table
     end
 }
-function track (t)
+local function track (t)
     local proxy = {}
     proxy[index] = t
     setmetatable(proxy, mt)
@@ -474,7 +474,7 @@ is(w, "*update of element 2 to hello")
 is(r, "*access to element 2")
 
 --[[ read-only table ]]
-function readOnly (t)
+local function readOnly (t)
     local proxy = {}
     local mt = {
         __index = t,
@@ -486,7 +486,7 @@ function readOnly (t)
     return proxy
 end
 
-days = readOnly{'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+local days = readOnly{'Sunday', 'Monday', 'Tuesday', 'Wednesday',
         'Thurday', 'Friday', 'Saturday'}
 
 is(days[1], 'Sunday', "read-only tables")
@@ -495,7 +495,7 @@ error_like(function () days[2] = 'Noday' end,
            "^[^:]+:%d+: attempt to update a read%-only table")
 
 --[[ declare global ]]
-function declare (name, initval)
+local function declare (name, initval)
     rawset(_G, name, initval or false)
 end
 

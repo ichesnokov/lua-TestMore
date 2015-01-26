@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -37,13 +37,13 @@ end
 plan(28)
 diag(lua)
 
-f = io.open('hello.lua', 'w')
+local f = io.open('hello.lua', 'w')
 f:write([[
 print 'Hello World'
 ]])
 f:close()
 
-cmd = lua .. " hello.lua"
+local cmd = lua .. " hello.lua"
 f = io.popen(cmd)
 is(f:read'*l', 'Hello World', "file")
 f:close()

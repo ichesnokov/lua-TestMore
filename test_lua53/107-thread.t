@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -26,7 +26,7 @@ require 'Test.More'
 
 plan(32)
 
-co = coroutine.create(function () return 1 end)
+local co = coroutine.create(function () return 1 end)
 
 error_like(function () return -co end,
            "^[^:]+:%d+: attempt to perform arithmetic on",
@@ -96,8 +96,8 @@ error_like(function () return co << 2 end,
 
 is(co == co, true, "co == co")
 
-co1 = coroutine.create(function () return 1 end)
-co2 = coroutine.create(function () return 2 end)
+local co1 = coroutine.create(function () return 1 end)
+local co2 = coroutine.create(function () return 2 end)
 is(co1 ~= co2, true, "co1 ~= co2")
 
 is(co == 1, false, "co == 1")
@@ -136,7 +136,7 @@ error_like(function () return co > 0 end,
            "^[^:]+:%d+: attempt to compare %w+ with %w+",
            "co >= 0")
 
-error_like(function () a = co[1] end,
+error_like(function () local a = co[1] end,
            "^[^:]+:%d+: attempt to index",
            "index")
 
@@ -144,7 +144,7 @@ error_like(function () co[1] = 1 end,
            "^[^:]+:%d+: attempt to index",
            "index")
 
-t = {}
+local t = {}
 t[co] = true
 ok(t[co])
 

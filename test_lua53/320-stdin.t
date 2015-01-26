@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -34,7 +34,7 @@ end
 
 plan(12)
 
-f = io.open('lib1.lua', 'w')
+local f = io.open('lib1.lua', 'w')
 f:write[[
 function norm (x, y)
     return (x^2 + y^2)^0.5
@@ -46,7 +46,7 @@ end
 ]]
 f:close()
 
-cmd = lua .. [[ -e "dofile(); n = norm(3.4, 1.0); print(twice(n))" < lib1.lua]]
+local cmd = lua .. [[ -e "dofile(); n = norm(3.4, 1.0); print(twice(n))" < lib1.lua]]
 f = io.popen(cmd)
 like(f:read'*l', '^7%.088', "function dofile (stdin)")
 f:close()

@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -43,7 +43,7 @@ eq_array({string.byte('ABC', 1, 4)}, {65, 66, 67})
 
 type_ok(getmetatable('ABC'), 'table', "literal string has metatable")
 
-s = "ABC"
+local s = "ABC"
 is(s:byte(2), 66, "method s:byte")
 
 is(string.char(65, 66, 67), 'ABC', "function char")
@@ -57,7 +57,7 @@ error_like(function () string.char(0, 9999) end,
            "^[^:]+:%d+: bad argument #2 to 'char' %(.-value.-%)",
            "function char (invalid)")
 
-d = string.dump(plan)
+local d = string.dump(plan)
 type_ok(d, 'string', "function dump")
 
 error_like(function () string.dump(print) end,
@@ -83,7 +83,7 @@ is(string.find(s, "W.rld"), nil)
 eq_array({string.find(s, "^(h.ll.)")}, {1, 5, 'hello'})
 eq_array({string.find(s, "^(h.)l(l.)")}, {1, 5, 'he', 'lo'})
 s = "Deadline is 30/05/1999, firm"
-date = "%d%d/%d%d/%d%d%d%d"
+local date = "%d%d/%d%d/%d%d%d%d"
 is(string.sub(s, string.find(s, date)), "30/05/1999")
 date = "%f[%S]%d%d/%d%d/%d%d%d%d"
 is(string.sub(s, string.find(s, date)), "30/05/1999")
@@ -93,10 +93,10 @@ error_like(function () string.find(s, '%f') end,
            "function find (invalid frontier)")
 
 is(string.format("pi = %.4f", math.pi), 'pi = 3.1416', "function format")
-d = 5; m = 11; y = 1990
+d = 5; local m = 11; local y = 1990
 is(string.format("%02d/%02d/%04d", d, m, y), "05/11/1990")
 is(string.format("%X %x", 126, 126), "7E 7e")
-tag, title = "h1", "a title"
+local tag, title = "h1", "a title"
 is(string.format("<%s>%s</%s>", tag, title, tag), "<h1>a title</h1>")
 
 is(string.format('%q', 'a string with "quotes" and \n new line'), [["a string with \"quotes\" and \
@@ -108,7 +108,7 @@ is(string.format("%s %s", 1, 2, 3), '1 2', "function format (too many arg)")
 
 is(string.format("%% %c %%", 65), '% A %', "function format (%%)")
 
-r = string.rep("ab", 100)
+local r = string.rep("ab", 100)
 is(string.format("%s %d", r, r:len()), r .. " 200")
 
 error_like(function () string.format("%s %s", 1) end,
@@ -136,7 +136,7 @@ error_like(function () string.format('% 123s', 'toto') end,
            "function format (invalid format)")
 
 s = "hello"
-output = {}
+local output = {}
 for c in string.gmatch(s, '..') do
     table.insert(output, c)
 end
@@ -180,11 +180,11 @@ is(string.gsub("all lii", 'l', 'x', 2), "axx lii")
 is(select(2, string.gsub("string with 3 spaces", ' ', ' ')), 3)
 
 eq_array({string.gsub("hello, up-down!", '%A', '.')}, {"hello..up.down.", 4})
-text = "hello world"
-nvow = select(2, string.gsub(text, '[AEIOUaeiou]', ''))
+local text = "hello world"
+local nvow = select(2, string.gsub(text, '[AEIOUaeiou]', ''))
 is(nvow, 3)
 eq_array({string.gsub("one, and two; and three", '%a+', 'word')}, {"word, word word; word word", 5})
-test = "int x; /* x */  int y; /* y */"
+local test = "int x; /* x */  int y; /* y */"
 eq_array({string.gsub(test, "/%*.*%*/", '<COMMENT>')}, {"int x; <COMMENT>", 1})
 eq_array({string.gsub(test, "/%*.-%*/", '<COMMENT>')}, {"int x; <COMMENT>  int y; <COMMENT>", 2})
 s = "a (enclosed (in) parentheses) line"
@@ -197,7 +197,7 @@ error_like(function () string.gsub(s, '%b(', '') end,
 eq_array({string.gsub("hello Lua!", "%a", "%0-%0")}, {"h-he-el-ll-lo-o L-Lu-ua-a!", 8})
 eq_array({string.gsub("hello Lua", "(.)(.)", "%2%1")}, {"ehll ouLa", 4})
 
-function expand (s)
+local function expand (s)
     return (string.gsub(s, '$(%w+)', _G))
 end
 name = 'Lua'; status= 'great'
@@ -248,12 +248,12 @@ date = "Today is 17/7/1990"
 is(string.match(date, '%d+/%d+/%d+'), '17/7/1990')
 eq_array({string.match(date, '(%d+)/(%d+)/(%d+)')}, {'17', '7', '1990'})
 is(string.match("The number 1298 is even", '%d+'), '1298')
-pair = "name = Anna"
+local pair = "name = Anna"
 eq_array({string.match(pair, '(%a+)%s*=%s*(%a+)')}, {'name', 'Anna'})
 
 s = [[then he said: "it's all right"!]]
 eq_array({string.match(s, "([\"'])(.-)%1")}, {'"', "it's all right"}, "function match (back ref)")
-p = "%[(=*)%[(.-)%]%1%]"
+local p = "%[(=*)%[(.-)%]%1%]"
 s = "a = [=[[[ something ]] ]==]x]=]; print(a)"
 eq_array({string.match(s, p)}, {'=', '[[ something ]] ]==]x'})
 

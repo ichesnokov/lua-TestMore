@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2010-2014, Perrad Francois
+-- Copyright (C) 2010-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -46,7 +46,7 @@ is(string.byte("\\"), 92)
 
 is(string.len("A\0B"), 3)
 
-f, msg = load [[a = "A\300"]]
+local f, msg = load [[a = "A\300"]]
 like(msg, "^[^:]+:%d+: .- escape .- near")
 
 f, msg = load [[a = "A\xyz"]]
@@ -75,7 +75,7 @@ like(msg, "^[^:]+:%d+: unfinished long string .-near")
 f, msg = load "a = [== invalid long string delimiter "
 like(msg, "^[^:]+:%d+: invalid long string delimiter near")
 
-a = 'alo\n123"'
+local a = 'alo\n123"'
 is('alo\n123"', a)
 is("alo\n123\"", a)
 is('\97lo\10\04923"', a)

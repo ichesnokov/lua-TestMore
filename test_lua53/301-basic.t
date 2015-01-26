@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -33,7 +33,7 @@ plan(163)
 
 like(_VERSION, '^Lua 5%.3$', "variable _VERSION")
 
-v, msg = assert('text', "assert string")
+local v, msg = assert('text', "assert string")
 is(v, 'text', "function assert")
 is(msg, "assert string")
 v, msg = assert({}, "assert table")
@@ -69,7 +69,7 @@ error_like(function () collectgarbage('unknown') end,
            "^[^:]+:%d+: bad argument #1 to 'collectgarbage' %(invalid option 'unknown'%)",
            "function collectgarbage (invalid)")
 
-f = io.open('lib1.lua', 'w')
+local f = io.open('lib1.lua', 'w')
 f:write[[
 function norm (x, y)
     return (x^2 + y^2)^0.5
@@ -81,7 +81,7 @@ end
 ]]
 f:close()
 dofile('lib1.lua')
-n = norm(3.4, 1.0)
+local n = norm(3.4, 1.0)
 like(twice(n), '^7%.088', "function dofile")
 
 os.remove('lib1.lua') -- clean up
@@ -98,7 +98,7 @@ error_like(function () dofile('foo.lua') end,
            "function dofile (syntax error)")
 os.remove('foo.lua') -- clean up
 
-a = setmetatable({
+local a = setmetatable({
   [1] = 'a',
   [3] = 'c',
 }, {
@@ -106,7 +106,8 @@ a = setmetatable({
     [2] = 'b',
   }
 })
-local f, v, s = ipairs(a)
+local s
+f, v, s = ipairs(a)
 type_ok(f, 'function', "function ipairs")
 type_ok(v, 'table')
 is(s, 0)
@@ -129,7 +130,7 @@ function bar (x)
 end
 ]] }
 i = 0
-function reader ()
+local function reader ()
     i = i + 1
     return t[i]
 end
@@ -184,7 +185,7 @@ f()
 is(bar('ok'), 'ok')
 bar = nil
 
-env = {}
+local env = {}
 f = load([[
 function bar (x)
     return x
@@ -254,7 +255,7 @@ is(i, 2)
 i = 32
 local i = 0
 f = load([[i = i + 1; return i]])
-g = function () i = i + 1; return i end
+local g = function () i = i + 1; return i end
 is(f(), 33, "function load")
 is(g(), 1)
 
@@ -306,7 +307,7 @@ is(s, 3)
 s = f(v, s)
 is(s, nil)
 
-r = pcall(assert, true)
+local r = pcall(assert, true)
 is(r, true, "function pcall")
 r, msg = pcall(assert, false, 'catched')
 is(r, false)
@@ -332,7 +333,7 @@ is(rawequal('text', '2'), false)
 is(rawequal('text', 2), false)
 is(rawequal(t, {}), false)
 is(rawequal(t, 2), false)
-is(rawequal(print, format), false)
+is(rawequal(print, type), false)
 is(rawequal(print, 2), false)
 
 is(rawlen("text"), 4, "function rawlen (string)")
@@ -431,7 +432,7 @@ error_like(function () xpcall(assert) end,
            "bad argument #2 to 'xpcall' %(function expected, got no value%)",
            "function xpcall")
 
-function backtrace ()
+local function backtrace ()
     return 'not a back trace'
 end
 r, msg = xpcall(assert, backtrace)

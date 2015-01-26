@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -52,12 +52,12 @@ local m = require 'Test.More'
 m.ok(true, "function require")
 is(m, package.loaded['Test.More'])
 
-p = package.searchpath('Test.More', package.path)
+local p = package.searchpath('Test.More', package.path)
 type_ok(p, 'string', "searchpath")
 p = package.searchpath('Test.More', 'bad path')
 is(p, nil)
 
-f = io.open('complex.lua', 'w')
+local f = io.open('complex.lua', 'w')
 f:write [[
 complex = {}
 
@@ -109,9 +109,9 @@ error_like(function () require('foo') end,
            "function require (syntax error)")
 os.remove('foo.lua') -- clean up
 
-foo = {}
+local foo = {}
 foo.bar = 1234
-function foo_loader ()
+local function foo_loader ()
     return foo
 end
 package.preload.foo = foo_loader

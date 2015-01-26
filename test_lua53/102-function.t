@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -26,7 +26,7 @@ require 'Test.More'
 
 plan(65)
 
-f = function () return 1 end
+local f = function () return 1 end
 
 error_like(function () return -f end,
            "^[^:]+:%d+: attempt to perform arithmetic on",
@@ -144,7 +144,7 @@ error_like(function () return f << 2 end,
 error_like(function () f = print; return f << 2 end,
            "^[^:]+:%d+: attempt to perform bitwise operation on a function value")
 
-g = f
+local g = f
 is(f == g, true, "f == f")
 
 g = print
@@ -152,7 +152,7 @@ is(g == print, true)
 
 g = function () return 2 end
 is(f ~= g, true, "f ~= g")
-h = type
+local h = type
 is(f ~= h, true)
 
 is(print ~= g, true)
@@ -222,21 +222,21 @@ error_like(function () return f > 0 end,
 error_like(function () f = print; return f >= 0 end,
            "^[^:]+:%d+: attempt to compare %w+ with %w+")
 
-error_like(function () a = f; b = a[1]; end,
+error_like(function () local a = f; local b = a[1]; end,
            "^[^:]+:%d+: attempt to index",
            "index")
 
-error_like(function () a = print; b = a[1]; end,
+error_like(function () local a = print; local b = a[1]; end,
            "^[^:]+:%d+: attempt to index")
 
-error_like(function () a = f; a[1] = 1; end,
+error_like(function () local a = f; a[1] = 1; end,
            "^[^:]+:%d+: attempt to index",
            "index")
 
-error_like(function () a = print; a[1] = 1; end,
+error_like(function () local a = print; a[1] = 1; end,
            "^[^:]+:%d+: attempt to index")
 
-t = {}
+local t = {}
 t[print] = true
 ok(t[print])
 

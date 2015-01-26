@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -155,9 +155,9 @@ error_like(function () math.random(1, 2, 3) end,
            "function random too many arg")
 
 math.randomseed(12)
-a = math.random()
+local a = math.random()
 math.randomseed(12)
-b = math.random()
+local b = math.random()
 is(a, b, "function randomseed")
 
 like(math.sin(math.pi/2), '^1%.?', "function sin")

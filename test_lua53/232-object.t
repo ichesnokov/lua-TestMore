@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -29,17 +29,17 @@ require 'Test.More'
 plan(18)
 
 --[[ object ]]
-Account = {balance = 0}
+local Account = {balance = 0}
 
 function Account.withdraw (self, v)
     self.balance = self.balance - v
 end
 
-a1 = Account; Account = nil
+local a1 = Account; Account = nil
 a1.withdraw(a1, 100.00)
 is(a1.balance, -100, "object")
 
-a2 = {balance = 0, withdraw = a1.withdraw}
+local a2 = {balance = 0, withdraw = a1.withdraw}
 a2.withdraw(a2, 260.00)
 is(a2.balance, -260)
 
@@ -50,7 +50,7 @@ function Account:withdraw (v)
     self.balance = self.balance - v
 end
 
-a = Account
+local a = Account
 a:withdraw(100.00)
 is(a.balance, -100, "object")
 
@@ -90,7 +90,7 @@ a = Account:new{balance = 0}
 a:deposit(100.00)
 is(a.balance, 100, "classe")
 
-b = Account:new()
+local b = Account:new()
 is(b.balance, 0)
 b:deposit(200.00)
 is(b.balance, 200)
@@ -122,7 +122,7 @@ is(a.balance, 0, "inheritance")
 -- r, msg = pcall(Account.withdraw, a, 100)
 -- print(msg)
 
-SpecialAccount = Account:new()
+local SpecialAccount = Account:new()
 
 function SpecialAccount:withdraw (v)
 --    print "SpecialAccount:withdraw"
@@ -137,7 +137,7 @@ function SpecialAccount:getLimit ()
     return self.limit or 0
 end
 
-s = SpecialAccount:new{limit=1000.00}
+local s = SpecialAccount:new{limit=1000.00}
 
 s:deposit(100.00)
 is(s.balance, 100)
@@ -154,7 +154,7 @@ local function search (k, plist)
     end
 end
 
-function createClass (...)
+local function createClass (...)
     local c = {}  -- new class
     local arg = {...}
 
@@ -186,7 +186,7 @@ function Account:withdraw (v)
     self.balance = self.balance - v
 end
 
-Named = {}
+local Named = {}
 function Named:getname ()
     return self.name
 end
@@ -194,9 +194,9 @@ function Named:setname (n)
     self.name = n
 end
 
-NamedAccount = createClass(Account, Named)
+local NamedAccount = createClass(Account, Named)
 
-account = NamedAccount:new{name = "Paul"}
+local account = NamedAccount:new{name = "Paul"}
 is(account:getname(), 'Paul', "multiple inheritance")
 account:deposit(100.00)
 is(account.balance, 100)
@@ -260,7 +260,7 @@ account:deposit(100.00)
 is(account.balance, 100)
 
 --[[ privacy ]]
-function newAccount (initialBalance)
+local function newAccount (initialBalance)
     local self = {balance = initialBalance}
 
     local withdraw = function (v)
@@ -280,12 +280,12 @@ function newAccount (initialBalance)
     }
 end
 
-acc1 = newAccount(100.00)
+local acc1 = newAccount(100.00)
 acc1.withdraw(40.00)
 is(acc1.getBalance(), 60, "privacy")
 
 --[[ single-method approach ]]
-function newObject (value)
+local function newObject (value)
     return function (action, v)
         if action == 'get' then return value
         elseif action == 'set' then value = v
@@ -294,7 +294,7 @@ function newObject (value)
     end
 end
 
-d = newObject(0)
+local d = newObject(0)
 is(d('get'), 0, "single-method approach")
 d('set', 10)
 is(d('get'), 10)

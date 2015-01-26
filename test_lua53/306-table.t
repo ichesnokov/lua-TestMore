@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -33,7 +33,7 @@ require 'Test.More'
 
 plan(48)
 
-t = {'a','b','c','d','e'}
+local t = {'a','b','c','d','e'}
 is(table.concat(t), 'abcde', "function concat")
 is(table.concat(t, ','), 'a,b,c,d,e')
 is(table.concat(t, ',',2), 'b,c,d,e')
@@ -53,7 +53,7 @@ error_like(function () table.concat(t, ',') end,
            "^[^:]+:%d+: invalid value %(boolean%) at index 3 in table for 'concat'",
            "function concat (non-string)")
 
-a = {10, 20, 30}
+local a = {10, 20, 30}
 table.insert(a, 1, 15)
 is(table.concat(a,','), '15,10,20,30', "function insert")
 t = {}
@@ -110,7 +110,7 @@ error_like(function () table.remove(t,7) end,
            "^[^:]+:%d+: bad argument #1 to 'remove' %(position out of bounds%)",
            "function remove (out of bounds)")
 
-lines = {
+local lines = {
     luaH_set = 10,
     luaH_get = 24,
     luaH_present = 48,
@@ -118,13 +118,13 @@ lines = {
 a = {}
 for n in pairs(lines) do a[#a + 1] = n end
 table.sort(a)
-output = {}
+local output = {}
 for _, n in ipairs(a) do
     table.insert(output, n)
 end
 eq_array(output, {'luaH_get', 'luaH_present', 'luaH_set'}, "function sort")
 
-function pairsByKeys (t, f)
+local function pairsByKeys (t, f)
     local a = {}
     for n in pairs(t) do a[#a + 1] = n end
     table.sort(a, f)
@@ -149,7 +149,7 @@ for name, line in pairsByKeys(lines, function (a, b) return a < b end) do
 end
 eq_array(output, {'luaH_get', 24, 'luaH_present', 48, 'luaH_set', 10}, "function sort")
 
-function permgen (a, n)
+local function permgen (a, n)
     n = n or #a
     if n <= 1 then
         coroutine.yield(a)
@@ -162,7 +162,7 @@ function permgen (a, n)
     end
 end
 
-function permutations (a)
+local function permutations (a)
     local co = coroutine.create(function () permgen(a) end)
     return function ()
                local code, res = coroutine.resume(co)
@@ -170,7 +170,7 @@ function permutations (a)
            end
 end
 
-local t = {}
+t = {}
 output = {}
 for _, v in ipairs{'a', 'b', 'c', 'd', 'e', 'f', 'g'} do
     table.insert(t, v)
@@ -179,8 +179,8 @@ for _, v in ipairs{'a', 'b', 'c', 'd', 'e', 'f', 'g'} do
     local n = 0
     for p in permutations(t) do
         local c = {}
-        for i, v in ipairs(p) do
-            c[i] = v
+        for i, vv in ipairs(p) do
+            c[i] = vv
         end
         table.sort(c)
         assert(ref == table.concat(c, ' '), table.concat(p, ' '))

@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -26,7 +26,7 @@ require 'Test.More'
 
 plan(32)
 
-u = io.stdin
+local u = io.stdin
 
 error_like(function () return -u end,
            "^[^:]+:%d+: attempt to perform arithmetic on",
@@ -96,7 +96,7 @@ error_like(function () return u << 2 end,
 
 is(u == u, true, "u == u")
 
-v = io.stdout
+local v = io.stdout
 is(u ~= v, true, "u ~= v")
 
 is(u == 1, false, "u == 1")
@@ -141,7 +141,7 @@ error_like(function () u[1] = 1 end,
            "^[^:]+:%d+: attempt to index",
            "index")
 
-t = {}
+local t = {}
 t[u] = true
 ok(t[u])
 

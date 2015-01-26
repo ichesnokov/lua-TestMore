@@ -29,7 +29,7 @@ See "Programming in Lua", section 4.3 "Control Structures".
 
 print("1..11")
 
-a = {}
+local a = {}
 local i = 1
 while a[i] do
     i = i + 1
@@ -60,7 +60,7 @@ else
     print("not ok 7 - " .. i)
 end
 
-x = 3
+local x = 3
 i = 1
 while i<=x do
     print("ok " .. 7+i)

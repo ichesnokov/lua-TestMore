@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -33,9 +33,9 @@ require 'Test.More'
 
 plan(50)
 
-debug = require 'debug'
+local debug = require 'debug'
 
-info = debug.getinfo(is)
+local info = debug.getinfo(is)
 type_ok(info, 'table', "function getinfo (function)")
 is(info.func, is, " .func")
 
@@ -69,13 +69,13 @@ name, value = debug.getlocal(like, 1)
 type_ok(name, 'string', "function getlocal (func)")
 is(value, nil)
 
-t = {}
+local t = {}
 is(debug.getmetatable(t), nil, "function getmetatable")
-t1 = {}
+local t1 = {}
 debug.setmetatable(t, t1)
 is(debug.getmetatable(t), t1)
 
-a = true
+local a = true
 is(debug.getmetatable(a), nil)
 debug.setmetatable(a, t1)
 is(debug.getmetatable(t), t1)
@@ -93,7 +93,7 @@ name = debug.getupvalue(plan, 1)
 type_ok(name, 'string', "function getupvalue")
 
 debug.sethook()
-hook, mask, count = debug.gethook()
+local hook, mask, count = debug.gethook()
 is(hook, nil, "function gethook")
 is(mask, '')
 is(count, 0)
@@ -104,7 +104,7 @@ is(hook, f, "function gethook")
 is(mask, 'c')
 is(count, 42)
 
-co = coroutine.create(function () print "thread" end)
+local co = coroutine.create(function () print "thread" end)
 hook = debug.gethook(co)
 is(hook, nil, "function gethook(thread)")
 
@@ -137,7 +137,7 @@ local old = debug.getuservalue(u)
 is(old, nil, "function getuservalue")
 is(debug.getuservalue(true), nil)
 local data = {}
-r = debug.setuservalue(u, data)
+local r = debug.setuservalue(u, data)
 is(r, u, "function setuservalue")
 is(debug.getuservalue(u), data)
 r = debug.setuservalue(u, old)

@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2014, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -46,7 +46,7 @@ local function local_factorial (n)
 end
 is(local_factorial(7), 5040, "factorial (recursive)")
 
-function loop_factorial (n)
+local function loop_factorial (n)
     local a = 1
     for i = 1, n, 1 do
         a = a*i
@@ -55,7 +55,7 @@ function loop_factorial (n)
 end
 is(loop_factorial(7), 5040, "factorial (loop)")
 
-function iter_factorial (n)
+local function iter_factorial (n)
     local function iter (product, counter)
         if counter > n then
             return product
