@@ -23,7 +23,7 @@ description = {
 
         It supplies a Test Suite for Lua itself.
     ]],
-    homepage = 'http://fperrad.github.com/lua-TestMore/',
+    homepage = 'http://fperrad.github.io/lua-TestMore/',
     maintainer = 'Francois Perrad',
     license = 'MIT/X11'
 }
