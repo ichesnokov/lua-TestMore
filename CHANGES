@@ -1,11 +1,11 @@
 Revision history for lua-TestMore
 
-0.3.2
+0.3.2  Sat Jan 31 12:30:00 2015
 	test suite aligned with Lua 5.2.2/5.2.3
 	remove dependency on string metatable
 	add a leading comment in subtest
 	compat Lua 5.3
-	add test suite for Lua 5.3
+	add a test suite for Lua 5.3
 
 0.3.1  Tue Dec  4 16:30:00 2012
 	test suite aligned with LuaJIT 2.0.0

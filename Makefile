@@ -93,6 +93,9 @@ dist: $(TARBALL)
 rockspec: $(TARBALL)
 	perl -e '$(rockspec_pl)' rockspec.in > rockspec/lua-testmore-$(VERSION)-$(REV).rockspec
 
+rock:
+	luarocks pack rockspec/lua-testmore-$(VERSION)-$(REV).rockspec
+
 check: test
 
 test:
