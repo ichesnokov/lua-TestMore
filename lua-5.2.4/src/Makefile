@@ -57,8 +57,8 @@ a:	$(ALL_A)
 
 lcov:
 	lcov --capture -d . -o lua.info
-	rm -rf ../../cover_lua523
-	genhtml -o ../../cover_lua523 -t "Lua 5.2.3" --no-function-coverage --no-branch-coverage --legend --prefix /home/user/checkout/gh-pages/lua-TestMore/lua-5.2.3 lua.info
+	rm -rf ../../cover_lua524
+	genhtml -o ../../cover_lua524 -t "Lua 5.2.4" --no-function-coverage --no-branch-coverage --legend --prefix /home/user/checkout/gh-pages/lua-TestMore/lua-5.2.4 lua.info
 
 $(LUA_A): $(BASE_O)
 	$(AR) $@ $(BASE_O)
