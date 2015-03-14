@@ -509,7 +509,7 @@ do
         local proxy = {}
         local mt = {
             __index = t,
-            __newindex = function (t,k,v)
+            __newindex = function (_t,k,v)
                 error("attempt to update a read-only table", 2)
             end
         }

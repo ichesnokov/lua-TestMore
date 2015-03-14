@@ -43,7 +43,9 @@ files['test/bail_out.t'].ignore = { '122/os' }
 files['test/skipall.t'].ignore = { '122/os' }
 files['test_lua53/201-assign.t'].ignore = { '411/my_i', '531', '532' }
 files['test_lua53/211-scope.t'].ignore = { '421' }
-files['test_lua53/231-metatable.t'].ignore = { '421' }
+files['test_lua53/231-metatable.t'].ignore = { '421', '431' }
+files['test_lua53/304-string.t'].ignore = { '431' }
+files['test_lua53/306-table.t'].ignore = { '431' }
 files['test_lua53/308-io.t'].ignore = { '512' }
 
 files['test_lua53/000-sanity.t'].globals = { 'f', 'g', 'i', 'j', 'k' }

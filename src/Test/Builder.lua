@@ -71,10 +71,10 @@ function m.create ()
     return o
 end
 
-local test
+local singleton_test
 function m.new ()
-    test = test or m.create()
-    return test
+    singleton_test = singleton_test or m.create()
+    return singleton_test
 end
 
 local function in_todo (self)
