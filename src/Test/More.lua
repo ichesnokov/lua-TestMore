@@ -15,7 +15,7 @@ local _G = _G
 
 local tb = require 'Test.Builder'.new()
 
-_ENV = nil
+local _ENV = nil
 local m = {}
 
 function m.plan (arg)

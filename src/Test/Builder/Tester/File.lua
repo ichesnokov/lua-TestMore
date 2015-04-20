@@ -6,7 +6,7 @@
 local tconcat = require 'table'.concat
 local setmetatable = setmetatable
 
-_ENV = nil
+local _ENV = nil
 local m = {}
 
 function m.new (_type)

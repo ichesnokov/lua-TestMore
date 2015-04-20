@@ -17,7 +17,7 @@ local assert = assert
 
 local tb = require 'Test.Builder'.new()
 local m = getmetatable(tb)
-_ENV = nil
+local _ENV = nil
 
 function m.init (sock)
     tb:output(sock)
@@ -31,7 +31,7 @@ end
 
 return m
 --
--- Copyright (c) 2011-2012 Francois Perrad
+-- Copyright (c) 2011-2015 Francois Perrad
 --
 -- This library is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.

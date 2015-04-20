@@ -6,7 +6,7 @@
 local io = require 'io'
 local require = require
 
-_ENV = nil
+local _ENV = nil
 local m = {}
 
 function m.create ()

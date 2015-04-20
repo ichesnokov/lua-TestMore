@@ -19,7 +19,7 @@ local tonumber = tonumber
 local tostring = tostring
 local type = type
 
-_ENV = nil
+local _ENV = nil
 local m = {}
 
 local testout = io and io.stdout

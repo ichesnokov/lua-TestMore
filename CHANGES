@@ -1,5 +1,8 @@
 Revision history for lua-TestMore
 
+0.3.3
+	shadow _ENV
+
 0.3.2  Sat Jan 31 12:30:00 2015
 	test suite aligned with Lua 5.2.2/5.2.3
 	remove dependency on string metatable

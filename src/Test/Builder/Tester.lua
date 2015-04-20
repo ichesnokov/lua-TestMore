@@ -14,7 +14,7 @@ local tb  = require 'Test.Builder'.new()
 local out = require 'Test.Builder.Tester.File'.new 'out'
 local err = require 'Test.Builder.Tester.File'.new 'err'
 
-_ENV = nil
+local _ENV = nil
 local m = {}
 
 -- for remembering that we're testing and where we're testing at

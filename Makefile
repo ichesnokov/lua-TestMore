@@ -102,7 +102,7 @@ test:
 	cd src && prove --exec=$(LUA) ../test/*.t ../test/subtest/*.t
 
 luacheck:
-	luacheck --std=max src
+	luacheck --std=max src --ignore 211/_ENV
 	luacheck --std=min --config .test.luacheckrc test/*.t test/subtest/*.t
 	luacheck --std=max --config .test.luacheckrc --no-unused test_lua53/*.t
 
