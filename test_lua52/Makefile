@@ -1,6 +1,6 @@
 
 LUA = ../../lua-5.2.4/src/lua
-LUAJIT = ../../luajit-2.0/src/luajit
+LUAJIT = ../../LuaJIT-2.0.4-compat52/src/luajit
 LUA_COVER = ../../gh-pages/lua-TestMore/lua-5.2.4/src/lua
 LUA_COMPAT = true
 
