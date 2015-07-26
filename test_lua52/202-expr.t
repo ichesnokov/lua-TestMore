@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2010, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -29,7 +29,7 @@ See "Programming in Lua", section 3 "Expressions".
 
 require 'Test.More'
 
-plan(39)
+plan(41)
 
 x = math.pi
 is(x - x%0.01, 3.14, "modulo")
@@ -93,6 +93,17 @@ error_like(function () return 'hello' + 1 end,
            "no coercion")
 
 error_like(function ()
+                local function first() return end
+                local function limit() return 2 end
+                local function step()  return 1 end
+                for i = first(), limit(), step() do
+                    print(i)
+                end
+           end,
+           "^[^:]+:%d+: 'for' initial value must be a number",
+           "for tonumber")
+
+error_like(function ()
                 local function first() return 1 end
                 local function limit() return end
                 local function step()  return 2 end
@@ -101,6 +112,17 @@ error_like(function ()
                 end
            end,
            "^[^:]+:%d+: 'for' limit must be a number",
+           "for tonumber")
+
+error_like(function ()
+                local function first() return 1 end
+                local function limit() return 2 end
+                local function step()  return end
+                for i = first(), limit(), step() do
+                    print(i)
+                end
+           end,
+           "^[^:]+:%d+: 'for' step must be a number",
            "for tonumber")
 
 -- Local Variables:

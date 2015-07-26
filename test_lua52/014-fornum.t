@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2013, Perrad Francois
+-- Copyright (C) 2009-2015, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -29,21 +29,21 @@ See "Programming in Lua", section 4.3 "Control Structures".
 
 print("1..36")
 
-for i = 1, 10, 2 do
-    print("ok " .. (i+1)/2 .. " - for 1, 10, 2")
+for i = 1.0, 3.0, 0.5 do
+    print("ok " .. 2*i-1 .. " - for 1.0, 3.0, 0.5")
 end
 
-for i = 1, 10, 2 do
-    function f ()
-        print("ok " .. (i+11)/2 .. " - for 1, 10, 2 lex")
+for i = 1.0, 3.0, 0.5 do
+    local function f ()
+        print("ok " .. 2*i+4 .. " - for 1.0, 3.0, 0.5 lex")
     end
     f()
 end
 
-function f (i)
-    print("ok " .. (i+21)/2 .. " - for 1, 10, 2 !lex")
+local function f (i)
+    print("ok " .. 2*i+9 .. " - for 1.0, 3.0, 0.5 !lex")
 end
-for i = 1, 10, 2 do
+for i = 1.0, 3.0, 0.5 do
     f(i)
 end
 
