@@ -226,7 +226,7 @@ table.move(a, 1, 3, 3)
 eq_array(a, {'a', 'b', 'a', 'b', 'c'})
 
 error_like(function () table.move(a, 1, 2, 1, 2) end,
-           "^[^:]+:%d+: bad argument #5 to 'move' %(table expected, got number%)",
+           "^[^:]+:%d+: bad argument #5 to 'move' %(table expected",
            "function move (bad arg)")
 
 error_like(function () table.move(a, 1, 2) end,

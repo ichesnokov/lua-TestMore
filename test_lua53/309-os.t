@@ -156,20 +156,21 @@ like(os.time({
     isdst = 0,
 }), '^946%d+$', "function time")
 
-if string.packsize('i') == 8 then
-    todo("pb on 64bit platforms")
-    -- os.time returns nil when C mktime returns < 0
-    -- this test needs a out of range value on any platform
+if string.packsize('l') == 8 then
+    skip('64bit platforms')
+else
+    error_like(function () os.time({
+        sec = 0,
+        min = 0,
+        hour = 0,
+        day = 1,
+        month = 1,
+        year = 1000,
+        isdst = 0,
+    }) end,
+               "^[^:]+:%d+: time result cannot be represented in this installation",
+               "function time (invalid)")
 end
-is(os.time({
-    sec = 0,
-    min = 0,
-    hour = 0,
-    day = 1,
-    month = 1,
-    year = 1000,
-    isdst = 0,
-}), nil, "function time -> nil")
 
 error_like(function () os.time{} end,
            "^[^:]+:%d+: field 'day' missing in date table",

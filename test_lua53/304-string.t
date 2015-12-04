@@ -326,6 +326,7 @@ is(string.pack('i1 x x i1', 0, 0):len(), 4)
 
 is(string.pack('c3', 'foo'), 'foo')
 is(string.pack('z', 'foo'), 'foo\0')
+is(string.pack('c4', 'foo'), 'foo\0')   -- padding
 
 error_like(function () string.pack('w', 0) end,
            "^[^:]+:%d+: invalid format option 'w'",
@@ -338,10 +339,6 @@ error_like(function () string.pack('i1 Xz i1', 0, 0) end,
 error_like(function () string.pack('i', 'foo') end,
            "^[^:]+:%d+: bad argument #2 to 'pack' %(number expected, got string%)",
            "function pack bad arg")
-
-error_like(function () string.pack('c4', 'foo') end,
-           "^[^:]+:%d+: bad argument #2 to 'pack' %(wrong length%)",
-           "function pack wrong length")
 
 is(string.unpack('<h', string.pack('>h', 1):reverse()), 1, "function unpack")
 is(string.unpack('<H', string.pack('>H', 1):reverse()), 1)
