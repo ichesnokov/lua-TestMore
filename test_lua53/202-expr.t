@@ -32,7 +32,7 @@ require 'Test.More'
 plan(41)
 
 local x = math.pi
-is(x - x%0.0001, 3.1415, "modulo")
+is(tostring(x - x%0.0001), tostring(3.1415), "modulo")
 
 local a = {}; a.x = 1; a.y = 0;
 local b = {}; b.x = 1; b.y = 0;
