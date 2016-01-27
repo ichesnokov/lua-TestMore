@@ -24,7 +24,7 @@
 
 require 'Test.More'
 
-plan(28)
+plan(29)
 
 error_like(function () return -{} end,
            "^[^:]+:%d+: attempt to perform arithmetic on",
@@ -116,6 +116,9 @@ error_like(function () t = {}; t[nil] = 42 end,
            "^[^:]+:%d+: table index is nil",
            "table index is nil")
 
+error_like(function () t = {}; t[0/0] = 42 end,
+           "^[^:]+:%d+: table index is NaN",
+           "table index is NaN")
 
 -- Local Variables:
 --   mode: lua
