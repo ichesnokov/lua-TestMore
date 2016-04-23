@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-03-07 13:57:54</td>
+            <td class="headerValue">2016-04-23 13:26:22</td>
             <td></td>
           </tr>
           <tr>
@@ -217,12 +217,12 @@
 <span class="lineNum">     151 </span>            : }
 <span class="lineNum">     152 </span>            : 
 <span class="lineNum">     153 </span>            : 
-<span class="lineNum">     154 </span><span class="lineCov">       1745 : static FILE *tofile (lua_State *L) {</span>
-<span class="lineNum">     155 </span><span class="lineCov">       1745 :   LStream *p = tolstream(L);</span>
-<span class="lineNum">     156 </span><span class="lineCov">       1745 :   if (isclosed(p))</span>
+<span class="lineNum">     154 </span><span class="lineCov">       1748 : static FILE *tofile (lua_State *L) {</span>
+<span class="lineNum">     155 </span><span class="lineCov">       1748 :   LStream *p = tolstream(L);</span>
+<span class="lineNum">     156 </span><span class="lineCov">       1748 :   if (isclosed(p))</span>
 <span class="lineNum">     157 </span><span class="lineCov">          5 :     luaL_error(L, &quot;attempt to use a closed file&quot;);</span>
 <span class="lineNum">     158 </span>            :   lua_assert(p-&gt;f);
-<span class="lineNum">     159 </span><span class="lineCov">       1740 :   return p-&gt;f;</span>
+<span class="lineNum">     159 </span><span class="lineCov">       1743 :   return p-&gt;f;</span>
 <span class="lineNum">     160 </span>            : }
 <span class="lineNum">     161 </span>            : 
 <span class="lineNum">     162 </span>            : 
@@ -577,22 +577,22 @@
 <span class="lineNum">     511 </span>            : /* }====================================================== */
 <span class="lineNum">     512 </span>            : 
 <span class="lineNum">     513 </span>            : 
-<span class="lineNum">     514 </span><span class="lineCov">       1575 : static int g_write (lua_State *L, FILE *f, int arg) {</span>
-<span class="lineNum">     515 </span><span class="lineCov">       1575 :   int nargs = lua_gettop(L) - arg;</span>
+<span class="lineNum">     514 </span><span class="lineCov">       1578 : static int g_write (lua_State *L, FILE *f, int arg) {</span>
+<span class="lineNum">     515 </span><span class="lineCov">       1578 :   int nargs = lua_gettop(L) - arg;</span>
 <span class="lineNum">     516 </span>            :   int status = 1;
-<span class="lineNum">     517 </span><span class="lineCov">       3151 :   for (; nargs--; arg++) {</span>
-<span class="lineNum">     518 </span><span class="lineCov">       1576 :     if (lua_type(L, arg) == LUA_TNUMBER) {</span>
+<span class="lineNum">     517 </span><span class="lineCov">       3157 :   for (; nargs--; arg++) {</span>
+<span class="lineNum">     518 </span><span class="lineCov">       1579 :     if (lua_type(L, arg) == LUA_TNUMBER) {</span>
 <span class="lineNum">     519 </span>            :       /* optimization: could be done exactly as for strings */
 <span class="lineNum">     520 </span><span class="lineCov">          2 :       status = status &amp;&amp;</span>
 <span class="lineNum">     521 </span><span class="lineCov">          1 :           fprintf(f, LUA_NUMBER_FMT, lua_tonumber(L, arg)) &gt; 0;</span>
 <span class="lineNum">     522 </span>            :     }
 <span class="lineNum">     523 </span>            :     else {
 <span class="lineNum">     524 </span>            :       size_t l;
-<span class="lineNum">     525 </span><span class="lineCov">       1575 :       const char *s = luaL_checklstring(L, arg, &amp;l);</span>
-<span class="lineNum">     526 </span><span class="lineCov">       1575 :       status = status &amp;&amp; (fwrite(s, sizeof(char), l, f) == l);</span>
+<span class="lineNum">     525 </span><span class="lineCov">       1578 :       const char *s = luaL_checklstring(L, arg, &amp;l);</span>
+<span class="lineNum">     526 </span><span class="lineCov">       1578 :       status = status &amp;&amp; (fwrite(s, sizeof(char), l, f) == l);</span>
 <span class="lineNum">     527 </span>            :     }
 <span class="lineNum">     528 </span>            :   }
-<span class="lineNum">     529 </span><span class="lineCov">       1575 :   if (status) return 1;  /* file handle already on stack top */</span>
+<span class="lineNum">     529 </span><span class="lineCov">       1578 :   if (status) return 1;  /* file handle already on stack top */</span>
 <span class="lineNum">     530 </span><span class="lineNoCov">          0 :   else return luaL_fileresult(L, status, NULL);</span>
 <span class="lineNum">     531 </span>            : }
 <span class="lineNum">     532 </span>            : 
@@ -602,10 +602,10 @@
 <span class="lineNum">     536 </span>            : }
 <span class="lineNum">     537 </span>            : 
 <span class="lineNum">     538 </span>            : 
-<span class="lineNum">     539 </span><span class="lineCov">       1574 : static int f_write (lua_State *L) {</span>
-<span class="lineNum">     540 </span><span class="lineCov">       1574 :   FILE *f = tofile(L);</span>
-<span class="lineNum">     541 </span><span class="lineCov">       1573 :   lua_pushvalue(L, 1);  /* push file at the stack top (to be returned) */</span>
-<span class="lineNum">     542 </span><span class="lineCov">       1573 :   return g_write(L, f, 2);</span>
+<span class="lineNum">     539 </span><span class="lineCov">       1577 : static int f_write (lua_State *L) {</span>
+<span class="lineNum">     540 </span><span class="lineCov">       1577 :   FILE *f = tofile(L);</span>
+<span class="lineNum">     541 </span><span class="lineCov">       1576 :   lua_pushvalue(L, 1);  /* push file at the stack top (to be returned) */</span>
+<span class="lineNum">     542 </span><span class="lineCov">       1576 :   return g_write(L, f, 2);</span>
 <span class="lineNum">     543 </span>            : }
 <span class="lineNum">     544 </span>            : 
 <span class="lineNum">     545 </span>            : 
@@ -738,7 +738,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-12-13 17:49:16</td>
+            <td class="headerValue">2016-04-23 13:26:11</td>
             <td></td>
           </tr>
           <tr>
@@ -395,22 +395,22 @@
 <span class="lineNum">     329 </span>            : */
 <span class="lineNum">     330 </span>            : 
 <span class="lineNum">     331 </span>            : 
-<span class="lineNum">     332 </span><span class="lineCov">        158 : static int readable (const char *filename) {</span>
-<span class="lineNum">     333 </span><span class="lineCov">        158 :   FILE *f = fopen(filename, &quot;r&quot;);  /* try to open file */</span>
-<span class="lineNum">     334 </span><span class="lineCov">        158 :   if (f == NULL) return 0;  /* open failed */</span>
+<span class="lineNum">     332 </span><span class="lineCov">        430 : static int readable (const char *filename) {</span>
+<span class="lineNum">     333 </span><span class="lineCov">        430 :   FILE *f = fopen(filename, &quot;r&quot;);  /* try to open file */</span>
+<span class="lineNum">     334 </span><span class="lineCov">        430 :   if (f == NULL) return 0;  /* open failed */</span>
 <span class="lineNum">     335 </span><span class="lineCov">         72 :   fclose(f);</span>
 <span class="lineNum">     336 </span><span class="lineCov">         72 :   return 1;</span>
 <span class="lineNum">     337 </span>            : }
 <span class="lineNum">     338 </span>            : 
 <span class="lineNum">     339 </span>            : 
-<span class="lineNum">     340 </span><span class="lineCov">        162 : static const char *pushnexttemplate (lua_State *L, const char *path) {</span>
+<span class="lineNum">     340 </span><span class="lineCov">        434 : static const char *pushnexttemplate (lua_State *L, const char *path) {</span>
 <span class="lineNum">     341 </span>            :   const char *l;
-<span class="lineNum">     342 </span><span class="lineCov">        162 :   while (*path == *LUA_PATHSEP) path++;  /* skip separators */</span>
-<span class="lineNum">     343 </span><span class="lineCov">        162 :   if (*path == '\0') return NULL;  /* no more templates */</span>
-<span class="lineNum">     344 </span><span class="lineCov">        158 :   l = strchr(path, *LUA_PATHSEP);  /* find next separator */</span>
-<span class="lineNum">     345 </span><span class="lineCov">        158 :   if (l == NULL) l = path + strlen(path);</span>
-<span class="lineNum">     346 </span><span class="lineCov">        158 :   lua_pushlstring(L, path, l - path);  /* template */</span>
-<span class="lineNum">     347 </span><span class="lineCov">        158 :   return l;</span>
+<span class="lineNum">     342 </span><span class="lineCov">        434 :   while (*path == *LUA_PATHSEP) path++;  /* skip separators */</span>
+<span class="lineNum">     343 </span><span class="lineCov">        434 :   if (*path == '\0') return NULL;  /* no more templates */</span>
+<span class="lineNum">     344 </span><span class="lineCov">        430 :   l = strchr(path, *LUA_PATHSEP);  /* find next separator */</span>
+<span class="lineNum">     345 </span><span class="lineCov">        430 :   if (l == NULL) l = path + strlen(path);</span>
+<span class="lineNum">     346 </span><span class="lineCov">        430 :   lua_pushlstring(L, path, l - path);  /* template */</span>
+<span class="lineNum">     347 </span><span class="lineCov">        430 :   return l;</span>
 <span class="lineNum">     348 </span>            : }
 <span class="lineNum">     349 </span>            : 
 <span class="lineNum">     350 </span>            : 
@@ -423,15 +423,15 @@
 <span class="lineNum">     357 </span><span class="lineCov">         76 :   if (path == NULL)</span>
 <span class="lineNum">     358 </span><span class="lineNoCov">          0 :     luaL_error(L, LUA_QL(&quot;package.%s&quot;) &quot; must be a string&quot;, pname);</span>
 <span class="lineNum">     359 </span><span class="lineCov">         76 :   lua_pushliteral(L, &quot;&quot;);  /* error accumulator */</span>
-<span class="lineNum">     360 </span><span class="lineCov">        238 :   while ((path = pushnexttemplate(L, path)) != NULL) {</span>
+<span class="lineNum">     360 </span><span class="lineCov">        510 :   while ((path = pushnexttemplate(L, path)) != NULL) {</span>
 <span class="lineNum">     361 </span>            :     const char *filename;
-<span class="lineNum">     362 </span><span class="lineCov">        158 :     filename = luaL_gsub(L, lua_tostring(L, -1), LUA_PATH_MARK, name);</span>
-<span class="lineNum">     363 </span><span class="lineCov">        158 :     lua_remove(L, -2);  /* remove path template */</span>
-<span class="lineNum">     364 </span><span class="lineCov">        158 :     if (readable(filename))  /* does file exist and is readable? */</span>
+<span class="lineNum">     362 </span><span class="lineCov">        430 :     filename = luaL_gsub(L, lua_tostring(L, -1), LUA_PATH_MARK, name);</span>
+<span class="lineNum">     363 </span><span class="lineCov">        430 :     lua_remove(L, -2);  /* remove path template */</span>
+<span class="lineNum">     364 </span><span class="lineCov">        430 :     if (readable(filename))  /* does file exist and is readable? */</span>
 <span class="lineNum">     365 </span><span class="lineCov">         72 :       return filename;  /* return that file name */</span>
-<span class="lineNum">     366 </span><span class="lineCov">         86 :     lua_pushfstring(L, &quot;\n\tno file &quot; LUA_QS, filename);</span>
-<span class="lineNum">     367 </span><span class="lineCov">         86 :     lua_remove(L, -2);  /* remove file name */</span>
-<span class="lineNum">     368 </span><span class="lineCov">         86 :     lua_concat(L, 2);  /* add entry to possible error message */</span>
+<span class="lineNum">     366 </span><span class="lineCov">        358 :     lua_pushfstring(L, &quot;\n\tno file &quot; LUA_QS, filename);</span>
+<span class="lineNum">     367 </span><span class="lineCov">        358 :     lua_remove(L, -2);  /* remove file name */</span>
+<span class="lineNum">     368 </span><span class="lineCov">        358 :     lua_concat(L, 2);  /* add entry to possible error message */</span>
 <span class="lineNum">     369 </span>            :   }
 <span class="lineNum">     370 </span><span class="lineCov">          4 :   return NULL;  /* not found */</span>
 <span class="lineNum">     371 </span>            : }
@@ -738,7 +738,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 

@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.3.2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">289</td>
-            <td class="headerCovTableEntry">296</td>
+            <td class="headerCovTableEntry">288</td>
+            <td class="headerCovTableEntry">295</td>
             <td class="headerCovTableEntryHi">97.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-12-04 16:12:25</td>
+            <td class="headerValue">2016-04-23 13:26:33</td>
             <td></td>
           </tr>
           <tr>
@@ -236,12 +236,12 @@
 <span class="lineNum">     170 </span>            : }
 <span class="lineNum">     171 </span>            : 
 <span class="lineNum">     172 </span>            : 
-<span class="lineNum">     173 </span><span class="lineCov">       2017 : static FILE *tofile (lua_State *L) {</span>
-<span class="lineNum">     174 </span><span class="lineCov">       2017 :   LStream *p = tolstream(L);</span>
-<span class="lineNum">     175 </span><span class="lineCov">       2017 :   if (isclosed(p))</span>
+<span class="lineNum">     173 </span><span class="lineCov">       2018 : static FILE *tofile (lua_State *L) {</span>
+<span class="lineNum">     174 </span><span class="lineCov">       2018 :   LStream *p = tolstream(L);</span>
+<span class="lineNum">     175 </span><span class="lineCov">       2018 :   if (isclosed(p))</span>
 <span class="lineNum">     176 </span><span class="lineCov">          5 :     luaL_error(L, &quot;attempt to use a closed file&quot;);</span>
 <span class="lineNum">     177 </span>            :   lua_assert(p-&gt;f);
-<span class="lineNum">     178 </span><span class="lineCov">       2012 :   return p-&gt;f;</span>
+<span class="lineNum">     178 </span><span class="lineCov">       2013 :   return p-&gt;f;</span>
 <span class="lineNum">     179 </span>            : }
 <span class="lineNum">     180 </span>            : 
 <span class="lineNum">     181 </span>            : 
@@ -471,7 +471,7 @@
 <span class="lineNum">     405 </span>            : /*
 <span class="lineNum">     406 </span>            : ** Accept current char if it is in 'set' (of size 1 or 2)
 <span class="lineNum">     407 </span>            : */
-<span class="lineNum">     408 </span><span class="lineCov">         45 : static int test2 (RN *rn, const char *set) {</span>
+<span class="lineNum">     408 </span><span class="lineCov">         12 : static int test2 (RN *rn, const char *set) {</span>
 <span class="lineNum">     409 </span><span class="lineCov">         45 :   if (rn-&gt;c == set[0] || (rn-&gt;c == set[1] &amp;&amp; rn-&gt;c != '\0'))</span>
 <span class="lineNum">     410 </span><span class="lineCov">          8 :     return nextc(rn);</span>
 <span class="lineNum">     411 </span>            :   else return 0;
@@ -501,7 +501,7 @@
 <span class="lineNum">     435 </span>            :   char decp[2];
 <span class="lineNum">     436 </span><span class="lineCov">         11 :   rn.f = f; rn.n = 0;</span>
 <span class="lineNum">     437 </span><span class="lineCov">         11 :   decp[0] = lua_getlocaledecpoint();  /* get decimal point from locale */</span>
-<span class="lineNum">     438 </span><span class="lineCov">         11 :   decp[1] = '\0';</span>
+<span class="lineNum">     438 </span>            :   decp[1] = '\0';
 <span class="lineNum">     439 </span><span class="lineCov">         11 :   l_lockfile(rn.f);</span>
 <span class="lineNum">     440 </span><span class="lineCov">         66 :   do { rn.c = l_getc(rn.f); } while (isspace(rn.c));  /* skip spaces */</span>
 <span class="lineNum">     441 </span><span class="lineCov">         11 :   test2(&amp;rn, &quot;-+&quot;);  /* optional signal */</span>
@@ -512,7 +512,7 @@
 <span class="lineNum">     446 </span><span class="lineCov">         11 :   count += readdigits(&amp;rn, hex);  /* integral part */</span>
 <span class="lineNum">     447 </span><span class="lineCov">         11 :   if (test2(&amp;rn, decp))  /* decimal point? */</span>
 <span class="lineNum">     448 </span><span class="lineCov">          3 :     count += readdigits(&amp;rn, hex);  /* fractional part */</span>
-<span class="lineNum">     449 </span><span class="lineCov">         11 :   if (count &gt; 0 &amp;&amp; test2(&amp;rn, (hex ? &quot;pP&quot; : &quot;eE&quot;))) {  /* exponent mark? */</span>
+<span class="lineNum">     449 </span><span class="lineCov">         20 :   if (count &gt; 0 &amp;&amp; test2(&amp;rn, (hex ? &quot;pP&quot; : &quot;eE&quot;))) {  /* exponent mark? */</span>
 <span class="lineNum">     450 </span><span class="lineCov">          1 :     test2(&amp;rn, &quot;-+&quot;);  /* exponent signal */</span>
 <span class="lineNum">     451 </span><span class="lineCov">          1 :     readdigits(&amp;rn, 0);  /* exponent digits */</span>
 <span class="lineNum">     452 </span>            :   }
@@ -674,11 +674,11 @@
 <span class="lineNum">     608 </span>            : /* }====================================================== */
 <span class="lineNum">     609 </span>            : 
 <span class="lineNum">     610 </span>            : 
-<span class="lineNum">     611 </span><span class="lineCov">       1843 : static int g_write (lua_State *L, FILE *f, int arg) {</span>
-<span class="lineNum">     612 </span><span class="lineCov">       1843 :   int nargs = lua_gettop(L) - arg;</span>
+<span class="lineNum">     611 </span><span class="lineCov">       1844 : static int g_write (lua_State *L, FILE *f, int arg) {</span>
+<span class="lineNum">     612 </span><span class="lineCov">       1844 :   int nargs = lua_gettop(L) - arg;</span>
 <span class="lineNum">     613 </span>            :   int status = 1;
-<span class="lineNum">     614 </span><span class="lineCov">       3687 :   for (; nargs--; arg++) {</span>
-<span class="lineNum">     615 </span><span class="lineCov">       1844 :     if (lua_type(L, arg) == LUA_TNUMBER) {</span>
+<span class="lineNum">     614 </span><span class="lineCov">       3689 :   for (; nargs--; arg++) {</span>
+<span class="lineNum">     615 </span><span class="lineCov">       1845 :     if (lua_type(L, arg) == LUA_TNUMBER) {</span>
 <span class="lineNum">     616 </span>            :       /* optimization: could be done exactly as for strings */
 <span class="lineNum">     617 </span><span class="lineCov">          1 :       int len = lua_isinteger(L, arg)</span>
 <span class="lineNum">     618 </span><span class="lineCov">          1 :                 ? fprintf(f, LUA_INTEGER_FMT, lua_tointeger(L, arg))</span>
@@ -687,11 +687,11 @@
 <span class="lineNum">     621 </span>            :     }
 <span class="lineNum">     622 </span>            :     else {
 <span class="lineNum">     623 </span>            :       size_t l;
-<span class="lineNum">     624 </span><span class="lineCov">       1843 :       const char *s = luaL_checklstring(L, arg, &amp;l);</span>
-<span class="lineNum">     625 </span><span class="lineCov">       1843 :       status = status &amp;&amp; (fwrite(s, sizeof(char), l, f) == l);</span>
+<span class="lineNum">     624 </span><span class="lineCov">       1844 :       const char *s = luaL_checklstring(L, arg, &amp;l);</span>
+<span class="lineNum">     625 </span><span class="lineCov">       1844 :       status = status &amp;&amp; (fwrite(s, sizeof(char), l, f) == l);</span>
 <span class="lineNum">     626 </span>            :     }
 <span class="lineNum">     627 </span>            :   }
-<span class="lineNum">     628 </span><span class="lineCov">       1843 :   if (status) return 1;  /* file handle already on stack top */</span>
+<span class="lineNum">     628 </span><span class="lineCov">       1844 :   if (status) return 1;  /* file handle already on stack top */</span>
 <span class="lineNum">     629 </span><span class="lineNoCov">          0 :   else return luaL_fileresult(L, status, NULL);</span>
 <span class="lineNum">     630 </span>            : }
 <span class="lineNum">     631 </span>            : 
@@ -701,10 +701,10 @@
 <span class="lineNum">     635 </span>            : }
 <span class="lineNum">     636 </span>            : 
 <span class="lineNum">     637 </span>            : 
-<span class="lineNum">     638 </span><span class="lineCov">       1842 : static int f_write (lua_State *L) {</span>
-<span class="lineNum">     639 </span><span class="lineCov">       1842 :   FILE *f = tofile(L);</span>
-<span class="lineNum">     640 </span><span class="lineCov">       1841 :   lua_pushvalue(L, 1);  /* push file at the stack top (to be returned) */</span>
-<span class="lineNum">     641 </span><span class="lineCov">       1841 :   return g_write(L, f, 2);</span>
+<span class="lineNum">     638 </span><span class="lineCov">       1843 : static int f_write (lua_State *L) {</span>
+<span class="lineNum">     639 </span><span class="lineCov">       1843 :   FILE *f = tofile(L);</span>
+<span class="lineNum">     640 </span><span class="lineCov">       1842 :   lua_pushvalue(L, 1);  /* push file at the stack top (to be returned) */</span>
+<span class="lineNum">     641 </span><span class="lineCov">       1842 :   return g_write(L, f, 2);</span>
 <span class="lineNum">     642 </span>            : }
 <span class="lineNum">     643 </span>            : 
 <span class="lineNum">     644 </span>            : 
@@ -837,7 +837,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 

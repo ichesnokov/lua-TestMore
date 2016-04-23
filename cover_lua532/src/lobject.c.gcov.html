@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">155</td>
-            <td class="headerCovTableEntry">171</td>
-            <td class="headerCovTableEntryHi">90.6 %</td>
+            <td class="headerCovTableEntry">170</td>
+            <td class="headerCovTableEntryHi">91.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-12-04 16:12:25</td>
+            <td class="headerValue">2016-04-23 13:26:33</td>
             <td></td>
           </tr>
           <tr>
@@ -104,9 +104,9 @@
 <span class="lineNum">      38 </span>            : ** (eeeeexxx), where the real value is (1xxx) * 2^(eeeee - 1) if
 <span class="lineNum">      39 </span>            : ** eeeee != 0 and (xxx) otherwise.
 <span class="lineNum">      40 </span>            : */
-<span class="lineNum">      41 </span><span class="lineCov">       2316 : int luaO_int2fb (unsigned int x) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">       2318 : int luaO_int2fb (unsigned int x) {</span>
 <span class="lineNum">      42 </span>            :   int e = 0;  /* exponent */
-<span class="lineNum">      43 </span><span class="lineCov">       2316 :   if (x &lt; 8) return x;</span>
+<span class="lineNum">      43 </span><span class="lineCov">       2318 :   if (x &lt; 8) return x;</span>
 <span class="lineNum">      44 </span><span class="lineCov">          3 :   while (x &gt;= (8 &lt;&lt; 4)) {  /* coarse steps */</span>
 <span class="lineNum">      45 </span><span class="lineNoCov">          0 :     x = (x + 0xf) &gt;&gt; 4;  /* x = ceil(x / 16) */</span>
 <span class="lineNum">      46 </span><span class="lineNoCov">          0 :     e += 4;</span>
@@ -128,7 +128,7 @@
 <span class="lineNum">      62 </span>            : /*
 <span class="lineNum">      63 </span>            : ** Computes ceil(log2(x))
 <span class="lineNum">      64 </span>            : */
-<span class="lineNum">      65 </span><span class="lineCov">      29931 : int luaO_ceillog2 (unsigned int x) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">      29933 : int luaO_ceillog2 (unsigned int x) {</span>
 <span class="lineNum">      66 </span>            :   static const lu_byte log_2[256] = {  /* log_2[i] = ceil(log2(i - 1)) */
 <span class="lineNum">      67 </span>            :     0,1,2,2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 <span class="lineNum">      68 </span>            :     6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
@@ -140,9 +140,9 @@
 <span class="lineNum">      74 </span>            :     8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8
 <span class="lineNum">      75 </span>            :   };
 <span class="lineNum">      76 </span>            :   int l = 0;
-<span class="lineNum">      77 </span><span class="lineCov">      29931 :   x--;</span>
-<span class="lineNum">      78 </span><span class="lineCov">      29931 :   while (x &gt;= 256) { l += 8; x &gt;&gt;= 8; }</span>
-<span class="lineNum">      79 </span><span class="lineCov">      29931 :   return l + log_2[x];</span>
+<span class="lineNum">      77 </span><span class="lineCov">      29933 :   x--;</span>
+<span class="lineNum">      78 </span><span class="lineCov">      29933 :   while (x &gt;= 256) { l += 8; x &gt;&gt;= 8; }</span>
+<span class="lineNum">      79 </span><span class="lineCov">      29933 :   return l + log_2[x];</span>
 <span class="lineNum">      80 </span>            : }
 <span class="lineNum">      81 </span>            : 
 <span class="lineNum">      82 </span>            : 
@@ -233,8 +233,8 @@
 <span class="lineNum">     167 </span>            : 
 <span class="lineNum">     168 </span>            : 
 <span class="lineNum">     169 </span>            : static int isneg (const char **s) {
-<span class="lineNum">     170 </span><span class="lineCov">       3483 :   if (**s == '-') { (*s)++; return 1; }</span>
-<span class="lineNum">     171 </span><span class="lineCov">       3461 :   else if (**s == '+') (*s)++;</span>
+<span class="lineNum">     170 </span><span class="lineCov">       3486 :   if (**s == '-') { (*s)++; return 1; }</span>
+<span class="lineNum">     171 </span><span class="lineCov">       3464 :   else if (**s == '+') (*s)++;</span>
 <span class="lineNum">     172 </span>            :   return 0;
 <span class="lineNum">     173 </span>            : }
 <span class="lineNum">     174 </span>            : 
@@ -323,14 +323,14 @@
 <span class="lineNum">     257 </span>            : }
 <span class="lineNum">     258 </span>            : 
 <span class="lineNum">     259 </span>            : 
-<span class="lineNum">     260 </span><span class="lineCov">       3483 : static const char *l_str2int (const char *s, lua_Integer *result) {</span>
+<span class="lineNum">     260 </span><span class="lineCov">       3486 : static const char *l_str2int (const char *s, lua_Integer *result) {</span>
 <span class="lineNum">     261 </span>            :   lua_Unsigned a = 0;
 <span class="lineNum">     262 </span>            :   int empty = 1;
 <span class="lineNum">     263 </span>            :   int neg;
-<span class="lineNum">     264 </span><span class="lineCov">       3483 :   while (lisspace(cast_uchar(*s))) s++;  /* skip initial spaces */</span>
+<span class="lineNum">     264 </span><span class="lineCov">       3486 :   while (lisspace(cast_uchar(*s))) s++;  /* skip initial spaces */</span>
 <span class="lineNum">     265 </span>            :   neg = isneg(&amp;s);
-<span class="lineNum">     266 </span><span class="lineCov">       4457 :   if (s[0] == '0' &amp;&amp;</span>
-<span class="lineNum">     267 </span><span class="lineCov">        974 :       (s[1] == 'x' || s[1] == 'X')) {  /* hex? */</span>
+<span class="lineNum">     266 </span><span class="lineCov">       4462 :   if (s[0] == '0' &amp;&amp;</span>
+<span class="lineNum">     267 </span><span class="lineCov">        976 :       (s[1] == 'x' || s[1] == 'X')) {  /* hex? */</span>
 <span class="lineNum">     268 </span><span class="lineCov">         73 :     s += 2;  /* skip '0x' */</span>
 <span class="lineNum">     269 </span><span class="lineCov">        277 :     for (; lisxdigit(cast_uchar(*s)); s++) {</span>
 <span class="lineNum">     270 </span><span class="lineCov">        408 :       a = a * 16 + luaO_hexavalue(*s);</span>
@@ -338,32 +338,32 @@
 <span class="lineNum">     272 </span>            :     }
 <span class="lineNum">     273 </span>            :   }
 <span class="lineNum">     274 </span>            :   else {  /* decimal */
-<span class="lineNum">     275 </span><span class="lineCov">       3997 :     for (; lisdigit(cast_uchar(*s)); s++) {</span>
-<span class="lineNum">     276 </span><span class="lineCov">       3997 :       a = a * 10 + *s - '0';</span>
+<span class="lineNum">     275 </span><span class="lineCov">       4001 :     for (; lisdigit(cast_uchar(*s)); s++) {</span>
+<span class="lineNum">     276 </span><span class="lineCov">       4001 :       a = a * 10 + *s - '0';</span>
 <span class="lineNum">     277 </span>            :       empty = 0;
 <span class="lineNum">     278 </span>            :     }
 <span class="lineNum">     279 </span>            :   }
 <span class="lineNum">     280 </span><span class="lineNoCov">          0 :   while (lisspace(cast_uchar(*s))) s++;  /* skip trailing spaces */</span>
-<span class="lineNum">     281 </span><span class="lineCov">       3483 :   if (empty || *s != '\0') return NULL;  /* something wrong in the numeral */</span>
+<span class="lineNum">     281 </span><span class="lineCov">       3486 :   if (empty || *s != '\0') return NULL;  /* something wrong in the numeral */</span>
 <span class="lineNum">     282 </span>            :   else {
-<span class="lineNum">     283 </span><span class="lineCov">       3281 :     *result = l_castU2S((neg) ? 0u - a : a);</span>
-<span class="lineNum">     284 </span><span class="lineCov">       3281 :     return s;</span>
+<span class="lineNum">     283 </span><span class="lineCov">       3284 :     *result = l_castU2S((neg) ? 0u - a : a);</span>
+<span class="lineNum">     284 </span><span class="lineCov">       3284 :     return s;</span>
 <span class="lineNum">     285 </span>            :   }
 <span class="lineNum">     286 </span>            : }
 <span class="lineNum">     287 </span>            : 
 <span class="lineNum">     288 </span>            : 
-<span class="lineNum">     289 </span><span class="lineCov">       3483 : size_t luaO_str2num (const char *s, TValue *o) {</span>
+<span class="lineNum">     289 </span><span class="lineCov">       3486 : size_t luaO_str2num (const char *s, TValue *o) {</span>
 <span class="lineNum">     290 </span>            :   lua_Integer i; lua_Number n;
 <span class="lineNum">     291 </span>            :   const char *e;
-<span class="lineNum">     292 </span><span class="lineCov">       3483 :   if ((e = l_str2int(s, &amp;i)) != NULL) {  /* try as an integer */</span>
-<span class="lineNum">     293 </span><span class="lineCov">       3281 :     setivalue(o, i);</span>
+<span class="lineNum">     292 </span><span class="lineCov">       3486 :   if ((e = l_str2int(s, &amp;i)) != NULL) {  /* try as an integer */</span>
+<span class="lineNum">     293 </span><span class="lineCov">       3284 :     setivalue(o, i);</span>
 <span class="lineNum">     294 </span>            :   }
 <span class="lineNum">     295 </span><span class="lineCov">        202 :   else if ((e = l_str2d(s, &amp;n)) != NULL) {  /* else try as a float */</span>
 <span class="lineNum">     296 </span><span class="lineCov">        144 :     setfltvalue(o, n);</span>
 <span class="lineNum">     297 </span>            :   }
 <span class="lineNum">     298 </span>            :   else
 <span class="lineNum">     299 </span>            :     return 0;  /* conversion failed */
-<span class="lineNum">     300 </span><span class="lineCov">       3425 :   return (e - s) + 1;  /* success; return string size */</span>
+<span class="lineNum">     300 </span><span class="lineCov">       3428 :   return (e - s) + 1;  /* success; return string size */</span>
 <span class="lineNum">     301 </span>            : }
 <span class="lineNum">     302 </span>            : 
 <span class="lineNum">     303 </span>            : 
@@ -392,45 +392,45 @@
 <span class="lineNum">     326 </span>            : /*
 <span class="lineNum">     327 </span>            : ** Convert a number object to a string
 <span class="lineNum">     328 </span>            : */
-<span class="lineNum">     329 </span><span class="lineCov">       2453 : void luaO_tostring (lua_State *L, StkId obj) {</span>
+<span class="lineNum">     329 </span><span class="lineCov">       2457 : void luaO_tostring (lua_State *L, StkId obj) {</span>
 <span class="lineNum">     330 </span>            :   char buff[MAXNUMBER2STR];
 <span class="lineNum">     331 </span>            :   size_t len;
 <span class="lineNum">     332 </span>            :   lua_assert(ttisnumber(obj));
-<span class="lineNum">     333 </span><span class="lineCov">       2453 :   if (ttisinteger(obj))</span>
-<span class="lineNum">     334 </span><span class="lineCov">       4818 :     len = lua_integer2str(buff, sizeof(buff), ivalue(obj));</span>
+<span class="lineNum">     333 </span><span class="lineCov">       2457 :   if (ttisinteger(obj))</span>
+<span class="lineNum">     334 </span><span class="lineCov">       4822 :     len = lua_integer2str(buff, sizeof(buff), ivalue(obj));</span>
 <span class="lineNum">     335 </span>            :   else {
-<span class="lineNum">     336 </span><span class="lineCov">         88 :     len = lua_number2str(buff, sizeof(buff), fltvalue(obj));</span>
+<span class="lineNum">     336 </span><span class="lineCov">         92 :     len = lua_number2str(buff, sizeof(buff), fltvalue(obj));</span>
 <span class="lineNum">     337 </span>            : #if !defined(LUA_COMPAT_FLOATSTRING)
-<span class="lineNum">     338 </span><span class="lineCov">         44 :     if (buff[strspn(buff, &quot;-0123456789&quot;)] == '\0') {  /* looks like an int? */</span>
+<span class="lineNum">     338 </span><span class="lineCov">         46 :     if (buff[strspn(buff, &quot;-0123456789&quot;)] == '\0') {  /* looks like an int? */</span>
 <span class="lineNum">     339 </span><span class="lineCov">         25 :       buff[len++] = lua_getlocaledecpoint();</span>
 <span class="lineNum">     340 </span><span class="lineCov">         25 :       buff[len++] = '0';  /* adds '.0' to result */</span>
 <span class="lineNum">     341 </span>            :     }
 <span class="lineNum">     342 </span>            : #endif
 <span class="lineNum">     343 </span>            :   }
-<span class="lineNum">     344 </span><span class="lineCov">       2453 :   setsvalue2s(L, obj, luaS_newlstr(L, buff, len));</span>
-<span class="lineNum">     345 </span><span class="lineCov">       2453 : }</span>
+<span class="lineNum">     344 </span><span class="lineCov">       2457 :   setsvalue2s(L, obj, luaS_newlstr(L, buff, len));</span>
+<span class="lineNum">     345 </span><span class="lineCov">       2457 : }</span>
 <span class="lineNum">     346 </span>            : 
 <span class="lineNum">     347 </span>            : 
-<span class="lineNum">     348 </span><span class="lineCov">       9859 : static void pushstr (lua_State *L, const char *str, size_t l) {</span>
-<span class="lineNum">     349 </span><span class="lineCov">       9859 :   setsvalue2s(L, L-&gt;top, luaS_newlstr(L, str, l));</span>
-<span class="lineNum">     350 </span><span class="lineCov">       9859 :   luaD_inctop(L);</span>
-<span class="lineNum">     351 </span><span class="lineCov">       9859 : }</span>
+<span class="lineNum">     348 </span><span class="lineCov">      11258 : static void pushstr (lua_State *L, const char *str, size_t l) {</span>
+<span class="lineNum">     349 </span><span class="lineCov">      11258 :   setsvalue2s(L, L-&gt;top, luaS_newlstr(L, str, l));</span>
+<span class="lineNum">     350 </span><span class="lineCov">      11258 :   luaD_inctop(L);</span>
+<span class="lineNum">     351 </span><span class="lineCov">      11258 : }</span>
 <span class="lineNum">     352 </span>            : 
 <span class="lineNum">     353 </span>            : 
 <span class="lineNum">     354 </span>            : /* this function handles only '%d', '%c', '%f', '%p', and '%s' 
 <span class="lineNum">     355 </span>            :    conventional formats, plus Lua-specific '%I' and '%U' */
-<span class="lineNum">     356 </span><span class="lineCov">       3173 : const char *luaO_pushvfstring (lua_State *L, const char *fmt, va_list argp) {</span>
+<span class="lineNum">     356 </span><span class="lineCov">       3640 : const char *luaO_pushvfstring (lua_State *L, const char *fmt, va_list argp) {</span>
 <span class="lineNum">     357 </span>            :   int n = 0;
 <span class="lineNum">     358 </span>            :   for (;;) {
-<span class="lineNum">     359 </span><span class="lineCov">       7708 :     const char *e = strchr(fmt, '%');</span>
-<span class="lineNum">     360 </span><span class="lineCov">       7708 :     if (e == NULL) break;</span>
-<span class="lineNum">     361 </span><span class="lineCov">       4535 :     pushstr(L, fmt, e - fmt);</span>
-<span class="lineNum">     362 </span><span class="lineCov">       4535 :     switch (*(e+1)) {</span>
+<span class="lineNum">     359 </span><span class="lineCov">       8643 :     const char *e = strchr(fmt, '%');</span>
+<span class="lineNum">     360 </span><span class="lineCov">       8643 :     if (e == NULL) break;</span>
+<span class="lineNum">     361 </span><span class="lineCov">       5003 :     pushstr(L, fmt, e - fmt);</span>
+<span class="lineNum">     362 </span><span class="lineCov">       5003 :     switch (*(e+1)) {</span>
 <span class="lineNum">     363 </span>            :       case 's': {
-<span class="lineNum">     364 </span><span class="lineCov">       2115 :         const char *s = va_arg(argp, char *);</span>
-<span class="lineNum">     365 </span><span class="lineCov">       2115 :         if (s == NULL) s = &quot;(null)&quot;;</span>
-<span class="lineNum">     366 </span><span class="lineCov">       2115 :         pushstr(L, s, strlen(s));</span>
-<span class="lineNum">     367 </span><span class="lineCov">       2115 :         break;</span>
+<span class="lineNum">     364 </span><span class="lineCov">       2579 :         const char *s = va_arg(argp, char *);</span>
+<span class="lineNum">     365 </span><span class="lineCov">       2579 :         if (s == NULL) s = &quot;(null)&quot;;</span>
+<span class="lineNum">     366 </span><span class="lineCov">       2579 :         pushstr(L, s, strlen(s));</span>
+<span class="lineNum">     367 </span><span class="lineCov">       2579 :         break;</span>
 <span class="lineNum">     368 </span>            :       }
 <span class="lineNum">     369 </span>            :       case 'c': {
 <span class="lineNum">     370 </span><span class="lineCov">         10 :         char buff = cast(char, va_arg(argp, int));</span>
@@ -441,19 +441,19 @@
 <span class="lineNum">     375 </span>            :         break;
 <span class="lineNum">     376 </span>            :       }
 <span class="lineNum">     377 </span>            :       case 'd': {
-<span class="lineNum">     378 </span><span class="lineCov">        484 :         setivalue(L-&gt;top, va_arg(argp, int));</span>
-<span class="lineNum">     379 </span><span class="lineCov">        484 :         goto top2str;</span>
+<span class="lineNum">     378 </span><span class="lineCov">        485 :         setivalue(L-&gt;top, va_arg(argp, int));</span>
+<span class="lineNum">     379 </span><span class="lineCov">        485 :         goto top2str;</span>
 <span class="lineNum">     380 </span>            :       }
 <span class="lineNum">     381 </span>            :       case 'I': {
-<span class="lineNum">     382 </span><span class="lineCov">       1877 :         setivalue(L-&gt;top, cast(lua_Integer, va_arg(argp, l_uacInt)));</span>
-<span class="lineNum">     383 </span><span class="lineCov">       1877 :         goto top2str;</span>
+<span class="lineNum">     382 </span><span class="lineCov">       1878 :         setivalue(L-&gt;top, cast(lua_Integer, va_arg(argp, l_uacInt)));</span>
+<span class="lineNum">     383 </span><span class="lineCov">       1878 :         goto top2str;</span>
 <span class="lineNum">     384 </span>            :       }
 <span class="lineNum">     385 </span>            :       case 'f': {
-<span class="lineNum">     386 </span><span class="lineCov">         23 :         setfltvalue(L-&gt;top, cast_num(va_arg(argp, l_uacNumber)));</span>
+<span class="lineNum">     386 </span><span class="lineCov">         25 :         setfltvalue(L-&gt;top, cast_num(va_arg(argp, l_uacNumber)));</span>
 <span class="lineNum">     387 </span>            :       top2str:
-<span class="lineNum">     388 </span><span class="lineCov">       2384 :         luaD_inctop(L);</span>
-<span class="lineNum">     389 </span><span class="lineCov">       2384 :         luaO_tostring(L, L-&gt;top - 1);</span>
-<span class="lineNum">     390 </span><span class="lineCov">       2384 :         break;</span>
+<span class="lineNum">     388 </span><span class="lineCov">       2388 :         luaD_inctop(L);</span>
+<span class="lineNum">     389 </span><span class="lineCov">       2388 :         luaO_tostring(L, L-&gt;top - 1);</span>
+<span class="lineNum">     390 </span><span class="lineCov">       2388 :         break;</span>
 <span class="lineNum">     391 </span>            :       }
 <span class="lineNum">     392 </span>            :       case 'p': {
 <span class="lineNum">     393 </span>            :         char buff[4*sizeof(void *) + 8]; /* should be enough space for a '%p' */
@@ -473,26 +473,26 @@
 <span class="lineNum">     407 </span>            :       }
 <span class="lineNum">     408 </span>            :       default: {
 <span class="lineNum">     409 </span><span class="lineNoCov">          0 :         luaG_runerror(L, &quot;invalid option '%%%c' to 'lua_pushfstring'&quot;,</span>
-<span class="lineNum">     410 </span><span class="lineNoCov">          0 :                          *(e + 1));</span>
+<span class="lineNum">     410 </span>            :                          *(e + 1));
 <span class="lineNum">     411 </span>            :       }
 <span class="lineNum">     412 </span>            :     }
-<span class="lineNum">     413 </span><span class="lineCov">       4535 :     n += 2;</span>
-<span class="lineNum">     414 </span><span class="lineCov">       4535 :     fmt = e+2;</span>
-<span class="lineNum">     415 </span><span class="lineCov">       4535 :   }</span>
-<span class="lineNum">     416 </span><span class="lineCov">       3173 :   luaD_checkstack(L, 1);</span>
-<span class="lineNum">     417 </span><span class="lineCov">       3173 :   pushstr(L, fmt, strlen(fmt));</span>
-<span class="lineNum">     418 </span><span class="lineCov">       3173 :   if (n &gt; 0) luaV_concat(L, n + 1);</span>
-<span class="lineNum">     419 </span><span class="lineCov">       3173 :   return svalue(L-&gt;top - 1);</span>
+<span class="lineNum">     413 </span><span class="lineCov">       5003 :     n += 2;</span>
+<span class="lineNum">     414 </span><span class="lineCov">       5003 :     fmt = e+2;</span>
+<span class="lineNum">     415 </span><span class="lineCov">       5003 :   }</span>
+<span class="lineNum">     416 </span><span class="lineCov">       3640 :   luaD_checkstack(L, 1);</span>
+<span class="lineNum">     417 </span><span class="lineCov">       3640 :   pushstr(L, fmt, strlen(fmt));</span>
+<span class="lineNum">     418 </span><span class="lineCov">       3640 :   if (n &gt; 0) luaV_concat(L, n + 1);</span>
+<span class="lineNum">     419 </span><span class="lineCov">       3640 :   return svalue(L-&gt;top - 1);</span>
 <span class="lineNum">     420 </span>            : }
 <span class="lineNum">     421 </span>            : 
 <span class="lineNum">     422 </span>            : 
-<span class="lineNum">     423 </span><span class="lineCov">        425 : const char *luaO_pushfstring (lua_State *L, const char *fmt, ...) {</span>
+<span class="lineNum">     423 </span><span class="lineCov">        426 : const char *luaO_pushfstring (lua_State *L, const char *fmt, ...) {</span>
 <span class="lineNum">     424 </span>            :   const char *msg;
 <span class="lineNum">     425 </span>            :   va_list argp;
-<span class="lineNum">     426 </span><span class="lineCov">        425 :   va_start(argp, fmt);</span>
-<span class="lineNum">     427 </span><span class="lineCov">        425 :   msg = luaO_pushvfstring(L, fmt, argp);</span>
-<span class="lineNum">     428 </span><span class="lineCov">        425 :   va_end(argp);</span>
-<span class="lineNum">     429 </span><span class="lineCov">        425 :   return msg;</span>
+<span class="lineNum">     426 </span><span class="lineCov">        426 :   va_start(argp, fmt);</span>
+<span class="lineNum">     427 </span><span class="lineCov">        426 :   msg = luaO_pushvfstring(L, fmt, argp);</span>
+<span class="lineNum">     428 </span><span class="lineCov">        426 :   va_end(argp);</span>
+<span class="lineNum">     429 </span><span class="lineCov">        426 :   return msg;</span>
 <span class="lineNum">     430 </span>            : }
 <span class="lineNum">     431 </span>            : 
 <span class="lineNum">     432 </span>            : 
@@ -505,9 +505,9 @@
 <span class="lineNum">     439 </span>            : 
 <span class="lineNum">     440 </span>            : #define addstr(a,b,l)   ( memcpy(a,b,(l) * sizeof(char)), a += (l) )
 <span class="lineNum">     441 </span>            : 
-<span class="lineNum">     442 </span><span class="lineCov">        427 : void luaO_chunkid (char *out, const char *source, size_t bufflen) {</span>
-<span class="lineNum">     443 </span><span class="lineCov">        427 :   size_t l = strlen(source);</span>
-<span class="lineNum">     444 </span><span class="lineCov">        427 :   if (*source == '=') {  /* 'literal' source */</span>
+<span class="lineNum">     442 </span><span class="lineCov">        428 : void luaO_chunkid (char *out, const char *source, size_t bufflen) {</span>
+<span class="lineNum">     443 </span><span class="lineCov">        428 :   size_t l = strlen(source);</span>
+<span class="lineNum">     444 </span><span class="lineCov">        428 :   if (*source == '=') {  /* 'literal' source */</span>
 <span class="lineNum">     445 </span><span class="lineCov">         20 :     if (l &lt;= bufflen)  /* small enough? */</span>
 <span class="lineNum">     446 </span><span class="lineCov">         20 :       memcpy(out, source + 1, l * sizeof(char));</span>
 <span class="lineNum">     447 </span>            :     else {  /* truncate it */
@@ -515,9 +515,9 @@
 <span class="lineNum">     449 </span><span class="lineNoCov">          0 :       *out = '\0';</span>
 <span class="lineNum">     450 </span>            :     }
 <span class="lineNum">     451 </span>            :   }
-<span class="lineNum">     452 </span><span class="lineCov">        407 :   else if (*source == '@') {  /* file name */</span>
-<span class="lineNum">     453 </span><span class="lineCov">        384 :     if (l &lt;= bufflen)  /* small enough? */</span>
-<span class="lineNum">     454 </span><span class="lineCov">        384 :       memcpy(out, source + 1, l * sizeof(char));</span>
+<span class="lineNum">     452 </span><span class="lineCov">        408 :   else if (*source == '@') {  /* file name */</span>
+<span class="lineNum">     453 </span><span class="lineCov">        385 :     if (l &lt;= bufflen)  /* small enough? */</span>
+<span class="lineNum">     454 </span><span class="lineCov">        385 :       memcpy(out, source + 1, l * sizeof(char));</span>
 <span class="lineNum">     455 </span>            :     else {  /* add '...' before rest of name */
 <span class="lineNum">     456 </span><span class="lineNoCov">          0 :       addstr(out, RETS, LL(RETS));</span>
 <span class="lineNum">     457 </span><span class="lineNoCov">          0 :       bufflen -= LL(RETS);</span>
@@ -539,7 +539,7 @@
 <span class="lineNum">     473 </span>            :     }
 <span class="lineNum">     474 </span>            :     memcpy(out, POS, (LL(POS) + 1) * sizeof(char));
 <span class="lineNum">     475 </span>            :   }
-<span class="lineNum">     476 </span><span class="lineCov">        427 : }</span>
+<span class="lineNum">     476 </span><span class="lineCov">        428 : }</span>
 <span class="lineNum">     477 </span>            : 
 </pre>
       </td>
@@ -549,7 +549,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 

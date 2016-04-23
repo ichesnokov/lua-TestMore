@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-12-13 17:49:16</td>
+            <td class="headerValue">2016-04-23 13:26:11</td>
             <td></td>
           </tr>
           <tr>
@@ -96,14 +96,14 @@
 <span class="lineNum">      30 </span>            : }
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">       3822 : Closure *luaF_newLclosure (lua_State *L, int nelems, Table *e) {</span>
-<span class="lineNum">      34 </span><span class="lineCov">       3822 :   Closure *c = cast(Closure *, luaM_malloc(L, sizeLclosure(nelems)));</span>
-<span class="lineNum">      35 </span><span class="lineCov">       3822 :   luaC_link(L, obj2gco(c), LUA_TFUNCTION);</span>
-<span class="lineNum">      36 </span><span class="lineCov">       3822 :   c-&gt;l.isC = 0;</span>
-<span class="lineNum">      37 </span><span class="lineCov">       3822 :   c-&gt;l.env = e;</span>
-<span class="lineNum">      38 </span><span class="lineCov">       3822 :   c-&gt;l.nupvalues = cast_byte(nelems);</span>
-<span class="lineNum">      39 </span><span class="lineCov">       3822 :   while (nelems--) c-&gt;l.upvals[nelems] = NULL;</span>
-<span class="lineNum">      40 </span><span class="lineCov">       3822 :   return c;</span>
+<span class="lineNum">      33 </span><span class="lineCov">       3856 : Closure *luaF_newLclosure (lua_State *L, int nelems, Table *e) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">       3856 :   Closure *c = cast(Closure *, luaM_malloc(L, sizeLclosure(nelems)));</span>
+<span class="lineNum">      35 </span><span class="lineCov">       3856 :   luaC_link(L, obj2gco(c), LUA_TFUNCTION);</span>
+<span class="lineNum">      36 </span><span class="lineCov">       3856 :   c-&gt;l.isC = 0;</span>
+<span class="lineNum">      37 </span><span class="lineCov">       3856 :   c-&gt;l.env = e;</span>
+<span class="lineNum">      38 </span><span class="lineCov">       3856 :   c-&gt;l.nupvalues = cast_byte(nelems);</span>
+<span class="lineNum">      39 </span><span class="lineCov">       3856 :   while (nelems--) c-&gt;l.upvals[nelems] = NULL;</span>
+<span class="lineNum">      40 </span><span class="lineCov">       3856 :   return c;</span>
 <span class="lineNum">      41 </span>            : }
 <span class="lineNum">      42 </span>            : 
 <span class="lineNum">      43 </span>            : 
@@ -116,19 +116,19 @@
 <span class="lineNum">      50 </span>            : }
 <span class="lineNum">      51 </span>            : 
 <span class="lineNum">      52 </span>            : 
-<span class="lineNum">      53 </span><span class="lineCov">       8274 : UpVal *luaF_findupval (lua_State *L, StkId level) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">       8274 :   global_State *g = G(L);</span>
-<span class="lineNum">      55 </span><span class="lineCov">       8274 :   GCObject **pp = &amp;L-&gt;openupval;</span>
+<span class="lineNum">      53 </span><span class="lineCov">       8308 : UpVal *luaF_findupval (lua_State *L, StkId level) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">       8308 :   global_State *g = G(L);</span>
+<span class="lineNum">      55 </span><span class="lineCov">       8308 :   GCObject **pp = &amp;L-&gt;openupval;</span>
 <span class="lineNum">      56 </span>            :   UpVal *p;
 <span class="lineNum">      57 </span>            :   UpVal *uv;
-<span class="lineNum">      58 </span><span class="lineCov">      34757 :   while (*pp != NULL &amp;&amp; (p = ngcotouv(*pp))-&gt;v &gt;= level) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">      34927 :   while (*pp != NULL &amp;&amp; (p = ngcotouv(*pp))-&gt;v &gt;= level) {</span>
 <span class="lineNum">      59 </span>            :     lua_assert(p-&gt;v != &amp;p-&gt;u.value);
-<span class="lineNum">      60 </span><span class="lineCov">      20808 :     if (p-&gt;v == level) {  /* found a corresponding upvalue? */</span>
-<span class="lineNum">      61 </span><span class="lineCov">       2599 :       if (isdead(g, obj2gco(p)))  /* is it dead? */</span>
+<span class="lineNum">      60 </span><span class="lineCov">      20944 :     if (p-&gt;v == level) {  /* found a corresponding upvalue? */</span>
+<span class="lineNum">      61 </span><span class="lineCov">       2633 :       if (isdead(g, obj2gco(p)))  /* is it dead? */</span>
 <span class="lineNum">      62 </span><span class="lineNoCov">          0 :         changewhite(obj2gco(p));  /* ressurect it */</span>
-<span class="lineNum">      63 </span><span class="lineCov">       2599 :       return p;</span>
+<span class="lineNum">      63 </span><span class="lineCov">       2633 :       return p;</span>
 <span class="lineNum">      64 </span>            :     }
-<span class="lineNum">      65 </span><span class="lineCov">      18209 :     pp = &amp;p-&gt;next;</span>
+<span class="lineNum">      65 </span><span class="lineCov">      18311 :     pp = &amp;p-&gt;next;</span>
 <span class="lineNum">      66 </span>            :   }
 <span class="lineNum">      67 </span><span class="lineCov">       5675 :   uv = luaM_new(L, UpVal);  /* not found: create a new one */</span>
 <span class="lineNum">      68 </span><span class="lineCov">       5675 :   uv-&gt;tt = LUA_TUPVAL;</span>
@@ -159,10 +159,10 @@
 <span class="lineNum">      93 </span><span class="lineCov">       5675 : }</span>
 <span class="lineNum">      94 </span>            : 
 <span class="lineNum">      95 </span>            : 
-<span class="lineNum">      96 </span><span class="lineCov">       7038 : void luaF_close (lua_State *L, StkId level) {</span>
+<span class="lineNum">      96 </span><span class="lineCov">       6018 : void luaF_close (lua_State *L, StkId level) {</span>
 <span class="lineNum">      97 </span>            :   UpVal *uv;
-<span class="lineNum">      98 </span><span class="lineCov">       7038 :   global_State *g = G(L);</span>
-<span class="lineNum">      99 </span><span class="lineCov">      19751 :   while (L-&gt;openupval != NULL &amp;&amp; (uv = ngcotouv(L-&gt;openupval))-&gt;v &gt;= level) {</span>
+<span class="lineNum">      98 </span><span class="lineCov">       6018 :   global_State *g = G(L);</span>
+<span class="lineNum">      99 </span><span class="lineCov">      17711 :   while (L-&gt;openupval != NULL &amp;&amp; (uv = ngcotouv(L-&gt;openupval))-&gt;v &gt;= level) {</span>
 <span class="lineNum">     100 </span><span class="lineCov">       5675 :     GCObject *o = obj2gco(uv);</span>
 <span class="lineNum">     101 </span>            :     lua_assert(!isblack(o) &amp;&amp; uv-&gt;v != &amp;uv-&gt;u.value);
 <span class="lineNum">     102 </span><span class="lineCov">       5675 :     L-&gt;openupval = uv-&gt;next;  /* remove from `open' list */</span>
@@ -175,51 +175,51 @@
 <span class="lineNum">     109 </span><span class="lineCov">       5675 :       luaC_linkupval(L, uv);  /* link upvalue into `gcroot' list */</span>
 <span class="lineNum">     110 </span>            :     }
 <span class="lineNum">     111 </span>            :   }
-<span class="lineNum">     112 </span><span class="lineCov">       7038 : }</span>
+<span class="lineNum">     112 </span><span class="lineCov">       6018 : }</span>
 <span class="lineNum">     113 </span>            : 
 <span class="lineNum">     114 </span>            : 
-<span class="lineNum">     115 </span><span class="lineCov">       3114 : Proto *luaF_newproto (lua_State *L) {</span>
-<span class="lineNum">     116 </span><span class="lineCov">       3114 :   Proto *f = luaM_new(L, Proto);</span>
-<span class="lineNum">     117 </span><span class="lineCov">       3114 :   luaC_link(L, obj2gco(f), LUA_TPROTO);</span>
-<span class="lineNum">     118 </span><span class="lineCov">       3114 :   f-&gt;k = NULL;</span>
-<span class="lineNum">     119 </span><span class="lineCov">       3114 :   f-&gt;sizek = 0;</span>
-<span class="lineNum">     120 </span><span class="lineCov">       3114 :   f-&gt;p = NULL;</span>
-<span class="lineNum">     121 </span><span class="lineCov">       3114 :   f-&gt;sizep = 0;</span>
-<span class="lineNum">     122 </span><span class="lineCov">       3114 :   f-&gt;code = NULL;</span>
-<span class="lineNum">     123 </span><span class="lineCov">       3114 :   f-&gt;sizecode = 0;</span>
-<span class="lineNum">     124 </span><span class="lineCov">       3114 :   f-&gt;sizelineinfo = 0;</span>
-<span class="lineNum">     125 </span><span class="lineCov">       3114 :   f-&gt;sizeupvalues = 0;</span>
-<span class="lineNum">     126 </span><span class="lineCov">       3114 :   f-&gt;nups = 0;</span>
-<span class="lineNum">     127 </span><span class="lineCov">       3114 :   f-&gt;upvalues = NULL;</span>
-<span class="lineNum">     128 </span><span class="lineCov">       3114 :   f-&gt;numparams = 0;</span>
-<span class="lineNum">     129 </span><span class="lineCov">       3114 :   f-&gt;is_vararg = 0;</span>
-<span class="lineNum">     130 </span><span class="lineCov">       3114 :   f-&gt;maxstacksize = 0;</span>
-<span class="lineNum">     131 </span><span class="lineCov">       3114 :   f-&gt;lineinfo = NULL;</span>
-<span class="lineNum">     132 </span><span class="lineCov">       3114 :   f-&gt;sizelocvars = 0;</span>
-<span class="lineNum">     133 </span><span class="lineCov">       3114 :   f-&gt;locvars = NULL;</span>
-<span class="lineNum">     134 </span><span class="lineCov">       3114 :   f-&gt;linedefined = 0;</span>
-<span class="lineNum">     135 </span><span class="lineCov">       3114 :   f-&gt;lastlinedefined = 0;</span>
-<span class="lineNum">     136 </span><span class="lineCov">       3114 :   f-&gt;source = NULL;</span>
-<span class="lineNum">     137 </span><span class="lineCov">       3114 :   return f;</span>
+<span class="lineNum">     115 </span><span class="lineCov">       3148 : Proto *luaF_newproto (lua_State *L) {</span>
+<span class="lineNum">     116 </span><span class="lineCov">       3148 :   Proto *f = luaM_new(L, Proto);</span>
+<span class="lineNum">     117 </span><span class="lineCov">       3148 :   luaC_link(L, obj2gco(f), LUA_TPROTO);</span>
+<span class="lineNum">     118 </span><span class="lineCov">       3148 :   f-&gt;k = NULL;</span>
+<span class="lineNum">     119 </span><span class="lineCov">       3148 :   f-&gt;sizek = 0;</span>
+<span class="lineNum">     120 </span><span class="lineCov">       3148 :   f-&gt;p = NULL;</span>
+<span class="lineNum">     121 </span><span class="lineCov">       3148 :   f-&gt;sizep = 0;</span>
+<span class="lineNum">     122 </span><span class="lineCov">       3148 :   f-&gt;code = NULL;</span>
+<span class="lineNum">     123 </span><span class="lineCov">       3148 :   f-&gt;sizecode = 0;</span>
+<span class="lineNum">     124 </span><span class="lineCov">       3148 :   f-&gt;sizelineinfo = 0;</span>
+<span class="lineNum">     125 </span><span class="lineCov">       3148 :   f-&gt;sizeupvalues = 0;</span>
+<span class="lineNum">     126 </span><span class="lineCov">       3148 :   f-&gt;nups = 0;</span>
+<span class="lineNum">     127 </span><span class="lineCov">       3148 :   f-&gt;upvalues = NULL;</span>
+<span class="lineNum">     128 </span><span class="lineCov">       3148 :   f-&gt;numparams = 0;</span>
+<span class="lineNum">     129 </span><span class="lineCov">       3148 :   f-&gt;is_vararg = 0;</span>
+<span class="lineNum">     130 </span><span class="lineCov">       3148 :   f-&gt;maxstacksize = 0;</span>
+<span class="lineNum">     131 </span><span class="lineCov">       3148 :   f-&gt;lineinfo = NULL;</span>
+<span class="lineNum">     132 </span><span class="lineCov">       3148 :   f-&gt;sizelocvars = 0;</span>
+<span class="lineNum">     133 </span><span class="lineCov">       3148 :   f-&gt;locvars = NULL;</span>
+<span class="lineNum">     134 </span><span class="lineCov">       3148 :   f-&gt;linedefined = 0;</span>
+<span class="lineNum">     135 </span><span class="lineCov">       3148 :   f-&gt;lastlinedefined = 0;</span>
+<span class="lineNum">     136 </span><span class="lineCov">       3148 :   f-&gt;source = NULL;</span>
+<span class="lineNum">     137 </span><span class="lineCov">       3148 :   return f;</span>
 <span class="lineNum">     138 </span>            : }
 <span class="lineNum">     139 </span>            : 
 <span class="lineNum">     140 </span>            : 
-<span class="lineNum">     141 </span><span class="lineCov">       3110 : void luaF_freeproto (lua_State *L, Proto *f) {</span>
-<span class="lineNum">     142 </span><span class="lineCov">       3110 :   luaM_freearray(L, f-&gt;code, f-&gt;sizecode, Instruction);</span>
-<span class="lineNum">     143 </span><span class="lineCov">       3110 :   luaM_freearray(L, f-&gt;p, f-&gt;sizep, Proto *);</span>
-<span class="lineNum">     144 </span><span class="lineCov">       3110 :   luaM_freearray(L, f-&gt;k, f-&gt;sizek, TValue);</span>
-<span class="lineNum">     145 </span><span class="lineCov">       3110 :   luaM_freearray(L, f-&gt;lineinfo, f-&gt;sizelineinfo, int);</span>
-<span class="lineNum">     146 </span><span class="lineCov">       3110 :   luaM_freearray(L, f-&gt;locvars, f-&gt;sizelocvars, struct LocVar);</span>
-<span class="lineNum">     147 </span><span class="lineCov">       3110 :   luaM_freearray(L, f-&gt;upvalues, f-&gt;sizeupvalues, TString *);</span>
-<span class="lineNum">     148 </span><span class="lineCov">       3110 :   luaM_free(L, f);</span>
-<span class="lineNum">     149 </span><span class="lineCov">       3110 : }</span>
+<span class="lineNum">     141 </span><span class="lineCov">       3144 : void luaF_freeproto (lua_State *L, Proto *f) {</span>
+<span class="lineNum">     142 </span><span class="lineCov">       3144 :   luaM_freearray(L, f-&gt;code, f-&gt;sizecode, Instruction);</span>
+<span class="lineNum">     143 </span><span class="lineCov">       3144 :   luaM_freearray(L, f-&gt;p, f-&gt;sizep, Proto *);</span>
+<span class="lineNum">     144 </span><span class="lineCov">       3144 :   luaM_freearray(L, f-&gt;k, f-&gt;sizek, TValue);</span>
+<span class="lineNum">     145 </span><span class="lineCov">       3144 :   luaM_freearray(L, f-&gt;lineinfo, f-&gt;sizelineinfo, int);</span>
+<span class="lineNum">     146 </span><span class="lineCov">       3144 :   luaM_freearray(L, f-&gt;locvars, f-&gt;sizelocvars, struct LocVar);</span>
+<span class="lineNum">     147 </span><span class="lineCov">       3144 :   luaM_freearray(L, f-&gt;upvalues, f-&gt;sizeupvalues, TString *);</span>
+<span class="lineNum">     148 </span><span class="lineCov">       3144 :   luaM_free(L, f);</span>
+<span class="lineNum">     149 </span><span class="lineCov">       3144 : }</span>
 <span class="lineNum">     150 </span>            : 
 <span class="lineNum">     151 </span>            : 
-<span class="lineNum">     152 </span><span class="lineCov">      13134 : void luaF_freeclosure (lua_State *L, Closure *c) {</span>
-<span class="lineNum">     153 </span><span class="lineCov">      16952 :   int size = (c-&gt;c.isC) ? sizeCclosure(c-&gt;c.nupvalues) :</span>
-<span class="lineNum">     154 </span><span class="lineCov">       3818 :                           sizeLclosure(c-&gt;l.nupvalues);</span>
-<span class="lineNum">     155 </span><span class="lineCov">      13134 :   luaM_freemem(L, c, size);</span>
-<span class="lineNum">     156 </span><span class="lineCov">      13134 : }</span>
+<span class="lineNum">     152 </span><span class="lineCov">      13168 : void luaF_freeclosure (lua_State *L, Closure *c) {</span>
+<span class="lineNum">     153 </span><span class="lineCov">      17020 :   int size = (c-&gt;c.isC) ? sizeCclosure(c-&gt;c.nupvalues) :</span>
+<span class="lineNum">     154 </span><span class="lineCov">       3852 :                           sizeLclosure(c-&gt;l.nupvalues);</span>
+<span class="lineNum">     155 </span><span class="lineCov">      13168 :   luaM_freemem(L, c, size);</span>
+<span class="lineNum">     156 </span><span class="lineCov">      13168 : }</span>
 <span class="lineNum">     157 </span>            : 
 <span class="lineNum">     158 </span>            : 
 <span class="lineNum">     159 </span>            : /*
@@ -246,7 +246,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 

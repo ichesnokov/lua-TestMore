@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.3.2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">227</td>
-            <td class="headerCovTableEntry">270</td>
-            <td class="headerCovTableEntryMed">84.1 %</td>
+            <td class="headerCovTableEntry">224</td>
+            <td class="headerCovTableEntry">267</td>
+            <td class="headerCovTableEntryMed">83.9 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-12-04 16:12:25</td>
+            <td class="headerValue">2016-04-23 13:26:33</td>
             <td></td>
           </tr>
           <tr>
@@ -109,12 +109,12 @@
 <span class="lineNum">      43 </span>            : 
 <span class="lineNum">      44 </span>            : static int currentpc (CallInfo *ci) {
 <span class="lineNum">      45 </span>            :   lua_assert(isLua(ci));
-<span class="lineNum">      46 </span><span class="lineCov">        557 :   return pcRel(ci-&gt;u.l.savedpc, ci_func(ci)-&gt;p);</span>
+<span class="lineNum">      46 </span><span class="lineCov">        558 :   return pcRel(ci-&gt;u.l.savedpc, ci_func(ci)-&gt;p);</span>
 <span class="lineNum">      47 </span>            : }
 <span class="lineNum">      48 </span>            : 
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span>            : static int currentline (CallInfo *ci) {
-<span class="lineNum">      51 </span><span class="lineCov">        774 :   return getfuncline(ci_func(ci)-&gt;p, currentpc(ci));</span>
+<span class="lineNum">      51 </span><span class="lineCov">        776 :   return getfuncline(ci_func(ci)-&gt;p, currentpc(ci));</span>
 <span class="lineNum">      52 </span>            : }
 <span class="lineNum">      53 </span>            : 
 <span class="lineNum">      54 </span>            : 
@@ -179,7 +179,7 @@
 <span class="lineNum">     113 </span>            :   }
 <span class="lineNum">     114 </span>            :   else status = 0;  /* no such level */
 <span class="lineNum">     115 </span>            :   lua_unlock(L);
-<span class="lineNum">     116 </span><span class="lineCov">        234 :   return status;</span>
+<span class="lineNum">     116 </span>            :   return status;
 <span class="lineNum">     117 </span>            : }
 <span class="lineNum">     118 </span>            : 
 <span class="lineNum">     119 </span>            : 
@@ -595,7 +595,7 @@
 <span class="lineNum">     529 </span>            : ** with instructions OP_GETTABUP/OP_SETTABUP, which operate directly on
 <span class="lineNum">     530 </span>            : ** upvalues.)
 <span class="lineNum">     531 </span>            : */
-<span class="lineNum">     532 </span><span class="lineCov">        191 : static const char *getupvalname (CallInfo *ci, const TValue *o,</span>
+<span class="lineNum">     532 </span>            : static const char *getupvalname (CallInfo *ci, const TValue *o,
 <span class="lineNum">     533 </span>            :                                  const char **name) {
 <span class="lineNum">     534 </span><span class="lineCov">        191 :   LClosure *c = ci_func(ci);</span>
 <span class="lineNum">     535 </span>            :   int i;
@@ -614,7 +614,7 @@
 <span class="lineNum">     548 </span><span class="lineCov">        192 :   CallInfo *ci = L-&gt;ci;</span>
 <span class="lineNum">     549 </span>            :   const char *kind = NULL;
 <span class="lineNum">     550 </span><span class="lineCov">        192 :   if (isLua(ci)) {</span>
-<span class="lineNum">     551 </span><span class="lineCov">        191 :     kind = getupvalname(ci, o, &amp;name);  /* check whether 'o' is an upvalue */</span>
+<span class="lineNum">     551 </span>            :     kind = getupvalname(ci, o, &amp;name);  /* check whether 'o' is an upvalue */
 <span class="lineNum">     552 </span><span class="lineCov">        377 :     if (!kind &amp;&amp; isinstack(ci, o))  /* no? try a register */</span>
 <span class="lineNum">     553 </span><span class="lineCov">        107 :       kind = getobjname(ci_func(ci)-&gt;p, currentpc(ci),</span>
 <span class="lineNum">     554 </span>            :                         cast_int(o - ci-&gt;u.l.base), &amp;name);
@@ -666,40 +666,40 @@
 <span class="lineNum">     600 </span>            : 
 <span class="lineNum">     601 </span>            : 
 <span class="lineNum">     602 </span>            : /* add src:line information to 'msg' */
-<span class="lineNum">     603 </span><span class="lineCov">        295 : const char *luaG_addinfo (lua_State *L, const char *msg, TString *src,</span>
+<span class="lineNum">     603 </span><span class="lineCov">        296 : const char *luaG_addinfo (lua_State *L, const char *msg, TString *src,</span>
 <span class="lineNum">     604 </span>            :                                         int line) {
 <span class="lineNum">     605 </span>            :   char buff[LUA_IDSIZE];
-<span class="lineNum">     606 </span><span class="lineCov">        295 :   if (src)</span>
-<span class="lineNum">     607 </span><span class="lineCov">        295 :     luaO_chunkid(buff, getstr(src), LUA_IDSIZE);</span>
+<span class="lineNum">     606 </span><span class="lineCov">        296 :   if (src)</span>
+<span class="lineNum">     607 </span><span class="lineCov">        296 :     luaO_chunkid(buff, getstr(src), LUA_IDSIZE);</span>
 <span class="lineNum">     608 </span>            :   else {  /* no source available; use &quot;?&quot; instead */
 <span class="lineNum">     609 </span><span class="lineNoCov">          0 :     buff[0] = '?'; buff[1] = '\0';</span>
 <span class="lineNum">     610 </span>            :   }
-<span class="lineNum">     611 </span><span class="lineCov">        295 :   return luaO_pushfstring(L, &quot;%s:%d: %s&quot;, buff, line, msg);</span>
+<span class="lineNum">     611 </span><span class="lineCov">        296 :   return luaO_pushfstring(L, &quot;%s:%d: %s&quot;, buff, line, msg);</span>
 <span class="lineNum">     612 </span>            : }
 <span class="lineNum">     613 </span>            : 
 <span class="lineNum">     614 </span>            : 
-<span class="lineNum">     615 </span><span class="lineCov">        394 : l_noret luaG_errormsg (lua_State *L) {</span>
-<span class="lineNum">     616 </span><span class="lineCov">        394 :   if (L-&gt;errfunc != 0) {  /* is there an error handling function? */</span>
+<span class="lineNum">     615 </span><span class="lineCov">        395 : l_noret luaG_errormsg (lua_State *L) {</span>
+<span class="lineNum">     616 </span><span class="lineCov">        395 :   if (L-&gt;errfunc != 0) {  /* is there an error handling function? */</span>
 <span class="lineNum">     617 </span><span class="lineCov">          6 :     StkId errfunc = restorestack(L, L-&gt;errfunc);</span>
 <span class="lineNum">     618 </span><span class="lineCov">          6 :     setobjs2s(L, L-&gt;top, L-&gt;top - 1);  /* move argument */</span>
 <span class="lineNum">     619 </span><span class="lineCov">          6 :     setobjs2s(L, L-&gt;top - 1, errfunc);  /* push function */</span>
 <span class="lineNum">     620 </span><span class="lineCov">          6 :     L-&gt;top++;  /* assume EXTRA_STACK */</span>
 <span class="lineNum">     621 </span><span class="lineCov">          6 :     luaD_callnoyield(L, L-&gt;top - 2, 1);  /* call it */</span>
 <span class="lineNum">     622 </span>            :   }
-<span class="lineNum">     623 </span><span class="lineCov">        394 :   luaD_throw(L, LUA_ERRRUN);</span>
+<span class="lineNum">     623 </span><span class="lineCov">        395 :   luaD_throw(L, LUA_ERRRUN);</span>
 <span class="lineNum">     624 </span>            : }
 <span class="lineNum">     625 </span>            : 
 <span class="lineNum">     626 </span>            : 
-<span class="lineNum">     627 </span><span class="lineCov">        275 : l_noret luaG_runerror (lua_State *L, const char *fmt, ...) {</span>
-<span class="lineNum">     628 </span><span class="lineCov">        275 :   CallInfo *ci = L-&gt;ci;</span>
+<span class="lineNum">     627 </span><span class="lineCov">        276 : l_noret luaG_runerror (lua_State *L, const char *fmt, ...) {</span>
+<span class="lineNum">     628 </span><span class="lineCov">        276 :   CallInfo *ci = L-&gt;ci;</span>
 <span class="lineNum">     629 </span>            :   const char *msg;
 <span class="lineNum">     630 </span>            :   va_list argp;
-<span class="lineNum">     631 </span><span class="lineCov">        275 :   va_start(argp, fmt);</span>
-<span class="lineNum">     632 </span><span class="lineCov">        275 :   msg = luaO_pushvfstring(L, fmt, argp);  /* format message */</span>
-<span class="lineNum">     633 </span><span class="lineCov">        275 :   va_end(argp);</span>
-<span class="lineNum">     634 </span><span class="lineCov">        275 :   if (isLua(ci))  /* if Lua function, add source:line information */</span>
-<span class="lineNum">     635 </span><span class="lineCov">        271 :     luaG_addinfo(L, msg, ci_func(ci)-&gt;p-&gt;source, currentline(ci));</span>
-<span class="lineNum">     636 </span><span class="lineCov">        275 :   luaG_errormsg(L);</span>
+<span class="lineNum">     631 </span><span class="lineCov">        276 :   va_start(argp, fmt);</span>
+<span class="lineNum">     632 </span><span class="lineCov">        276 :   msg = luaO_pushvfstring(L, fmt, argp);  /* format message */</span>
+<span class="lineNum">     633 </span><span class="lineCov">        276 :   va_end(argp);</span>
+<span class="lineNum">     634 </span><span class="lineCov">        276 :   if (isLua(ci))  /* if Lua function, add source:line information */</span>
+<span class="lineNum">     635 </span><span class="lineCov">        272 :     luaG_addinfo(L, msg, ci_func(ci)-&gt;p-&gt;source, currentline(ci));</span>
+<span class="lineNum">     636 </span><span class="lineCov">        276 :   luaG_errormsg(L);</span>
 <span class="lineNum">     637 </span>            : }
 <span class="lineNum">     638 </span>            : 
 <span class="lineNum">     639 </span>            : 
@@ -745,7 +745,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 

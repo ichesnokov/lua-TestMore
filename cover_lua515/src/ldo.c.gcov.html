@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.1.5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">201</td>
+            <td class="headerCovTableEntry">200</td>
             <td class="headerCovTableEntry">280</td>
-            <td class="headerCovTableEntryLo">71.8 %</td>
+            <td class="headerCovTableEntryLo">71.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-12-13 17:49:16</td>
+            <td class="headerValue">2016-04-23 13:26:11</td>
             <td></td>
           </tr>
           <tr>
@@ -193,12 +193,12 @@
 <span class="lineNum">     127 </span>            :   CallInfo *ci;
 <span class="lineNum">     128 </span>            :   GCObject *up;
 <span class="lineNum">     129 </span><span class="lineCov">         50 :   L-&gt;top = (L-&gt;top - oldstack) + L-&gt;stack;</span>
-<span class="lineNum">     130 </span><span class="lineCov">       1334 :   for (up = L-&gt;openupval; up != NULL; up = up-&gt;gch.next)</span>
-<span class="lineNum">     131 </span><span class="lineCov">       1284 :     gco2uv(up)-&gt;v = (gco2uv(up)-&gt;v - oldstack) + L-&gt;stack;</span>
-<span class="lineNum">     132 </span><span class="lineCov">        509 :   for (ci = L-&gt;base_ci; ci &lt;= L-&gt;ci; ci++) {</span>
-<span class="lineNum">     133 </span><span class="lineCov">        459 :     ci-&gt;top = (ci-&gt;top - oldstack) + L-&gt;stack;</span>
-<span class="lineNum">     134 </span><span class="lineCov">        459 :     ci-&gt;base = (ci-&gt;base - oldstack) + L-&gt;stack;</span>
-<span class="lineNum">     135 </span><span class="lineCov">        459 :     ci-&gt;func = (ci-&gt;func - oldstack) + L-&gt;stack;</span>
+<span class="lineNum">     130 </span><span class="lineCov">       1104 :   for (up = L-&gt;openupval; up != NULL; up = up-&gt;gch.next)</span>
+<span class="lineNum">     131 </span><span class="lineCov">       1054 :     gco2uv(up)-&gt;v = (gco2uv(up)-&gt;v - oldstack) + L-&gt;stack;</span>
+<span class="lineNum">     132 </span><span class="lineCov">        473 :   for (ci = L-&gt;base_ci; ci &lt;= L-&gt;ci; ci++) {</span>
+<span class="lineNum">     133 </span><span class="lineCov">        423 :     ci-&gt;top = (ci-&gt;top - oldstack) + L-&gt;stack;</span>
+<span class="lineNum">     134 </span><span class="lineCov">        423 :     ci-&gt;base = (ci-&gt;base - oldstack) + L-&gt;stack;</span>
+<span class="lineNum">     135 </span><span class="lineCov">        423 :     ci-&gt;func = (ci-&gt;func - oldstack) + L-&gt;stack;</span>
 <span class="lineNum">     136 </span>            :   }
 <span class="lineNum">     137 </span><span class="lineCov">         50 :   L-&gt;base = (L-&gt;base - oldstack) + L-&gt;stack;</span>
 <span class="lineNum">     138 </span><span class="lineCov">         50 : }</span>
@@ -328,15 +328,15 @@
 <span class="lineNum">     262 </span>            :    (condhardstacktests(luaD_reallocCI(L, L-&gt;size_ci)), ++L-&gt;ci))
 <span class="lineNum">     263 </span>            : 
 <span class="lineNum">     264 </span>            : 
-<span class="lineNum">     265 </span><span class="lineCov">     178173 : int luaD_precall (lua_State *L, StkId func, int nresults) {</span>
+<span class="lineNum">     265 </span><span class="lineCov">     178408 : int luaD_precall (lua_State *L, StkId func, int nresults) {</span>
 <span class="lineNum">     266 </span>            :   LClosure *cl;
 <span class="lineNum">     267 </span>            :   ptrdiff_t funcr;
-<span class="lineNum">     268 </span><span class="lineCov">     178173 :   if (!ttisfunction(func)) /* `func' is not a function? */</span>
+<span class="lineNum">     268 </span><span class="lineCov">     178408 :   if (!ttisfunction(func)) /* `func' is not a function? */</span>
 <span class="lineNum">     269 </span><span class="lineCov">          6 :     func = tryfuncTM(L, func);  /* check the `function' tag method */</span>
-<span class="lineNum">     270 </span><span class="lineCov">     178171 :   funcr = savestack(L, func);</span>
-<span class="lineNum">     271 </span><span class="lineCov">     178171 :   cl = &amp;clvalue(func)-&gt;l;</span>
-<span class="lineNum">     272 </span><span class="lineCov">     178171 :   L-&gt;ci-&gt;savedpc = L-&gt;savedpc;</span>
-<span class="lineNum">     273 </span><span class="lineCov">     178171 :   if (!cl-&gt;isC) {  /* Lua function? prepare its call */</span>
+<span class="lineNum">     270 </span><span class="lineCov">     178406 :   funcr = savestack(L, func);</span>
+<span class="lineNum">     271 </span><span class="lineCov">     178406 :   cl = &amp;clvalue(func)-&gt;l;</span>
+<span class="lineNum">     272 </span><span class="lineCov">     178406 :   L-&gt;ci-&gt;savedpc = L-&gt;savedpc;</span>
+<span class="lineNum">     273 </span><span class="lineCov">     178406 :   if (!cl-&gt;isC) {  /* Lua function? prepare its call */</span>
 <span class="lineNum">     274 </span>            :     CallInfo *ci;
 <span class="lineNum">     275 </span>            :     StkId st, base;
 <span class="lineNum">     276 </span><span class="lineCov">      49360 :     Proto *p = cl-&gt;p;</span>
@@ -360,8 +360,8 @@
 <span class="lineNum">     294 </span><span class="lineCov">      49360 :     L-&gt;savedpc = p-&gt;code;  /* starting point */</span>
 <span class="lineNum">     295 </span><span class="lineCov">      49360 :     ci-&gt;tailcalls = 0;</span>
 <span class="lineNum">     296 </span><span class="lineCov">      49360 :     ci-&gt;nresults = nresults;</span>
-<span class="lineNum">     297 </span><span class="lineCov">     266422 :     for (st = L-&gt;top; st &lt; ci-&gt;top; st++)</span>
-<span class="lineNum">     298 </span><span class="lineCov">     217062 :       setnilvalue(st);</span>
+<span class="lineNum">     297 </span><span class="lineCov">     266524 :     for (st = L-&gt;top; st &lt; ci-&gt;top; st++)</span>
+<span class="lineNum">     298 </span><span class="lineCov">     217164 :       setnilvalue(st);</span>
 <span class="lineNum">     299 </span><span class="lineCov">      49360 :     L-&gt;top = ci-&gt;top;</span>
 <span class="lineNum">     300 </span><span class="lineCov">      49360 :     if (L-&gt;hookmask &amp; LUA_MASKCALL) {</span>
 <span class="lineNum">     301 </span><span class="lineNoCov">          0 :       L-&gt;savedpc++;  /* hooks assume 'pc' is already incremented */</span>
@@ -373,23 +373,23 @@
 <span class="lineNum">     307 </span>            :   else {  /* if is a C function, call it */
 <span class="lineNum">     308 </span>            :     CallInfo *ci;
 <span class="lineNum">     309 </span>            :     int n;
-<span class="lineNum">     310 </span><span class="lineCov">     128811 :     luaD_checkstack(L, LUA_MINSTACK);  /* ensure minimum stack size */</span>
-<span class="lineNum">     311 </span><span class="lineCov">     128811 :     ci = inc_ci(L);  /* now `enter' new function */</span>
-<span class="lineNum">     312 </span><span class="lineCov">     128811 :     ci-&gt;func = restorestack(L, funcr);</span>
-<span class="lineNum">     313 </span><span class="lineCov">     128811 :     L-&gt;base = ci-&gt;base = ci-&gt;func + 1;</span>
-<span class="lineNum">     314 </span><span class="lineCov">     128811 :     ci-&gt;top = L-&gt;top + LUA_MINSTACK;</span>
+<span class="lineNum">     310 </span><span class="lineCov">     129046 :     luaD_checkstack(L, LUA_MINSTACK);  /* ensure minimum stack size */</span>
+<span class="lineNum">     311 </span><span class="lineCov">     129046 :     ci = inc_ci(L);  /* now `enter' new function */</span>
+<span class="lineNum">     312 </span><span class="lineCov">     129046 :     ci-&gt;func = restorestack(L, funcr);</span>
+<span class="lineNum">     313 </span><span class="lineCov">     129046 :     L-&gt;base = ci-&gt;base = ci-&gt;func + 1;</span>
+<span class="lineNum">     314 </span><span class="lineCov">     129046 :     ci-&gt;top = L-&gt;top + LUA_MINSTACK;</span>
 <span class="lineNum">     315 </span>            :     lua_assert(ci-&gt;top &lt;= L-&gt;stack_last);
-<span class="lineNum">     316 </span><span class="lineCov">     128811 :     ci-&gt;nresults = nresults;</span>
-<span class="lineNum">     317 </span><span class="lineCov">     128811 :     if (L-&gt;hookmask &amp; LUA_MASKCALL)</span>
+<span class="lineNum">     316 </span><span class="lineCov">     129046 :     ci-&gt;nresults = nresults;</span>
+<span class="lineNum">     317 </span><span class="lineCov">     129046 :     if (L-&gt;hookmask &amp; LUA_MASKCALL)</span>
 <span class="lineNum">     318 </span><span class="lineNoCov">          0 :       luaD_callhook(L, LUA_HOOKCALL, -1);</span>
 <span class="lineNum">     319 </span>            :     lua_unlock(L);
-<span class="lineNum">     320 </span><span class="lineCov">     128811 :     n = (*curr_func(L)-&gt;c.f)(L);  /* do the actual call */</span>
+<span class="lineNum">     320 </span><span class="lineCov">     129046 :     n = (*curr_func(L)-&gt;c.f)(L);  /* do the actual call */</span>
 <span class="lineNum">     321 </span>            :     lua_lock(L);
-<span class="lineNum">     322 </span><span class="lineCov">     128746 :     if (n &lt; 0)  /* yielding? */</span>
+<span class="lineNum">     322 </span><span class="lineCov">     128981 :     if (n &lt; 0)  /* yielding? */</span>
 <span class="lineNum">     323 </span><span class="lineCov">       5948 :       return PCRYIELD;</span>
 <span class="lineNum">     324 </span>            :     else {
-<span class="lineNum">     325 </span><span class="lineCov">     122798 :       luaD_poscall(L, L-&gt;top - n);</span>
-<span class="lineNum">     326 </span><span class="lineCov">     122798 :       return PCRC;</span>
+<span class="lineNum">     325 </span><span class="lineCov">     123033 :       luaD_poscall(L, L-&gt;top - n);</span>
+<span class="lineNum">     326 </span><span class="lineCov">     123033 :       return PCRC;</span>
 <span class="lineNum">     327 </span>            :     }
 <span class="lineNum">     328 </span>            :   }
 <span class="lineNum">     329 </span>            : }
@@ -406,24 +406,24 @@
 <span class="lineNum">     340 </span>            : }
 <span class="lineNum">     341 </span>            : 
 <span class="lineNum">     342 </span>            : 
-<span class="lineNum">     343 </span><span class="lineCov">     176716 : int luaD_poscall (lua_State *L, StkId firstResult) {</span>
+<span class="lineNum">     343 </span><span class="lineCov">     176951 : int luaD_poscall (lua_State *L, StkId firstResult) {</span>
 <span class="lineNum">     344 </span>            :   StkId res;
 <span class="lineNum">     345 </span>            :   int wanted, i;
 <span class="lineNum">     346 </span>            :   CallInfo *ci;
-<span class="lineNum">     347 </span><span class="lineCov">     176716 :   if (L-&gt;hookmask &amp; LUA_MASKRET)</span>
+<span class="lineNum">     347 </span><span class="lineCov">     176951 :   if (L-&gt;hookmask &amp; LUA_MASKRET)</span>
 <span class="lineNum">     348 </span><span class="lineNoCov">          0 :     firstResult = callrethooks(L, firstResult);</span>
-<span class="lineNum">     349 </span><span class="lineCov">     176716 :   ci = L-&gt;ci--;</span>
-<span class="lineNum">     350 </span><span class="lineCov">     176716 :   res = ci-&gt;func;  /* res == final position of 1st result */</span>
-<span class="lineNum">     351 </span><span class="lineCov">     176716 :   wanted = ci-&gt;nresults;</span>
-<span class="lineNum">     352 </span><span class="lineCov">     176716 :   L-&gt;base = (ci - 1)-&gt;base;  /* restore base */</span>
-<span class="lineNum">     353 </span><span class="lineCov">     176716 :   L-&gt;savedpc = (ci - 1)-&gt;savedpc;  /* restore savedpc */</span>
+<span class="lineNum">     349 </span><span class="lineCov">     176951 :   ci = L-&gt;ci--;</span>
+<span class="lineNum">     350 </span><span class="lineCov">     176951 :   res = ci-&gt;func;  /* res == final position of 1st result */</span>
+<span class="lineNum">     351 </span><span class="lineCov">     176951 :   wanted = ci-&gt;nresults;</span>
+<span class="lineNum">     352 </span><span class="lineCov">     176951 :   L-&gt;base = (ci - 1)-&gt;base;  /* restore base */</span>
+<span class="lineNum">     353 </span><span class="lineCov">     176951 :   L-&gt;savedpc = (ci - 1)-&gt;savedpc;  /* restore savedpc */</span>
 <span class="lineNum">     354 </span>            :   /* move results to correct place */
-<span class="lineNum">     355 </span><span class="lineCov">     364869 :   for (i = wanted; i != 0 &amp;&amp; firstResult &lt; L-&gt;top; i--)</span>
-<span class="lineNum">     356 </span><span class="lineCov">     188153 :     setobjs2s(L, res++, firstResult++);</span>
-<span class="lineNum">     357 </span><span class="lineCov">     365566 :   while (i-- &gt; 0)</span>
+<span class="lineNum">     355 </span><span class="lineCov">     365339 :   for (i = wanted; i != 0 &amp;&amp; firstResult &lt; L-&gt;top; i--)</span>
+<span class="lineNum">     356 </span><span class="lineCov">     188388 :     setobjs2s(L, res++, firstResult++);</span>
+<span class="lineNum">     357 </span><span class="lineCov">     366036 :   while (i-- &gt; 0)</span>
 <span class="lineNum">     358 </span><span class="lineCov">      12134 :     setnilvalue(res++);</span>
-<span class="lineNum">     359 </span><span class="lineCov">     176716 :   L-&gt;top = res;</span>
-<span class="lineNum">     360 </span><span class="lineCov">     176716 :   return (wanted - LUA_MULTRET);  /* 0 iff wanted == LUA_MULTRET */</span>
+<span class="lineNum">     359 </span><span class="lineCov">     176951 :   L-&gt;top = res;</span>
+<span class="lineNum">     360 </span><span class="lineCov">     176951 :   return (wanted - LUA_MULTRET);  /* 0 iff wanted == LUA_MULTRET */</span>
 <span class="lineNum">     361 </span>            : }
 <span class="lineNum">     362 </span>            : 
 <span class="lineNum">     363 </span>            : 
@@ -453,7 +453,7 @@
 <span class="lineNum">     387 </span><span class="lineCov">       5961 :   if (L-&gt;status == 0) {  /* start coroutine? */</span>
 <span class="lineNum">     388 </span>            :     lua_assert(ci == L-&gt;base_ci &amp;&amp; firstArg &gt; L-&gt;base);
 <span class="lineNum">     389 </span><span class="lineCov">         15 :     if (luaD_precall(L, firstArg - 1, LUA_MULTRET) != PCRLUA)</span>
-<span class="lineNum">     390 </span><span class="lineCov">       5961 :       return;</span>
+<span class="lineNum">     390 </span><span class="lineNoCov">          0 :       return;</span>
 <span class="lineNum">     391 </span>            :   }
 <span class="lineNum">     392 </span>            :   else {  /* resuming from previous yield */
 <span class="lineNum">     393 </span>            :     lua_assert(L-&gt;status == LUA_YIELD);
@@ -591,7 +591,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 
