@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2015, Perrad Francois
+-- Copyright (C) 2009-2016, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -37,7 +37,7 @@ error_like(function () return #u end,
            "#u")
 
 error_like(function () return ~u end,
-           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "^[^:]+:%d+: attempt to perform bitwise operation on a",
            "~u")
 
 is(not u, false, "not u")
@@ -75,23 +75,23 @@ error_like(function () return u // 3 end,
            "u // 3")
 
 error_like(function () return u & 7 end,
-           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "^[^:]+:%d+: attempt to perform bitwise operation on a",
            "u & 7")
 
 error_like(function () return u | 1 end,
-           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "^[^:]+:%d+: attempt to perform bitwise operation on a",
            "u | 1")
 
 error_like(function () return u ~ 4 end,
-           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "^[^:]+:%d+: attempt to perform bitwise operation on a",
            "u ~ 4")
 
 error_like(function () return u >> 5 end,
-           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "^[^:]+:%d+: attempt to perform bitwise operation on a",
            "u >> 5")
 
 error_like(function () return u << 2 end,
-           "^[^:]+:%d+: attempt to perform bitwise operation on a userdata value",
+           "^[^:]+:%d+: attempt to perform bitwise operation on a",
            "u << 2")
 
 is(u == u, true, "u == u")
@@ -104,35 +104,35 @@ is(u == 1, false, "u == 1")
 is(u ~= 1, true, "u ~= 1")
 
 error_like(function () return u < v end,
-           "^[^:]+:%d+: attempt to compare two userdata values",
+           "^[^:]+:%d+: attempt to compare two",
            "u < v")
 
 error_like(function () return u <= v end,
-           "^[^:]+:%d+: attempt to compare two userdata values",
+           "^[^:]+:%d+: attempt to compare two",
            "u <= v")
 
 error_like(function () return u > v end,
-           "^[^:]+:%d+: attempt to compare two userdata values",
+           "^[^:]+:%d+: attempt to compare two",
            "u > v")
 
 error_like(function () return u >= v end,
-           "^[^:]+:%d+: attempt to compare two userdata values",
+           "^[^:]+:%d+: attempt to compare two",
            "u >= v")
 
 error_like(function () return u < 0 end,
-           "^[^:]+:%d+: attempt to compare %w+ with %w+",
+           "^[^:]+:%d+: attempt to compare",
            "u < 0")
 
 error_like(function () return u <= 0 end,
-           "^[^:]+:%d+: attempt to compare %w+ with %w+",
+           "^[^:]+:%d+: attempt to compare",
            "u <= 0")
 
 error_like(function () return u > 0 end,
-           "^[^:]+:%d+: attempt to compare %w+ with %w+",
+           "^[^:]+:%d+: attempt to compare",
            "u > 0")
 
 error_like(function () return u > 0 end,
-           "^[^:]+:%d+: attempt to compare %w+ with %w+",
+           "^[^:]+:%d+: attempt to compare",
            "u >= 0")
 
 is(u[1], nil, "index")

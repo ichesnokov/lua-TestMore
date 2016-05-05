@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2015, Perrad Francois
+-- Copyright (C) 2009-2016, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -48,7 +48,7 @@ error_like(function () assert(false) end,
            "function assert(false)")
 
 error_like(function () assert(false, 42) end,
-           "^[^:]+:%d+: 42",
+           "42",
            "function assert(false, 42)")
 
 is(collectgarbage('stop'), 0, "function collectgarbage 'stop/restart/collect'")
