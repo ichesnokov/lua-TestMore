@@ -1,0 +1,89 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "Overview\n\n\nlua-TestMore is a port of the Perl5 module\n\nTest::More\n.\n\n\nIt uses the\n\nTest Anything Protocol\n\nas output, that allows a compatibility with the Perl QA ecosystem.\nFor example,\n\nprove\n\na basic CLI, or\n\nSmolder\n\na Web-based Continuous Integration Smoke Server.\n\n\nIt's an extensible framework.\n\n\nIt allows a simple and efficient way to write tests (without OO style).\n\n\nSome tests could be marked as \nTODO\n or \nskipped\n.\n\n\nErrors could be fully checked with \nerror_like()\n.\n\n\nIt supplies a Test Suite for Lua itself.\n\n\nReferences\n\n\nIan Langworth, chromatic,\n\nPerl Testing\n\nO'Reilly, 2005\n\n\nStatus\n\n\nlua-TestMore is in beta stage.\n\n\nIt's developed for Lua 5.1, 5.2 & 5.3.\n\n\nDownload\n\n\nlua-TestMore source can be downloaded from\n\nGitHub\n.\n\n\nInstallation\n\n\nThe easiest way to install lua-TestMore is to use LuaRocks:\n\n\nluarocks install lua-testmore\n\n\n\nor manually, with:\n\n\nmake install\n\n\n\nThe Lua Test Suite (5.1, 5.2 & 5.3)\n\n\nThis suite is usable with :\n\n\n\n\nthe standard \nlua\n,\n\n\nLuaJIT\n,\n\n\n...\n\n\n\n\nIt gives this \ncoverage\n with Lua 5.1.5,\nthis \ncoverage\n with Lua 5.2.4\nand this \ncoverage\n with Lua 5.3.3.\n\n\nCopyright and License\n\n\nCopyright \u00a9 2009-2016 Fran\u00e7ois Perrad\n\n\n\n\n\nThis library is licensed under the terms of the MIT/X11 license,\nlike Lua itself.",
+            "title": "Home"
+        },
+        {
+            "location": "/#overview",
+            "text": "lua-TestMore is a port of the Perl5 module Test::More .  It uses the Test Anything Protocol \nas output, that allows a compatibility with the Perl QA ecosystem.\nFor example, prove \na basic CLI, or Smolder \na Web-based Continuous Integration Smoke Server.  It's an extensible framework.  It allows a simple and efficient way to write tests (without OO style).  Some tests could be marked as  TODO  or  skipped .  Errors could be fully checked with  error_like() .  It supplies a Test Suite for Lua itself.",
+            "title": "Overview"
+        },
+        {
+            "location": "/#references",
+            "text": "Ian Langworth, chromatic, Perl Testing \nO'Reilly, 2005",
+            "title": "References"
+        },
+        {
+            "location": "/#status",
+            "text": "lua-TestMore is in beta stage.  It's developed for Lua 5.1, 5.2 & 5.3.",
+            "title": "Status"
+        },
+        {
+            "location": "/#download",
+            "text": "lua-TestMore source can be downloaded from GitHub .",
+            "title": "Download"
+        },
+        {
+            "location": "/#installation",
+            "text": "The easiest way to install lua-TestMore is to use LuaRocks:  luarocks install lua-testmore  or manually, with:  make install",
+            "title": "Installation"
+        },
+        {
+            "location": "/#the-lua-test-suite-51-52-53",
+            "text": "This suite is usable with :   the standard  lua ,  LuaJIT ,  ...   It gives this  coverage  with Lua 5.1.5,\nthis  coverage  with Lua 5.2.4\nand this  coverage  with Lua 5.3.3.",
+            "title": "The Lua Test Suite (5.1, 5.2 & 5.3)"
+        },
+        {
+            "location": "/#copyright-and-license",
+            "text": "Copyright \u00a9 2009-2016 Fran\u00e7ois Perrad   This library is licensed under the terms of the MIT/X11 license,\nlike Lua itself.",
+            "title": "Copyright and License"
+        },
+        {
+            "location": "/testmore/",
+            "text": "Reference\n\n\nAll functions are injected in the global environment \n_G\n.\n\n\nplan( arg )\n\n\nplan(2)\n\npass \"one\"\npass \"two\"\n\n\n\n\ngives\n\n\n1..2\nok 1 - one\nok 2 - two\n\n\n\n\ndone_testing( num_tests )\n\n\nplan 'no_plan'\n\npass \"one\"\npass \"two\"\ndone_testing()\n\n\n\n\ngives\n\n\nok 1 - one\nok 2 - two\n1..2\n\n\n\n\nskip_all( reason )\n\n\nif everything_looks_good then\n    plan(7)\nelse\n    skip_all \"looks bad\"\nend\n\n\n\n\ngives\n\n\n1..0 # SKIP looks bad\n\n\n\n\nBAIL_OUT( reason )\n\n\nplan(7)\n\nif not require_ok 'MyApp' then\n    BAIL_OUT \"no MyApp\"\nend\n\n\n\n\ngives\n\n\n1..7\nnot ok 1 - require 'MyApp'\n#     module 'MyApp' not found:\n#       no field package.preload['MyApp']\n#       no file '.\\MyApp.lua'\n#       ...\nBail out!  no MyApp\n\n\n\n\nand breaks the execution of \nprove\n.\n\n\nsubtest( name, func )\n\n\nplan(3)\npass \"First test\"\nsubtest('An example subtest', function ()\n    plan(2)\n    pass \"This is a subtest\"\n    pass \"So is this\"\nend)\npass \"Third test\"\n\n\n\n\ngives\n\n\n1..3\nok 1 - First test\n# Subtest: An example subtest\n    1..2\n    ok 1 - This is a subtest\n    ok 2 - So is this\nok 2 - An example subtest\nok 3 - Third test\n\n\n\n\nok( test [, name] )\n\n\nnok( test [, name] )\n\n\nis( got, expected [, name] )\n\n\nisnt( got, expected [, name] )\n\n\nlike( got, pattern [, name] )\n\n\nunlike( got, pattern [, name] )\n\n\ncmp_ok( this, op, that [, name] )\n\n\ntype_ok( val, t [, name] )\n\n\npass( name )\n\n\nfail( name )\n\n\nrequire_ok( mod )\n\n\neq_array( got, expected [, name] )\n\n\nis_deeply( got, expected [, name] )\n\n\nerror_is( code [, params_array], expected [, name] )\n\n\nerror_like( code [, params_array], pattern [, name] )\n\n\nlives_ok( code [, params_array] [, name] )\n\n\ndiag( msg )\n\n\nnote( msg )\n\n\nskip( reason [, count] )\n\n\nplan(4)\n\npass \"one\"\n\nif true then\n    skip(\"here, segfault\", 2)\nelse\n    fail \"two\"\n    fail \"three\"\nend\n\npass \"four\"\n\n\n\n\ngives\n\n\n1..4\nok 1 - one\nok 2 - # skip here, segfault\nok 3 - # skip here, segfault\nok 4 - four\n\n\n\n\ntodo_skip( reason [, count] )\n\n\nplan(3)\n\npass \"one\"\n\nif true then\n    todo_skip \"here, segfault\"\nelse\n    fail \"two\"\nend\n\npass \"three\"\n\n\n\n\ngives\n\n\n1..3\nok 1 - one\nnot ok 2 - # TODO & SKIP here, segfault\nok 3 - three\n\n\n\n\nskip_rest( reason )\n\n\nplan(3)\n\nif not require_ok 'MyApp' then\n    skip_rest \"no MyApp\"\n    os.exit()\nend\n\npass \"two\"\npass \"three\"\n\n\n\n\ngives\n\n\n1..3\nnot ok 1 - require 'MyApp'\n#     module 'MyApp' not found:\n#       no field package.preload['MyApp']\n#       no file '.\\MyApp.lua'\n#       ...\nok 2 - # skip no MyApp\nok 3 - # skip no MyApp\n\n\n\n\ntodo( reason [, count] )\n\n\nplan(4)\n\npass \"one\"\n\ntodo( \"not yet implemented\", 2 )\nfail \"two\"\nfail \"three\"\n\npass \"four\"\n\n\n\n\ngives\n\n\n1..4\nok 1 - one\nnot ok 2 - two # TODO # not yet implemented\nnot ok 3 - three # TODO # not yet implemented\nok 4 - four\n\n\n\n\nExamples\n\n\n-- 99example.t\n#!/usr/bin/lua\nrequire 'Test.More'\n\nplan(9)\n\nok(true, \"true\")\nok(1, \"1 is true\")\nnok(false, \"false\")\nnok(nil, \"nil is false\")\n\nis(1 + 1, 2, \"addition\")\n\nlike(\"with aaa\", 'a', \"pattern matches\")\nunlike(\"with aaa\", 'b', \"pattern doesn't match\")\n\nerror_like([[error 'MSG']], '^[^:]+:%d+: MSG', \"loadstring error\")\nerror_is(error, { 'MSG' }, 'MSG', \"function error with param\")\n\n\n\n\n$ lua 99example.t\n1..9\nok 1 - true\nok 2 - 1 is true\nok 3 - false\nok 4 - nil is false\nok 5 - addition\nok 6 - pattern matches\nok 7 - pattern doesn't match\nok 8 - loadstring error\nok 9 - function error with param\n\n\n\n\nNow, with \nprove\n.\n\n\n$ prove 99example.t\n99example.t .. ok\nAll tests successful.\nFiles=1, Tests=9,  0 wallclock secs ( 0.05 usr +  0.20 sys =  0.25 CPU)\nResult: PASS\n\n\n\n\nIf your continuous integration tool\n(for example, \nJenkins\n)\nrequires the JUnix XML format.\n\n\n$ prove --formatter=TAP::Formatter::JUnit 99example.t\n<testsuites>\n  <testsuite failures=\"0\"\n             errors=\"0\"\n             tests=\"9\"\n             name=\"test_99example_t\">\n    <testcase name=\"1 - true\"></testcase>\n    <testcase name=\"2 - 1 is true\"></testcase>\n    <testcase name=\"3 - false\"></testcase>\n    <testcase name=\"4 - nil is false\"></testcase>\n    <testcase name=\"5 - addition\"></testcase>\n    <testcase name=\"6 - pattern matches\"></testcase>\n    <testcase name=\"7 - pattern doesn't match\"></testcase>\n    <testcase name=\"8 - loadstring error\"></testcase>\n    <testcase name=\"9 - function error with param\"></testcase>\n    <system-out><![CDATA[1..9\nok 1 - true\nok 2 - 1 is true\nok 3 - false\nok 4 - nil is false\nok 5 - addition\nok 6 - pattern matches\nok 7 - pattern doesn't match\nok 8 - loadstring error\nok 9 - function error with param\n]]></system-out>\n    <system-err></system-err>\n  </testsuite>\n</testsuites>\n\n\n\n\nIf your results must be stored first, and processed after.\n\n\n$ lua 99example.t > 99example.tap\n$ prove --source=TAP::Parser::SourceHandler::RawTAP 99example.tap\n99example.tap .. ok\nAll tests successful.\nFiles=1, Tests=9,  0 wallclock secs ( 0.02 usr +  0.04 sys =  0.06 CPU)\nResult: PASS",
+            "title": "Test.More"
+        },
+        {
+            "location": "/testmore/#reference",
+            "text": "All functions are injected in the global environment  _G .  plan( arg )  plan(2)\n\npass \"one\"\npass \"two\"  gives  1..2\nok 1 - one\nok 2 - two  done_testing( num_tests )  plan 'no_plan'\n\npass \"one\"\npass \"two\"\ndone_testing()  gives  ok 1 - one\nok 2 - two\n1..2  skip_all( reason )  if everything_looks_good then\n    plan(7)\nelse\n    skip_all \"looks bad\"\nend  gives  1..0 # SKIP looks bad  BAIL_OUT( reason )  plan(7)\n\nif not require_ok 'MyApp' then\n    BAIL_OUT \"no MyApp\"\nend  gives  1..7\nnot ok 1 - require 'MyApp'\n#     module 'MyApp' not found:\n#       no field package.preload['MyApp']\n#       no file '.\\MyApp.lua'\n#       ...\nBail out!  no MyApp  and breaks the execution of  prove .  subtest( name, func )  plan(3)\npass \"First test\"\nsubtest('An example subtest', function ()\n    plan(2)\n    pass \"This is a subtest\"\n    pass \"So is this\"\nend)\npass \"Third test\"  gives  1..3\nok 1 - First test\n# Subtest: An example subtest\n    1..2\n    ok 1 - This is a subtest\n    ok 2 - So is this\nok 2 - An example subtest\nok 3 - Third test  ok( test [, name] )  nok( test [, name] )  is( got, expected [, name] )  isnt( got, expected [, name] )  like( got, pattern [, name] )  unlike( got, pattern [, name] )  cmp_ok( this, op, that [, name] )  type_ok( val, t [, name] )  pass( name )  fail( name )  require_ok( mod )  eq_array( got, expected [, name] )  is_deeply( got, expected [, name] )  error_is( code [, params_array], expected [, name] )  error_like( code [, params_array], pattern [, name] )  lives_ok( code [, params_array] [, name] )  diag( msg )  note( msg )  skip( reason [, count] )  plan(4)\n\npass \"one\"\n\nif true then\n    skip(\"here, segfault\", 2)\nelse\n    fail \"two\"\n    fail \"three\"\nend\n\npass \"four\"  gives  1..4\nok 1 - one\nok 2 - # skip here, segfault\nok 3 - # skip here, segfault\nok 4 - four  todo_skip( reason [, count] )  plan(3)\n\npass \"one\"\n\nif true then\n    todo_skip \"here, segfault\"\nelse\n    fail \"two\"\nend\n\npass \"three\"  gives  1..3\nok 1 - one\nnot ok 2 - # TODO & SKIP here, segfault\nok 3 - three  skip_rest( reason )  plan(3)\n\nif not require_ok 'MyApp' then\n    skip_rest \"no MyApp\"\n    os.exit()\nend\n\npass \"two\"\npass \"three\"  gives  1..3\nnot ok 1 - require 'MyApp'\n#     module 'MyApp' not found:\n#       no field package.preload['MyApp']\n#       no file '.\\MyApp.lua'\n#       ...\nok 2 - # skip no MyApp\nok 3 - # skip no MyApp  todo( reason [, count] )  plan(4)\n\npass \"one\"\n\ntodo( \"not yet implemented\", 2 )\nfail \"two\"\nfail \"three\"\n\npass \"four\"  gives  1..4\nok 1 - one\nnot ok 2 - two # TODO # not yet implemented\nnot ok 3 - three # TODO # not yet implemented\nok 4 - four",
+            "title": "Reference"
+        },
+        {
+            "location": "/testmore/#examples",
+            "text": "-- 99example.t\n#!/usr/bin/lua\nrequire 'Test.More'\n\nplan(9)\n\nok(true, \"true\")\nok(1, \"1 is true\")\nnok(false, \"false\")\nnok(nil, \"nil is false\")\n\nis(1 + 1, 2, \"addition\")\n\nlike(\"with aaa\", 'a', \"pattern matches\")\nunlike(\"with aaa\", 'b', \"pattern doesn't match\")\n\nerror_like([[error 'MSG']], '^[^:]+:%d+: MSG', \"loadstring error\")\nerror_is(error, { 'MSG' }, 'MSG', \"function error with param\")  $ lua 99example.t\n1..9\nok 1 - true\nok 2 - 1 is true\nok 3 - false\nok 4 - nil is false\nok 5 - addition\nok 6 - pattern matches\nok 7 - pattern doesn't match\nok 8 - loadstring error\nok 9 - function error with param  Now, with  prove .  $ prove 99example.t\n99example.t .. ok\nAll tests successful.\nFiles=1, Tests=9,  0 wallclock secs ( 0.05 usr +  0.20 sys =  0.25 CPU)\nResult: PASS  If your continuous integration tool\n(for example,  Jenkins )\nrequires the JUnix XML format.  $ prove --formatter=TAP::Formatter::JUnit 99example.t\n<testsuites>\n  <testsuite failures=\"0\"\n             errors=\"0\"\n             tests=\"9\"\n             name=\"test_99example_t\">\n    <testcase name=\"1 - true\"></testcase>\n    <testcase name=\"2 - 1 is true\"></testcase>\n    <testcase name=\"3 - false\"></testcase>\n    <testcase name=\"4 - nil is false\"></testcase>\n    <testcase name=\"5 - addition\"></testcase>\n    <testcase name=\"6 - pattern matches\"></testcase>\n    <testcase name=\"7 - pattern doesn't match\"></testcase>\n    <testcase name=\"8 - loadstring error\"></testcase>\n    <testcase name=\"9 - function error with param\"></testcase>\n    <system-out><![CDATA[1..9\nok 1 - true\nok 2 - 1 is true\nok 3 - false\nok 4 - nil is false\nok 5 - addition\nok 6 - pattern matches\nok 7 - pattern doesn't match\nok 8 - loadstring error\nok 9 - function error with param\n]]></system-out>\n    <system-err></system-err>\n  </testsuite>\n</testsuites>  If your results must be stored first, and processed after.  $ lua 99example.t > 99example.tap\n$ prove --source=TAP::Parser::SourceHandler::RawTAP 99example.tap\n99example.tap .. ok\nAll tests successful.\nFiles=1, Tests=9,  0 wallclock secs ( 0.02 usr +  0.04 sys =  0.06 CPU)\nResult: PASS",
+            "title": "Examples"
+        },
+        {
+            "location": "/testbuilder/",
+            "text": "Reference\n\n\nThis module is the \ncore\n of the framework.\nIt allows its extensibility.\n\n\nAll libraries built with \nTest.Builder\n could work together.\n\n\nSee the module\n\nTest.LongString\n\nas a real example.\n\n\nNote : this kind of library could be tested\nwith the help of the module \nTest.Builder.Tester\n.\n\n\nExamples\n\n\nThis minimal example shows how to add a function/predicate \niszero\n.\n\n\n-- iszero.lua\nlocal tb = require 'Test.Builder'.new()  -- it's a singleton shared by all libraries\n\nfunction _G.iszero(val, name)\n    local pass = val == 0\n    tb:ok(pass, name)\n    if not pass then\n        tb:diag(\"         got: \" .. tostring(val))\n    end\nend\n\n\n\n\n-- iszero.t\nrequire 'Test.More'\nrequire 'iszero'\n\nplan(1)\n\nval = 0\niszero(val, \"val is zero\")\n\n\n\n\n$ lua iszero.t\n1..1\nok 1 - val is zero",
+            "title": "Test.Builder"
+        },
+        {
+            "location": "/testbuilder/#reference",
+            "text": "This module is the  core  of the framework.\nIt allows its extensibility.  All libraries built with  Test.Builder  could work together.  See the module Test.LongString \nas a real example.  Note : this kind of library could be tested\nwith the help of the module  Test.Builder.Tester .",
+            "title": "Reference"
+        },
+        {
+            "location": "/testbuilder/#examples",
+            "text": "This minimal example shows how to add a function/predicate  iszero .  -- iszero.lua\nlocal tb = require 'Test.Builder'.new()  -- it's a singleton shared by all libraries\n\nfunction _G.iszero(val, name)\n    local pass = val == 0\n    tb:ok(pass, name)\n    if not pass then\n        tb:diag(\"         got: \" .. tostring(val))\n    end\nend  -- iszero.t\nrequire 'Test.More'\nrequire 'iszero'\n\nplan(1)\n\nval = 0\niszero(val, \"val is zero\")  $ lua iszero.t\n1..1\nok 1 - val is zero",
+            "title": "Examples"
+        },
+        {
+            "location": "/socketoutput/",
+            "text": "Reference\n\n\nThis module allows to redirect the test output (\nstdout/stderr\n)\nto a \nsocket\n.\n\n\nThis feature is useful for embedded development\nwhere the test runs into a target but the output is consumed by a host.\n\n\nThe use with the \nCorona SDK\n is described in this\n\nblog\n.\n\n\nThis module requires\n\nLuaSocket\n.\n\n\nExamples\n\n\nrequire 'Test.More'\nrequire 'socket'\nlocal conn = socket.connect(host, port)\nrequire 'Test.Builder.SocketOutput'.init(conn)\n-- now, as usual\nplan(...)\n...",
+            "title": "Test.Builder.SocketOutput"
+        },
+        {
+            "location": "/socketoutput/#reference",
+            "text": "This module allows to redirect the test output ( stdout/stderr )\nto a  socket .  This feature is useful for embedded development\nwhere the test runs into a target but the output is consumed by a host.  The use with the  Corona SDK  is described in this blog .  This module requires LuaSocket .",
+            "title": "Reference"
+        },
+        {
+            "location": "/socketoutput/#examples",
+            "text": "require 'Test.More'\nrequire 'socket'\nlocal conn = socket.connect(host, port)\nrequire 'Test.Builder.SocketOutput'.init(conn)\n-- now, as usual\nplan(...)\n...",
+            "title": "Examples"
+        }
+    ]
+}
