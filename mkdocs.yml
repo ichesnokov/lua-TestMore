@@ -1,0 +1,11 @@
+site_name: lua-TestMore
+site_description: an Unit Testing Framework
+site_author: François Perrad
+repo_url: https://github.com/fperrad/lua-TestMore
+pages:
+- Home: index.md
+- API:
+  - Test.More: testmore.md
+  - Test.Builder: testbuilder.md
+  - Test.Builder.SocketOutput: socketoutput.md
+theme: mkdocs
