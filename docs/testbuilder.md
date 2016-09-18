@@ -1,5 +1,9 @@
 
-## Reference
+# Test.Builder
+
+---
+
+# Reference
 
 This module is the _core_ of the framework.
 It allows its extensibility.
@@ -13,7 +17,7 @@ as a real example.
 Note : this kind of library could be tested
 with the help of the module `Test.Builder.Tester`.
 
-## Examples
+# Examples
 
 This minimal example shows how to add a function/predicate `iszero`.
 

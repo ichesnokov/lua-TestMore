@@ -1,5 +1,9 @@
 
-## Reference
+# Test.More
+
+---
+
+# Reference
 
 All functions are injected in the global environment `_G`.
 
@@ -243,7 +247,7 @@ not ok 3 - three # TODO # not yet implemented
 ok 4 - four
 ```
 
-## Examples
+# Examples
 
 ```lua
 -- 99example.t

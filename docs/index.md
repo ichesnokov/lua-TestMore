@@ -1,4 +1,8 @@
 
+# lua-TestMore
+
+---
+
 ## Overview
 
 lua-TestMore is a port of the Perl5 module
@@ -44,11 +48,15 @@ lua-TestMore source can be downloaded from
 
 The easiest way to install lua-TestMore is to use LuaRocks:
 
-    luarocks install lua-testmore
+```sh
+luarocks install lua-testmore
+```
 
 or manually, with:
 
-    make install
+```sh
+make install
+```
 
 ## The Lua Test Suite (5.1, 5.2 & 5.3)
 
@@ -64,7 +72,7 @@ and this [coverage](https://fperrad.github.io/lua-TestMore/cover_lua533/src/inde
 
 ## Copyright and License
 
-Copyright © 2009-2016 François Perrad
+Copyright &copy 2009-2016 Fran&ccedil;ois Perrad
 [![OpenHUB](http://www.openhub.net/accounts/4780/widgets/account_rank.gif)](http://www.openhub.net/accounts/4780?ref=Rank)
 [![LinkedIn](http://www.linkedin.com/img/webpromo/btn_liprofile_blue_80x15.gif)](http://www.linkedin.com/in/fperrad)
 

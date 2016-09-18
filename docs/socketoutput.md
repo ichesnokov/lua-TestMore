@@ -1,5 +1,9 @@
 
-## Reference
+# Test.Builder.SocketOutput
+
+---
+
+# Reference
 
 This module allows to redirect the test output (`stdout/stderr`)
 to a `socket`.
@@ -13,7 +17,7 @@ The use with the **Corona SDK** is described in this
 This module requires
 [LuaSocket](http://w3.impa.br/~diego/software/luasocket/).
 
-## Examples
+# Examples
 
 ```lua
 require 'Test.More'

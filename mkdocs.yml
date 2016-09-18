@@ -9,3 +9,4 @@ pages:
   - Test.Builder: testbuilder.md
   - Test.Builder.SocketOutput: socketoutput.md
 theme: mkdocs
+copyright: Copyright &copy; 2009-2016 Fran&ccedil;ois Perrad
