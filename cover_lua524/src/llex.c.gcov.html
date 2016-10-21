@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">231</td>
-            <td class="headerCovTableEntry">236</td>
+            <td class="headerCovTableEntry">230</td>
+            <td class="headerCovTableEntry">235</td>
             <td class="headerCovTableEntryHi">97.9 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:22</td>
+            <td class="headerValue">2016-10-21 17:14:27</td>
             <td></td>
           </tr>
           <tr>
@@ -303,12 +303,12 @@
 <span class="lineNum">     237 </span><span class="lineCov">       2927 :   if (first == '0' &amp;&amp; check_next(ls, &quot;Xx&quot;))  /* hexadecimal? */</span>
 <span class="lineNum">     238 </span>            :     expo = &quot;Pp&quot;;
 <span class="lineNum">     239 </span>            :   for (;;) {
-<span class="lineNum">     240 </span><span class="lineCov">       3924 :     if (check_next(ls, expo))  /* exponent part? */</span>
+<span class="lineNum">     240 </span><span class="lineCov">       4921 :     if (check_next(ls, expo))  /* exponent part? */</span>
 <span class="lineNum">     241 </span><span class="lineCov">          8 :       check_next(ls, &quot;+-&quot;);  /* optional exponent sign */</span>
 <span class="lineNum">     242 </span><span class="lineCov">       3924 :     if (lisxdigit(ls-&gt;current) || ls-&gt;current == '.')</span>
 <span class="lineNum">     243 </span><span class="lineCov">        997 :       save_and_next(ls);</span>
 <span class="lineNum">     244 </span>            :     else  break;
-<span class="lineNum">     245 </span><span class="lineCov">        997 :   }</span>
+<span class="lineNum">     245 </span>            :   }
 <span class="lineNum">     246 </span><span class="lineCov">       2927 :   save(ls, '\0');</span>
 <span class="lineNum">     247 </span><span class="lineCov">       2927 :   buffreplace(ls, '.', ls-&gt;decpoint);  /* follow locale for decimal point */</span>
 <span class="lineNum">     248 </span><span class="lineCov">       2927 :   if (!buff2d(ls-&gt;buff, &amp;seminfo-&gt;r))  /* format error? */</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-06-07 18:53:14</td>
+            <td class="headerValue">2016-10-21 17:14:38</td>
             <td></td>
           </tr>
           <tr>
@@ -412,7 +412,7 @@
 <span class="lineNum">     346 </span>            : ** Read multiple lines until a complete Lua statement
 <span class="lineNum">     347 </span>            : */
 <span class="lineNum">     348 </span><span class="lineNoCov">          0 : static int multiline (lua_State *L) {</span>
-<span class="lineNum">     349 </span>            :   for (;;) {  /* repeat until gets a complete statement */
+<span class="lineNum">     349 </span><span class="lineNoCov">          0 :   for (;;) {  /* repeat until gets a complete statement */</span>
 <span class="lineNum">     350 </span>            :     size_t len;
 <span class="lineNum">     351 </span><span class="lineNoCov">          0 :     const char *line = lua_tolstring(L, 1, &amp;len);  /* get what it has */</span>
 <span class="lineNum">     352 </span><span class="lineNoCov">          0 :     int status = luaL_loadbuffer(L, line, len, &quot;=stdin&quot;);  /* try it */</span>
@@ -423,7 +423,7 @@
 <span class="lineNum">     357 </span><span class="lineNoCov">          0 :     lua_pushliteral(L, &quot;\n&quot;);  /* add newline... */</span>
 <span class="lineNum">     358 </span><span class="lineNoCov">          0 :     lua_insert(L, -2);  /* ...between the two lines */</span>
 <span class="lineNum">     359 </span><span class="lineNoCov">          0 :     lua_concat(L, 3);  /* join them */</span>
-<span class="lineNum">     360 </span><span class="lineNoCov">          0 :   }</span>
+<span class="lineNum">     360 </span>            :   }
 <span class="lineNum">     361 </span>            : }
 <span class="lineNum">     362 </span>            : 
 <span class="lineNum">     363 </span>            : 

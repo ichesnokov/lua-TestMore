@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-06-07 18:53:14</td>
+            <td class="headerValue">2016-10-21 17:14:38</td>
             <td></td>
           </tr>
           <tr>
@@ -466,7 +466,7 @@
 <span class="lineNum">     400 </span>            : 
 <span class="lineNum">     401 </span>            : 
 <span class="lineNum">     402 </span><span class="lineCov">          1 : static int db_debug (lua_State *L) {</span>
-<span class="lineNum">     403 </span>            :   for (;;) {
+<span class="lineNum">     403 </span><span class="lineCov">          2 :   for (;;) {</span>
 <span class="lineNum">     404 </span>            :     char buffer[250];
 <span class="lineNum">     405 </span><span class="lineCov">          6 :     lua_writestringerror(&quot;%s&quot;, &quot;lua_debug&gt; &quot;);</span>
 <span class="lineNum">     406 </span><span class="lineCov">          9 :     if (fgets(buffer, sizeof(buffer), stdin) == 0 ||</span>
@@ -476,7 +476,7 @@
 <span class="lineNum">     410 </span><span class="lineCov">          2 :         lua_pcall(L, 0, 0, 0))</span>
 <span class="lineNum">     411 </span><span class="lineCov">          2 :       lua_writestringerror(&quot;%s\n&quot;, lua_tostring(L, -1));</span>
 <span class="lineNum">     412 </span><span class="lineCov">          2 :     lua_settop(L, 0);  /* remove eventual returns */</span>
-<span class="lineNum">     413 </span><span class="lineCov">          2 :   }</span>
+<span class="lineNum">     413 </span>            :   }
 <span class="lineNum">     414 </span>            : }
 <span class="lineNum">     415 </span>            : 
 <span class="lineNum">     416 </span>            : 

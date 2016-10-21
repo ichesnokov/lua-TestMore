@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.3.3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">757</td>
-            <td class="headerCovTableEntry">793</td>
-            <td class="headerCovTableEntryHi">95.5 %</td>
+            <td class="headerCovTableEntry">753</td>
+            <td class="headerCovTableEntry">789</td>
+            <td class="headerCovTableEntryHi">95.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-06-07 18:53:14</td>
+            <td class="headerValue">2016-10-21 17:14:38</td>
             <td></td>
           </tr>
           <tr>
@@ -210,7 +210,7 @@
 <span class="lineNum">     144 </span>            : static void init_exp (expdesc *e, expkind k, int i) {
 <span class="lineNum">     145 </span><span class="lineCov">     102022 :   e-&gt;f = e-&gt;t = NO_JUMP;</span>
 <span class="lineNum">     146 </span><span class="lineCov">     102022 :   e-&gt;k = k;</span>
-<span class="lineNum">     147 </span><span class="lineCov">     102022 :   e-&gt;u.info = i;</span>
+<span class="lineNum">     147 </span><span class="lineCov">      98733 :   e-&gt;u.info = i;</span>
 <span class="lineNum">     148 </span>            : }
 <span class="lineNum">     149 </span>            : 
 <span class="lineNum">     150 </span>            : 
@@ -507,7 +507,7 @@
 <span class="lineNum">     441 </span><span class="lineCov">       9178 :   bl-&gt;firstgoto = fs-&gt;ls-&gt;dyd-&gt;gt.n;</span>
 <span class="lineNum">     442 </span><span class="lineCov">       9178 :   bl-&gt;upval = 0;</span>
 <span class="lineNum">     443 </span><span class="lineCov">       9178 :   bl-&gt;previous = fs-&gt;bl;</span>
-<span class="lineNum">     444 </span><span class="lineCov">       9178 :   fs-&gt;bl = bl;</span>
+<span class="lineNum">     444 </span><span class="lineCov">       9175 :   fs-&gt;bl = bl;</span>
 <span class="lineNum">     445 </span>            :   lua_assert(fs-&gt;freereg == fs-&gt;nactvar);
 <span class="lineNum">     446 </span>            : }
 <span class="lineNum">     447 </span>            : 
@@ -590,7 +590,7 @@
 <span class="lineNum">     524 </span><span class="lineCov">       3254 : }</span>
 <span class="lineNum">     525 </span>            : 
 <span class="lineNum">     526 </span>            : 
-<span class="lineNum">     527 </span><span class="lineCov">       3695 : static void open_func (LexState *ls, FuncState *fs, BlockCnt *bl) {</span>
+<span class="lineNum">     527 </span>            : static void open_func (LexState *ls, FuncState *fs, BlockCnt *bl) {
 <span class="lineNum">     528 </span>            :   Proto *f;
 <span class="lineNum">     529 </span><span class="lineCov">       3695 :   fs-&gt;prev = ls-&gt;fs;  /* linked list of funcstates */</span>
 <span class="lineNum">     530 </span><span class="lineCov">       3695 :   fs-&gt;ls = ls;</span>
@@ -605,12 +605,12 @@
 <span class="lineNum">     539 </span><span class="lineCov">       3695 :   fs-&gt;nlocvars = 0;</span>
 <span class="lineNum">     540 </span><span class="lineCov">       3695 :   fs-&gt;nactvar = 0;</span>
 <span class="lineNum">     541 </span><span class="lineCov">       3695 :   fs-&gt;firstlocal = ls-&gt;dyd-&gt;actvar.n;</span>
-<span class="lineNum">     542 </span><span class="lineCov">       3695 :   fs-&gt;bl = NULL;</span>
-<span class="lineNum">     543 </span><span class="lineCov">       3695 :   f = fs-&gt;f;</span>
+<span class="lineNum">     542 </span>            :   fs-&gt;bl = NULL;
+<span class="lineNum">     543 </span><span class="lineCov">        440 :   f = fs-&gt;f;</span>
 <span class="lineNum">     544 </span><span class="lineCov">       3695 :   f-&gt;source = ls-&gt;source;</span>
 <span class="lineNum">     545 </span><span class="lineCov">       3695 :   f-&gt;maxstacksize = 2;  /* registers 0/1 are always valid */</span>
 <span class="lineNum">     546 </span>            :   enterblock(fs, bl, 0);
-<span class="lineNum">     547 </span><span class="lineCov">       3695 : }</span>
+<span class="lineNum">     547 </span>            : }
 <span class="lineNum">     548 </span>            : 
 <span class="lineNum">     549 </span>            : 
 <span class="lineNum">     550 </span><span class="lineCov">       3671 : static void close_func (LexState *ls) {</span>
@@ -757,7 +757,7 @@
 <span class="lineNum">     691 </span>            : static void listfield (LexState *ls, struct ConsControl *cc) {
 <span class="lineNum">     692 </span>            :   /* listfield -&gt; exp */
 <span class="lineNum">     693 </span><span class="lineCov">        766 :   expr(ls, &amp;cc-&gt;v);</span>
-<span class="lineNum">     694 </span>            :   checklimit(ls-&gt;fs, cc-&gt;na, MAX_INT, &quot;items in a constructor&quot;);
+<span class="lineNum">     694 </span><span class="lineCov">        766 :   checklimit(ls-&gt;fs, cc-&gt;na, MAX_INT, &quot;items in a constructor&quot;);</span>
 <span class="lineNum">     695 </span><span class="lineCov">        766 :   cc-&gt;na++;</span>
 <span class="lineNum">     696 </span><span class="lineCov">        766 :   cc-&gt;tostore++;</span>
 <span class="lineNum">     697 </span>            : }
@@ -849,7 +849,7 @@
 <span class="lineNum">     783 </span>            :   BlockCnt bl;
 <span class="lineNum">     784 </span><span class="lineCov">       3255 :   new_fs.f = addprototype(ls);</span>
 <span class="lineNum">     785 </span><span class="lineCov">       3255 :   new_fs.f-&gt;linedefined = line;</span>
-<span class="lineNum">     786 </span><span class="lineCov">       3255 :   open_func(ls, &amp;new_fs, &amp;bl);</span>
+<span class="lineNum">     786 </span>            :   open_func(ls, &amp;new_fs, &amp;bl);
 <span class="lineNum">     787 </span><span class="lineCov">       3255 :   checknext(ls, '(');</span>
 <span class="lineNum">     788 </span><span class="lineCov">       3255 :   if (ismethod) {</span>
 <span class="lineNum">     789 </span>            :     new_localvarliteral(ls, &quot;self&quot;);  /* create 'self' parameter */
@@ -1680,7 +1680,7 @@
 <span class="lineNum">    1614 </span><span class="lineCov">        440 : static void mainfunc (LexState *ls, FuncState *fs) {</span>
 <span class="lineNum">    1615 </span>            :   BlockCnt bl;
 <span class="lineNum">    1616 </span>            :   expdesc v;
-<span class="lineNum">    1617 </span><span class="lineCov">        440 :   open_func(ls, fs, &amp;bl);</span>
+<span class="lineNum">    1617 </span>            :   open_func(ls, fs, &amp;bl);
 <span class="lineNum">    1618 </span><span class="lineCov">        440 :   fs-&gt;f-&gt;is_vararg = 2;  /* main function is always declared vararg */</span>
 <span class="lineNum">    1619 </span>            :   init_exp(&amp;v, VLOCAL, 0);  /* create and... */
 <span class="lineNum">    1620 </span><span class="lineCov">        440 :   newupvalue(fs, ls-&gt;envn, &amp;v);  /* ...set environment upvalue */</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-06-07 18:53:14</td>
+            <td class="headerValue">2016-10-21 17:14:38</td>
             <td></td>
           </tr>
           <tr>
@@ -122,12 +122,12 @@
 <span class="lineNum">      56 </span>            : ** function to be used with macro &quot;fasttm&quot;: optimized for absence of
 <span class="lineNum">      57 </span>            : ** tag methods
 <span class="lineNum">      58 </span>            : */
-<span class="lineNum">      59 </span><span class="lineCov">      34290 : const TValue *luaT_gettm (Table *events, TMS event, TString *ename) {</span>
-<span class="lineNum">      60 </span><span class="lineCov">      34290 :   const TValue *tm = luaH_getshortstr(events, ename);</span>
+<span class="lineNum">      59 </span><span class="lineCov">      34298 : const TValue *luaT_gettm (Table *events, TMS event, TString *ename) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">      34298 :   const TValue *tm = luaH_getshortstr(events, ename);</span>
 <span class="lineNum">      61 </span>            :   lua_assert(event &lt;= TM_EQ);
-<span class="lineNum">      62 </span><span class="lineCov">      34290 :   if (ttisnil(tm)) {  /* no tag method? */</span>
-<span class="lineNum">      63 </span><span class="lineCov">        389 :     events-&gt;flags |= cast_byte(1u&lt;&lt;event);  /* cache this fact */</span>
-<span class="lineNum">      64 </span><span class="lineCov">        389 :     return NULL;</span>
+<span class="lineNum">      62 </span><span class="lineCov">      34298 :   if (ttisnil(tm)) {  /* no tag method? */</span>
+<span class="lineNum">      63 </span><span class="lineCov">        397 :     events-&gt;flags |= cast_byte(1u&lt;&lt;event);  /* cache this fact */</span>
+<span class="lineNum">      64 </span><span class="lineCov">        397 :     return NULL;</span>
 <span class="lineNum">      65 </span>            :   }
 <span class="lineNum">      66 </span>            :   else return tm;
 <span class="lineNum">      67 </span>            : }

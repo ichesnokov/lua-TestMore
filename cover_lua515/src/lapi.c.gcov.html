@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:11</td>
+            <td class="headerValue">2016-10-21 17:14:17</td>
             <td></td>
           </tr>
           <tr>
@@ -134,7 +134,7 @@
 <span class="lineNum">      68 </span>            :     default: {
 <span class="lineNum">      69 </span><span class="lineCov">       6200 :       Closure *func = curr_func(L);</span>
 <span class="lineNum">      70 </span><span class="lineCov">       6200 :       idx = LUA_GLOBALSINDEX - idx;</span>
-<span class="lineNum">      71 </span><span class="lineCov">      12400 :       return (idx &lt;= func-&gt;c.nupvalues)</span>
+<span class="lineNum">      71 </span><span class="lineCov">       6200 :       return (idx &lt;= func-&gt;c.nupvalues)</span>
 <span class="lineNum">      72 </span><span class="lineCov">       6200 :                 ? &amp;func-&gt;c.upvalue[idx-1]</span>
 <span class="lineNum">      73 </span><span class="lineCov">      12400 :                 : cast(TValue *, luaO_nilobject);</span>
 <span class="lineNum">      74 </span>            :     }
@@ -345,7 +345,7 @@
 <span class="lineNum">     279 </span><span class="lineCov">       1803 : LUA_API int lua_rawequal (lua_State *L, int index1, int index2) {</span>
 <span class="lineNum">     280 </span><span class="lineCov">       1803 :   StkId o1 = index2adr(L, index1);</span>
 <span class="lineNum">     281 </span><span class="lineCov">       1803 :   StkId o2 = index2adr(L, index2);</span>
-<span class="lineNum">     282 </span><span class="lineCov">       3606 :   return (o1 == luaO_nilobject || o2 == luaO_nilobject) ? 0</span>
+<span class="lineNum">     282 </span><span class="lineCov">       1803 :   return (o1 == luaO_nilobject || o2 == luaO_nilobject) ? 0</span>
 <span class="lineNum">     283 </span><span class="lineCov">       3606 :          : luaO_rawequalObj(o1, o2);</span>
 <span class="lineNum">     284 </span>            : }
 <span class="lineNum">     285 </span>            : 

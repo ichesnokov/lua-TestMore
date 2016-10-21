@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">116</td>
-            <td class="headerCovTableEntry">124</td>
+            <td class="headerCovTableEntry">115</td>
+            <td class="headerCovTableEntry">123</td>
             <td class="headerCovTableEntryHi">93.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:22</td>
+            <td class="headerValue">2016-10-21 17:14:27</td>
             <td></td>
           </tr>
           <tr>
@@ -309,7 +309,7 @@
 <span class="lineNum">     243 </span>            : */
 <span class="lineNum">     244 </span><span class="lineCov">         12 : void luaU_header (lu_byte* h)</span>
 <span class="lineNum">     245 </span>            : {
-<span class="lineNum">     246 </span><span class="lineCov">         12 :  int x=1;</span>
+<span class="lineNum">     246 </span>            :  int x=1;
 <span class="lineNum">     247 </span>            :  memcpy(h,LUA_SIGNATURE,sizeof(LUA_SIGNATURE)-sizeof(char));
 <span class="lineNum">     248 </span>            :  h+=sizeof(LUA_SIGNATURE)-sizeof(char);
 <span class="lineNum">     249 </span><span class="lineCov">         12 :  *h++=cast_byte(VERSION);</span>

@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.1.5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">153</td>
-            <td class="headerCovTableEntry">157</td>
-            <td class="headerCovTableEntryHi">97.5 %</td>
+            <td class="headerCovTableEntry">152</td>
+            <td class="headerCovTableEntry">156</td>
+            <td class="headerCovTableEntryHi">97.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:11</td>
+            <td class="headerValue">2016-10-21 17:14:17</td>
             <td></td>
           </tr>
           <tr>
@@ -289,7 +289,7 @@
 <span class="lineNum">     223 </span><span class="lineCov">       9937 :     i = l; j = u-1;</span>
 <span class="lineNum">     224 </span>            :     for (;;) {  /* invariant: a[l..i] &lt;= P &lt;= a[j..u] */
 <span class="lineNum">     225 </span>            :       /* repeat ++i until a[i] &gt;= P */
-<span class="lineNum">     226 </span><span class="lineCov">      37529 :       while (lua_rawgeti(L, 1, ++i), sort_comp(L, -1, -2)) {</span>
+<span class="lineNum">     226 </span><span class="lineCov">      41153 :       while (lua_rawgeti(L, 1, ++i), sort_comp(L, -1, -2)) {</span>
 <span class="lineNum">     227 </span><span class="lineCov">      10407 :         if (i&gt;u) luaL_error(L, &quot;invalid order function for sorting&quot;);</span>
 <span class="lineNum">     228 </span><span class="lineCov">      10407 :         lua_pop(L, 1);  /* remove a[i] */</span>
 <span class="lineNum">     229 </span>            :       }
@@ -303,7 +303,7 @@
 <span class="lineNum">     237 </span><span class="lineCov">       9936 :         break;</span>
 <span class="lineNum">     238 </span>            :       }
 <span class="lineNum">     239 </span><span class="lineCov">       3624 :       set2(L, i, j);</span>
-<span class="lineNum">     240 </span><span class="lineCov">       3624 :     }</span>
+<span class="lineNum">     240 </span>            :     }
 <span class="lineNum">     241 </span><span class="lineCov">       9936 :     lua_rawgeti(L, 1, u-1);</span>
 <span class="lineNum">     242 </span><span class="lineCov">       9936 :     lua_rawgeti(L, 1, i);</span>
 <span class="lineNum">     243 </span><span class="lineCov">       9936 :     set2(L, u-1, i);  /* swap pivot (a[u-1]) with a[i] */</span>

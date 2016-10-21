@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-06-07 18:53:14</td>
+            <td class="headerValue">2016-10-21 17:14:38</td>
             <td></td>
           </tr>
           <tr>
@@ -128,7 +128,7 @@
 <span class="lineNum">      62 </span>            : /*
 <span class="lineNum">      63 </span>            : ** Computes ceil(log2(x))
 <span class="lineNum">      64 </span>            : */
-<span class="lineNum">      65 </span><span class="lineCov">      29933 : int luaO_ceillog2 (unsigned int x) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">      29941 : int luaO_ceillog2 (unsigned int x) {</span>
 <span class="lineNum">      66 </span>            :   static const lu_byte log_2[256] = {  /* log_2[i] = ceil(log2(i - 1)) */
 <span class="lineNum">      67 </span>            :     0,1,2,2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 <span class="lineNum">      68 </span>            :     6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
@@ -140,9 +140,9 @@
 <span class="lineNum">      74 </span>            :     8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8
 <span class="lineNum">      75 </span>            :   };
 <span class="lineNum">      76 </span>            :   int l = 0;
-<span class="lineNum">      77 </span><span class="lineCov">      29933 :   x--;</span>
-<span class="lineNum">      78 </span><span class="lineCov">      29933 :   while (x &gt;= 256) { l += 8; x &gt;&gt;= 8; }</span>
-<span class="lineNum">      79 </span><span class="lineCov">      29933 :   return l + log_2[x];</span>
+<span class="lineNum">      77 </span><span class="lineCov">      29941 :   x--;</span>
+<span class="lineNum">      78 </span><span class="lineCov">      29941 :   while (x &gt;= 256) { l += 8; x &gt;&gt;= 8; }</span>
+<span class="lineNum">      79 </span><span class="lineCov">      29941 :   return l + log_2[x];</span>
 <span class="lineNum">      80 </span>            : }
 <span class="lineNum">      81 </span>            : 
 <span class="lineNum">      82 </span>            : 
@@ -453,28 +453,28 @@
 <span class="lineNum">     387 </span><span class="lineCov">       2456 : }</span>
 <span class="lineNum">     388 </span>            : 
 <span class="lineNum">     389 </span>            : 
-<span class="lineNum">     390 </span><span class="lineCov">       9880 : static void pushstr (lua_State *L, const char *str, size_t l) {</span>
-<span class="lineNum">     391 </span><span class="lineCov">       9880 :   setsvalue2s(L, L-&gt;top, luaS_newlstr(L, str, l));</span>
-<span class="lineNum">     392 </span><span class="lineCov">       9880 :   luaD_inctop(L);</span>
-<span class="lineNum">     393 </span><span class="lineCov">       9880 : }</span>
+<span class="lineNum">     390 </span><span class="lineCov">      11266 : static void pushstr (lua_State *L, const char *str, size_t l) {</span>
+<span class="lineNum">     391 </span><span class="lineCov">      11266 :   setsvalue2s(L, L-&gt;top, luaS_newlstr(L, str, l));</span>
+<span class="lineNum">     392 </span><span class="lineCov">      11266 :   luaD_inctop(L);</span>
+<span class="lineNum">     393 </span><span class="lineCov">      11266 : }</span>
 <span class="lineNum">     394 </span>            : 
 <span class="lineNum">     395 </span>            : 
 <span class="lineNum">     396 </span>            : /*
 <span class="lineNum">     397 </span>            : ** this function handles only '%d', '%c', '%f', '%p', and '%s' 
 <span class="lineNum">     398 </span>            :    conventional formats, plus Lua-specific '%I' and '%U'
 <span class="lineNum">     399 </span>            : */
-<span class="lineNum">     400 </span><span class="lineCov">       3184 : const char *luaO_pushvfstring (lua_State *L, const char *fmt, va_list argp) {</span>
+<span class="lineNum">     400 </span><span class="lineCov">       3646 : const char *luaO_pushvfstring (lua_State *L, const char *fmt, va_list argp) {</span>
 <span class="lineNum">     401 </span>            :   int n = 0;
-<span class="lineNum">     402 </span>            :   for (;;) {
-<span class="lineNum">     403 </span><span class="lineCov">       7726 :     const char *e = strchr(fmt, '%');</span>
-<span class="lineNum">     404 </span><span class="lineCov">       7726 :     if (e == NULL) break;</span>
-<span class="lineNum">     405 </span><span class="lineCov">       4542 :     pushstr(L, fmt, e - fmt);</span>
-<span class="lineNum">     406 </span><span class="lineCov">       4542 :     switch (*(e+1)) {</span>
+<span class="lineNum">     402 </span><span class="lineCov">       5004 :   for (;;) {</span>
+<span class="lineNum">     403 </span><span class="lineCov">       8650 :     const char *e = strchr(fmt, '%');</span>
+<span class="lineNum">     404 </span><span class="lineCov">       8650 :     if (e == NULL) break;</span>
+<span class="lineNum">     405 </span><span class="lineCov">       5004 :     pushstr(L, fmt, e - fmt);</span>
+<span class="lineNum">     406 </span><span class="lineCov">       5004 :     switch (*(e+1)) {</span>
 <span class="lineNum">     407 </span>            :       case 's': {  /* zero-terminated string */
-<span class="lineNum">     408 </span><span class="lineCov">       2118 :         const char *s = va_arg(argp, char *);</span>
-<span class="lineNum">     409 </span><span class="lineCov">       2118 :         if (s == NULL) s = &quot;(null)&quot;;</span>
-<span class="lineNum">     410 </span><span class="lineCov">       2118 :         pushstr(L, s, strlen(s));</span>
-<span class="lineNum">     411 </span><span class="lineCov">       2118 :         break;</span>
+<span class="lineNum">     408 </span><span class="lineCov">       2580 :         const char *s = va_arg(argp, char *);</span>
+<span class="lineNum">     409 </span><span class="lineCov">       2580 :         if (s == NULL) s = &quot;(null)&quot;;</span>
+<span class="lineNum">     410 </span><span class="lineCov">       2580 :         pushstr(L, s, strlen(s));</span>
+<span class="lineNum">     411 </span><span class="lineCov">       2580 :         break;</span>
 <span class="lineNum">     412 </span>            :       }
 <span class="lineNum">     413 </span>            :       case 'c': {  /* an 'int' as a character */
 <span class="lineNum">     414 </span><span class="lineCov">         10 :         char buff = cast(char, va_arg(argp, int));</span>
@@ -520,13 +520,13 @@
 <span class="lineNum">     454 </span>            :                          *(e + 1));
 <span class="lineNum">     455 </span>            :       }
 <span class="lineNum">     456 </span>            :     }
-<span class="lineNum">     457 </span><span class="lineCov">       4542 :     n += 2;</span>
-<span class="lineNum">     458 </span><span class="lineCov">       4542 :     fmt = e+2;</span>
-<span class="lineNum">     459 </span><span class="lineCov">       4542 :   }</span>
-<span class="lineNum">     460 </span><span class="lineCov">       3184 :   luaD_checkstack(L, 1);</span>
-<span class="lineNum">     461 </span><span class="lineCov">       3184 :   pushstr(L, fmt, strlen(fmt));</span>
-<span class="lineNum">     462 </span><span class="lineCov">       3184 :   if (n &gt; 0) luaV_concat(L, n + 1);</span>
-<span class="lineNum">     463 </span><span class="lineCov">       3184 :   return svalue(L-&gt;top - 1);</span>
+<span class="lineNum">     457 </span><span class="lineCov">       5004 :     n += 2;</span>
+<span class="lineNum">     458 </span><span class="lineCov">       5004 :     fmt = e+2;</span>
+<span class="lineNum">     459 </span>            :   }
+<span class="lineNum">     460 </span><span class="lineCov">       3646 :   luaD_checkstack(L, 1);</span>
+<span class="lineNum">     461 </span><span class="lineCov">       3646 :   pushstr(L, fmt, strlen(fmt));</span>
+<span class="lineNum">     462 </span><span class="lineCov">       3646 :   if (n &gt; 0) luaV_concat(L, n + 1);</span>
+<span class="lineNum">     463 </span><span class="lineCov">       3646 :   return svalue(L-&gt;top - 1);</span>
 <span class="lineNum">     464 </span>            : }
 <span class="lineNum">     465 </span>            : 
 <span class="lineNum">     466 </span>            : 

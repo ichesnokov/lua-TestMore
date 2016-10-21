@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:22</td>
+            <td class="headerValue">2016-10-21 17:14:27</td>
             <td></td>
           </tr>
           <tr>
@@ -349,7 +349,7 @@
 <span class="lineNum">     283 </span><span class="lineNoCov">          0 :   lua_settop(L, 0);</span>
 <span class="lineNum">     284 </span><span class="lineNoCov">          0 :   if (!pushline(L, 1))</span>
 <span class="lineNum">     285 </span>            :     return -1;  /* no input */
-<span class="lineNum">     286 </span>            :   for (;;) {  /* repeat until gets a complete line */
+<span class="lineNum">     286 </span><span class="lineNoCov">          0 :   for (;;) {  /* repeat until gets a complete line */</span>
 <span class="lineNum">     287 </span>            :     size_t l;
 <span class="lineNum">     288 </span><span class="lineNoCov">          0 :     const char *line = lua_tolstring(L, 1, &amp;l);</span>
 <span class="lineNum">     289 </span><span class="lineNoCov">          0 :     status = luaL_loadbuffer(L, line, l, &quot;=stdin&quot;);</span>
@@ -359,7 +359,7 @@
 <span class="lineNum">     293 </span><span class="lineNoCov">          0 :     lua_pushliteral(L, &quot;\n&quot;);  /* add a new line... */</span>
 <span class="lineNum">     294 </span><span class="lineNoCov">          0 :     lua_insert(L, -2);  /* ...between the two lines */</span>
 <span class="lineNum">     295 </span><span class="lineNoCov">          0 :     lua_concat(L, 3);  /* join them */</span>
-<span class="lineNum">     296 </span><span class="lineNoCov">          0 :   }</span>
+<span class="lineNum">     296 </span>            :   }
 <span class="lineNum">     297 </span><span class="lineNoCov">          0 :   lua_saveline(L, 1);</span>
 <span class="lineNum">     298 </span><span class="lineNoCov">          0 :   lua_remove(L, 1);  /* remove line */</span>
 <span class="lineNum">     299 </span><span class="lineNoCov">          0 :   return status;</span>

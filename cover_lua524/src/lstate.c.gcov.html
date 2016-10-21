@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">149</td>
             <td class="headerCovTableEntry">150</td>
-            <td class="headerCovTableEntry">151</td>
             <td class="headerCovTableEntryHi">99.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:22</td>
+            <td class="headerValue">2016-10-21 17:14:27</td>
             <td></td>
           </tr>
           <tr>
@@ -169,19 +169,19 @@
 <span class="lineNum">     103 </span>            : ** set GCdebt to a new value keeping the value (totalbytes + GCdebt)
 <span class="lineNum">     104 </span>            : ** invariant
 <span class="lineNum">     105 </span>            : */
-<span class="lineNum">     106 </span><span class="lineCov">       2327 : void luaE_setdebt (global_State *g, l_mem debt) {</span>
-<span class="lineNum">     107 </span><span class="lineCov">       2327 :   g-&gt;totalbytes -= (debt - g-&gt;GCdebt);</span>
-<span class="lineNum">     108 </span><span class="lineCov">       2327 :   g-&gt;GCdebt = debt;</span>
-<span class="lineNum">     109 </span><span class="lineCov">       2327 : }</span>
+<span class="lineNum">     106 </span><span class="lineCov">       2333 : void luaE_setdebt (global_State *g, l_mem debt) {</span>
+<span class="lineNum">     107 </span><span class="lineCov">       2333 :   g-&gt;totalbytes -= (debt - g-&gt;GCdebt);</span>
+<span class="lineNum">     108 </span><span class="lineCov">       2333 :   g-&gt;GCdebt = debt;</span>
+<span class="lineNum">     109 </span><span class="lineCov">       2333 : }</span>
 <span class="lineNum">     110 </span>            : 
 <span class="lineNum">     111 </span>            : 
-<span class="lineNum">     112 </span><span class="lineCov">        861 : CallInfo *luaE_extendCI (lua_State *L) {</span>
-<span class="lineNum">     113 </span><span class="lineCov">        861 :   CallInfo *ci = luaM_new(L, CallInfo);</span>
+<span class="lineNum">     112 </span><span class="lineCov">        855 : CallInfo *luaE_extendCI (lua_State *L) {</span>
+<span class="lineNum">     113 </span><span class="lineCov">        855 :   CallInfo *ci = luaM_new(L, CallInfo);</span>
 <span class="lineNum">     114 </span>            :   lua_assert(L-&gt;ci-&gt;next == NULL);
-<span class="lineNum">     115 </span><span class="lineCov">        861 :   L-&gt;ci-&gt;next = ci;</span>
-<span class="lineNum">     116 </span><span class="lineCov">        861 :   ci-&gt;previous = L-&gt;ci;</span>
-<span class="lineNum">     117 </span><span class="lineCov">        861 :   ci-&gt;next = NULL;</span>
-<span class="lineNum">     118 </span><span class="lineCov">        861 :   return ci;</span>
+<span class="lineNum">     115 </span><span class="lineCov">        855 :   L-&gt;ci-&gt;next = ci;</span>
+<span class="lineNum">     116 </span><span class="lineCov">        855 :   ci-&gt;previous = L-&gt;ci;</span>
+<span class="lineNum">     117 </span><span class="lineCov">        855 :   ci-&gt;next = NULL;</span>
+<span class="lineNum">     118 </span><span class="lineCov">        855 :   return ci;</span>
 <span class="lineNum">     119 </span>            : }
 <span class="lineNum">     120 </span>            : 
 <span class="lineNum">     121 </span>            : 
@@ -189,9 +189,9 @@
 <span class="lineNum">     123 </span><span class="lineCov">        321 :   CallInfo *ci = L-&gt;ci;</span>
 <span class="lineNum">     124 </span><span class="lineCov">        321 :   CallInfo *next = ci-&gt;next;</span>
 <span class="lineNum">     125 </span><span class="lineCov">        321 :   ci-&gt;next = NULL;</span>
-<span class="lineNum">     126 </span><span class="lineCov">       1482 :   while ((ci = next) != NULL) {</span>
-<span class="lineNum">     127 </span><span class="lineCov">        840 :     next = ci-&gt;next;</span>
-<span class="lineNum">     128 </span><span class="lineCov">        840 :     luaM_free(L, ci);</span>
+<span class="lineNum">     126 </span><span class="lineCov">       1476 :   while ((ci = next) != NULL) {</span>
+<span class="lineNum">     127 </span><span class="lineCov">        834 :     next = ci-&gt;next;</span>
+<span class="lineNum">     128 </span><span class="lineCov">        834 :     luaM_free(L, ci);</span>
 <span class="lineNum">     129 </span>            :   }
 <span class="lineNum">     130 </span><span class="lineCov">        321 : }</span>
 <span class="lineNum">     131 </span>            : 
@@ -203,7 +203,7 @@
 <span class="lineNum">     137 </span><span class="lineCov">        113 :   L1-&gt;stacksize = BASIC_STACK_SIZE;</span>
 <span class="lineNum">     138 </span><span class="lineCov">       4633 :   for (i = 0; i &lt; BASIC_STACK_SIZE; i++)</span>
 <span class="lineNum">     139 </span><span class="lineCov">       4520 :     setnilvalue(L1-&gt;stack + i);  /* erase new stack */</span>
-<span class="lineNum">     140 </span><span class="lineCov">        113 :   L1-&gt;top = L1-&gt;stack;</span>
+<span class="lineNum">     140 </span>            :   L1-&gt;top = L1-&gt;stack;
 <span class="lineNum">     141 </span><span class="lineCov">        113 :   L1-&gt;stack_last = L1-&gt;stack + L1-&gt;stacksize - EXTRA_STACK;</span>
 <span class="lineNum">     142 </span>            :   /* initialize first ci */
 <span class="lineNum">     143 </span><span class="lineCov">        113 :   ci = &amp;L1-&gt;base_ci;</span>
@@ -278,7 +278,7 @@
 <span class="lineNum">     212 </span><span class="lineCov">        113 :   L-&gt;hookmask = 0;</span>
 <span class="lineNum">     213 </span><span class="lineCov">        113 :   L-&gt;basehookcount = 0;</span>
 <span class="lineNum">     214 </span><span class="lineCov">        113 :   L-&gt;allowhook = 1;</span>
-<span class="lineNum">     215 </span><span class="lineCov">        113 :   resethookcount(L);</span>
+<span class="lineNum">     215 </span><span class="lineCov">         88 :   resethookcount(L);</span>
 <span class="lineNum">     216 </span><span class="lineCov">        113 :   L-&gt;openupval = NULL;</span>
 <span class="lineNum">     217 </span><span class="lineCov">        113 :   L-&gt;nny = 1;</span>
 <span class="lineNum">     218 </span><span class="lineCov">        113 :   L-&gt;status = LUA_OK;</span>

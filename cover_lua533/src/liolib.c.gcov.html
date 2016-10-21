@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-06-07 18:53:14</td>
+            <td class="headerValue">2016-10-21 17:14:38</td>
             <td></td>
           </tr>
           <tr>
@@ -318,7 +318,7 @@
 <span class="lineNum">     252 </span><span class="lineCov">         46 :   const char *mode = luaL_optstring(L, 2, &quot;r&quot;);</span>
 <span class="lineNum">     253 </span>            :   LStream *p = newfile(L);
 <span class="lineNum">     254 </span>            :   const char *md = mode;  /* to traverse/check mode */
-<span class="lineNum">     255 </span><span class="lineCov">         91 :   luaL_argcheck(L, l_checkmode(md), 2, &quot;invalid mode&quot;);</span>
+<span class="lineNum">     255 </span><span class="lineCov">         46 :   luaL_argcheck(L, l_checkmode(md), 2, &quot;invalid mode&quot;);</span>
 <span class="lineNum">     256 </span><span class="lineCov">         45 :   p-&gt;f = fopen(filename, mode);</span>
 <span class="lineNum">     257 </span><span class="lineCov">         45 :   return (p-&gt;f == NULL) ? luaL_fileresult(L, 0, filename) : 1;</span>
 <span class="lineNum">     258 </span>            : }

@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.3.3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">26</td>
-            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">25</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-06-07 18:53:14</td>
+            <td class="headerValue">2016-10-21 17:14:38</td>
             <td></td>
           </tr>
           <tr>
@@ -96,7 +96,7 @@
 <span class="lineNum">      30 </span><span class="lineCov">       1102 :   if (buff == NULL || size == 0)</span>
 <span class="lineNum">      31 </span>            :     return EOZ;
 <span class="lineNum">      32 </span><span class="lineCov">        677 :   z-&gt;n = size - 1;  /* discount char being returned */</span>
-<span class="lineNum">      33 </span><span class="lineCov">        677 :   z-&gt;p = buff;</span>
+<span class="lineNum">      33 </span>            :   z-&gt;p = buff;
 <span class="lineNum">      34 </span><span class="lineCov">        677 :   return cast_uchar(*(z-&gt;p++));</span>
 <span class="lineNum">      35 </span>            : }
 <span class="lineNum">      36 </span>            : 

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:11</td>
+            <td class="headerValue">2016-10-21 17:14:17</td>
             <td></td>
           </tr>
           <tr>
@@ -135,8 +135,8 @@
 <span class="lineNum">      69 </span>            : }
 <span class="lineNum">      70 </span>            : 
 <span class="lineNum">      71 </span>            : 
-<span class="lineNum">      72 </span><span class="lineCov">       5346 : int luaO_rawequalObj (const TValue *t1, const TValue *t2) {</span>
-<span class="lineNum">      73 </span><span class="lineCov">       5346 :   if (ttype(t1) != ttype(t2)) return 0;</span>
+<span class="lineNum">      72 </span><span class="lineCov">       5367 : int luaO_rawequalObj (const TValue *t1, const TValue *t2) {</span>
+<span class="lineNum">      73 </span><span class="lineCov">       5367 :   if (ttype(t1) != ttype(t2)) return 0;</span>
 <span class="lineNum">      74 </span><span class="lineCov">       3666 :   else switch (ttype(t1)) {</span>
 <span class="lineNum">      75 </span>            :     case LUA_TNIL:
 <span class="lineNum">      76 </span><span class="lineCov">          1 :       return 1;</span>
@@ -177,7 +177,7 @@
 <span class="lineNum">     111 </span><span class="lineCov">       1098 : const char *luaO_pushvfstring (lua_State *L, const char *fmt, va_list argp) {</span>
 <span class="lineNum">     112 </span><span class="lineCov">       1098 :   int n = 1;</span>
 <span class="lineNum">     113 </span><span class="lineCov">       1098 :   pushstr(L, &quot;&quot;);</span>
-<span class="lineNum">     114 </span>            :   for (;;) {
+<span class="lineNum">     114 </span><span class="lineCov">       1871 :   for (;;) {</span>
 <span class="lineNum">     115 </span><span class="lineCov">       2969 :     const char *e = strchr(fmt, '%');</span>
 <span class="lineNum">     116 </span><span class="lineCov">       2969 :     if (e == NULL) break;</span>
 <span class="lineNum">     117 </span><span class="lineCov">       1871 :     setsvalue2s(L, L-&gt;top, luaS_newlstr(L, fmt, e-fmt));</span>
@@ -227,7 +227,7 @@
 <span class="lineNum">     161 </span>            :     }
 <span class="lineNum">     162 </span><span class="lineCov">       1871 :     n += 2;</span>
 <span class="lineNum">     163 </span><span class="lineCov">       1871 :     fmt = e+2;</span>
-<span class="lineNum">     164 </span><span class="lineCov">       1871 :   }</span>
+<span class="lineNum">     164 </span>            :   }
 <span class="lineNum">     165 </span><span class="lineCov">       1098 :   pushstr(L, fmt);</span>
 <span class="lineNum">     166 </span><span class="lineCov">       1098 :   luaV_concat(L, n+1, cast_int(L-&gt;top - L-&gt;base) - 1);</span>
 <span class="lineNum">     167 </span><span class="lineCov">       1098 :   L-&gt;top -= n;</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:22</td>
+            <td class="headerValue">2016-10-21 17:14:27</td>
             <td></td>
           </tr>
           <tr>
@@ -214,7 +214,7 @@
 <span class="lineNum">     148 </span>            : static void init_exp (expdesc *e, expkind k, int i) {
 <span class="lineNum">     149 </span><span class="lineCov">      95334 :   e-&gt;f = e-&gt;t = NO_JUMP;</span>
 <span class="lineNum">     150 </span><span class="lineCov">      95334 :   e-&gt;k = k;</span>
-<span class="lineNum">     151 </span><span class="lineCov">      95334 :   e-&gt;u.info = i;</span>
+<span class="lineNum">     151 </span><span class="lineCov">      92408 :   e-&gt;u.info = i;</span>
 <span class="lineNum">     152 </span>            : }
 <span class="lineNum">     153 </span>            : 
 <span class="lineNum">     154 </span>            : 
@@ -413,7 +413,7 @@
 <span class="lineNum">     347 </span><span class="lineCov">          2 :     TString *vname = getlocvar(fs, gt-&gt;nactvar)-&gt;varname;</span>
 <span class="lineNum">     348 </span><span class="lineCov">          2 :     const char *msg = luaO_pushfstring(ls-&gt;L,</span>
 <span class="lineNum">     349 </span>            :       &quot;&lt;goto %s&gt; at line %d jumps into the scope of local &quot; LUA_QS,
-<span class="lineNum">     350 </span><span class="lineCov">          1 :       getstr(gt-&gt;name), gt-&gt;line, getstr(vname));</span>
+<span class="lineNum">     350 </span><span class="lineCov">          2 :       getstr(gt-&gt;name), gt-&gt;line, getstr(vname));</span>
 <span class="lineNum">     351 </span><span class="lineCov">          1 :     semerror(ls, msg);</span>
 <span class="lineNum">     352 </span>            :   }
 <span class="lineNum">     353 </span><span class="lineCov">         13 :   luaK_patchlist(fs, gt-&gt;pc, label-&gt;pc);</span>
@@ -508,7 +508,7 @@
 <span class="lineNum">     442 </span><span class="lineCov">       8795 :   bl-&gt;firstgoto = fs-&gt;ls-&gt;dyd-&gt;gt.n;</span>
 <span class="lineNum">     443 </span><span class="lineCov">       8795 :   bl-&gt;upval = 0;</span>
 <span class="lineNum">     444 </span><span class="lineCov">       8795 :   bl-&gt;previous = fs-&gt;bl;</span>
-<span class="lineNum">     445 </span><span class="lineCov">       8795 :   fs-&gt;bl = bl;</span>
+<span class="lineNum">     445 </span><span class="lineCov">       8792 :   fs-&gt;bl = bl;</span>
 <span class="lineNum">     446 </span>            :   lua_assert(fs-&gt;freereg == fs-&gt;nactvar);
 <span class="lineNum">     447 </span>            : }
 <span class="lineNum">     448 </span>            : 
@@ -1262,9 +1262,9 @@
 <span class="lineNum">    1196 </span>            :   int i;
 <span class="lineNum">    1197 </span><span class="lineCov">          6 :   for (i = fs-&gt;bl-&gt;firstlabel; i &lt; ll-&gt;n; i++) {</span>
 <span class="lineNum">    1198 </span><span class="lineCov">          2 :     if (luaS_eqstr(label, ll-&gt;arr[i].name)) {</span>
-<span class="lineNum">    1199 </span><span class="lineCov">          1 :       const char *msg = luaO_pushfstring(fs-&gt;ls-&gt;L,</span>
+<span class="lineNum">    1199 </span><span class="lineCov">          2 :       const char *msg = luaO_pushfstring(fs-&gt;ls-&gt;L,</span>
 <span class="lineNum">    1200 </span>            :                           &quot;label &quot; LUA_QS &quot; already defined on line %d&quot;,
-<span class="lineNum">    1201 </span><span class="lineCov">          1 :                           getstr(label), ll-&gt;arr[i].line);</span>
+<span class="lineNum">    1201 </span><span class="lineCov">          2 :                           getstr(label), ll-&gt;arr[i].line);</span>
 <span class="lineNum">    1202 </span><span class="lineCov">          1 :       semerror(fs-&gt;ls, msg);</span>
 <span class="lineNum">    1203 </span>            :     }
 <span class="lineNum">    1204 </span>            :   }

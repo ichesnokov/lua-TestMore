@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.1.5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">171</td>
-            <td class="headerCovTableEntry">250</td>
-            <td class="headerCovTableEntryLo">68.4 %</td>
+            <td class="headerCovTableEntry">170</td>
+            <td class="headerCovTableEntry">249</td>
+            <td class="headerCovTableEntryLo">68.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:11</td>
+            <td class="headerValue">2016-10-21 17:14:17</td>
             <td></td>
           </tr>
           <tr>
@@ -531,7 +531,7 @@
 <span class="lineNum">     465 </span><span class="lineNoCov">          0 :     luaL_error(L, LUA_QL(&quot;package.loaders&quot;) &quot; must be a table&quot;);</span>
 <span class="lineNum">     466 </span><span class="lineCov">         75 :   lua_pushliteral(L, &quot;&quot;);  /* error message accumulator */</span>
 <span class="lineNum">     467 </span><span class="lineCov">        155 :   for (i=1; ; i++) {</span>
-<span class="lineNum">     468 </span><span class="lineCov">        155 :     lua_rawgeti(L, -2, i);  /* get a loader */</span>
+<span class="lineNum">     468 </span><span class="lineCov">        235 :     lua_rawgeti(L, -2, i);  /* get a loader */</span>
 <span class="lineNum">     469 </span><span class="lineCov">        155 :     if (lua_isnil(L, -1))</span>
 <span class="lineNum">     470 </span><span class="lineCov">          2 :       luaL_error(L, &quot;module &quot; LUA_QS &quot; not found:%s&quot;,</span>
 <span class="lineNum">     471 </span>            :                     name, lua_tostring(L, -2));
@@ -543,7 +543,7 @@
 <span class="lineNum">     477 </span><span class="lineCov">         78 :       lua_concat(L, 2);  /* accumulate it */</span>
 <span class="lineNum">     478 </span>            :     else
 <span class="lineNum">     479 </span><span class="lineCov">          2 :       lua_pop(L, 1);</span>
-<span class="lineNum">     480 </span><span class="lineCov">         80 :   }</span>
+<span class="lineNum">     480 </span>            :   }
 <span class="lineNum">     481 </span><span class="lineCov">         72 :   lua_pushlightuserdata(L, sentinel);</span>
 <span class="lineNum">     482 </span><span class="lineCov">         72 :   lua_setfield(L, 2, name);  /* _LOADED[name] = sentinel */</span>
 <span class="lineNum">     483 </span><span class="lineCov">         72 :   lua_pushstring(L, name);  /* pass name as argument to module */</span>

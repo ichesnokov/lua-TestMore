@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.2.4</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">159</td>
-            <td class="headerCovTableEntry">174</td>
-            <td class="headerCovTableEntryHi">91.4 %</td>
+            <td class="headerCovTableEntry">158</td>
+            <td class="headerCovTableEntry">173</td>
+            <td class="headerCovTableEntryHi">91.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:22</td>
+            <td class="headerValue">2016-10-21 17:14:27</td>
             <td></td>
           </tr>
           <tr>
@@ -450,8 +450,8 @@
 <span class="lineNum">     384 </span>            :   s=&quot;(bstring)&quot;;
 <span class="lineNum">     385 </span>            :  else
 <span class="lineNum">     386 </span>            :   s=&quot;(string)&quot;;
-<span class="lineNum">     387 </span><span class="lineCov">          8 :  printf(&quot;\n%s &lt;%s:%d,%d&gt; (%d instruction%s at %p)\n&quot;,</span>
-<span class="lineNum">     388 </span><span class="lineCov">          4 :         (f-&gt;linedefined==0)?&quot;main&quot;:&quot;function&quot;,s,</span>
+<span class="lineNum">     387 </span><span class="lineCov">          4 :  printf(&quot;\n%s &lt;%s:%d,%d&gt; (%d instruction%s at %p)\n&quot;,</span>
+<span class="lineNum">     388 </span>            :         (f-&gt;linedefined==0)?&quot;main&quot;:&quot;function&quot;,s,
 <span class="lineNum">     389 </span>            :         f-&gt;linedefined,f-&gt;lastlinedefined,
 <span class="lineNum">     390 </span><span class="lineCov">          4 :         S(f-&gt;sizecode),VOID(f));</span>
 <span class="lineNum">     391 </span><span class="lineCov">         16 :  printf(&quot;%d%s param%s, %d slot%s, %d upvalue%s, &quot;,</span>
@@ -476,7 +476,7 @@
 <span class="lineNum">     410 </span>            :  printf(&quot;locals (%d) for %p:\n&quot;,n,VOID(f));
 <span class="lineNum">     411 </span><span class="lineCov">          6 :  for (i=0; i&lt;n; i++)</span>
 <span class="lineNum">     412 </span>            :  {
-<span class="lineNum">     413 </span><span class="lineCov">         12 :   printf(&quot;\t%d\t%s\t%d\t%d\n&quot;,</span>
+<span class="lineNum">     413 </span><span class="lineCov">          8 :   printf(&quot;\t%d\t%s\t%d\t%d\n&quot;,</span>
 <span class="lineNum">     414 </span><span class="lineCov">         12 :   i,getstr(f-&gt;locvars[i].varname),f-&gt;locvars[i].startpc+1,f-&gt;locvars[i].endpc+1);</span>
 <span class="lineNum">     415 </span>            :  }
 <span class="lineNum">     416 </span><span class="lineCov">          2 :  n=f-&gt;sizeupvalues;</span>

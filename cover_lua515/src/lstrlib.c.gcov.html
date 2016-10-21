@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:11</td>
+            <td class="headerValue">2016-10-21 17:14:17</td>
             <td></td>
           </tr>
           <tr>
@@ -381,14 +381,14 @@
 <span class="lineNum">     315 </span>            : 
 <span class="lineNum">     316 </span><span class="lineCov">        129 : static const char *min_expand (MatchState *ms, const char *s,</span>
 <span class="lineNum">     317 </span>            :                                  const char *p, const char *ep) {
-<span class="lineNum">     318 </span>            :   for (;;) {
+<span class="lineNum">     318 </span><span class="lineCov">        118 :   for (;;) {</span>
 <span class="lineNum">     319 </span><span class="lineCov">        129 :     const char *res = match(ms, s, ep+1);</span>
 <span class="lineNum">     320 </span><span class="lineCov">        129 :     if (res != NULL)</span>
 <span class="lineNum">     321 </span><span class="lineCov">         11 :       return res;</span>
 <span class="lineNum">     322 </span><span class="lineCov">        118 :     else if (s&lt;ms-&gt;src_end &amp;&amp; singlematch(uchar(*s), p, ep))</span>
 <span class="lineNum">     323 </span><span class="lineCov">        118 :       s++;  /* try with one more repetition */</span>
 <span class="lineNum">     324 </span><span class="lineNoCov">          0 :     else return NULL;</span>
-<span class="lineNum">     325 </span><span class="lineCov">        118 :   }</span>
+<span class="lineNum">     325 </span>            :   }
 <span class="lineNum">     326 </span>            : }
 <span class="lineNum">     327 </span>            : 
 <span class="lineNum">     328 </span>            : 

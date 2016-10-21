@@ -31,13 +31,13 @@
             <td class="headerValue">Lua 5.1.5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">222</td>
-            <td class="headerCovTableEntry">246</td>
+            <td class="headerCovTableEntry">220</td>
+            <td class="headerCovTableEntry">244</td>
             <td class="headerCovTableEntryHi">90.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:11</td>
+            <td class="headerValue">2016-10-21 17:14:17</td>
             <td></td>
           </tr>
           <tr>
@@ -293,7 +293,7 @@
 <span class="lineNum">     227 </span><span class="lineCov">        221 :   if (currIsNewline(ls))  /* string starts with a newline? */</span>
 <span class="lineNum">     228 </span><span class="lineCov">         55 :     inclinenumber(ls);  /* skip it */</span>
 <span class="lineNum">     229 </span>            :   for (;;) {
-<span class="lineNum">     230 </span><span class="lineCov">      13251 :     switch (ls-&gt;current) {</span>
+<span class="lineNum">     230 </span><span class="lineCov">      26281 :     switch (ls-&gt;current) {</span>
 <span class="lineNum">     231 </span>            :       case EOZ:
 <span class="lineNum">     232 </span><span class="lineCov">          2 :         luaX_lexerror(ls, (seminfo) ? &quot;unfinished long string&quot; :</span>
 <span class="lineNum">     233 </span>            :                                    &quot;unfinished long comment&quot;, TK_EOS);
@@ -334,7 +334,7 @@
 <span class="lineNum">     268 </span><span class="lineCov">       9140 :         else next(ls);</span>
 <span class="lineNum">     269 </span>            :       }
 <span class="lineNum">     270 </span>            :     }
-<span class="lineNum">     271 </span><span class="lineCov">      13030 :   } endloop:</span>
+<span class="lineNum">     271 </span>            :   } endloop:
 <span class="lineNum">     272 </span><span class="lineCov">        219 :   if (seminfo)</span>
 <span class="lineNum">     273 </span><span class="lineCov">        111 :     seminfo-&gt;ts = luaX_newstring(ls, luaZ_buffer(ls-&gt;buff) + (2 + sep),</span>
 <span class="lineNum">     274 </span><span class="lineCov">        111 :                                      luaZ_bufflen(ls-&gt;buff) - 2*(2 + sep));</span>
@@ -400,7 +400,7 @@
 <span class="lineNum">     334 </span><span class="lineCov">     157190 : static int llex (LexState *ls, SemInfo *seminfo) {</span>
 <span class="lineNum">     335 </span><span class="lineCov">     157190 :   luaZ_resetbuffer(ls-&gt;buff);</span>
 <span class="lineNum">     336 </span>            :   for (;;) {
-<span class="lineNum">     337 </span><span class="lineCov">     394502 :     switch (ls-&gt;current) {</span>
+<span class="lineNum">     337 </span><span class="lineCov">     631814 :     switch (ls-&gt;current) {</span>
 <span class="lineNum">     338 </span>            :       case '\n':
 <span class="lineNum">     339 </span>            :       case '\r': {
 <span class="lineNum">     340 </span><span class="lineCov">      32691 :         inclinenumber(ls);</span>
@@ -507,7 +507,7 @@
 <span class="lineNum">     441 </span>            :         }
 <span class="lineNum">     442 </span>            :       }
 <span class="lineNum">     443 </span>            :     }
-<span class="lineNum">     444 </span><span class="lineCov">     237312 :   }</span>
+<span class="lineNum">     444 </span>            :   }
 <span class="lineNum">     445 </span>            : }
 <span class="lineNum">     446 </span>            : 
 <span class="lineNum">     447 </span>            : 

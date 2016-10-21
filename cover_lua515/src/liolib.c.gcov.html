@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-04-23 13:26:11</td>
+            <td class="headerValue">2016-10-21 17:14:17</td>
             <td></td>
           </tr>
           <tr>
@@ -360,7 +360,7 @@
 <span class="lineNum">     294 </span><span class="lineCov">        194 : static int read_line (lua_State *L, FILE *f) {</span>
 <span class="lineNum">     295 </span>            :   luaL_Buffer b;
 <span class="lineNum">     296 </span><span class="lineCov">        194 :   luaL_buffinit(L, &amp;b);</span>
-<span class="lineNum">     297 </span>            :   for (;;) {
+<span class="lineNum">     297 </span><span class="lineNoCov">          0 :   for (;;) {</span>
 <span class="lineNum">     298 </span>            :     size_t l;
 <span class="lineNum">     299 </span><span class="lineCov">        194 :     char *p = luaL_prepbuffer(&amp;b);</span>
 <span class="lineNum">     300 </span><span class="lineCov">        194 :     if (fgets(p, LUAL_BUFFERSIZE, f) == NULL) {  /* eof? */</span>
@@ -375,7 +375,7 @@
 <span class="lineNum">     309 </span><span class="lineCov">        185 :       luaL_pushresult(&amp;b);  /* close buffer */</span>
 <span class="lineNum">     310 </span><span class="lineCov">        185 :       return 1;  /* read at least an `eol' */</span>
 <span class="lineNum">     311 </span>            :     }
-<span class="lineNum">     312 </span><span class="lineNoCov">          0 :   }</span>
+<span class="lineNum">     312 </span>            :   }
 <span class="lineNum">     313 </span>            : }
 <span class="lineNum">     314 </span>            : 
 <span class="lineNum">     315 </span>            : 
