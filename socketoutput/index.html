@@ -12,7 +12,7 @@
 	<title>Test.Builder.SocketOutput - lua-TestMore</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
 
@@ -126,7 +126,10 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#reference">Reference</a></li>
+        <li class="main active"><a href="#testbuildersocketoutput">Test.Builder.SocketOutput</a></li>
+        
+    
+        <li class="main "><a href="#reference">Reference</a></li>
         
     
         <li class="main "><a href="#examples">Examples</a></li>
@@ -136,7 +139,9 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h2 id="reference">Reference</h2>
+<h1 id="testbuildersocketoutput">Test.Builder.SocketOutput</h1>
+<hr />
+<h1 id="reference">Reference</h1>
 <p>This module allows to redirect the test output (<code>stdout/stderr</code>)
 to a <code>socket</code>.</p>
 <p>This feature is useful for embedded development
@@ -145,7 +150,7 @@ where the test runs into a target but the output is consumed by a host.</p>
 <a href="http://blog.anscamobile.com/2011/08/automated-testing-on-mobile-devices-part3/">blog</a>.</p>
 <p>This module requires
 <a href="http://w3.impa.br/~diego/software/luasocket/">LuaSocket</a>.</p>
-<h2 id="examples">Examples</h2>
+<h1 id="examples">Examples</h1>
 <pre><code class="lua">require 'Test.More'
 require 'socket'
 local conn = socket.connect(host, port)
@@ -159,6 +164,8 @@ plan(...)
 
         <footer class="col-md-12">
             <hr>
+            
+                <p>Copyright &copy; 2009-2016 Fran&ccedil;ois Perrad</p>
             
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>

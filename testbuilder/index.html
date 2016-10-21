@@ -12,7 +12,7 @@
 	<title>Test.Builder - lua-TestMore</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
 
@@ -126,7 +126,10 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#reference">Reference</a></li>
+        <li class="main active"><a href="#testbuilder">Test.Builder</a></li>
+        
+    
+        <li class="main "><a href="#reference">Reference</a></li>
         
     
         <li class="main "><a href="#examples">Examples</a></li>
@@ -136,7 +139,9 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h2 id="reference">Reference</h2>
+<h1 id="testbuilder">Test.Builder</h1>
+<hr />
+<h1 id="reference">Reference</h1>
 <p>This module is the <em>core</em> of the framework.
 It allows its extensibility.</p>
 <p>All libraries built with <code>Test.Builder</code> could work together.</p>
@@ -145,7 +150,7 @@ It allows its extensibility.</p>
 as a real example.</p>
 <p>Note : this kind of library could be tested
 with the help of the module <code>Test.Builder.Tester</code>.</p>
-<h2 id="examples">Examples</h2>
+<h1 id="examples">Examples</h1>
 <p>This minimal example shows how to add a function/predicate <code>iszero</code>.</p>
 <pre><code class="lua">-- iszero.lua
 local tb = require 'Test.Builder'.new()  -- it's a singleton shared by all libraries
@@ -178,6 +183,8 @@ ok 1 - val is zero
 
         <footer class="col-md-12">
             <hr>
+            
+                <p>Copyright &copy; 2009-2016 Fran&ccedil;ois Perrad</p>
             
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>

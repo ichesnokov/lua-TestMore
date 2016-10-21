@@ -12,7 +12,7 @@
 	<title>Test.More - lua-TestMore</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
 
@@ -126,7 +126,10 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#reference">Reference</a></li>
+        <li class="main active"><a href="#testmore">Test.More</a></li>
+        
+    
+        <li class="main "><a href="#reference">Reference</a></li>
         
             <li><a href="#plan-arg">plan( arg )</a></li>
         
@@ -190,7 +193,9 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h2 id="reference">Reference</h2>
+<h1 id="testmore">Test.More</h1>
+<hr />
+<h1 id="reference">Reference</h1>
 <p>All functions are injected in the global environment <code>_G</code>.</p>
 <h4 id="plan-arg">plan( arg )</h4>
 <pre><code class="lua">plan(2)
@@ -377,7 +382,7 @@ not ok 3 - three # TODO # not yet implemented
 ok 4 - four
 </code></pre>
 
-<h2 id="examples">Examples</h2>
+<h1 id="examples">Examples</h1>
 <pre><code class="lua">-- 99example.t
 #!/usr/bin/lua
 require 'Test.More'
@@ -466,6 +471,8 @@ Result: PASS
 
         <footer class="col-md-12">
             <hr>
+            
+                <p>Copyright &copy; 2009-2016 Fran&ccedil;ois Perrad</p>
             
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
