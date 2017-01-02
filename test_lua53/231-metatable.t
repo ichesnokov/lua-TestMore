@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2015, Perrad Francois
+-- Copyright (C) 2009-2017, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -69,10 +69,11 @@ do
     local a = nil
     function mt.__tostring () a = "return nothing" end
     setmetatable(t, mt)
-    is(tostring(t), nil, "__tostring no-output")
+    error_like(function () tostring(t) end,
+               "^[^:]+:%d+: '__tostring' must return a string")
     is(a, "return nothing")
-    error_like(function () print(t) end,
-               "^[^:]+:%d+: 'tostring' must return a string to 'print'")
+    error_is(function () print(t) end,
+             "'__tostring' must return a string")
 
     mt.__tostring = function () return '__FIRST__', 2 end
     setmetatable(t, mt)
