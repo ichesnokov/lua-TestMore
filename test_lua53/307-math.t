@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2015, Perrad Francois
+-- Copyright (C) 2009-2017, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -31,7 +31,7 @@ See "Programming in Lua", section 18 "The Mathematical Library".
 
 require 'Test.More'
 
-plan(67)
+plan(73)
 
 like(tostring(math.pi), '^3%.14', "variable pi")
 
@@ -178,9 +178,15 @@ else
     is(math.tanh, nil, "function tanh (removed)")
 end
 
-is(math.tointeger(-12), -12, "function tointeger")
+is(math.tointeger(-12), -12, "function tointeger (number)")
 is(math.tointeger(-12.0), -12)
 is(math.tointeger(-12.34), nil)
+is(math.tointeger('-12'), -12, "function tointeger (string)")
+is(math.tointeger('-12.0'), -12)
+is(math.tointeger('-12.34'), nil)
+is(math.tointeger('bad'), nil)
+is(math.tointeger(true), nil, "function tointeger (boolean)")
+is(math.tointeger({}), nil, "function tointeger (table)")
 
 is(math.type(3), 'integer', "function type")
 is(math.type(3.14), 'float')

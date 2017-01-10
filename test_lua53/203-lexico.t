@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2010-2015, Perrad Francois
+-- Copyright (C) 2010-2017, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -27,13 +27,16 @@ L<http://www.lua.org/manual/5.3/manual.html#3.1>.
 
 require 'Test.More'
 
-plan(40)
+plan(46)
 
 is("\65", "A")
 is("\065", "A")
 is("\x41", "A")
 is("\x3d", "=")
 is("\x3D", "=")
+is("\u{41}", "A")
+is("\u{20AC}", "\xE2\x82\xAC")
+is("\u{20ac}", "\xe2\x82\xac")
 
 is(string.byte("\a"), 7)
 is(string.byte("\b"), 8)
@@ -50,6 +53,15 @@ local f, msg = load [[a = "A\300"]]
 like(msg, "^[^:]+:%d+: .- escape .- near")
 
 f, msg = load [[a = "A\xyz"]]
+like(msg, "^[^:]+:%d+: .- near")
+
+f, msg = load [[a = "A\u{yz}"]]
+like(msg, "^[^:]+:%d+: .- near")
+
+f, msg = load [[a = "A\u{41"]]
+like(msg, "^[^:]+:%d+: .- near")
+
+f, msg = load [[a = "A\u{FFFFFFFFFF}"]]
 like(msg, "^[^:]+:%d+: .- near")
 
 f, msg = load [[a = "A\Z"]]
