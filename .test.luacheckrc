@@ -46,6 +46,8 @@ files['test/skip_rest.t'].ignore = { '511' }
 files['test/todo.t'].ignore = { '511' }
 
 files['test_lua53/001-if.t'].ignore = { '511' }
+files['test_lua53/102-function.t'].ignore = { '122/print' }
+files['test_lua53/108-userdata.t'].ignore = { '122/io' }
 files['test_lua53/201-assign.t'].ignore = { '411/my_i', '531', '532' }
 files['test_lua53/211-scope.t'].ignore = { '421' }
 files['test_lua53/231-metatable.t'].ignore = { '421', '431' }
