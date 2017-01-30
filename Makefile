@@ -110,13 +110,13 @@ coveralls:
 README.html: README.md
 	Markdown.pl README.md > README.html
 
-gh-pages:
-	mkdocs gh-deploy --clean
+site:
+	mkdocs build --clean
 
 clean:
 	rm -f MANIFEST *.bak src/luacov.*.out README.html
 
 realclean: clean
 
-.PHONY: test rockspec CHANGES dist.info
+.PHONY: test rockspec CHANGES dist.info site
 
