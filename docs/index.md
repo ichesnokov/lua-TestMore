@@ -68,7 +68,7 @@ This suite is usable with :
 
 It gives this [coverage](https://fperrad.github.io/lua-TestMore/cover_lua515/src/index.html) with Lua 5.1.5,
 this [coverage](https://fperrad.github.io/lua-TestMore/cover_lua524/src/index.html) with Lua 5.2.4
-and this [coverage](https://fperrad.github.io/lua-TestMore/cover_lua533/src/index.html) with Lua 5.3.3.
+and this [coverage](https://fperrad.github.io/lua-TestMore/cover_lua534/src/index.html) with Lua 5.3.4.
 
 ## Copyright and License
 
