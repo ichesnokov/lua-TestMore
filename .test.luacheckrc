@@ -46,14 +46,16 @@ files['test/skip_rest.t'].ignore = { '511' }
 files['test/todo.t'].ignore = { '511' }
 
 files['test_lua53/001-if.t'].ignore = { '511' }
-files['test_lua53/102-function.t'].ignore = { '122/print' }
-files['test_lua53/108-userdata.t'].ignore = { '122/io' }
+files['test_lua53/014-fornum.t'].ignore = { '512' }
+files['test_lua53/102-function.t'].ignore = { '122/print', '142/print', '143/print' }
+files['test_lua53/108-userdata.t'].ignore = { '122/io', '142/io', '143/io' }
 files['test_lua53/201-assign.t'].ignore = { '411/my_i', '531', '532' }
 files['test_lua53/211-scope.t'].ignore = { '421' }
 files['test_lua53/231-metatable.t'].ignore = { '421', '431' }
 files['test_lua53/304-string.t'].ignore = { '431' }
 files['test_lua53/306-table.t'].ignore = { '431' }
 files['test_lua53/308-io.t'].ignore = { '512' }
+files['test_lua53/320-stdin.t'].ignore = { '631' }
 
 files['test_lua53/000-sanity.t'].globals = { 'f', 'g', 'i', 'j', 'k' }
 files['test_lua53/001-if.t'].globals = { 'a', 'b' }
