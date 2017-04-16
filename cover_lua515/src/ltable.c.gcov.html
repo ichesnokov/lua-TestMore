@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2016-10-21 17:14:17</td>
+            <td class="headerValue">2017-04-16 16:03:13</td>
             <td></td>
           </tr>
           <tr>
@@ -163,18 +163,18 @@
 <span class="lineNum">      97 </span>            : ** returns the `main' position of an element in a table (that is, the index
 <span class="lineNum">      98 </span>            : ** of its hash value)
 <span class="lineNum">      99 </span>            : */
-<span class="lineNum">     100 </span><span class="lineCov">     228823 : static Node *mainposition (const Table *t, const TValue *key) {</span>
-<span class="lineNum">     101 </span><span class="lineCov">     228823 :   switch (ttype(key)) {</span>
+<span class="lineNum">     100 </span><span class="lineCov">     228819 : static Node *mainposition (const Table *t, const TValue *key) {</span>
+<span class="lineNum">     101 </span><span class="lineCov">     228819 :   switch (ttype(key)) {</span>
 <span class="lineNum">     102 </span>            :     case LUA_TNUMBER:
 <span class="lineNum">     103 </span><span class="lineCov">      27844 :       return hashnum(t, nvalue(key));</span>
 <span class="lineNum">     104 </span>            :     case LUA_TSTRING:
-<span class="lineNum">     105 </span><span class="lineCov">     197927 :       return hashstr(t, rawtsvalue(key));</span>
+<span class="lineNum">     105 </span><span class="lineCov">     197920 :       return hashstr(t, rawtsvalue(key));</span>
 <span class="lineNum">     106 </span>            :     case LUA_TBOOLEAN:
-<span class="lineNum">     107 </span><span class="lineCov">       2498 :       return hashboolean(t, bvalue(key));</span>
+<span class="lineNum">     107 </span><span class="lineCov">       2499 :       return hashboolean(t, bvalue(key));</span>
 <span class="lineNum">     108 </span>            :     case LUA_TLIGHTUSERDATA:
 <span class="lineNum">     109 </span><span class="lineNoCov">          0 :       return hashpointer(t, pvalue(key));</span>
 <span class="lineNum">     110 </span>            :     default:
-<span class="lineNum">     111 </span><span class="lineCov">        554 :       return hashpointer(t, gcvalue(key));</span>
+<span class="lineNum">     111 </span><span class="lineCov">        556 :       return hashpointer(t, gcvalue(key));</span>
 <span class="lineNum">     112 </span>            :   }
 <span class="lineNum">     113 </span>            : }
 <span class="lineNum">     114 </span>            : 
@@ -445,10 +445,10 @@
 <span class="lineNum">     379 </span><span class="lineCov">      12741 : }</span>
 <span class="lineNum">     380 </span>            : 
 <span class="lineNum">     381 </span>            : 
-<span class="lineNum">     382 </span><span class="lineCov">      90313 : static Node *getfreepos (Table *t) {</span>
-<span class="lineNum">     383 </span><span class="lineCov">     243268 :   while (t-&gt;lastfree-- &gt; t-&gt;node) {</span>
-<span class="lineNum">     384 </span><span class="lineCov">     111669 :     if (ttisnil(gkey(t-&gt;lastfree)))</span>
-<span class="lineNum">     385 </span><span class="lineCov">      49027 :       return t-&gt;lastfree;</span>
+<span class="lineNum">     382 </span><span class="lineCov">      90309 : static Node *getfreepos (Table *t) {</span>
+<span class="lineNum">     383 </span><span class="lineCov">     243260 :   while (t-&gt;lastfree-- &gt; t-&gt;node) {</span>
+<span class="lineNum">     384 </span><span class="lineCov">     111665 :     if (ttisnil(gkey(t-&gt;lastfree)))</span>
+<span class="lineNum">     385 </span><span class="lineCov">      49023 :       return t-&gt;lastfree;</span>
 <span class="lineNum">     386 </span>            :   }
 <span class="lineNum">     387 </span><span class="lineCov">      41286 :   return NULL;  /* could not find a free place */</span>
 <span class="lineNum">     388 </span>            : }
@@ -466,26 +466,26 @@
 <span class="lineNum">     400 </span><span class="lineCov">     177269 :   Node *mp = mainposition(t, key);</span>
 <span class="lineNum">     401 </span><span class="lineCov">     177269 :   if (!ttisnil(gval(mp)) || mp == dummynode) {</span>
 <span class="lineNum">     402 </span>            :     Node *othern;
-<span class="lineNum">     403 </span><span class="lineCov">      90313 :     Node *n = getfreepos(t);  /* get a free place */</span>
-<span class="lineNum">     404 </span><span class="lineCov">      90313 :     if (n == NULL) {  /* cannot find a free place? */</span>
+<span class="lineNum">     403 </span><span class="lineCov">      90309 :     Node *n = getfreepos(t);  /* get a free place */</span>
+<span class="lineNum">     404 </span><span class="lineCov">      90309 :     if (n == NULL) {  /* cannot find a free place? */</span>
 <span class="lineNum">     405 </span><span class="lineCov">      41286 :       rehash(L, t, key);  /* grow table */</span>
 <span class="lineNum">     406 </span><span class="lineCov">      41286 :       return luaH_set(L, t, key);  /* re-insert key into grown table */</span>
 <span class="lineNum">     407 </span>            :     }
 <span class="lineNum">     408 </span>            :     lua_assert(n != dummynode);
-<span class="lineNum">     409 </span><span class="lineCov">      49027 :     othern = mainposition(t, key2tval(mp));</span>
-<span class="lineNum">     410 </span><span class="lineCov">      49027 :     if (othern != mp) {  /* is colliding node out of its main position? */</span>
+<span class="lineNum">     409 </span><span class="lineCov">      49023 :     othern = mainposition(t, key2tval(mp));</span>
+<span class="lineNum">     410 </span><span class="lineCov">      49023 :     if (othern != mp) {  /* is colliding node out of its main position? */</span>
 <span class="lineNum">     411 </span>            :       /* yes; move colliding node into free position */
-<span class="lineNum">     412 </span><span class="lineCov">       6915 :       while (gnext(othern) != mp) othern = gnext(othern);  /* find previous */</span>
-<span class="lineNum">     413 </span><span class="lineCov">       6915 :       gnext(othern) = n;  /* redo the chain with `n' in place of `mp' */</span>
-<span class="lineNum">     414 </span><span class="lineCov">       6915 :       *n = *mp;  /* copy colliding node into free pos. (mp-&gt;next also goes) */</span>
-<span class="lineNum">     415 </span><span class="lineCov">       6915 :       gnext(mp) = NULL;  /* now `mp' is free */</span>
-<span class="lineNum">     416 </span><span class="lineCov">       6915 :       setnilvalue(gval(mp));</span>
+<span class="lineNum">     412 </span><span class="lineCov">       6922 :       while (gnext(othern) != mp) othern = gnext(othern);  /* find previous */</span>
+<span class="lineNum">     413 </span><span class="lineCov">       6922 :       gnext(othern) = n;  /* redo the chain with `n' in place of `mp' */</span>
+<span class="lineNum">     414 </span><span class="lineCov">       6922 :       *n = *mp;  /* copy colliding node into free pos. (mp-&gt;next also goes) */</span>
+<span class="lineNum">     415 </span><span class="lineCov">       6922 :       gnext(mp) = NULL;  /* now `mp' is free */</span>
+<span class="lineNum">     416 </span><span class="lineCov">       6922 :       setnilvalue(gval(mp));</span>
 <span class="lineNum">     417 </span>            :     }
 <span class="lineNum">     418 </span>            :     else {  /* colliding node is in its own main position */
 <span class="lineNum">     419 </span>            :       /* new node will go into free position */
-<span class="lineNum">     420 </span><span class="lineCov">      42112 :       gnext(n) = gnext(mp);  /* chain new position */</span>
-<span class="lineNum">     421 </span><span class="lineCov">      42112 :       gnext(mp) = n;</span>
-<span class="lineNum">     422 </span><span class="lineCov">      42112 :       mp = n;</span>
+<span class="lineNum">     420 </span><span class="lineCov">      42101 :       gnext(n) = gnext(mp);  /* chain new position */</span>
+<span class="lineNum">     421 </span><span class="lineCov">      42101 :       gnext(mp) = n;</span>
+<span class="lineNum">     422 </span><span class="lineCov">      42101 :       mp = n;</span>
 <span class="lineNum">     423 </span>            :     }
 <span class="lineNum">     424 </span>            :   }
 <span class="lineNum">     425 </span><span class="lineCov">     135983 :   gkey(mp)-&gt;value = key-&gt;value; gkey(mp)-&gt;tt = key-&gt;tt;</span>
@@ -521,10 +521,10 @@
 <span class="lineNum">     455 </span><span class="lineCov">     423145 : const TValue *luaH_getstr (Table *t, TString *key) {</span>
 <span class="lineNum">     456 </span><span class="lineCov">     423145 :   Node *n = hashstr(t, key);</span>
 <span class="lineNum">     457 </span>            :   do {  /* check whether `key' is somewhere in the chain */
-<span class="lineNum">     458 </span><span class="lineCov">     498152 :     if (ttisstring(gkey(n)) &amp;&amp; rawtsvalue(gkey(n)) == key)</span>
+<span class="lineNum">     458 </span><span class="lineCov">     498127 :     if (ttisstring(gkey(n)) &amp;&amp; rawtsvalue(gkey(n)) == key)</span>
 <span class="lineNum">     459 </span><span class="lineCov">     250092 :       return gval(n);  /* that's it */</span>
-<span class="lineNum">     460 </span><span class="lineCov">     248060 :     else n = gnext(n);</span>
-<span class="lineNum">     461 </span><span class="lineCov">     248060 :   } while (n);</span>
+<span class="lineNum">     460 </span><span class="lineCov">     248035 :     else n = gnext(n);</span>
+<span class="lineNum">     461 </span><span class="lineCov">     248035 :   } while (n);</span>
 <span class="lineNum">     462 </span><span class="lineCov">     173053 :   return luaO_nilobject;</span>
 <span class="lineNum">     463 </span>            : }
 <span class="lineNum">     464 </span>            : 
@@ -547,10 +547,10 @@
 <span class="lineNum">     481 </span>            :     default: {
 <span class="lineNum">     482 </span><span class="lineCov">       1593 :       Node *n = mainposition(t, key);</span>
 <span class="lineNum">     483 </span>            :       do {  /* check whether `key' is somewhere in the chain */
-<span class="lineNum">     484 </span><span class="lineCov">       2179 :         if (luaO_rawequalObj(key2tval(n), key))</span>
+<span class="lineNum">     484 </span><span class="lineCov">       2156 :         if (luaO_rawequalObj(key2tval(n), key))</span>
 <span class="lineNum">     485 </span><span class="lineCov">        478 :           return gval(n);  /* that's it */</span>
-<span class="lineNum">     486 </span><span class="lineCov">       1701 :         else n = gnext(n);</span>
-<span class="lineNum">     487 </span><span class="lineCov">       1701 :       } while (n);</span>
+<span class="lineNum">     486 </span><span class="lineCov">       1678 :         else n = gnext(n);</span>
+<span class="lineNum">     487 </span><span class="lineCov">       1678 :       } while (n);</span>
 <span class="lineNum">     488 </span><span class="lineCov">       1115 :       return luaO_nilobject;</span>
 <span class="lineNum">     489 </span>            :     }
 <span class="lineNum">     490 </span>            :   }
@@ -660,7 +660,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
   </table>
   <br>
 

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-01-30 11:32:37</td>
+            <td class="headerValue">2017-04-16 16:03:34</td>
             <td></td>
           </tr>
           <tr>
@@ -470,10 +470,10 @@
 <span class="lineNum">     404 </span>            : ** Main operation for equality of Lua values; return 't1 == t2'.
 <span class="lineNum">     405 </span>            : ** L == NULL means raw equality (no metamethods)
 <span class="lineNum">     406 </span>            : */
-<span class="lineNum">     407 </span><span class="lineCov">      67845 : int luaV_equalobj (lua_State *L, const TValue *t1, const TValue *t2) {</span>
+<span class="lineNum">     407 </span><span class="lineCov">      68280 : int luaV_equalobj (lua_State *L, const TValue *t1, const TValue *t2) {</span>
 <span class="lineNum">     408 </span>            :   const TValue *tm;
-<span class="lineNum">     409 </span><span class="lineCov">      67845 :   if (ttype(t1) != ttype(t2)) {  /* not the same variant? */</span>
-<span class="lineNum">     410 </span><span class="lineCov">       9716 :     if (ttnov(t1) != ttnov(t2) || ttnov(t1) != LUA_TNUMBER)</span>
+<span class="lineNum">     409 </span><span class="lineCov">      68280 :   if (ttype(t1) != ttype(t2)) {  /* not the same variant? */</span>
+<span class="lineNum">     410 </span><span class="lineCov">      10683 :     if (ttnov(t1) != ttnov(t2) || ttnov(t1) != LUA_TNUMBER)</span>
 <span class="lineNum">     411 </span>            :       return 0;  /* only numbers can be equal with different variants */
 <span class="lineNum">     412 </span>            :     else {  /* two numbers with different variants */
 <span class="lineNum">     413 </span>            :       lua_Integer i1, i2;  /* compare them as integers */
@@ -481,15 +481,15 @@
 <span class="lineNum">     415 </span>            :     }
 <span class="lineNum">     416 </span>            :   }
 <span class="lineNum">     417 </span>            :   /* values have same type and same variant */
-<span class="lineNum">     418 </span><span class="lineCov">      58129 :   switch (ttype(t1)) {</span>
+<span class="lineNum">     418 </span><span class="lineCov">      57597 :   switch (ttype(t1)) {</span>
 <span class="lineNum">     419 </span>            :     case LUA_TNIL: return 1;
 <span class="lineNum">     420 </span><span class="lineCov">       2380 :     case LUA_TNUMINT: return (ivalue(t1) == ivalue(t2));</span>
 <span class="lineNum">     421 </span><span class="lineCov">        116 :     case LUA_TNUMFLT: return luai_numeq(fltvalue(t1), fltvalue(t2));</span>
 <span class="lineNum">     422 </span><span class="lineCov">       1351 :     case LUA_TBOOLEAN: return bvalue(t1) == bvalue(t2);  /* true must be 1 !! */</span>
-<span class="lineNum">     423 </span><span class="lineCov">       3855 :     case LUA_TLIGHTUSERDATA: return pvalue(t1) == pvalue(t2);</span>
-<span class="lineNum">     424 </span><span class="lineCov">       1212 :     case LUA_TLCF: return fvalue(t1) == fvalue(t2);</span>
-<span class="lineNum">     425 </span><span class="lineCov">      43555 :     case LUA_TSHRSTR: return eqshrstr(tsvalue(t1), tsvalue(t2));</span>
-<span class="lineNum">     426 </span><span class="lineCov">        865 :     case LUA_TLNGSTR: return luaS_eqlngstr(tsvalue(t1), tsvalue(t2));</span>
+<span class="lineNum">     423 </span><span class="lineCov">       3848 :     case LUA_TLIGHTUSERDATA: return pvalue(t1) == pvalue(t2);</span>
+<span class="lineNum">     424 </span><span class="lineCov">       1077 :     case LUA_TLCF: return fvalue(t1) == fvalue(t2);</span>
+<span class="lineNum">     425 </span><span class="lineCov">      43138 :     case LUA_TSHRSTR: return eqshrstr(tsvalue(t1), tsvalue(t2));</span>
+<span class="lineNum">     426 </span><span class="lineCov">        892 :     case LUA_TLNGSTR: return luaS_eqlngstr(tsvalue(t1), tsvalue(t2));</span>
 <span class="lineNum">     427 </span>            :     case LUA_TUSERDATA: {
 <span class="lineNum">     428 </span><span class="lineCov">         11 :       if (uvalue(t1) == uvalue(t2)) return 1;</span>
 <span class="lineNum">     429 </span><span class="lineCov">          1 :       else if (L == NULL) return 0;</span>
@@ -523,58 +523,58 @@
 <span class="lineNum">     457 </span>            : #define isemptystr(o)   (ttisshrstring(o) &amp;&amp; tsvalue(o)-&gt;shrlen == 0)
 <span class="lineNum">     458 </span>            : 
 <span class="lineNum">     459 </span>            : /* copy strings in stack from top - n up to top - 1 to buffer */
-<span class="lineNum">     460 </span><span class="lineCov">      10754 : static void copy2buff (StkId top, int n, char *buff) {</span>
+<span class="lineNum">     460 </span><span class="lineCov">      11216 : static void copy2buff (StkId top, int n, char *buff) {</span>
 <span class="lineNum">     461 </span>            :   size_t tl = 0;  /* size already copied */
 <span class="lineNum">     462 </span>            :   do {
-<span class="lineNum">     463 </span><span class="lineCov">      30167 :     size_t l = vslen(top - n);  /* length of string being copied */</span>
-<span class="lineNum">     464 </span><span class="lineCov">      30167 :     memcpy(buff + tl, svalue(top - n), l * sizeof(char));</span>
-<span class="lineNum">     465 </span><span class="lineCov">      30167 :     tl += l;</span>
-<span class="lineNum">     466 </span><span class="lineCov">      30167 :   } while (--n &gt; 0);</span>
-<span class="lineNum">     467 </span><span class="lineCov">      10754 : }</span>
+<span class="lineNum">     463 </span><span class="lineCov">      31553 :     size_t l = vslen(top - n);  /* length of string being copied */</span>
+<span class="lineNum">     464 </span><span class="lineCov">      31553 :     memcpy(buff + tl, svalue(top - n), l * sizeof(char));</span>
+<span class="lineNum">     465 </span><span class="lineCov">      31553 :     tl += l;</span>
+<span class="lineNum">     466 </span><span class="lineCov">      31553 :   } while (--n &gt; 0);</span>
+<span class="lineNum">     467 </span><span class="lineCov">      11216 : }</span>
 <span class="lineNum">     468 </span>            : 
 <span class="lineNum">     469 </span>            : 
 <span class="lineNum">     470 </span>            : /*
 <span class="lineNum">     471 </span>            : ** Main operation for concatenation: concat 'total' values in the stack,
 <span class="lineNum">     472 </span>            : ** from 'L-&gt;top - total' up to 'L-&gt;top - 1'.
 <span class="lineNum">     473 </span>            : */
-<span class="lineNum">     474 </span><span class="lineCov">      15166 : void luaV_concat (lua_State *L, int total) {</span>
+<span class="lineNum">     474 </span><span class="lineCov">      15628 : void luaV_concat (lua_State *L, int total) {</span>
 <span class="lineNum">     475 </span>            :   lua_assert(total &gt;= 2);
 <span class="lineNum">     476 </span>            :   do {
-<span class="lineNum">     477 </span><span class="lineCov">      18254 :     StkId top = L-&gt;top;</span>
+<span class="lineNum">     477 </span><span class="lineCov">      18716 :     StkId top = L-&gt;top;</span>
 <span class="lineNum">     478 </span>            :     int n = 2;  /* number of elements handled in this pass (at least 2) */
-<span class="lineNum">     479 </span><span class="lineCov">      18254 :     if (!(ttisstring(top-2) || cvt2str(top-2)) || !tostring(L, top-1))</span>
+<span class="lineNum">     479 </span><span class="lineCov">      18716 :     if (!(ttisstring(top-2) || cvt2str(top-2)) || !tostring(L, top-1))</span>
 <span class="lineNum">     480 </span><span class="lineCov">         12 :       luaT_trybinTM(L, top-2, top-1, top-2, TM_CONCAT);</span>
-<span class="lineNum">     481 </span><span class="lineCov">      18242 :     else if (isemptystr(top - 1))  /* second operand is empty? */</span>
+<span class="lineNum">     481 </span><span class="lineCov">      18704 :     else if (isemptystr(top - 1))  /* second operand is empty? */</span>
 <span class="lineNum">     482 </span><span class="lineCov">       4741 :       cast_void(tostring(L, top - 2));  /* result is first operand */</span>
-<span class="lineNum">     483 </span><span class="lineCov">      13501 :     else if (isemptystr(top - 2)) {  /* first operand is an empty string? */</span>
+<span class="lineNum">     483 </span><span class="lineCov">      13963 :     else if (isemptystr(top - 2)) {  /* first operand is an empty string? */</span>
 <span class="lineNum">     484 </span><span class="lineCov">       2747 :       setobjs2s(L, top - 2, top - 1);  /* result is second op. */</span>
 <span class="lineNum">     485 </span>            :     }
 <span class="lineNum">     486 </span>            :     else {
 <span class="lineNum">     487 </span>            :       /* at least two non-empty string values; get as many as possible */
-<span class="lineNum">     488 </span><span class="lineCov">      10754 :       size_t tl = vslen(top - 1);</span>
+<span class="lineNum">     488 </span><span class="lineCov">      11216 :       size_t tl = vslen(top - 1);</span>
 <span class="lineNum">     489 </span>            :       TString *ts;
 <span class="lineNum">     490 </span>            :       /* collect total length and number of strings */
-<span class="lineNum">     491 </span><span class="lineCov">      19413 :       for (n = 1; n &lt; total &amp;&amp; tostring(L, top - n - 1); n++) {</span>
-<span class="lineNum">     492 </span><span class="lineCov">      19413 :         size_t l = vslen(top - n - 1);</span>
-<span class="lineNum">     493 </span><span class="lineCov">      19413 :         if (l &gt;= (MAX_SIZE/sizeof(char)) - tl)</span>
+<span class="lineNum">     491 </span><span class="lineCov">      20337 :       for (n = 1; n &lt; total &amp;&amp; tostring(L, top - n - 1); n++) {</span>
+<span class="lineNum">     492 </span><span class="lineCov">      20337 :         size_t l = vslen(top - n - 1);</span>
+<span class="lineNum">     493 </span><span class="lineCov">      20337 :         if (l &gt;= (MAX_SIZE/sizeof(char)) - tl)</span>
 <span class="lineNum">     494 </span><span class="lineNoCov">          0 :           luaG_runerror(L, &quot;string length overflow&quot;);</span>
-<span class="lineNum">     495 </span><span class="lineCov">      19413 :         tl += l;</span>
+<span class="lineNum">     495 </span><span class="lineCov">      20337 :         tl += l;</span>
 <span class="lineNum">     496 </span>            :       }
-<span class="lineNum">     497 </span><span class="lineCov">      10754 :       if (tl &lt;= LUAI_MAXSHORTLEN) {  /* is result a short string? */</span>
+<span class="lineNum">     497 </span><span class="lineCov">      11216 :       if (tl &lt;= LUAI_MAXSHORTLEN) {  /* is result a short string? */</span>
 <span class="lineNum">     498 </span>            :         char buff[LUAI_MAXSHORTLEN];
-<span class="lineNum">     499 </span><span class="lineCov">       9686 :         copy2buff(top, n, buff);  /* copy strings to buffer */</span>
-<span class="lineNum">     500 </span><span class="lineCov">       9686 :         ts = luaS_newlstr(L, buff, tl);</span>
+<span class="lineNum">     499 </span><span class="lineCov">       9878 :         copy2buff(top, n, buff);  /* copy strings to buffer */</span>
+<span class="lineNum">     500 </span><span class="lineCov">       9878 :         ts = luaS_newlstr(L, buff, tl);</span>
 <span class="lineNum">     501 </span>            :       }
 <span class="lineNum">     502 </span>            :       else {  /* long string; copy strings directly to final result */
-<span class="lineNum">     503 </span><span class="lineCov">       1068 :         ts = luaS_createlngstrobj(L, tl);</span>
-<span class="lineNum">     504 </span><span class="lineCov">       1068 :         copy2buff(top, n, getstr(ts));</span>
+<span class="lineNum">     503 </span><span class="lineCov">       1338 :         ts = luaS_createlngstrobj(L, tl);</span>
+<span class="lineNum">     504 </span><span class="lineCov">       1338 :         copy2buff(top, n, getstr(ts));</span>
 <span class="lineNum">     505 </span>            :       }
-<span class="lineNum">     506 </span><span class="lineCov">      10754 :       setsvalue2s(L, top - n, ts);  /* create result */</span>
+<span class="lineNum">     506 </span><span class="lineCov">      11216 :       setsvalue2s(L, top - n, ts);  /* create result */</span>
 <span class="lineNum">     507 </span>            :     }
-<span class="lineNum">     508 </span><span class="lineCov">      18245 :     total -= n-1;  /* got 'n' strings to create 1 new */</span>
-<span class="lineNum">     509 </span><span class="lineCov">      18245 :     L-&gt;top -= n-1;  /* popped 'n' strings and pushed one */</span>
-<span class="lineNum">     510 </span><span class="lineCov">      18245 :   } while (total &gt; 1);  /* repeat until only 1 result left */</span>
-<span class="lineNum">     511 </span><span class="lineCov">      15157 : }</span>
+<span class="lineNum">     508 </span><span class="lineCov">      18707 :     total -= n-1;  /* got 'n' strings to create 1 new */</span>
+<span class="lineNum">     509 </span><span class="lineCov">      18707 :     L-&gt;top -= n-1;  /* popped 'n' strings and pushed one */</span>
+<span class="lineNum">     510 </span><span class="lineCov">      18707 :   } while (total &gt; 1);  /* repeat until only 1 result left */</span>
+<span class="lineNum">     511 </span><span class="lineCov">      15619 : }</span>
 <span class="lineNum">     512 </span>            : 
 <span class="lineNum">     513 </span>            : 
 <span class="lineNum">     514 </span>            : /*
@@ -676,12 +676,12 @@
 <span class="lineNum">     610 </span><span class="lineCov">       4124 : static LClosure *getcached (Proto *p, UpVal **encup, StkId base) {</span>
 <span class="lineNum">     611 </span><span class="lineCov">       4124 :   LClosure *c = p-&gt;cache;</span>
 <span class="lineNum">     612 </span><span class="lineCov">       4124 :   if (c != NULL) {  /* is there a cached closure? */</span>
-<span class="lineNum">     613 </span><span class="lineCov">        529 :     int nup = p-&gt;sizeupvalues;</span>
-<span class="lineNum">     614 </span><span class="lineCov">        529 :     Upvaldesc *uv = p-&gt;upvalues;</span>
+<span class="lineNum">     613 </span><span class="lineCov">        659 :     int nup = p-&gt;sizeupvalues;</span>
+<span class="lineNum">     614 </span><span class="lineCov">        659 :     Upvaldesc *uv = p-&gt;upvalues;</span>
 <span class="lineNum">     615 </span>            :     int i;
-<span class="lineNum">     616 </span><span class="lineCov">        547 :     for (i = 0; i &lt; nup; i++) {  /* check whether it has right upvalues */</span>
-<span class="lineNum">     617 </span><span class="lineCov">        545 :       TValue *v = uv[i].instack ? base + uv[i].idx : encup[uv[i].idx]-&gt;v;</span>
-<span class="lineNum">     618 </span><span class="lineCov">        545 :       if (c-&gt;upvals[i]-&gt;v != v)</span>
+<span class="lineNum">     616 </span><span class="lineCov">        678 :     for (i = 0; i &lt; nup; i++) {  /* check whether it has right upvalues */</span>
+<span class="lineNum">     617 </span><span class="lineCov">        676 :       TValue *v = uv[i].instack ? base + uv[i].idx : encup[uv[i].idx]-&gt;v;</span>
+<span class="lineNum">     618 </span><span class="lineCov">        676 :       if (c-&gt;upvals[i]-&gt;v != v)</span>
 <span class="lineNum">     619 </span>            :         return NULL;  /* wrong upvalue; cannot reuse closure */
 <span class="lineNum">     620 </span>            :     }
 <span class="lineNum">     621 </span>            :   }
@@ -712,7 +712,7 @@
 <span class="lineNum">     646 </span>            :     /* new closure is white, so we do not need a barrier here */
 <span class="lineNum">     647 </span>            :   }
 <span class="lineNum">     648 </span><span class="lineCov">       4122 :   if (!isblack(p))  /* cache will not break GC invariant? */</span>
-<span class="lineNum">     649 </span><span class="lineCov">       3660 :     p-&gt;cache = ncl;  /* save it on cache for reuse */</span>
+<span class="lineNum">     649 </span><span class="lineCov">       3800 :     p-&gt;cache = ncl;  /* save it on cache for reuse */</span>
 <span class="lineNum">     650 </span><span class="lineCov">       4122 : }</span>
 <span class="lineNum">     651 </span>            : 
 <span class="lineNum">     652 </span>            : 
@@ -1394,7 +1394,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
   </table>
   <br>
 
