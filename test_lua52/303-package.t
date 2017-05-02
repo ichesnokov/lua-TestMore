@@ -2,7 +2,7 @@
 --
 -- lua-TestMore : <http://fperrad.github.com/lua-TestMore/>
 --
--- Copyright (C) 2009-2013, Perrad Francois
+-- Copyright (C) 2009-2017, Perrad Francois
 --
 -- This code is licensed under the terms of the MIT/X11 license,
 -- like Lua itself.
@@ -47,7 +47,7 @@ is(# package.preload, 0)
 
 if (platform and platform.compat) or jit then
     type_ok(package.loaders, 'table', "table package.loaders")
-    if jit then
+    if jit and jit.version_num < 20100 then
         todo("LuaJIT TODO. package.searchers", 1)
     end
     is(package.searchers, package.loaders, "alias")
