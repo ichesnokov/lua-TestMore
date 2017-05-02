@@ -1,6 +1,6 @@
 
 LUA = ../../lua-5.1.5/src/lua
-LUAJIT = ../../LuaJIT-2.0.4/src/luajit
+LUAJIT = ../../LuaJIT-2.0.5/src/luajit
 LUA_COVER = ../../gh-pages/lua-TestMore/lua-5.1.5/src/lua
 
 LUA_VERSION = $(shell $(LUA) -e "print(_VERSION)")
