@@ -35,6 +35,7 @@ while (<>) { \
     chomp; \
     next if m{^\.}; \
     next if m{/\.}; \
+    next if m{^debian/}; \
     next if m{^rockspec/}; \
     push @files, $$_; \
 } \
@@ -87,6 +88,17 @@ rockspec: $(TARBALL)
 rock:
 	luarocks pack rockspec/lua-testmore-$(VERSION)-$(REV).rockspec
 
+debclean:
+	echo "lua-testmore ($(shell git describe --dirty)) unstable; urgency=medium" >  debian/changelog
+	echo ""                         >> debian/changelog
+	echo "  * UNRELEASED"           >> debian/changelog
+	echo ""                         >> debian/changelog
+	echo " -- $(shell git config --get user.name) <$(shell git config --get user.email)>  $(shell date -R)" >> debian/changelog
+	fakeroot debian/rules clean
+
+deb: debclean
+	fakeroot debian/rules binary
+
 check: test
 
 test:
@@ -118,5 +130,5 @@ clean:
 
 realclean: clean
 
-.PHONY: test rockspec CHANGES dist.info site
+.PHONY: test rockspec deb debclean CHANGES dist.info site
 

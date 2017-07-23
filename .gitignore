@@ -8,3 +8,12 @@
 *.tar.gz
 *.src.rock
 *.out
+
+/5.*
+/debian/debhelper-build-stamp
+/debian/files
+/debian/lua-testmore*
+/debian/lua_versions
+/debian/tmp
+/debian/trash
+
