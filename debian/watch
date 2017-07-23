@@ -1,5 +1,6 @@
 # test this watch file using:
-# uscan --watchfile debian/watch --upstream-version 0.0.1 --package lua-testmore
+# uscan --watchfile debian/watch --upstream-version 0.1.0 --package lua-testmore
 #
 version=3
-http://...  /.../lua-testmore-([\d\.]*).tar.gz
+opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/lua-testmore-$1\.tar\.gz/ \
+  https://github.com/fperrad/lua-TestMore/releases .*/v?(\d\S*)\.tar\.gz
