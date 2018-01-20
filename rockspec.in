@@ -1,7 +1,7 @@
 package = 'lua-TestMore'
 version = '@version@-@rev@'
 source = {
-    url = 'http://sites.google.com/site/fperrad/lua-testmore-@version@.tar.gz',
+    url = 'http://github.com/fperrad/lua-testmore/raw/releases/lua-testmore-@version@.tar.gz',
     md5 = '@md5@',
     dir = 'lua-TestMore-@version@',
 }

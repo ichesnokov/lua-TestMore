@@ -4,7 +4,7 @@ VERSION := $(shell cd src && $(LUA) -e "m = require [[Test.More]]; print(m._VERS
 TARBALL := lua-testmore-$(VERSION).tar.gz
 REV     := 1
 
-LUAVER  := 5.1
+LUAVER  := 5.3
 PREFIX  := /usr/local
 DPREFIX := $(DESTDIR)$(PREFIX)
 LIBDIR  := $(DPREFIX)/share/lua/$(LUAVER)
@@ -127,5 +127,5 @@ clean:
 
 realclean: clean
 
-.PHONY: test rockspec deb debclean CHANGES dist.info site
+.PHONY: test rockspec deb CHANGES dist.info site
 

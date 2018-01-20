@@ -3,7 +3,7 @@ Upstream-Name: lua-TestMore
 Source: https://github.com/fperrad/lua-TestMore/
 
 Files: *
-Copyright: Copyright (C) 2009-2015 Francois Perrad <francois.perrad@gadz.org>
+Copyright: Copyright (C) 2009-2018 Francois Perrad <francois.perrad@gadz.org>
 License: Expat
 
 License: Expat
