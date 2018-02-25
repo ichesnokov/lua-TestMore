@@ -1,5 +1,8 @@
 Revision history for lua-TestMore
 
+0.3.4  Sun Feb 25 22:10:00 2018
+        make subtest() use note() instead of diag(), like in Perl's Test::Builder
+
 0.3.3  Sat Jan 20 17:30:00 2018
 	shadow _ENV
 	add Debian package infrastructure
