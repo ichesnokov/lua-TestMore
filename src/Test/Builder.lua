@@ -25,6 +25,9 @@ local m = {}
 local testout = io and io.stdout
 local testerr = io and (io.stderr or io.stdout)
 
+testout:setvbuf('no')
+testerr:setvbuf('no')
+
 function m.puts (f, str)
     f:write(str)
 end
